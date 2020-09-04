@@ -11,10 +11,11 @@ public class DataBaseHelper {
     private static final String SQL_INSERT =
             "INSERT INTO users(name, password, email, role) VALUES(?,?,?,?)";
     private static final String SQL_SELECT =
-            "SELECT id, name, password, email, role, registration_date FROM " +
-                    "users WHERE name=? AND password=?";
+            "SELECT id, name, password, role, registration_date FROM " +
+                    "account WHERE name=? AND password=?";
     private static final String SQL_SELECT_ALL =
-            "SELECT id, name, password, email, role FROM users";
+            "SELECT id, name, password, email, role, registration_date " +
+                    "FROM account";
 
     public PreparedStatement prepareStatementAdd(Connection connection,
                                                  User user,
@@ -23,10 +24,10 @@ public class DataBaseHelper {
         try {
             PreparedStatement statement =
                     connection.prepareStatement(SQL_INSERT);
-            statement.setString(1, user.getName());
+            //statement.setString(1, user.getName());
             statement.setBytes(2, encryptedPassword);
             statement.setString(3,user.getEmail());
-            statement.setString(4,user.getType().toString());
+            //statement.setString(4,user.getType().toString());
             return statement;
         } catch (SQLException e) {
             throw new DaoException("Error, while getting statement!", e);

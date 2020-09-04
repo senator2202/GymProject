@@ -1,5 +1,6 @@
 package com.kharitonov.gym.model.creator;
 
+import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.security.WebCipher;
@@ -24,13 +25,15 @@ public class UserCreator {
         WebCipher cipher = new WebCipher();
         byte[] decryptedBytes = cipher.decryptMessage(encryptedBytes);
         String password = new String(decryptedBytes);
-        return User.UserBuilder.aUser()
+        Account account = Account.AccountBuilder.anAccount()
                 .withId(id)
                 .withName(name)
                 .withPassword(password)
-                .withEmail(email)
                 .withType(userRole)
                 .withRegistrationDate(date)
+                .build();
+        return User.UserBuilder.aUser()
+               .withAccount(account)
                 .build();
     }
 }

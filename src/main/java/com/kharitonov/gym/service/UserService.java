@@ -3,6 +3,7 @@ package com.kharitonov.gym.service;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
+import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.security.WebCipher;
@@ -46,10 +47,13 @@ public class UserService {
         WebCipher cipher = new WebCipher();
         byte[] sourceBytes = password.getBytes();
         byte[] encryptedBytes = cipher.encryptMessage(sourceBytes);
-        User user = User.UserBuilder.aUser()
+        Account account = Account.AccountBuilder.anAccount()
                 .withName(login)
-                .withEmail(email)
                 .withType(UserRole.CLIENT)
+                .build();
+        User user = User.UserBuilder.aUser()
+                .withAccount(account)
+                .withEmail(email)
                 .build();
         boolean result;
         try {

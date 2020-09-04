@@ -1,73 +1,62 @@
 package com.kharitonov.gym.model.entity;
 
-import java.sql.Date;
-
 public class User {
-    private int id;
-    private String name;
-    private String password;
-    private String email;
-    private UserRole type;
-    private Date registrationDate;
+    protected Account account;
+    protected String firstName;
+    protected String lastName;
+    protected String email;
+    protected String phoneNumber;
+
 
     protected User() {
     }
 
-    public int getId() {
-        return id;
+    public Account getAccount() {
+        return account;
     }
 
-    public String getName() {
-        return name;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public UserRole getType() {
-        return type;
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setType(UserRole type) {
-        this.type = type;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public static class UserBuilder {
-        private int id;
-        private String name;
-        private String password;
+    public static final class UserBuilder {
+        private Account account;
+        private String firstName;
+        private String lastName;
         private String email;
-        private UserRole type;
-        private Date registrationDate;
+        private String phoneNumber;
 
         private UserBuilder() {
         }
@@ -76,18 +65,18 @@ public class User {
             return new UserBuilder();
         }
 
-        public UserBuilder withId(int id) {
-            this.id = id;
+        public UserBuilder withAccount(Account account) {
+            this.account = account;
             return this;
         }
 
-        public UserBuilder withName(String name) {
-            this.name = name;
+        public UserBuilder withFirstName(String firstName) {
+            this.firstName = firstName;
             return this;
         }
 
-        public UserBuilder withPassword(String password) {
-            this.password = password;
+        public UserBuilder withLastName(String lastName) {
+            this.lastName = lastName;
             return this;
         }
 
@@ -96,24 +85,18 @@ public class User {
             return this;
         }
 
-        public UserBuilder withType(UserRole type) {
-            this.type = type;
-            return this;
-        }
-
-        public UserBuilder withRegistrationDate(Date registrationDate) {
-            this.registrationDate = registrationDate;
+        public UserBuilder withPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
             return this;
         }
 
         public User build() {
             User user = new User();
-            user.setId(id);
-            user.setName(name);
-            user.setPassword(password);
+            user.setAccount(account);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
             user.setEmail(email);
-            user.setType(type);
-            user.setRegistrationDate(registrationDate);
+            user.setPhoneNumber(phoneNumber);
             return user;
         }
     }
@@ -125,21 +108,24 @@ public class User {
 
         User user = (User) o;
 
-        if (name != null ? !name.equals(user.name) : user.name != null)
+        if (account != null ? !account.equals(user.account) : user.account != null)
             return false;
-        if (password != null ? !password.equals(user.password) : user.password != null)
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null)
+            return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null)
             return false;
         if (email != null ? !email.equals(user.email) : user.email != null)
             return false;
-        return type == user.type;
+        return phoneNumber != null ? phoneNumber.equals(user.phoneNumber) : user.phoneNumber == null;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
+        int result = account != null ? account.hashCode() : 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         return result;
     }
 }
