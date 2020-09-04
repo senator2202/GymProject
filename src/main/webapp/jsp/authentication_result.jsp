@@ -9,7 +9,7 @@
     ${authResult}
 </FORM>
 <hr/>
-<form action="/mainController">
+<form action="mainController">
     <input type="hidden" name="command" value="logout"/><br/>
     <input type="submit" value="Logout"/>
 </form>

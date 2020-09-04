@@ -5,12 +5,16 @@
     <title>Login</title>
 </head>
 <body>
-<form name="loginForm" method="post" action="/mainController">
+<form name="loginForm" method="post" action="mainController">
     <input type="hidden" name="command" value="register"/>
     Login:<br/>
-    <input type="text" name="login" value=""/><br/>
+    <label>
+        <input type="text" name="login" value=""/>
+    </label><br/>
     Password:<br/>
-    <input type="text" name="password" value=""/><br/>
+    <label>
+        <input type="text" name="password" value=""/>
+    </label><br/>
     ${authResult}<br/>
     <input type="submit" value="Register"/>
 </form
