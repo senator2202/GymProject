@@ -12,29 +12,31 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Дамп структуры базы данных web_training
-DROP DATABASE IF EXISTS `web_training`;
-CREATE DATABASE IF NOT EXISTS `web_training` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `web_training`;
+-- Дамп структуры базы данных gym
+DROP DATABASE IF EXISTS `gym`;
+CREATE DATABASE IF NOT EXISTS `gym` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `gym`;
 
--- Дамп структуры для таблица web_training.users
+-- Дамп структуры для таблица gym.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `password` varbinary(50) NOT NULL DEFAULT '',
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `name` varchar(30) NOT NULL,
+  `password` varbinary(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `role` enum('ADMIN','TRAINER','CLIENT') NOT NULL DEFAULT 'CLIENT',
+  `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы web_training.users: ~3 rows (приблизительно)
+-- Дамп данных таблицы gym.users: ~5 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`id`, `name`, `password`, `is_admin`) VALUES
-	(9, 'admin', _binary 0xF446EAAAED61385EEF431F06B26BA260, 1),
-	(10, 'user', _binary 0xB294CF542306D0418D46C588607FFDAA, 0),
-	(11, 'bugaa', _binary 0xF5437C29172940367005D89B1D6A28E5, 0);
+REPLACE INTO `users` (`id`, `name`, `password`, `email`, `role`, `registration_date`) VALUES
+	(7, 'admin', _binary 0xF446EAAAED61385EEF431F06B26BA260, 'admin@gmail.com', 'ADMIN', '2020-09-04 13:55:18'),
+	(8, 'user', _binary 0xB294CF542306D0418D46C588607FFDAA, 'user@yahoo.com', 'CLIENT', '2020-09-04 14:02:15');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

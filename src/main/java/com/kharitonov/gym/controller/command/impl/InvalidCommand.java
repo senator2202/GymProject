@@ -8,6 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 public class InvalidCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        return PagePath.INVALID_REQUEST;
+        return PagePath.ERROR;
     }
 }

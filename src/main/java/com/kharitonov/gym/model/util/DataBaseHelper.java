@@ -9,12 +9,12 @@ import java.sql.SQLException;
 
 public class DataBaseHelper {
     private static final String SQL_INSERT =
-            "INSERT INTO users(name, password, is_admin) VALUES(?,?,?)";
+            "INSERT INTO users(name, password, email, role) VALUES(?,?,?,?)";
     private static final String SQL_SELECT =
-            "SELECT id, name, password, is_admin FROM users " +
-                    "WHERE name=? AND password=?";
+            "SELECT id, name, password, email, role, registration_date FROM " +
+                    "users WHERE name=? AND password=?";
     private static final String SQL_SELECT_ALL =
-            "SELECT id, name, password, is_admin FROM users";
+            "SELECT id, name, password, email, role FROM users";
 
     public PreparedStatement prepareStatementAdd(Connection connection,
                                                  User user,
@@ -25,7 +25,8 @@ public class DataBaseHelper {
                     connection.prepareStatement(SQL_INSERT);
             statement.setString(1, user.getName());
             statement.setBytes(2, encryptedPassword);
-            statement.setBoolean(3, user.isAdmin());
+            statement.setString(3,user.getEmail());
+            statement.setString(4,user.getType().toString());
             return statement;
         } catch (SQLException e) {
             throw new DaoException("Error, while getting statement!", e);

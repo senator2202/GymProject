@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
                      helper.prepareStatementAdd(connection, user,
                              encryptedPassword)) {
             statementAdd.execute();
-        } catch (SQLException | DaoException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
@@ -68,7 +68,7 @@ public class UserDaoImpl implements UserDao {
                 users.add(user);
             }
             return users;
-        } catch (SQLException | DaoException e) {
+        } catch (SQLException e) {
             close(resultSet);
             throw new DaoException(e);
         }

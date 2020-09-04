@@ -5,9 +5,8 @@ public class PagePath {
     public static final String LOGIN = "/jsp/login.jsp";
     public static final String AUTHENTICATION_RESULT =
             "/jsp/authentication_result.jsp";
-    public static final String INVALID_REQUEST = "/jsp/invalid_request.jsp";
+    public static final String ERROR = "/jsp/error.jsp";
 
     private PagePath() {
-
     }
 }

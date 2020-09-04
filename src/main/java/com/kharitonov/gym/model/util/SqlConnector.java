@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class SqlConnector {
     private static final String HOST =
-            "jdbc:mysql://localhost:3306/web_training";
+            "jdbc:mysql://localhost:3306/gym";
     private static final Properties PROPERTIES;
 
     static {

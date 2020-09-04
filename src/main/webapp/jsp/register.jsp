@@ -5,7 +5,7 @@
     <title>Login</title>
 </head>
 <body>
-<form name="loginForm" method="post" action="mainController">
+<form name="loginForm" method="post" action="/mainController">
     <input type="hidden" name="command" value="register"/>
     Login:<br/>
     <label>
@@ -14,6 +14,10 @@
     Password:<br/>
     <label>
         <input type="text" name="password" value=""/>
+    </label><br/>
+    Email:<br/>
+    <label>
+        <input type="text" name="email" value=""/>
     </label><br/>
     ${authResult}<br/>
     <input type="submit" value="Register"/>
