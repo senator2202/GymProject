@@ -5,7 +5,7 @@
     <title>Login</title>
 </head>
 <body>
-<form name="loginForm" method="post" action="/mainController">
+<form name="loginForm" action="/mainController">
     <input type="hidden" name="command" value="login"/>
     Login:<br/>
     <label>
@@ -19,6 +19,10 @@
     <input type="submit" value="Login"/>
 </form>
 <br/>
-<a href="${pageContext.request.contextPath}/jsp/register.jsp">Register</a>
+<form action="/mainController">
+    <input type="hidden" name="command" value="open_page"/>
+    <input type="hidden" name="page_path" value="/jsp/register.jsp"/>
+    <input type="submit" value="Register"/>
+</form>
 </body>
 </html>
