@@ -6,11 +6,12 @@ import com.kharitonov.gym.model.entity.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserDao {
     void add(User user, byte[] encryptedPassword) throws DaoException;
 
-    User get(String name, byte[] encryptedPassword) throws DaoException;
+    Optional<User> get(String name, byte[] encryptedPassword) throws DaoException;
 
     List<User> getAll() throws DaoException;
 
