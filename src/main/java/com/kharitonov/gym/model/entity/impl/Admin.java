@@ -7,6 +7,7 @@ import com.kharitonov.gym.model.entity.UserRole;
 
 public class Admin extends User implements AdminFunctionality {
     public Admin() {
+        account = Account.AccountBuilder.anAccount().build();
         account.setRole(UserRole.ADMIN);
     }
 

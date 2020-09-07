@@ -8,16 +8,20 @@ import com.kharitonov.gym.model.entity.impl.Trainer;
 
 public class UserFactory {
     public static User createUser(UserRole role) {
-        User user;
-        switch (role) {
-            case ADMIN:
-                user = new Admin();
-                break;
-            case TRAINER:
-                user = new Trainer();
-                break;
-            default:
-                user = new Client();
+        User user = null;
+        try {
+            switch (role) {
+                case ADMIN:
+                    user = new Admin();
+                    break;
+                case TRAINER:
+                    user = new Trainer();
+                    break;
+                default:
+                    user = new Client();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return user;
     }

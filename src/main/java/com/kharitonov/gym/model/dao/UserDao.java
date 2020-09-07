@@ -34,7 +34,7 @@ public interface UserDao {
             try {
                 statement.close();
             } catch (SQLException e) {
-                throw new DaoException("Error during closing result set!");
+                throw new DaoException("Error during closing statement!");
             }
         }
     }

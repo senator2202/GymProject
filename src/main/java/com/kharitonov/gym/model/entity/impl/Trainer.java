@@ -12,6 +12,7 @@ public class Trainer extends User implements TrainerFunctionality, SportFunction
 
     public Trainer() {
         plannedTrainings = new ArrayList<>();
+        account = Account.AccountBuilder.anAccount().build();
         account.setRole(UserRole.TRAINER);
     }
 

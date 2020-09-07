@@ -13,6 +13,7 @@ public class Client extends User implements ClientFunctionality, SportFunctional
 
     public Client() {
         plannedTrainings = new ArrayList<>();
+        account = Account.AccountBuilder.anAccount().build();
         account.setRole(UserRole.CLIENT);
     }
 

@@ -23,80 +23,78 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
     private static final Logger LOGGER =
             LogManager.getLogger(UserDaoImpl.class);
-    private static final ConnectionPool connectionPool =
+    private static final ConnectionPool POOL =
             BasicConnectionPool.getInstance();
+    private static final DataBaseHelper DB_HELPER =
+            DataBaseHelper.getINSTANCE();
 
     @Override
     public void add(User user, byte[] password) throws DaoException {
-        DataBaseHelper helper = new DataBaseHelper();
-        String name = user.getAccount().getName();
-        PreparedStatement insertAccount = null;
-        try {
-            Connection connection = connectionPool.getConnection();
-            insertAccount = helper.statementInsertAccount(connection, user, password);
-            int id;
-            insertAccount.execute();
-            id = getAccountId(connection, name, password);
-            user.getAccount().setId(id);
-            addUser(connection, id);
-            if (user.getAccount().getRole() != UserRole.ADMIN) {
-                addInheritor(connection, user);
-            }
-            connectionPool.releaseConnection(connection);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            close(insertAccount);
-        }
+        Connection connection = POOL.getConnection();
+        addAccount(connection, user, password);
+        defineAccountId(connection, user, password);
+        addUser(connection, user.getAccount().getId());
+        addUserInheritor(connection, user);
+        POOL.releaseConnection(connection);
     }
 
-    private void addInheritor(Connection connection, User user)
-            throws DaoException {
-        DataBaseHelper helper = new DataBaseHelper();
-        try (PreparedStatement insertInheritor =
-                     helper.statementInsertUserInheritor(connection, user)) {
-            insertInheritor.execute();
+    private void addAccount(Connection connection, User user,
+                            byte[] password) throws DaoException {
+        try (PreparedStatement insertAccount =
+                     DB_HELPER.statementInsertAccount(connection, user, password)) {
+            insertAccount.execute();
         } catch (SQLException e) {
+            POOL.releaseConnection(connection);
             throw new DaoException(e);
         }
     }
 
     private void addUser(Connection connection, int id) throws DaoException {
-        DataBaseHelper helper = new DataBaseHelper();
         try (PreparedStatement insertUser =
-                     helper.statementInsertUser(connection, id)) {
+                     DB_HELPER.statementInsertUser(connection, id)) {
             insertUser.execute();
         } catch (SQLException e) {
+            POOL.releaseConnection(connection);
             throw new DaoException(e);
         }
     }
 
-    private int getAccountId(Connection connection, String userName, byte[] password)
+    private void addUserInheritor(Connection connection, User user)
             throws DaoException {
-        DataBaseHelper helper = new DataBaseHelper();
-        int id;
+        if (user.getAccount().getRole() != UserRole.ADMIN) {
+            try (PreparedStatement insertInheritor =
+                         DB_HELPER.statementInsertUserInheritor(connection, user)) {
+                insertInheritor.execute();
+            } catch (SQLException e) {
+                POOL.releaseConnection(connection);
+                throw new DaoException(e);
+            }
+        }
+    }
+
+    private void defineAccountId(Connection connection, User user, byte[] password)
+            throws DaoException {
+        String userName = user.getAccount().getName();
         try (PreparedStatement select =
-                     helper.statementSelect(connection, userName, password);
+                     DB_HELPER.statementSelect(connection, userName, password);
              ResultSet resultSet = select.executeQuery()) {
+            int id;
             resultSet.next();
             id = resultSet.getInt(TableColumnName.USER_ID);
+            user.getAccount().setId(id);
         } catch (SQLException e) {
+            POOL.releaseConnection(connection);
             throw new DaoException(e);
         }
-        return id;
     }
 
     @Override
     public Optional<User> get(String name, byte[] encryptedPassword)
             throws DaoException {
-        DataBaseHelper helper = new DataBaseHelper();
-        PreparedStatement statementSelect = null;
-        ResultSet resultSet;
-        try {
-            Connection connection = connectionPool.getConnection();
-            statementSelect = helper.statementSelect(connection, name,
-                    encryptedPassword);
-            resultSet = statementSelect.executeQuery();
+        Connection connection = POOL.getConnection();
+        try (PreparedStatement statementSelect =
+                     DB_HELPER.statementSelect(connection, name, encryptedPassword);
+             ResultSet resultSet = statementSelect.executeQuery()) {
             if (resultSet.next()) {
                 return Optional.of(UserCreator.create(resultSet));
             } else {
@@ -105,21 +103,16 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException e) {
             throw new DaoException(e);
-        } finally {
-            close(statementSelect);
         }
     }
 
     @Override
     public List<User> getAll() throws DaoException {
-        DataBaseHelper helper = new DataBaseHelper();
-        ResultSet resultSet;
+        Connection connection = POOL.getConnection();
         List<User> users = new ArrayList<>();
-        PreparedStatement statementSelect = null;
-        try {
-            Connection connection = connectionPool.getConnection();
-            statementSelect = helper.statementSelectAll(connection);
-            resultSet = statementSelect.executeQuery();
+        try (PreparedStatement statementSelect =
+                     DB_HELPER.statementSelectAll(connection);
+             ResultSet resultSet = statementSelect.executeQuery()) {
             while (resultSet.next()) {
                 User user = UserCreator.create(resultSet);
                 users.add(user);
@@ -128,27 +121,22 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            close(statementSelect);
+            POOL.releaseConnection(connection);
         }
     }
 
     @Override
     public boolean checkLoginPassword(String name, byte[] encryptedPassword)
             throws DaoException {
-        DataBaseHelper helper = new DataBaseHelper();
-        PreparedStatement statementSelect = null;
-        ResultSet resultSet;
-        try {
-            Connection connection = connectionPool.getConnection();
-            statementSelect = helper.statementSelect(connection, name,
-                    encryptedPassword);
-            resultSet = statementSelect.executeQuery();
-            connectionPool.releaseConnection(connection);
+        Connection connection = POOL.getConnection();
+        try (PreparedStatement statementSelect =
+                     DB_HELPER.statementSelect(connection, name, encryptedPassword);
+             ResultSet resultSet = statementSelect.executeQuery()) {
             return resultSet.next();
-        } catch (SQLException | DaoException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            close(statementSelect);
+            POOL.releaseConnection(connection);
         }
     }
 }

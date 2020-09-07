@@ -9,6 +9,7 @@ import com.kharitonov.gym.model.entity.impl.Trainer;
 import com.kharitonov.gym.security.WebCipher;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.Random;
 
 import static org.testng.Assert.assertEquals;
@@ -40,7 +41,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testAddTrainer() throws DaoException {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 10; i++) {
             WebCipher cipher = new WebCipher();
             Random random = new Random();
             String name = "trainer" + random.nextInt(10000000);
@@ -92,7 +93,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testGetAll() throws DaoException {
-        dao.getAll();
+        List<User> users = dao.getAll();
         assertTrue(true);
     }
 }

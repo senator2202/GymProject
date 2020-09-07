@@ -96,7 +96,7 @@ public class Account {
             return this;
         }
 
-        public AccountBuilder withType(UserRole type) {
+        public AccountBuilder withRole(UserRole type) {
             this.type = type;
             return this;
         }

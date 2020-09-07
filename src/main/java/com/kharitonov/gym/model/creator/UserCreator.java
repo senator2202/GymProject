@@ -31,6 +31,7 @@ public class UserCreator {
                 .withName(name)
                 .withPassword(password)
                 .withEmail(email)
+                .withRole(userRole)
                 .withRegistrationDate(date)
                 .build();
         User user = UserFactory.createUser(userRole);
