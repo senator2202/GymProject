@@ -1,4 +1,4 @@
-package com.kharitonov.gym.model.connection;
+package com.kharitonov.gym.model.pool;
 
 import java.sql.Connection;
 

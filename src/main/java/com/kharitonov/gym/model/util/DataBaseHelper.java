@@ -2,14 +2,21 @@ package com.kharitonov.gym.model.util;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.model.entity.UserRole;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DataBaseHelper {
-    private static final String SQL_INSERT =
-            "INSERT INTO users(name, password, email, role) VALUES(?,?,?,?)";
+    private static final String SQL_INSERT_ACCOUNT =
+            "INSERT INTO account(name, password, email, role) VALUES(?,?,?,?)";
+    private static final String SQL_INSERT_USER =
+            "INSERT INTO user(account_id) VALUES(?)";
+    private static final String SQL_INSERT_CLIENT =
+            "INSERT INTO client(account_id) VALUES(?)";
+    private static final String SQL_INSERT_TRAINER =
+            "INSERT INTO trainer(account_id) VALUES(?)";
     private static final String SQL_SELECT =
             "SELECT id, name, password, role, registration_date FROM " +
                     "account WHERE name=? AND password=?";
@@ -17,26 +24,63 @@ public class DataBaseHelper {
             "SELECT id, name, password, email, role, registration_date " +
                     "FROM account";
 
-    public PreparedStatement prepareStatementAdd(Connection connection,
-                                                 User user,
-                                                 byte[] encryptedPassword)
+    public PreparedStatement statementInsertAccount(Connection connection,
+                                                    User user,
+                                                    byte[] password)
             throws DaoException {
         try {
             PreparedStatement statement =
-                    connection.prepareStatement(SQL_INSERT);
-            //statement.setString(1, user.getName());
-            statement.setBytes(2, encryptedPassword);
-            statement.setString(3,user.getEmail());
-            //statement.setString(4,user.getType().toString());
+                    connection.prepareStatement(SQL_INSERT_ACCOUNT);
+            statement.setString(1, user.getAccount().getName());
+            statement.setBytes(2, password);
+            statement.setString(3, user.getAccount().getEmail());
+            statement.setString(4, user.getAccount().getRole().toString());
             return statement;
         } catch (SQLException e) {
             throw new DaoException("Error, while getting statement!", e);
         }
     }
 
-    public PreparedStatement prepareStatementSelect(Connection connection,
-                                                    String name,
-                                                    byte[] password)
+    public PreparedStatement statementInsertUser(Connection connection,
+                                                  int accountId)
+            throws DaoException {
+        try {
+            PreparedStatement statement =
+                    connection.prepareStatement(SQL_INSERT_USER);
+            statement.setInt(1, accountId);
+            return statement;
+        } catch (SQLException e) {
+            throw new DaoException("Error, while getting statement!", e);
+        }
+    }
+
+    public PreparedStatement statementInsertUserInheritor(Connection connection,
+                                                          User user)
+            throws DaoException {
+        String text;
+        UserRole role = user.getAccount().getRole();
+        switch (role) {
+            case TRAINER:
+                text = SQL_INSERT_TRAINER;
+                break;
+            case CLIENT:
+                text = SQL_INSERT_CLIENT;
+                break;
+            default:
+                return null;
+        }
+        try {
+            PreparedStatement statement = connection.prepareStatement(text);
+            statement.setInt(1, user.getAccount().getId());
+            return statement;
+        } catch (SQLException e) {
+            throw new DaoException("Error, while getting statement!", e);
+        }
+    }
+
+    public PreparedStatement statementSelect(Connection connection,
+                                             String name,
+                                             byte[] password)
             throws DaoException {
         try {
             PreparedStatement statement =
@@ -49,7 +93,7 @@ public class DataBaseHelper {
         }
     }
 
-    public PreparedStatement preparedStatementSelectAll(Connection connection)
+    public PreparedStatement statementSelectAll(Connection connection)
             throws DaoException {
         try {
             return connection.prepareStatement(SQL_SELECT_ALL);

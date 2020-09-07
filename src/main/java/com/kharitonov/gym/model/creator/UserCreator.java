@@ -3,6 +3,7 @@ package com.kharitonov.gym.model.creator;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.factory.UserFactory;
 import com.kharitonov.gym.security.WebCipher;
 
 import java.sql.Date;
@@ -29,11 +30,11 @@ public class UserCreator {
                 .withId(id)
                 .withName(name)
                 .withPassword(password)
-                .withType(userRole)
+                .withEmail(email)
                 .withRegistrationDate(date)
                 .build();
-        return User.UserBuilder.aUser()
-               .withAccount(account)
-                .build();
+        User user = UserFactory.createUser(userRole);
+        user.setAccount(account);
+        return user;
     }
 }

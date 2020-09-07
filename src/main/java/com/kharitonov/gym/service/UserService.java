@@ -3,9 +3,9 @@ package com.kharitonov.gym.service;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
-import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.factory.UserFactory;
 import com.kharitonov.gym.security.WebCipher;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,27 +42,20 @@ public class UserService {
         return result;
     }
 
-    public boolean registerUser(String login, String password, String email)
+    public void registerUser(String login, String password,
+                             String email, UserRole role)
             throws ServiceException {
         WebCipher cipher = new WebCipher();
         byte[] sourceBytes = password.getBytes();
         byte[] encryptedBytes = cipher.encryptMessage(sourceBytes);
-        Account account = Account.AccountBuilder.anAccount()
-                .withName(login)
-                .withType(UserRole.CLIENT)
-                .build();
-        User user = User.UserBuilder.aUser()
-                .withAccount(account)
-                .withEmail(email)
-                .build();
-        boolean result;
+        User user = UserFactory.createUser(role);
+        user.getAccount().setName(login);
+        user.getAccount().setEmail(email);
         try {
             dao.add(user, encryptedBytes);
-            result = true;
             LOGGER.info("User '{}' was successfully registered!", login);
         } catch (DaoException e) {
             throw new ServiceException("Unable to register new user!", e);
         }
-        return result;
     }
 }

@@ -1,6 +1,6 @@
 package com.kharitonov.gym.model.creator;
 
-class TableColumnName {
+public class TableColumnName {
     public static final String USER_ID = "id";
     public static final String USER_NAME = "name";
     public static final String USER_PASSWORD = "password";

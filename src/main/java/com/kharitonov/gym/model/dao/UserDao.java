@@ -5,6 +5,7 @@ import com.kharitonov.gym.model.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,16 @@ public interface UserDao {
         if (resultSet != null) {
             try {
                 resultSet.close();
+            } catch (SQLException e) {
+                throw new DaoException("Error during closing result set!");
+            }
+        }
+    }
+
+    default void close(Statement statement) throws DaoException {
+        if (statement != null) {
+            try {
+                statement.close();
             } catch (SQLException e) {
                 throw new DaoException("Error during closing result set!");
             }

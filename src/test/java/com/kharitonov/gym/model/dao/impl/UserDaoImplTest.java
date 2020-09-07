@@ -2,8 +2,10 @@ package com.kharitonov.gym.model.dao.impl;
 
 import com.kharitonov.gym.data_provider.StaticDataProvider;
 import com.kharitonov.gym.exception.DaoException;
+import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.entity.impl.Client;
+import com.kharitonov.gym.model.entity.impl.Trainer;
 import com.kharitonov.gym.security.WebCipher;
 import org.testng.annotations.Test;
 
@@ -16,50 +18,65 @@ public class UserDaoImplTest {
     private final UserDaoImpl dao = new UserDaoImpl();
 
     @Test
-    public void testAdd() throws DaoException {
-        /*WebCipher cipher = new WebCipher();
-        Random random = new Random();
-        String name = "user" + random.nextInt(10000);
-        String password = "password" + random.nextInt(1000);
-        String email = "email" + random.nextInt(1000000) + "@gmail.com";
-        byte[] encryptedBytes = cipher.encryptMessage(password.getBytes());
-        boolean result;
-        User user = User.UserBuilder.aUser()
-                .withName(name)
-                .withEmail(email)
-                .withType(UserRole.CLIENT)
-                .build();
-        dao.add(user, encryptedBytes);
-        result = dao.checkLoginPassword(name, encryptedBytes);
-        assertTrue(result);*/
+    public void testAddClient() throws DaoException {
+        for (int i = 0; i < 10; i++) {
+            WebCipher cipher = new WebCipher();
+            Random random = new Random();
+            String name = "client" + random.nextInt(10000000);
+            String password = "password" + random.nextInt(1000);
+            String email = "email" + random.nextInt(10000000) + "@gmail.com";
+            byte[] encryptedBytes = cipher.encryptMessage(password.getBytes());
+            boolean result;
+            Account account = Account.AccountBuilder.anAccount()
+                    .withName(name)
+                    .withEmail(email)
+                    .build();
+            Client client = new Client(account);
+            dao.add(client, encryptedBytes);
+            result = dao.checkLoginPassword(name, encryptedBytes);
+            assertTrue(result);
+        }
+    }
+
+    @Test
+    public void testAddTrainer() throws DaoException {
+        for (int i = 0; i < 4; i++) {
+            WebCipher cipher = new WebCipher();
+            Random random = new Random();
+            String name = "trainer" + random.nextInt(10000000);
+            String password = "password" + random.nextInt(1000);
+            String email = "email" + random.nextInt(10000000) + "@gmail.com";
+            byte[] encryptedBytes = cipher.encryptMessage(password.getBytes());
+            boolean result;
+            Account account = Account.AccountBuilder.anAccount()
+                    .withName(name)
+                    .withEmail(email)
+                    .build();
+            Trainer trainer = new Trainer(account);
+            dao.add(trainer, encryptedBytes);
+            result = dao.checkLoginPassword(name, encryptedBytes);
+            assertTrue(result);
+        }
     }
 
     @Test
     public void testAddAdmin() throws DaoException {
-       /* WebCipher cipher = new WebCipher();
-        String name = StaticDataProvider.ADMIN_NAME;
-        String password = StaticDataProvider.ADMIN_PASSWORD;
-        String email = StaticDataProvider.ADMIN_EMAIL;
-        byte[] encryptedBytes = cipher.encryptMessage(password.getBytes());
-        boolean result;
-        User user = User.UserBuilder.aUser()
-                .withName(name)
-                .withEmail(email)
-                .withType(UserRole.ADMIN)
-                .build();
-        dao.add(user, encryptedBytes);
-        result = dao.checkLoginPassword(name, encryptedBytes);
-        assertTrue(result);*/
+        /*User user = StaticDataProvider.USER_ADMIN;
+        byte[] password = StaticDataProvider.ADMIN_PASSWORD_ENCRYPTED;
+        dao.add(user, password);
+        assertTrue(true);*/
     }
 
     @Test
     public void testCheckLoginPassword() throws DaoException {
-        String name = StaticDataProvider.ADMIN_NAME;
-        String password = StaticDataProvider.ADMIN_PASSWORD;
-        WebCipher cipher = new WebCipher();
-        byte[] encryptedBytes = cipher.encryptMessage(password.getBytes());
-        boolean result = dao.checkLoginPassword(name, encryptedBytes);
-        assertTrue(result);
+        for (int i = 0; i<10; i++) {
+            String name = StaticDataProvider.ADMIN_NAME;
+            String password = StaticDataProvider.ADMIN_PASSWORD;
+            WebCipher cipher = new WebCipher();
+            byte[] encryptedBytes = cipher.encryptMessage(password.getBytes());
+            boolean result = dao.checkLoginPassword(name, encryptedBytes);
+            assertTrue(result);
+        }
     }
 
     @Test
@@ -68,8 +85,8 @@ public class UserDaoImplTest {
         String password = StaticDataProvider.ADMIN_PASSWORD;
         WebCipher cipher = new WebCipher();
         byte[] encryptedBytes = cipher.encryptMessage(password.getBytes());
-        User actualUser = dao.get(name, encryptedBytes);
-        User expectedUser = StaticDataProvider.USER_CLIENT;
+        User actualUser = dao.get(name, encryptedBytes).get();
+        User expectedUser = StaticDataProvider.USER_ADMIN;
         assertEquals(actualUser, expectedUser);
     }
 

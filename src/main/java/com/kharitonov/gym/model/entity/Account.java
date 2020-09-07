@@ -6,9 +6,9 @@ public class Account {
     private int id;
     private String name;
     private String password;
+    private String email;
     private UserRole type;
     private Date registrationDate;
-
 
     private Account() {
     }
@@ -17,46 +17,55 @@ public class Account {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getEmail() {
+        return email;
     }
 
-    public UserRole getType() {
+    public UserRole getRole() {
         return type;
-    }
-
-    public void setType(UserRole type) {
-        this.type = type;
     }
 
     public Date getRegistrationDate() {
         return registrationDate;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRole(UserRole type) {
+        this.type = type;
+    }
+
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
 
-    public static final class AccountBuilder {
+    public static class AccountBuilder {
         private int id;
         private String name;
         private String password;
+        private String email;
         private UserRole type;
         private Date registrationDate;
 
@@ -82,6 +91,11 @@ public class Account {
             return this;
         }
 
+        public AccountBuilder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
         public AccountBuilder withType(UserRole type) {
             this.type = type;
             return this;
@@ -97,7 +111,8 @@ public class Account {
             account.setId(id);
             account.setName(name);
             account.setPassword(password);
-            account.setType(type);
+            account.setEmail(email);
+            account.setRole(type);
             account.setRegistrationDate(registrationDate);
             return account;
         }
@@ -114,6 +129,8 @@ public class Account {
             return false;
         if (password != null ? !password.equals(account.password) : account.password != null)
             return false;
+        if (email != null ? !email.equals(account.email) : account.email != null)
+            return false;
         if (type != account.type) return false;
         return registrationDate != null ? registrationDate.equals(account.registrationDate) : account.registrationDate == null;
     }
@@ -122,6 +139,7 @@ public class Account {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
         return result;

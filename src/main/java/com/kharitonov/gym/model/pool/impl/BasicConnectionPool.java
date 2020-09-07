@@ -1,8 +1,8 @@
-package com.kharitonov.gym.model.connection.impl;
+package com.kharitonov.gym.model.pool.impl;
 
 import com.kharitonov.gym.exception.ConnectionRuntimeException;
-import com.kharitonov.gym.model.connection.ConnectionPool;
-import com.kharitonov.gym.model.connection.PropertyName;
+import com.kharitonov.gym.model.pool.ConnectionPool;
+import com.kharitonov.gym.model.pool.PropertyName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,12 +27,7 @@ public class BasicConnectionPool implements ConnectionPool {
 
     private BasicConnectionPool() {
         try {
-            ClassLoader classLoader =
-                    Thread.currentThread().getContextClassLoader();
-            InputStream inputStream =
-                    classLoader.getResourceAsStream(PROPERTIES_PATH);
-            Properties properties = new Properties();
-            properties.load(inputStream);
+            Properties properties = loadProperties();
             String url = properties.getProperty(PropertyName.DB_URL);
             String driverName = properties.getProperty(PropertyName.DRIVER_NAME);
             Class.forName(driverName);
@@ -47,6 +42,16 @@ public class BasicConnectionPool implements ConnectionPool {
             throw new ConnectionRuntimeException("Connection pool" +
                     " creating error!", e);
         }
+    }
+
+    private Properties loadProperties() throws IOException {
+        ClassLoader classLoader =
+                Thread.currentThread().getContextClassLoader();
+        InputStream inputStream =
+                classLoader.getResourceAsStream(PROPERTIES_PATH);
+        Properties properties = new Properties();
+        properties.load(inputStream);
+        return properties;
     }
 
     public static BasicConnectionPool getInstance() {

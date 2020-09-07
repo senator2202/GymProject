@@ -1,15 +1,10 @@
-package com.kharitonov.gym.model.connection.impl;
+package com.kharitonov.gym.model.pool.impl;
 
-import com.kharitonov.gym.model.connection.ConnectionPool;
-import com.kharitonov.gym.model.connection.PropertyName;
+import com.kharitonov.gym.model.pool.ConnectionPool;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class BasicConnectionPoolTest {
     private final ConnectionPool pool =
@@ -17,7 +12,7 @@ public class BasicConnectionPoolTest {
 
     @Test
     public void testGetInstance() throws IOException, SQLException {
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 10; i++) {
             pool.getConnection();
         }
     }
