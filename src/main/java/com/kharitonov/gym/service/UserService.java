@@ -11,6 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class UserService {
+    private static final String REGEX_EMAIL =
+            "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)" +
+                    "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final Logger LOGGER =
             LogManager.getLogger(UserService.class);
     private static UserService instance;
@@ -45,6 +48,12 @@ public class UserService {
     public void registerUser(String login, String password,
                              String email, UserRole role)
             throws ServiceException {
+        if (login.isEmpty() || password.isEmpty() || email.isEmpty()) {
+            throw new ServiceException("All fields must be entered!");
+        }
+        if (!email.matches(REGEX_EMAIL)) {
+            throw new ServiceException("Invalid email format!");
+        }
         WebCipher cipher = new WebCipher();
         byte[] sourceBytes = password.getBytes();
         byte[] encryptedBytes = cipher.encryptMessage(sourceBytes);
@@ -55,7 +64,7 @@ public class UserService {
             dao.add(user, encryptedBytes);
             LOGGER.info("User '{}' was successfully registered!", login);
         } catch (DaoException e) {
-            throw new ServiceException("Unable to register new user!", e);
+            throw new ServiceException(e);
         }
     }
 }

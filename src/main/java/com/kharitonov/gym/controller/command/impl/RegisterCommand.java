@@ -32,8 +32,8 @@ public class RegisterCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error("Unable to register new user!", e);
             request.setAttribute(RequestAttributeName.AUTHENTICATION_RESULT,
-                    RequestAttributeValue.REGISTER_ERROR);
-            page = PagePath.LOGIN;
+                    e.getLocalizedMessage());
+            page = PagePath.REGISTER;
         }
         return page;
     }
