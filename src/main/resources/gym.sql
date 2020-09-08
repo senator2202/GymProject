@@ -26,13 +26,13 @@ CREATE TABLE IF NOT EXISTS `account` (
   `email` varchar(50) NOT NULL,
   `role` enum('ADMIN','TRAINER','CLIENT') NOT NULL DEFAULT 'CLIENT',
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.account: ~3 rows (приблизительно)
+-- Дамп данных таблицы gym.account: ~106 rows (приблизительно)
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 REPLACE INTO `account` (`id`, `name`, `password`, `email`, `role`, `registration_date`) VALUES
 	(24, 'admin', _binary 0xF446EAAAED61385EEF431F06B26BA260, 'admin@gmail.com', 'ADMIN', '2020-09-07 13:30:30'),
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   UNIQUE KEY `account_id` (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.client: ~0 rows (приблизительно)
+-- Дамп данных таблицы gym.client: ~79 rows (приблизительно)
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
 REPLACE INTO `client` (`account_id`, `discount`) VALUES
 	(29, 0),
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `trainer` (
   UNIQUE KEY `account_id` (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainer: ~0 rows (приблизительно)
+-- Дамп данных таблицы gym.trainer: ~8 rows (приблизительно)
 /*!40000 ALTER TABLE `trainer` DISABLE KEYS */;
 REPLACE INTO `trainer` (`account_id`, `rating`) VALUES
 	(25, 0),
@@ -298,17 +298,17 @@ CREATE TABLE IF NOT EXISTS `training_exercise` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `account_id` int(11) NOT NULL,
-  `first_name` varchar(30) DEFAULT '',
-  `last_name` varchar(30) DEFAULT '',
+  `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
+  `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `phone` varchar(30) DEFAULT '',
   PRIMARY KEY (`account_id`),
   UNIQUE KEY `account_id` (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.user: ~2 rows (приблизительно)
+-- Дамп данных таблицы gym.user: ~98 rows (приблизительно)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 REPLACE INTO `user` (`account_id`, `first_name`, `last_name`, `phone`) VALUES
-	(24, '', '', ''),
+	(24, 'Алексей', 'Харитонов', '+375296984636'),
 	(25, '', '', ''),
 	(26, '', '', ''),
 	(27, '', '', ''),
