@@ -2,6 +2,7 @@ package com.kharitonov.gym.controller;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.provider.CommandProvider;
+import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,5 +37,10 @@ public class MainServlet extends HttpServlet {
         RequestDispatcher dispatcher =
                 getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        BasicConnectionPool.getInstance().destroyPool();
     }
 }

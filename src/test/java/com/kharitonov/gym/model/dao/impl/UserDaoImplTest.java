@@ -20,7 +20,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testAddClient() throws DaoException {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             WebCipher cipher = new WebCipher();
             Random random = new Random();
             String name = "client" + random.nextInt(10000000);
