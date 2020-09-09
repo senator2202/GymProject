@@ -4,7 +4,7 @@ import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.factory.UserFactory;
-import com.kharitonov.gym.security.WebCipher;
+import com.kharitonov.gym.service.security.CipherService;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -23,7 +23,7 @@ public class UserCreator {
         String role = resultSet.getString(TableColumnName.ACCOUNT_ROLE);
         UserRole userRole = UserRole.valueOf(role);
         Date date = resultSet.getDate(TableColumnName.ACCOUNT_REGISTRATION_DATE);
-        WebCipher cipher = new WebCipher();
+        CipherService cipher = new CipherService();
         byte[] decryptedBytes = cipher.decryptMessage(encryptedBytes);
         String password = new String(decryptedBytes);
         Account account = Account.AccountBuilder.anAccount()

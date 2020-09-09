@@ -1,4 +1,4 @@
-package com.kharitonov.gym.security;
+package com.kharitonov.gym.service.security;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,8 +10,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-public class WebCipher {
-    private static final Logger LOGGER = LogManager.getLogger(WebCipher.class);
+public class CipherService {
+    private static final Logger LOGGER = LogManager.getLogger(CipherService.class);
     private static final String TRANSFORMATION = "AES/ECB/PKCS5Padding";
     private static final byte[] KEY_BYTES =
             new byte[]{-75, 30, 47, -15, -2, -68, 9, 115, -49, -117, 85, -15,

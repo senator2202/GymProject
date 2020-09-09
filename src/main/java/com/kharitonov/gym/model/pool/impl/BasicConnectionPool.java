@@ -1,8 +1,10 @@
 package com.kharitonov.gym.model.pool.impl;
 
+import com.kharitonov.gym.exception.PropertiesReaderException;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.PropertyName;
-import com.kharitonov.gym.model.reader.PropertiesReader;
+import com.kharitonov.gym.util.PropertiesPath;
+import com.kharitonov.gym.util.PropertiesReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +30,13 @@ public class BasicConnectionPool implements ConnectionPool {
 
     private BasicConnectionPool() throws RuntimeException {
         PropertiesReader reader = new PropertiesReader();
-        Properties properties = reader.readDBProperties();
+        String propertiesPath = PropertiesPath.DB_PROPERTIES;
+        Properties properties;
+        try {
+            properties = reader.readProperties(propertiesPath);
+        } catch (PropertiesReaderException e) {
+            throw new RuntimeException("Unable to read DB properties!", e);
+        }
         String url = properties.getProperty(PropertyName.DB_URL);
         String driverName = properties.getProperty(PropertyName.DRIVER_NAME);
         try {

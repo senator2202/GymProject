@@ -1,11 +1,11 @@
-package com.kharitonov.gym.security;
+package com.kharitonov.gym.service.security;
 
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class WebCipherTest {
-    private final WebCipher cipher = new WebCipher();
+public class CipherServiceTest {
+    private final CipherService cipher = new CipherService();
 
     @Test
     public void testWebCipher() {

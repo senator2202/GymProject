@@ -2,7 +2,7 @@ package com.kharitonov.gym.data_provider;
 
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.impl.Admin;
-import com.kharitonov.gym.security.WebCipher;
+import com.kharitonov.gym.service.security.CipherService;
 
 public class StaticDataProvider {
     public static final Admin USER_ADMIN;
@@ -18,7 +18,7 @@ public class StaticDataProvider {
                 .withEmail(ADMIN_EMAIL)
                 .build();
         USER_ADMIN = new Admin(account);
-        WebCipher cipher = new WebCipher();
+        CipherService cipher = new CipherService();
         ADMIN_PASSWORD_ENCRYPTED =
                 cipher.encryptMessage(ADMIN_PASSWORD.getBytes());
     }

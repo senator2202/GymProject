@@ -17,143 +17,201 @@ DROP DATABASE IF EXISTS `gym`;
 CREATE DATABASE IF NOT EXISTS `gym` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `gym`;
 
--- Дамп структуры для таблица gym.account
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE IF NOT EXISTS `account` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+-- Дамп структуры для таблица gym.accounts
+DROP TABLE IF EXISTS `accounts`;
+CREATE TABLE IF NOT EXISTS `accounts` (
+  `account_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `password` varbinary(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `role` enum('ADMIN','TRAINER','CLIENT') NOT NULL DEFAULT 'CLIENT',
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `id` (`id`),
+  `active` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`account_id`) USING BTREE,
   UNIQUE KEY `name` (`name`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `id` (`account_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.account: ~106 rows (приблизительно)
-/*!40000 ALTER TABLE `account` DISABLE KEYS */;
-REPLACE INTO `account` (`id`, `name`, `password`, `email`, `role`, `registration_date`) VALUES
-	(24, 'admin', _binary 0xF446EAAAED61385EEF431F06B26BA260, 'admin@gmail.com', 'ADMIN', '2020-09-07 13:30:30'),
-	(25, 'trainer16399', _binary 0xFD06549BF6CC4609AE7F3E377E4EE065, 'email156446@gmail.com', 'TRAINER', '2020-09-07 13:32:07'),
-	(26, 'trainer47708', _binary 0xB7BF5ECFF4D6F2EA0871B2D664D1848E, 'email73871@gmail.com', 'TRAINER', '2020-09-07 13:32:07'),
-	(27, 'trainer54602', _binary 0x43583CD7B0DDFE2382B16E7F2465446C, 'email837729@gmail.com', 'TRAINER', '2020-09-07 13:32:08'),
-	(28, 'trainer46413', _binary 0xA699682CE0ED54009DD39D94512DBFAA, 'email587605@gmail.com', 'TRAINER', '2020-09-07 13:32:08'),
-	(29, 'client34524', _binary 0x572816BAD18A9DF4C2F2D7EDDC9E3F42, 'email564721@gmail.com', 'CLIENT', '2020-09-07 13:32:51'),
-	(30, 'client74942', _binary 0x4AF4DECCCE2A207DD699A126A7CDBE06, 'email545260@gmail.com', 'CLIENT', '2020-09-07 13:32:52'),
-	(31, 'client48574', _binary 0xDDCAB30D7BCDE9C4C3DAF947A54243DF, 'email635093@gmail.com', 'CLIENT', '2020-09-07 13:32:53'),
-	(32, 'client78757', _binary 0xECC4E6D590365CB2430597B77F93EBF3, 'email689299@gmail.com', 'CLIENT', '2020-09-07 13:32:53'),
-	(33, 'client2275', _binary 0xB0147F2D3A4F3B7E0B95567836026B5D, 'email882504@gmail.com', 'CLIENT', '2020-09-07 13:32:53'),
-	(34, 'client75521', _binary 0x1CF2E147D147A70A3285B02A29D3FDBF, 'email685745@gmail.com', 'CLIENT', '2020-09-07 13:33:43'),
-	(35, 'client50081', _binary 0xEEA216E72CCD6CA6856912A4EBC1DF58, 'email560087@gmail.com', 'CLIENT', '2020-09-07 13:33:43'),
-	(36, 'client82095', _binary 0xFBA8D70E31D6AE8005EB075657BA7801, 'email68787@gmail.com', 'CLIENT', '2020-09-07 13:33:43'),
-	(37, 'client66153', _binary 0xE3F6A16595648CD0706D6803E9691D2D, 'email592000@gmail.com', 'CLIENT', '2020-09-07 13:33:43'),
-	(38, 'client60557', _binary 0x2EAB738AE82A52EE379651EDEB7CB083, 'email950190@gmail.com', 'CLIENT', '2020-09-07 13:33:43'),
-	(39, 'client20973', _binary 0x150599D25CF39968A4674FBE93A3F55E, 'email960265@gmail.com', 'CLIENT', '2020-09-07 13:35:18'),
-	(40, 'client11026', _binary 0xF5709C47B9226E748B36D4431C05C77C, 'email237234@gmail.com', 'CLIENT', '2020-09-07 13:35:39'),
-	(41, 'client13330', _binary 0x9F4576B2537CA608FA96E4C9AE852241, 'email953672@gmail.com', 'CLIENT', '2020-09-07 13:35:40'),
-	(42, 'client24084', _binary 0x3DF90D62CAB3D280A14A1144ADBA1AD8, 'email439424@gmail.com', 'CLIENT', '2020-09-07 13:35:41'),
-	(43, 'client9307', _binary 0x7DB93943235DF83C0449E7B1CCDF73AE, 'email760424@gmail.com', 'CLIENT', '2020-09-07 13:35:42'),
-	(44, 'client69634', _binary 0x8D869E095A5C2BF5A3787016BDB675FE, 'email626720@gmail.com', 'CLIENT', '2020-09-07 13:36:17'),
-	(45, 'client42551', _binary 0xD34CE73ABF31B142C98F6F17AC545BF8, 'email328898@gmail.com', 'CLIENT', '2020-09-07 13:36:18'),
-	(46, 'client16502', _binary 0x5425A130A94F0EA8DF593E5E4DCDFA95, 'email335891@gmail.com', 'CLIENT', '2020-09-07 13:36:19'),
-	(47, 'client75700', _binary 0xD0EFEBC8E90AAD2099BC6D26E90489C3, 'email423938@gmail.com', 'CLIENT', '2020-09-07 13:36:19'),
-	(48, 'client56044', _binary 0xB0E6806D32C8E8E0DAA80B803F387B5B, 'email315236@gmail.com', 'CLIENT', '2020-09-07 13:36:50'),
-	(49, 'client7299', _binary 0xD1D04179655063E6FC05F0B1B8C6D636, 'email238396@gmail.com', 'CLIENT', '2020-09-07 13:37:27'),
-	(50, 'client35850', _binary 0xFD6EDCB7713994639AE14F0B8EB46C24, 'email515953@gmail.com', 'CLIENT', '2020-09-07 13:37:27'),
-	(51, 'client19782', _binary 0xB625F7AB0FFD420B2D6E5DE453BE00AF, 'email666491@gmail.com', 'CLIENT', '2020-09-07 13:37:28'),
-	(52, 'client69623', _binary 0x2D970D5F4641DCA226369C535EF33E47, 'email149951@gmail.com', 'CLIENT', '2020-09-07 13:37:28'),
-	(53, 'client86140', _binary 0x35F3F5C1822836BD979ECC621195C5D0, 'email415441@gmail.com', 'CLIENT', '2020-09-07 13:37:29'),
-	(54, 'client15549', _binary 0x339A2FF780476E5F2C1ADDCB43A2D3C3, 'email960004@gmail.com', 'CLIENT', '2020-09-07 13:38:14'),
-	(55, 'client16130', _binary 0x109E41A297D1BBB5512594698086B5A9, 'email222171@gmail.com', 'CLIENT', '2020-09-07 13:38:15'),
-	(56, 'client7837', _binary 0x8CECD5493B770D7EA6B5A355B6085AC6, 'email538481@gmail.com', 'CLIENT', '2020-09-07 13:38:16'),
-	(57, 'client22362', _binary 0x7C9F2EF86586ADB761EC299D54198BAF, 'email257470@gmail.com', 'CLIENT', '2020-09-07 13:38:17'),
-	(58, 'client75511', _binary 0xC41E61E210EA8B9D7C9CDCAC632AAA6A, 'email256085@gmail.com', 'CLIENT', '2020-09-07 13:38:46'),
-	(59, 'client86848', _binary 0x237EE906527DE49A7AB9A60C04E97A02, 'email328594@gmail.com', 'CLIENT', '2020-09-07 13:40:58'),
-	(60, 'client13661', _binary 0xB8A59C3F5C1CFC4C5B9D8C3E76BFC265, 'email910382@gmail.com', 'CLIENT', '2020-09-07 13:40:59'),
-	(61, 'client32485', _binary 0xA35C4E55681BFFC7056A80CA05E6475A, 'email602445@gmail.com', 'CLIENT', '2020-09-07 13:41:00'),
-	(62, 'client17419', _binary 0x47015AC723C7514C9DB2F9F44EA82A13, 'email723190@gmail.com', 'CLIENT', '2020-09-07 13:41:01'),
-	(63, 'client46842', _binary 0x61AD4CC4F71BBDA0AC970771BD522A45, 'email270941@gmail.com', 'CLIENT', '2020-09-07 13:41:01'),
-	(64, 'client79304', _binary 0x848A264EE79C5A96581BD8E7B1A946A8, 'email415040@gmail.com', 'CLIENT', '2020-09-07 13:44:57'),
-	(65, 'client634', _binary 0x90E4189BEF00FE1347D4A34B9507632F, 'email237197@gmail.com', 'CLIENT', '2020-09-07 13:44:57'),
-	(66, 'client94137', _binary 0xB990AA02FCB14D8D185E59F463279DA7, 'email595461@gmail.com', 'CLIENT', '2020-09-07 13:44:57'),
-	(67, 'client18201', _binary 0xF36F4634C0282824800C8CC1E60407F7, 'email194822@gmail.com', 'CLIENT', '2020-09-07 13:44:58'),
-	(68, 'client2652', _binary 0xC0E386CE7DACCAE6FC2137DBA3A7E10C, 'email736426@gmail.com', 'CLIENT', '2020-09-07 13:44:58'),
-	(69, 'client24555', _binary 0xE02D8DB3D8DA180AF8C0F051A1988FA0, 'email710382@gmail.com', 'CLIENT', '2020-09-07 13:49:44'),
-	(70, 'client83000', _binary 0x7F374F0B1726848C6EC87C004F5F1224, 'email540302@gmail.com', 'CLIENT', '2020-09-07 13:49:45'),
-	(71, 'client12343', _binary 0xE050E94D846F3BCEF298C6105D7C5B4E, 'email268906@gmail.com', 'CLIENT', '2020-09-07 13:49:45'),
-	(72, 'client27196', _binary 0x39E1717775C61FC247970516C7C8F836, 'email34753@gmail.com', 'CLIENT', '2020-09-07 13:49:46'),
-	(73, 'client28801', _binary 0xECC8CFFE0B18E085EEAF281A26796507, 'email557206@gmail.com', 'CLIENT', '2020-09-07 13:49:47'),
-	(74, 'client74272', _binary 0x08A8881B929A2E809003B97DB8650BAC, 'email42924@gmail.com', 'CLIENT', '2020-09-07 14:00:50'),
-	(75, 'client52617', _binary 0x3FDE5B164169993CB2C13B939D8B43AC, 'email587842@gmail.com', 'CLIENT', '2020-09-07 14:00:51'),
-	(76, 'client25340', _binary 0x0FF8FD550254D0DDCAF4758A61F3C8B5, 'email144130@gmail.com', 'CLIENT', '2020-09-07 14:00:54'),
-	(77, 'client67391', _binary 0x1774716442E2B3F5D9EF76941E518B7F, 'email137787@gmail.com', 'CLIENT', '2020-09-07 14:00:58'),
-	(78, 'client89397', _binary 0x231C5CA21655B0104FBC7FE94014AF93, 'email441943@gmail.com', 'CLIENT', '2020-09-07 14:01:19'),
-	(79, 'client87709', _binary 0xC9E749988028E53061A18272220A9F4F, 'email704218@gmail.com', 'CLIENT', '2020-09-07 14:04:09'),
-	(80, 'client37987', _binary 0xDB78C09C2DADF166F593E5F07D451D8B, 'email82857@gmail.com', 'CLIENT', '2020-09-07 14:08:16'),
-	(81, 'client87177', _binary 0x9AEEDC178E4506E5870FD6D486220E2F, 'email786260@gmail.com', 'CLIENT', '2020-09-07 14:08:25'),
-	(82, 'client6209', _binary 0x89F00E1EC24B52D5824BABF000A1D174, 'email325135@gmail.com', 'CLIENT', '2020-09-07 14:08:25'),
-	(83, 'client93223', _binary 0x124CB1B7D28817A9B04A4A6F7715BE46, 'email889731@gmail.com', 'CLIENT', '2020-09-07 14:08:26'),
-	(84, 'client41858', _binary 0x1D5E21E71B1336857D1ED570B46B786C, 'email374111@gmail.com', 'CLIENT', '2020-09-07 14:10:35'),
-	(85, 'client66116', _binary 0xA59810B1A2AD476F00FC9B1026821E29, 'email174109@gmail.com', 'CLIENT', '2020-09-07 14:13:10'),
-	(86, 'client95823', _binary 0x1C071258F97F9265D7BCD15A88AAD93E, 'email864269@gmail.com', 'CLIENT', '2020-09-07 14:19:24'),
-	(87, 'client12279', _binary 0x290C9D977BA1A9560720DBB44C533487, 'email539885@gmail.com', 'CLIENT', '2020-09-07 14:19:58'),
-	(88, 'client26146', _binary 0xE050E94D846F3BCEF298C6105D7C5B4E, 'email842035@gmail.com', 'CLIENT', '2020-09-07 14:19:58'),
-	(89, 'client99661', _binary 0x3C3E7FC4E8489F6AA9E0D135DA504DF9, 'email162959@gmail.com', 'CLIENT', '2020-09-07 14:19:59'),
-	(90, 'client24909', _binary 0x12E6093A5E7859DF78D01AB70A5DF617, 'email923199@gmail.com', 'CLIENT', '2020-09-07 14:19:59'),
-	(91, 'client25776', _binary 0x5CF3A5260F2F828F27B814D3943DBE12, 'email235441@gmail.com', 'CLIENT', '2020-09-07 14:19:59'),
-	(92, 'client81357', _binary 0x4D4D089212706DE2646B9182E9FDB76B, 'email323625@gmail.com', 'CLIENT', '2020-09-07 14:22:25'),
-	(93, 'client38759', _binary 0x574746DB808BBEB2882C268052D61D9C, 'email710276@gmail.com', 'CLIENT', '2020-09-07 14:22:40'),
-	(94, 'client63532', _binary 0x857F6EE30891773133E26CE7CB00E297, 'email561197@gmail.com', 'CLIENT', '2020-09-07 14:24:55'),
-	(95, 'client63261', _binary 0x652A4F32B02F9C042BEDE97D07B83221, 'email901865@gmail.com', 'CLIENT', '2020-09-07 14:26:05'),
-	(96, 'client76294', _binary 0xCCA89A31C8B2202B6970CFBA5A674D02, 'email134073@gmail.com', 'CLIENT', '2020-09-07 14:26:15'),
-	(97, 'client52717', _binary 0xB0E6806D32C8E8E0DAA80B803F387B5B, 'email809772@gmail.com', 'CLIENT', '2020-09-07 14:26:16'),
-	(98, 'client18713', _binary 0x9FEF464251C2B9F6B897C0FC95E1D20D, 'email626753@gmail.com', 'CLIENT', '2020-09-07 14:28:50'),
-	(99, 'client82580', _binary 0x7005D08C4251CB4855391E7313B37695, 'email907363@gmail.com', 'CLIENT', '2020-09-07 14:29:49'),
-	(100, 'client1723', _binary 0xD1D04179655063E6FC05F0B1B8C6D636, 'email204064@gmail.com', 'CLIENT', '2020-09-07 14:30:20'),
-	(101, 'client20994', _binary 0x90158F195F487C6888715C2438FB7453, 'email351093@gmail.com', 'CLIENT', '2020-09-07 14:32:35'),
-	(102, 'client32413', _binary 0x2E986F5D6416C127D3BE86B03D885AAD, 'email579817@gmail.com', 'CLIENT', '2020-09-07 14:33:22'),
-	(103, 'client55671', _binary 0xA5B9B1E7DF42B8EF6A7D50AEA0678BFA, 'email667532@gmail.com', 'CLIENT', '2020-09-07 14:36:34'),
-	(104, 'client20771', _binary 0xDDCBF8AE2893A2DEF186796418A7BCB4, 'email224873@gmail.com', 'CLIENT', '2020-09-07 14:38:05'),
-	(105, 'client16413', _binary 0x08265C69090BEFE2C9FFB88193F830B4, 'email633377@gmail.com', 'CLIENT', '2020-09-07 14:39:08'),
-	(106, 'client75486', _binary 0xB0E6806D32C8E8E0DAA80B803F387B5B, 'email304987@gmail.com', 'CLIENT', '2020-09-07 14:39:08'),
-	(107, 'client10830', _binary 0xFFA0E87DADEDFB95A2F198C2D54F3287, 'email951357@gmail.com', 'CLIENT', '2020-09-07 14:39:08'),
-	(108, 'client79504', _binary 0x2362AECA15365B1A12B9C50F7112612A, 'email7528@gmail.com', 'CLIENT', '2020-09-07 14:39:10'),
-	(109, 'client23121', _binary 0x1DEB7BFBD7EE86BA18D0CF13E3152F29, 'email524939@gmail.com', 'CLIENT', '2020-09-07 14:39:10'),
-	(110, 'client37697', _binary 0xF36E383734879E710DD9CBFE06D02660, 'email653280@gmail.com', 'CLIENT', '2020-09-07 14:39:10'),
-	(111, 'client26415', _binary 0xF537883402946CEFA95624BB8E35AEE4, 'email876356@gmail.com', 'CLIENT', '2020-09-07 14:39:45'),
-	(112, 'client47887', _binary 0x1BC5970749EFD6169E19FAAE6CAAB14F, 'email429036@gmail.com', 'CLIENT', '2020-09-07 14:42:12'),
-	(113, 'trainer7499', _binary 0xA2D1872CBF2D904CFFF2BB9D921C57AC, 'email212726@gmail.com', 'TRAINER', '2020-09-07 15:44:51'),
-	(114, 'trainer60966', _binary 0x3F4F62968282096AE6AFB70C1B514125, 'email760416@gmail.com', 'TRAINER', '2020-09-07 15:48:19'),
-	(115, 'trainer87245', _binary 0xA374A153E8257465B3BFD6119781FAF5, 'email342875@gmail.com', 'TRAINER', '2020-09-07 15:49:17'),
-	(116, 'trainer99032', _binary 0xE395B8A2720DD0E1D9208DD6D2B99862, 'email925020@gmail.com', 'TRAINER', '2020-09-07 15:49:20'),
-	(117, 'trainer46999', _binary 0xEB5652E222FF7FA87113CF3F93C94AA6, 'email322419@gmail.com', 'TRAINER', '2020-09-07 15:49:21'),
-	(118, 'trainer96325', _binary 0x869DDA0AF3AC700CFD572DEE89DE51B5, 'email798120@gmail.com', 'TRAINER', '2020-09-07 15:49:32'),
-	(119, 'client45743', _binary 0xD521B029C00AB523CD10B5B133F8F2CD, 'email253624@gmail.com', 'CLIENT', '2020-09-07 15:57:07'),
-	(120, 'client9290', _binary 0x65A63AEAC0A8BCBEBFA508EB387E90AE, 'email269519@gmail.com', 'CLIENT', '2020-09-07 15:57:08'),
-	(121, 'client78722', _binary 0xA93E39CC8FBD2D586846A9864654B8CC, 'email26263@gmail.com', 'CLIENT', '2020-09-07 15:57:08'),
-	(122, 'client37714', _binary 0x3E1A0A2F00F1622DACF48FF75ACD846F, 'email674085@gmail.com', 'CLIENT', '2020-09-07 15:57:08'),
-	(123, 'client87368', _binary 0x920EEE84E13E7C95C54D0E5B845D8A95, 'email289081@gmail.com', 'CLIENT', '2020-09-07 15:57:08'),
-	(124, 'client90446', _binary 0x8779E1365BF03FAD4F83E51F701FEA0C, 'email248575@gmail.com', 'CLIENT', '2020-09-07 15:57:08'),
-	(125, 'client64712', _binary 0x2362AECA15365B1A12B9C50F7112612A, 'email805958@gmail.com', 'CLIENT', '2020-09-07 15:57:08'),
-	(126, 'client30759', _binary 0x5D83D02D9C5D5CAA8084D25920612816, 'email802667@gmail.com', 'CLIENT', '2020-09-07 15:57:09'),
-	(127, 'client43128', _binary 0xD6EB8F38B7C22C5EA65E41B0F95DC65E, 'email431270@gmail.com', 'CLIENT', '2020-09-07 15:57:09'),
-	(128, 'client12887', _binary 0xF4654046A33548B0B884859BC22A8DCE, 'email467597@gmail.com', 'CLIENT', '2020-09-07 15:57:09');
-/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+-- Дамп данных таблицы gym.accounts: ~161 rows (приблизительно)
+/*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+REPLACE INTO `accounts` (`account_id`, `name`, `password`, `email`, `role`, `registration_date`, `active`) VALUES
+	(24, 'admin', _binary 0xF446EAAAED61385EEF431F06B26BA260, 'admin@gmail.com', 'ADMIN', '2020-09-07 13:30:30', 0),
+	(25, 'trainer16399', _binary 0xFD06549BF6CC4609AE7F3E377E4EE065, 'email156446@gmail.com', 'TRAINER', '2020-09-07 13:32:07', 0),
+	(26, 'trainer47708', _binary 0xB7BF5ECFF4D6F2EA0871B2D664D1848E, 'email73871@gmail.com', 'TRAINER', '2020-09-07 13:32:07', 0),
+	(27, 'trainer54602', _binary 0x43583CD7B0DDFE2382B16E7F2465446C, 'email837729@gmail.com', 'TRAINER', '2020-09-07 13:32:08', 0),
+	(28, 'trainer46413', _binary 0xA699682CE0ED54009DD39D94512DBFAA, 'email587605@gmail.com', 'TRAINER', '2020-09-07 13:32:08', 0),
+	(29, 'client34524', _binary 0x572816BAD18A9DF4C2F2D7EDDC9E3F42, 'email564721@gmail.com', 'CLIENT', '2020-09-07 13:32:51', 0),
+	(30, 'client74942', _binary 0x4AF4DECCCE2A207DD699A126A7CDBE06, 'email545260@gmail.com', 'CLIENT', '2020-09-07 13:32:52', 0),
+	(31, 'client48574', _binary 0xDDCAB30D7BCDE9C4C3DAF947A54243DF, 'email635093@gmail.com', 'CLIENT', '2020-09-07 13:32:53', 0),
+	(32, 'client78757', _binary 0xECC4E6D590365CB2430597B77F93EBF3, 'email689299@gmail.com', 'CLIENT', '2020-09-07 13:32:53', 0),
+	(33, 'client2275', _binary 0xB0147F2D3A4F3B7E0B95567836026B5D, 'email882504@gmail.com', 'CLIENT', '2020-09-07 13:32:53', 0),
+	(34, 'client75521', _binary 0x1CF2E147D147A70A3285B02A29D3FDBF, 'email685745@gmail.com', 'CLIENT', '2020-09-07 13:33:43', 0),
+	(35, 'client50081', _binary 0xEEA216E72CCD6CA6856912A4EBC1DF58, 'email560087@gmail.com', 'CLIENT', '2020-09-07 13:33:43', 0),
+	(36, 'client82095', _binary 0xFBA8D70E31D6AE8005EB075657BA7801, 'email68787@gmail.com', 'CLIENT', '2020-09-07 13:33:43', 0),
+	(37, 'client66153', _binary 0xE3F6A16595648CD0706D6803E9691D2D, 'email592000@gmail.com', 'CLIENT', '2020-09-07 13:33:43', 0),
+	(38, 'client60557', _binary 0x2EAB738AE82A52EE379651EDEB7CB083, 'email950190@gmail.com', 'CLIENT', '2020-09-07 13:33:43', 0),
+	(39, 'client20973', _binary 0x150599D25CF39968A4674FBE93A3F55E, 'email960265@gmail.com', 'CLIENT', '2020-09-07 13:35:18', 0),
+	(40, 'client11026', _binary 0xF5709C47B9226E748B36D4431C05C77C, 'email237234@gmail.com', 'CLIENT', '2020-09-07 13:35:39', 0),
+	(41, 'client13330', _binary 0x9F4576B2537CA608FA96E4C9AE852241, 'email953672@gmail.com', 'CLIENT', '2020-09-07 13:35:40', 0),
+	(42, 'client24084', _binary 0x3DF90D62CAB3D280A14A1144ADBA1AD8, 'email439424@gmail.com', 'CLIENT', '2020-09-07 13:35:41', 0),
+	(43, 'client9307', _binary 0x7DB93943235DF83C0449E7B1CCDF73AE, 'email760424@gmail.com', 'CLIENT', '2020-09-07 13:35:42', 0),
+	(44, 'client69634', _binary 0x8D869E095A5C2BF5A3787016BDB675FE, 'email626720@gmail.com', 'CLIENT', '2020-09-07 13:36:17', 0),
+	(45, 'client42551', _binary 0xD34CE73ABF31B142C98F6F17AC545BF8, 'email328898@gmail.com', 'CLIENT', '2020-09-07 13:36:18', 0),
+	(46, 'client16502', _binary 0x5425A130A94F0EA8DF593E5E4DCDFA95, 'email335891@gmail.com', 'CLIENT', '2020-09-07 13:36:19', 0),
+	(47, 'client75700', _binary 0xD0EFEBC8E90AAD2099BC6D26E90489C3, 'email423938@gmail.com', 'CLIENT', '2020-09-07 13:36:19', 0),
+	(48, 'client56044', _binary 0xB0E6806D32C8E8E0DAA80B803F387B5B, 'email315236@gmail.com', 'CLIENT', '2020-09-07 13:36:50', 0),
+	(49, 'client7299', _binary 0xD1D04179655063E6FC05F0B1B8C6D636, 'email238396@gmail.com', 'CLIENT', '2020-09-07 13:37:27', 0),
+	(50, 'client35850', _binary 0xFD6EDCB7713994639AE14F0B8EB46C24, 'email515953@gmail.com', 'CLIENT', '2020-09-07 13:37:27', 0),
+	(51, 'client19782', _binary 0xB625F7AB0FFD420B2D6E5DE453BE00AF, 'email666491@gmail.com', 'CLIENT', '2020-09-07 13:37:28', 0),
+	(52, 'client69623', _binary 0x2D970D5F4641DCA226369C535EF33E47, 'email149951@gmail.com', 'CLIENT', '2020-09-07 13:37:28', 0),
+	(53, 'client86140', _binary 0x35F3F5C1822836BD979ECC621195C5D0, 'email415441@gmail.com', 'CLIENT', '2020-09-07 13:37:29', 0),
+	(54, 'client15549', _binary 0x339A2FF780476E5F2C1ADDCB43A2D3C3, 'email960004@gmail.com', 'CLIENT', '2020-09-07 13:38:14', 0),
+	(55, 'client16130', _binary 0x109E41A297D1BBB5512594698086B5A9, 'email222171@gmail.com', 'CLIENT', '2020-09-07 13:38:15', 0),
+	(56, 'client7837', _binary 0x8CECD5493B770D7EA6B5A355B6085AC6, 'email538481@gmail.com', 'CLIENT', '2020-09-07 13:38:16', 0),
+	(57, 'client22362', _binary 0x7C9F2EF86586ADB761EC299D54198BAF, 'email257470@gmail.com', 'CLIENT', '2020-09-07 13:38:17', 0),
+	(58, 'client75511', _binary 0xC41E61E210EA8B9D7C9CDCAC632AAA6A, 'email256085@gmail.com', 'CLIENT', '2020-09-07 13:38:46', 0),
+	(59, 'client86848', _binary 0x237EE906527DE49A7AB9A60C04E97A02, 'email328594@gmail.com', 'CLIENT', '2020-09-07 13:40:58', 0),
+	(60, 'client13661', _binary 0xB8A59C3F5C1CFC4C5B9D8C3E76BFC265, 'email910382@gmail.com', 'CLIENT', '2020-09-07 13:40:59', 0),
+	(61, 'client32485', _binary 0xA35C4E55681BFFC7056A80CA05E6475A, 'email602445@gmail.com', 'CLIENT', '2020-09-07 13:41:00', 0),
+	(62, 'client17419', _binary 0x47015AC723C7514C9DB2F9F44EA82A13, 'email723190@gmail.com', 'CLIENT', '2020-09-07 13:41:01', 0),
+	(63, 'client46842', _binary 0x61AD4CC4F71BBDA0AC970771BD522A45, 'email270941@gmail.com', 'CLIENT', '2020-09-07 13:41:01', 0),
+	(64, 'client79304', _binary 0x848A264EE79C5A96581BD8E7B1A946A8, 'email415040@gmail.com', 'CLIENT', '2020-09-07 13:44:57', 0),
+	(65, 'client634', _binary 0x90E4189BEF00FE1347D4A34B9507632F, 'email237197@gmail.com', 'CLIENT', '2020-09-07 13:44:57', 0),
+	(66, 'client94137', _binary 0xB990AA02FCB14D8D185E59F463279DA7, 'email595461@gmail.com', 'CLIENT', '2020-09-07 13:44:57', 0),
+	(67, 'client18201', _binary 0xF36F4634C0282824800C8CC1E60407F7, 'email194822@gmail.com', 'CLIENT', '2020-09-07 13:44:58', 0),
+	(68, 'client2652', _binary 0xC0E386CE7DACCAE6FC2137DBA3A7E10C, 'email736426@gmail.com', 'CLIENT', '2020-09-07 13:44:58', 0),
+	(69, 'client24555', _binary 0xE02D8DB3D8DA180AF8C0F051A1988FA0, 'email710382@gmail.com', 'CLIENT', '2020-09-07 13:49:44', 0),
+	(70, 'client83000', _binary 0x7F374F0B1726848C6EC87C004F5F1224, 'email540302@gmail.com', 'CLIENT', '2020-09-07 13:49:45', 0),
+	(71, 'client12343', _binary 0xE050E94D846F3BCEF298C6105D7C5B4E, 'email268906@gmail.com', 'CLIENT', '2020-09-07 13:49:45', 0),
+	(72, 'client27196', _binary 0x39E1717775C61FC247970516C7C8F836, 'email34753@gmail.com', 'CLIENT', '2020-09-07 13:49:46', 0),
+	(73, 'client28801', _binary 0xECC8CFFE0B18E085EEAF281A26796507, 'email557206@gmail.com', 'CLIENT', '2020-09-07 13:49:47', 0),
+	(74, 'client74272', _binary 0x08A8881B929A2E809003B97DB8650BAC, 'email42924@gmail.com', 'CLIENT', '2020-09-07 14:00:50', 0),
+	(75, 'client52617', _binary 0x3FDE5B164169993CB2C13B939D8B43AC, 'email587842@gmail.com', 'CLIENT', '2020-09-07 14:00:51', 0),
+	(76, 'client25340', _binary 0x0FF8FD550254D0DDCAF4758A61F3C8B5, 'email144130@gmail.com', 'CLIENT', '2020-09-07 14:00:54', 0),
+	(77, 'client67391', _binary 0x1774716442E2B3F5D9EF76941E518B7F, 'email137787@gmail.com', 'CLIENT', '2020-09-07 14:00:58', 0),
+	(78, 'client89397', _binary 0x231C5CA21655B0104FBC7FE94014AF93, 'email441943@gmail.com', 'CLIENT', '2020-09-07 14:01:19', 0),
+	(79, 'client87709', _binary 0xC9E749988028E53061A18272220A9F4F, 'email704218@gmail.com', 'CLIENT', '2020-09-07 14:04:09', 0),
+	(80, 'client37987', _binary 0xDB78C09C2DADF166F593E5F07D451D8B, 'email82857@gmail.com', 'CLIENT', '2020-09-07 14:08:16', 0),
+	(81, 'client87177', _binary 0x9AEEDC178E4506E5870FD6D486220E2F, 'email786260@gmail.com', 'CLIENT', '2020-09-07 14:08:25', 0),
+	(82, 'client6209', _binary 0x89F00E1EC24B52D5824BABF000A1D174, 'email325135@gmail.com', 'CLIENT', '2020-09-07 14:08:25', 0),
+	(83, 'client93223', _binary 0x124CB1B7D28817A9B04A4A6F7715BE46, 'email889731@gmail.com', 'CLIENT', '2020-09-07 14:08:26', 0),
+	(84, 'client41858', _binary 0x1D5E21E71B1336857D1ED570B46B786C, 'email374111@gmail.com', 'CLIENT', '2020-09-07 14:10:35', 0),
+	(85, 'client66116', _binary 0xA59810B1A2AD476F00FC9B1026821E29, 'email174109@gmail.com', 'CLIENT', '2020-09-07 14:13:10', 0),
+	(86, 'client95823', _binary 0x1C071258F97F9265D7BCD15A88AAD93E, 'email864269@gmail.com', 'CLIENT', '2020-09-07 14:19:24', 0),
+	(87, 'client12279', _binary 0x290C9D977BA1A9560720DBB44C533487, 'email539885@gmail.com', 'CLIENT', '2020-09-07 14:19:58', 0),
+	(88, 'client26146', _binary 0xE050E94D846F3BCEF298C6105D7C5B4E, 'email842035@gmail.com', 'CLIENT', '2020-09-07 14:19:58', 0),
+	(89, 'client99661', _binary 0x3C3E7FC4E8489F6AA9E0D135DA504DF9, 'email162959@gmail.com', 'CLIENT', '2020-09-07 14:19:59', 0),
+	(90, 'client24909', _binary 0x12E6093A5E7859DF78D01AB70A5DF617, 'email923199@gmail.com', 'CLIENT', '2020-09-07 14:19:59', 0),
+	(91, 'client25776', _binary 0x5CF3A5260F2F828F27B814D3943DBE12, 'email235441@gmail.com', 'CLIENT', '2020-09-07 14:19:59', 0),
+	(92, 'client81357', _binary 0x4D4D089212706DE2646B9182E9FDB76B, 'email323625@gmail.com', 'CLIENT', '2020-09-07 14:22:25', 0),
+	(93, 'client38759', _binary 0x574746DB808BBEB2882C268052D61D9C, 'email710276@gmail.com', 'CLIENT', '2020-09-07 14:22:40', 0),
+	(94, 'client63532', _binary 0x857F6EE30891773133E26CE7CB00E297, 'email561197@gmail.com', 'CLIENT', '2020-09-07 14:24:55', 0),
+	(95, 'client63261', _binary 0x652A4F32B02F9C042BEDE97D07B83221, 'email901865@gmail.com', 'CLIENT', '2020-09-07 14:26:05', 0),
+	(96, 'client76294', _binary 0xCCA89A31C8B2202B6970CFBA5A674D02, 'email134073@gmail.com', 'CLIENT', '2020-09-07 14:26:15', 0),
+	(97, 'client52717', _binary 0xB0E6806D32C8E8E0DAA80B803F387B5B, 'email809772@gmail.com', 'CLIENT', '2020-09-07 14:26:16', 0),
+	(98, 'client18713', _binary 0x9FEF464251C2B9F6B897C0FC95E1D20D, 'email626753@gmail.com', 'CLIENT', '2020-09-07 14:28:50', 0),
+	(99, 'client82580', _binary 0x7005D08C4251CB4855391E7313B37695, 'email907363@gmail.com', 'CLIENT', '2020-09-07 14:29:49', 0),
+	(100, 'client1723', _binary 0xD1D04179655063E6FC05F0B1B8C6D636, 'email204064@gmail.com', 'CLIENT', '2020-09-07 14:30:20', 0),
+	(101, 'client20994', _binary 0x90158F195F487C6888715C2438FB7453, 'email351093@gmail.com', 'CLIENT', '2020-09-07 14:32:35', 0),
+	(102, 'client32413', _binary 0x2E986F5D6416C127D3BE86B03D885AAD, 'email579817@gmail.com', 'CLIENT', '2020-09-07 14:33:22', 0),
+	(103, 'client55671', _binary 0xA5B9B1E7DF42B8EF6A7D50AEA0678BFA, 'email667532@gmail.com', 'CLIENT', '2020-09-07 14:36:34', 0),
+	(104, 'client20771', _binary 0xDDCBF8AE2893A2DEF186796418A7BCB4, 'email224873@gmail.com', 'CLIENT', '2020-09-07 14:38:05', 0),
+	(105, 'client16413', _binary 0x08265C69090BEFE2C9FFB88193F830B4, 'email633377@gmail.com', 'CLIENT', '2020-09-07 14:39:08', 0),
+	(106, 'client75486', _binary 0xB0E6806D32C8E8E0DAA80B803F387B5B, 'email304987@gmail.com', 'CLIENT', '2020-09-07 14:39:08', 0),
+	(107, 'client10830', _binary 0xFFA0E87DADEDFB95A2F198C2D54F3287, 'email951357@gmail.com', 'CLIENT', '2020-09-07 14:39:08', 0),
+	(108, 'client79504', _binary 0x2362AECA15365B1A12B9C50F7112612A, 'email7528@gmail.com', 'CLIENT', '2020-09-07 14:39:10', 0),
+	(109, 'client23121', _binary 0x1DEB7BFBD7EE86BA18D0CF13E3152F29, 'email524939@gmail.com', 'CLIENT', '2020-09-07 14:39:10', 0),
+	(110, 'client37697', _binary 0xF36E383734879E710DD9CBFE06D02660, 'email653280@gmail.com', 'CLIENT', '2020-09-07 14:39:10', 0),
+	(111, 'client26415', _binary 0xF537883402946CEFA95624BB8E35AEE4, 'email876356@gmail.com', 'CLIENT', '2020-09-07 14:39:45', 0),
+	(112, 'client47887', _binary 0x1BC5970749EFD6169E19FAAE6CAAB14F, 'email429036@gmail.com', 'CLIENT', '2020-09-07 14:42:12', 0),
+	(113, 'trainer7499', _binary 0xA2D1872CBF2D904CFFF2BB9D921C57AC, 'email212726@gmail.com', 'TRAINER', '2020-09-07 15:44:51', 0),
+	(114, 'trainer60966', _binary 0x3F4F62968282096AE6AFB70C1B514125, 'email760416@gmail.com', 'TRAINER', '2020-09-07 15:48:19', 0),
+	(115, 'trainer87245', _binary 0xA374A153E8257465B3BFD6119781FAF5, 'email342875@gmail.com', 'TRAINER', '2020-09-07 15:49:17', 0),
+	(116, 'trainer99032', _binary 0xE395B8A2720DD0E1D9208DD6D2B99862, 'email925020@gmail.com', 'TRAINER', '2020-09-07 15:49:20', 0),
+	(117, 'trainer46999', _binary 0xEB5652E222FF7FA87113CF3F93C94AA6, 'email322419@gmail.com', 'TRAINER', '2020-09-07 15:49:21', 0),
+	(118, 'trainer96325', _binary 0x869DDA0AF3AC700CFD572DEE89DE51B5, 'email798120@gmail.com', 'TRAINER', '2020-09-07 15:49:32', 0),
+	(119, 'client45743', _binary 0xD521B029C00AB523CD10B5B133F8F2CD, 'email253624@gmail.com', 'CLIENT', '2020-09-07 15:57:07', 0),
+	(120, 'client9290', _binary 0x65A63AEAC0A8BCBEBFA508EB387E90AE, 'email269519@gmail.com', 'CLIENT', '2020-09-07 15:57:08', 0),
+	(121, 'client78722', _binary 0xA93E39CC8FBD2D586846A9864654B8CC, 'email26263@gmail.com', 'CLIENT', '2020-09-07 15:57:08', 0),
+	(122, 'client37714', _binary 0x3E1A0A2F00F1622DACF48FF75ACD846F, 'email674085@gmail.com', 'CLIENT', '2020-09-07 15:57:08', 0),
+	(123, 'client87368', _binary 0x920EEE84E13E7C95C54D0E5B845D8A95, 'email289081@gmail.com', 'CLIENT', '2020-09-07 15:57:08', 0),
+	(124, 'client90446', _binary 0x8779E1365BF03FAD4F83E51F701FEA0C, 'email248575@gmail.com', 'CLIENT', '2020-09-07 15:57:08', 0),
+	(125, 'client64712', _binary 0x2362AECA15365B1A12B9C50F7112612A, 'email805958@gmail.com', 'CLIENT', '2020-09-07 15:57:08', 0),
+	(126, 'client30759', _binary 0x5D83D02D9C5D5CAA8084D25920612816, 'email802667@gmail.com', 'CLIENT', '2020-09-07 15:57:09', 0),
+	(127, 'client43128', _binary 0xD6EB8F38B7C22C5EA65E41B0F95DC65E, 'email431270@gmail.com', 'CLIENT', '2020-09-07 15:57:09', 0),
+	(128, 'client12887', _binary 0xF4654046A33548B0B884859BC22A8DCE, 'email467597@gmail.com', 'CLIENT', '2020-09-07 15:57:09', 0),
+	(129, 'trainer9529094', _binary 0x812D69F4721DE9AD2A878CB092DBAFDC, 'email1275764@gmail.com', 'TRAINER', '2020-09-09 09:18:45', 0),
+	(130, 'trainer1894761', _binary 0xC93E1D140E8021D935E235EDE71FE98F, 'email3155588@gmail.com', 'TRAINER', '2020-09-09 09:18:45', 0),
+	(131, 'trainer9956463', _binary 0x4E561D9DC5D7BD1097FB59FD019ED5D7, 'email3109324@gmail.com', 'TRAINER', '2020-09-09 09:18:45', 0),
+	(132, 'trainer5630144', _binary 0x77E34D635863D2AB8F143021F7D59818, 'email9976451@gmail.com', 'TRAINER', '2020-09-09 09:18:45', 0),
+	(133, 'trainer2408166', _binary 0x95D2A5C8FC16A6AFE563EE7C0510EC1D, 'email375783@gmail.com', 'TRAINER', '2020-09-09 09:18:45', 0),
+	(134, 'trainer3336', _binary 0xD693F6B07B3361C0FAEF19E76457A008, 'email5157538@gmail.com', 'TRAINER', '2020-09-09 09:18:46', 0),
+	(135, 'trainer6800190', _binary 0x8CDDBECC625CDE02A0A4EA95A0C3008C, 'email9369164@gmail.com', 'TRAINER', '2020-09-09 09:18:46', 0),
+	(136, 'trainer1926348', _binary 0xF9499CF101E507D0BC1FBAE3D0C0C2C0, 'email8932196@gmail.com', 'TRAINER', '2020-09-09 09:18:46', 0),
+	(137, 'trainer8716859', _binary 0x16653B35175CAF9DF9C8A44CDAE961CC, 'email6024876@gmail.com', 'TRAINER', '2020-09-09 09:18:46', 0),
+	(138, 'trainer1728007', _binary 0x3E2C704B58449CBF8CFB58FBBFBFC2DA, 'email4238847@gmail.com', 'TRAINER', '2020-09-09 09:18:46', 0),
+	(139, 'client1353637', _binary 0xFE26202F950478C793A90EE4D982BF32, 'email4899023@gmail.com', 'CLIENT', '2020-09-09 09:19:38', 0),
+	(140, 'client3941229', _binary 0x8610E8A561AA2700FE46151EEA820543, 'email2429317@gmail.com', 'CLIENT', '2020-09-09 09:19:38', 0),
+	(141, 'client2092311', _binary 0xE8F90683080FFB861EAD916F688F5808, 'email6590833@gmail.com', 'CLIENT', '2020-09-09 09:19:38', 0),
+	(142, 'client8556463', _binary 0xA5B9B1E7DF42B8EF6A7D50AEA0678BFA, 'email5686777@gmail.com', 'CLIENT', '2020-09-09 09:19:38', 0),
+	(143, 'client7705567', _binary 0xD521B029C00AB523CD10B5B133F8F2CD, 'email7663869@gmail.com', 'CLIENT', '2020-09-09 09:19:39', 0),
+	(144, 'client1187364', _binary 0xAD024CF4E255BE1C090E9293B3A57829, 'email1969470@gmail.com', 'CLIENT', '2020-09-09 09:19:39', 0),
+	(145, 'client3032632', _binary 0xA7EEDEE0B2A144B518D2FD139BDC26C0, 'email5312113@gmail.com', 'CLIENT', '2020-09-09 09:19:39', 0),
+	(146, 'client2163087', _binary 0x0B155585B9E302C409B800B8AF0AB36F, 'email4677147@gmail.com', 'CLIENT', '2020-09-09 09:19:39', 0),
+	(147, 'client4871138', _binary 0x18D1E25D71A14FD17A21EE4637538110, 'email7919548@gmail.com', 'CLIENT', '2020-09-09 09:19:39', 0),
+	(148, 'client2555107', _binary 0xFCC18F7D7C66ED69266F4FA30259BBC2, 'email9638046@gmail.com', 'CLIENT', '2020-09-09 09:19:40', 0),
+	(149, 'client6761738', _binary 0xBE1C7A2391436A070BD563938AE2BCD0, 'email5973743@gmail.com', 'CLIENT', '2020-09-09 09:19:40', 0),
+	(150, 'client4384686', _binary 0x62448A8359B7D469AA61D32924AD760F, 'email432945@gmail.com', 'CLIENT', '2020-09-09 09:19:40', 0),
+	(151, 'client8596060', _binary 0x0E899632A07062CC80C567058EF34BA7, 'email3079922@gmail.com', 'CLIENT', '2020-09-09 09:19:40', 0),
+	(152, 'client6764175', _binary 0xD439706A6E1BACAF8E88838005479CA2, 'email6888490@gmail.com', 'CLIENT', '2020-09-09 09:19:40', 0),
+	(153, 'client2000634', _binary 0x957E53F9F04D47EF15924BF10134CB03, 'email6304338@gmail.com', 'CLIENT', '2020-09-09 09:19:41', 0),
+	(154, 'client3408043', _binary 0x15D057252E645F9EC72E2F97B9605F8F, 'email3601558@gmail.com', 'CLIENT', '2020-09-09 09:19:41', 0),
+	(155, 'client8533427', _binary 0x3B27A5EF66A5BE70718C6DA7799B2853, 'email487367@gmail.com', 'CLIENT', '2020-09-09 09:19:41', 0),
+	(156, 'client994120', _binary 0x0F78C6F0897A417B053BD2406AEC849B, 'email5921662@gmail.com', 'CLIENT', '2020-09-09 09:19:41', 0),
+	(157, 'client3969596', _binary 0x47015AC723C7514C9DB2F9F44EA82A13, 'email3787705@gmail.com', 'CLIENT', '2020-09-09 09:19:41', 0),
+	(158, 'client3936980', _binary 0xC93E1D140E8021D935E235EDE71FE98F, 'email3582399@gmail.com', 'CLIENT', '2020-09-09 09:19:41', 0),
+	(159, 'petrov_ivan', _binary 0x4D05905C2694FB6102AB34B9FA57913F, 'ivan_petrov@yandex.ru', 'CLIENT', '2020-09-09 09:27:32', 0),
+	(160, 'client9007251', _binary 0x7626FE121E8614CCFDE2723FFF6B2914, 'email1571538@gmail.com', 'CLIENT', '2020-09-09 10:53:11', 0),
+	(161, 'client5019852', _binary 0xC2A40C582720DB2C0651F02AB751A157, 'email1201518@gmail.com', 'CLIENT', '2020-09-09 10:56:17', 0),
+	(162, 'client388038', _binary 0xAD186A88607A31F9486FFEA14FA358BD, 'email5735759@gmail.com', 'CLIENT', '2020-09-09 10:56:45', 0),
+	(163, 'client3833456', _binary 0x6F9369C5D4F7D57F9DDB27D25E3B9A3E, 'email821428@gmail.com', 'CLIENT', '2020-09-09 10:56:45', 0),
+	(164, 'client9841521', _binary 0xC0E386CE7DACCAE6FC2137DBA3A7E10C, 'email3820919@gmail.com', 'CLIENT', '2020-09-09 10:56:45', 0),
+	(166, 'client3135403', _binary 0x1E395060D9739E582ACCC4D856656D75, 'email7321040@gmail.com', 'CLIENT', '2020-09-09 11:14:33', 0),
+	(167, 'client1762524', _binary 0xD594F168F48A2F0A1502AD5CC528170E, 'email6933314@gmail.com', 'CLIENT', '2020-09-09 11:14:33', 0),
+	(168, 'client8806116', _binary 0x6207A2C5A1F773A7325D560ED4505EB3, 'email4937677@gmail.com', 'CLIENT', '2020-09-09 11:14:33', 0),
+	(169, 'client4558661', _binary 0x76F6EDC6FF4C2E99974D566186655228, 'email6573902@gmail.com', 'CLIENT', '2020-09-09 11:14:33', 0),
+	(170, 'client2912337', _binary 0x20C72DE90AE0023BD3C9B1CE67D28C51, 'email6590003@gmail.com', 'CLIENT', '2020-09-09 11:14:33', 0),
+	(171, 'client8850489', _binary 0x200C0809F370E95D649D467BF87C942D, 'email8419602@gmail.com', 'CLIENT', '2020-09-09 11:14:33', 0),
+	(172, 'client387091', _binary 0x3287B0A22A3BC0B928BDA51768115D8E, 'email1920764@gmail.com', 'CLIENT', '2020-09-09 11:14:33', 0),
+	(173, 'client8207144', _binary 0x1EAE46117A292C8B01622C6A0D3BD74A, 'email7837081@gmail.com', 'CLIENT', '2020-09-09 11:14:33', 0),
+	(174, 'client7181355', _binary 0x9D6AE72BCB67C51BB76F6BACBC8392AF, 'email5655455@gmail.com', 'CLIENT', '2020-09-09 11:14:34', 0),
+	(175, 'client1932613', _binary 0xB7E8E0FA12BE4E037313252063F429EA, 'email9587489@gmail.com', 'CLIENT', '2020-09-09 11:14:34', 0),
+	(176, 'client6534482', _binary 0xA3634C6834DE10443F03855C780B344D, 'email1717937@gmail.com', 'CLIENT', '2020-09-09 11:15:02', 0),
+	(177, 'client703705', _binary 0x700B815B143ECE46F3C749145E86C424, 'email6207356@gmail.com', 'CLIENT', '2020-09-09 11:15:02', 0),
+	(178, 'client4163419', _binary 0x59B4581222D490FBADE5927806046F82, 'email331927@gmail.com', 'CLIENT', '2020-09-09 11:15:03', 0),
+	(179, 'client6721567', _binary 0xC555298787C30DF9EB6BE4EDCA629A38, 'email560305@gmail.com', 'CLIENT', '2020-09-09 11:15:03', 0),
+	(180, 'client1917873', _binary 0x49769FC543F17E0F47E3864A5FD51213, 'email7658629@gmail.com', 'CLIENT', '2020-09-09 11:15:03', 0),
+	(181, 'client4228845', _binary 0x812D69F4721DE9AD2A878CB092DBAFDC, 'email7708602@gmail.com', 'CLIENT', '2020-09-09 11:15:03', 0),
+	(182, 'client6258902', _binary 0x0938F5DA786A2D167E6CFEACE122B06E, 'email4631481@gmail.com', 'CLIENT', '2020-09-09 11:15:03', 0),
+	(183, 'client7219047', _binary 0xAF1D3FAEDB838CDA2E0671475E78CA64, 'email9401531@gmail.com', 'CLIENT', '2020-09-09 11:15:03', 0),
+	(184, 'client3971853', _binary 0xB27C52D62D67FD8AC17992B5A6BB7E2C, 'email2009452@gmail.com', 'CLIENT', '2020-09-09 11:15:03', 0),
+	(185, 'client8746785', _binary 0x43632404E3872999B8DC4A5CBFC9DB97, 'email2483078@gmail.com', 'CLIENT', '2020-09-09 11:15:03', 0);
+/*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
--- Дамп структуры для таблица gym.client
-DROP TABLE IF EXISTS `client`;
-CREATE TABLE IF NOT EXISTS `client` (
-  `account_id` int(11) NOT NULL,
+-- Дамп структуры для таблица gym.clients
+DROP TABLE IF EXISTS `clients`;
+CREATE TABLE IF NOT EXISTS `clients` (
+  `client_id` int(11) NOT NULL,
   `discount` double(22,0) DEFAULT '0',
-  PRIMARY KEY (`account_id`),
-  UNIQUE KEY `account_id` (`account_id`)
+  PRIMARY KEY (`client_id`),
+  UNIQUE KEY `client_id` (`client_id`),
+  CONSTRAINT `FK_clients_users` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.client: ~79 rows (приблизительно)
-/*!40000 ALTER TABLE `client` DISABLE KEYS */;
-REPLACE INTO `client` (`account_id`, `discount`) VALUES
+-- Дамп данных таблицы gym.clients: ~133 rows (приблизительно)
+/*!40000 ALTER TABLE `clients` DISABLE KEYS */;
+REPLACE INTO `clients` (`client_id`, `discount`) VALUES
 	(29, 0),
 	(30, 0),
 	(31, 0),
@@ -240,21 +298,82 @@ REPLACE INTO `client` (`account_id`, `discount`) VALUES
 	(125, 0),
 	(126, 0),
 	(127, 0),
-	(128, 0);
-/*!40000 ALTER TABLE `client` ENABLE KEYS */;
+	(128, 0),
+	(139, 0),
+	(140, 0),
+	(141, 0),
+	(142, 0),
+	(143, 0),
+	(144, 0),
+	(145, 0),
+	(146, 0),
+	(147, 0),
+	(148, 0),
+	(149, 0),
+	(150, 0),
+	(151, 0),
+	(152, 0),
+	(153, 0),
+	(154, 0),
+	(155, 0),
+	(156, 0),
+	(157, 0),
+	(158, 0),
+	(159, 0),
+	(160, 0),
+	(161, 0),
+	(162, 0),
+	(163, 0),
+	(164, 0),
+	(166, 0),
+	(167, 0),
+	(168, 0),
+	(169, 0),
+	(170, 0),
+	(171, 0),
+	(172, 0),
+	(173, 0),
+	(174, 0),
+	(175, 0),
+	(176, 0),
+	(177, 0),
+	(178, 0),
+	(179, 0),
+	(180, 0),
+	(181, 0),
+	(182, 0),
+	(183, 0),
+	(184, 0),
+	(185, 0);
+/*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 
--- Дамп структуры для таблица gym.trainer
-DROP TABLE IF EXISTS `trainer`;
-CREATE TABLE IF NOT EXISTS `trainer` (
-  `account_id` int(11) NOT NULL,
-  `rating` double(22,0) DEFAULT '0',
-  PRIMARY KEY (`account_id`),
-  UNIQUE KEY `account_id` (`account_id`)
+-- Дамп структуры для таблица gym.exercises
+DROP TABLE IF EXISTS `exercises`;
+CREATE TABLE IF NOT EXISTS `exercises` (
+  `training_id` int(11) NOT NULL,
+  `type` enum('BENCH_PRESS','DEADLIFT','SQUATS') NOT NULL,
+  `weight` double DEFAULT NULL,
+  KEY `FK_exercises_trainings` (`training_id`),
+  CONSTRAINT `FK_exercises_trainings` FOREIGN KEY (`training_id`) REFERENCES `trainings` (`training_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainer: ~8 rows (приблизительно)
-/*!40000 ALTER TABLE `trainer` DISABLE KEYS */;
-REPLACE INTO `trainer` (`account_id`, `rating`) VALUES
+-- Дамп данных таблицы gym.exercises: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `exercises` DISABLE KEYS */;
+/*!40000 ALTER TABLE `exercises` ENABLE KEYS */;
+
+-- Дамп структуры для таблица gym.trainers
+DROP TABLE IF EXISTS `trainers`;
+CREATE TABLE IF NOT EXISTS `trainers` (
+  `trainer_id` int(11) NOT NULL,
+  `rating` double(22,0) DEFAULT '0',
+  PRIMARY KEY (`trainer_id`),
+  UNIQUE KEY `trainer_id` (`trainer_id`),
+  CONSTRAINT `FK_trainers_users` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Дамп данных таблицы gym.trainers: ~18 rows (приблизительно)
+/*!40000 ALTER TABLE `trainers` DISABLE KEYS */;
+REPLACE INTO `trainers` (`trainer_id`, `rating`) VALUES
 	(25, 0),
 	(26, 0),
 	(27, 0),
@@ -262,52 +381,53 @@ REPLACE INTO `trainer` (`account_id`, `rating`) VALUES
 	(113, 0),
 	(115, 0),
 	(116, 0),
-	(117, 0);
-/*!40000 ALTER TABLE `trainer` ENABLE KEYS */;
+	(117, 0),
+	(129, 0),
+	(130, 0),
+	(131, 0),
+	(132, 0),
+	(133, 0),
+	(134, 0),
+	(135, 0),
+	(136, 0),
+	(137, 0),
+	(138, 0);
+/*!40000 ALTER TABLE `trainers` ENABLE KEYS */;
 
--- Дамп структуры для таблица gym.training
-DROP TABLE IF EXISTS `training`;
-CREATE TABLE IF NOT EXISTS `training` (
-  `id` int(11) NOT NULL,
+-- Дамп структуры для таблица gym.trainings
+DROP TABLE IF EXISTS `trainings`;
+CREATE TABLE IF NOT EXISTS `trainings` (
+  `training_id` int(11) NOT NULL AUTO_INCREMENT,
   `trainer_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `cost` double NOT NULL DEFAULT '0',
   `date` date NOT NULL,
   `start` time NOT NULL,
   `end` time NOT NULL,
-  `bought` tinyint(4) NOT NULL DEFAULT '0'
+  `bought` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`training_id`) USING BTREE,
+  UNIQUE KEY `id` (`training_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.training: ~0 rows (приблизительно)
-/*!40000 ALTER TABLE `training` DISABLE KEYS */;
-/*!40000 ALTER TABLE `training` ENABLE KEYS */;
+-- Дамп данных таблицы gym.trainings: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 
--- Дамп структуры для таблица gym.training_exercise
-DROP TABLE IF EXISTS `training_exercise`;
-CREATE TABLE IF NOT EXISTS `training_exercise` (
-  `training_id` int(11) NOT NULL,
-  `type` enum('BENCH_PRESS','DEADLIFT','SQUATS') NOT NULL,
-  `weight` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Дамп данных таблицы gym.training_exercise: ~0 rows (приблизительно)
-/*!40000 ALTER TABLE `training_exercise` DISABLE KEYS */;
-/*!40000 ALTER TABLE `training_exercise` ENABLE KEYS */;
-
--- Дамп структуры для таблица gym.user
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `account_id` int(11) NOT NULL,
+-- Дамп структуры для таблица gym.users
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` int(11) NOT NULL,
   `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `phone` varchar(30) DEFAULT '',
-  PRIMARY KEY (`account_id`),
-  UNIQUE KEY `account_id` (`account_id`)
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  CONSTRAINT `FK_users_accounts` FOREIGN KEY (`user_id`) REFERENCES `accounts` (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.user: ~98 rows (приблизительно)
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-REPLACE INTO `user` (`account_id`, `first_name`, `last_name`, `phone`) VALUES
+-- Дамп данных таблицы gym.users: ~153 rows (приблизительно)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`) VALUES
 	(24, 'Алексей', 'Харитонов', '+375296984636'),
 	(25, '', '', ''),
 	(26, '', '', ''),
@@ -404,8 +524,80 @@ REPLACE INTO `user` (`account_id`, `first_name`, `last_name`, `phone`) VALUES
 	(125, '', '', ''),
 	(126, '', '', ''),
 	(127, '', '', ''),
-	(128, '', '', '');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+	(128, '', '', ''),
+	(129, '', '', ''),
+	(130, '', '', ''),
+	(131, '', '', ''),
+	(132, '', '', ''),
+	(133, '', '', ''),
+	(134, '', '', ''),
+	(135, '', '', ''),
+	(136, '', '', ''),
+	(137, '', '', ''),
+	(138, '', '', ''),
+	(139, '', '', ''),
+	(140, '', '', ''),
+	(141, '', '', ''),
+	(142, '', '', ''),
+	(143, '', '', ''),
+	(144, '', '', ''),
+	(145, '', '', ''),
+	(146, '', '', ''),
+	(147, '', '', ''),
+	(148, '', '', ''),
+	(149, '', '', ''),
+	(150, '', '', ''),
+	(151, '', '', ''),
+	(152, '', '', ''),
+	(153, '', '', ''),
+	(154, '', '', ''),
+	(155, '', '', ''),
+	(156, '', '', ''),
+	(157, '', '', ''),
+	(158, '', '', ''),
+	(159, '', '', ''),
+	(160, '', '', ''),
+	(161, '', '', ''),
+	(162, '', '', ''),
+	(163, '', '', ''),
+	(164, '', '', ''),
+	(166, '', '', ''),
+	(167, '', '', ''),
+	(168, '', '', ''),
+	(169, '', '', ''),
+	(170, '', '', ''),
+	(171, '', '', ''),
+	(172, '', '', ''),
+	(173, '', '', ''),
+	(174, '', '', ''),
+	(175, '', '', ''),
+	(176, '', '', ''),
+	(177, '', '', ''),
+	(178, '', '', ''),
+	(179, '', '', ''),
+	(180, '', '', ''),
+	(181, '', '', ''),
+	(182, '', '', ''),
+	(183, '', '', ''),
+	(184, '', '', ''),
+	(185, '', '', '');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+-- Дамп структуры для таблица gym.users_trainings
+DROP TABLE IF EXISTS `users_trainings`;
+CREATE TABLE IF NOT EXISTS `users_trainings` (
+  `user_id_fk` int(11) NOT NULL,
+  `training_id_fk` int(11) NOT NULL,
+  `done` tinyint(4) NOT NULL DEFAULT '0',
+  KEY `FK_users_trainings_users` (`user_id_fk`),
+  KEY `FK_users_trainings_trainings` (`training_id_fk`),
+  CONSTRAINT `FK_users_trainings_trainings` FOREIGN KEY (`training_id_fk`) REFERENCES `trainings` (`training_id`),
+  CONSTRAINT `FK_users_trainings_users` FOREIGN KEY (`user_id_fk`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Дамп данных таблицы gym.users_trainings: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `users_trainings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users_trainings` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

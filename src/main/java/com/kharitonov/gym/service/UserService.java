@@ -6,7 +6,7 @@ import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.factory.UserFactory;
-import com.kharitonov.gym.security.WebCipher;
+import com.kharitonov.gym.service.security.CipherService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,7 +33,7 @@ public class UserService {
     public boolean checkLoginPassword(String login, String password)
             throws ServiceException {
         boolean result;
-        WebCipher cipher = new WebCipher();
+        CipherService cipher = new CipherService();
         byte[] sourceBytes = password.getBytes();
         byte[] encryptedBytes = cipher.encryptMessage(sourceBytes);
         try {
@@ -54,7 +54,7 @@ public class UserService {
         if (!email.matches(REGEX_EMAIL)) {
             throw new ServiceException("Invalid email format!");
         }
-        WebCipher cipher = new WebCipher();
+        CipherService cipher = new CipherService();
         byte[] sourceBytes = password.getBytes();
         byte[] encryptedBytes = cipher.encryptMessage(sourceBytes);
         User user = UserFactory.createUser(role);

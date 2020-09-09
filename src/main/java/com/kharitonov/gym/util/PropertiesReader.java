@@ -1,5 +1,6 @@
-package com.kharitonov.gym.model.reader;
+package com.kharitonov.gym.util;
 
+import com.kharitonov.gym.exception.PropertiesReaderException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,20 +11,21 @@ import java.util.Properties;
 public class PropertiesReader {
     private static final Logger LOGGER =
             LogManager.getLogger(PropertiesReader.class);
-    private static final String DB_PROPERTIES = "db.properties";
 
-    public Properties readDBProperties() throws RuntimeException {
+    public Properties readProperties(String path)
+            throws PropertiesReaderException {
         ClassLoader classLoader =
                 Thread.currentThread().getContextClassLoader();
         InputStream inputStream =
-                classLoader.getResourceAsStream(DB_PROPERTIES);
+                classLoader.getResourceAsStream(path);
         Properties properties = new Properties();
         try {
             properties.load(inputStream);
-            LOGGER.info("DB properties were successfully read form '{}'",
-                    DB_PROPERTIES);
+            LOGGER.info("Properties were successfully read form '{}'",
+                    path);
         } catch (IOException e) {
-            throw new RuntimeException("Impossible to read DB properties!");
+            throw new PropertiesReaderException("Impossible to read " +
+                    "properties!");
         } finally {
             try {
                 inputStream.close();
@@ -33,4 +35,6 @@ public class PropertiesReader {
         }
         return properties;
     }
+
+
 }

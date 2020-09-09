@@ -6,7 +6,7 @@ import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.impl.Client;
 import com.kharitonov.gym.model.entity.impl.Trainer;
-import com.kharitonov.gym.security.WebCipher;
+import com.kharitonov.gym.service.security.CipherService;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class UserDaoImplTest {
     @Test
     public void testAddClient() throws DaoException {
         for (int i = 0; i < 10; i++) {
-            WebCipher cipher = new WebCipher();
+            CipherService cipher = new CipherService();
             Random random = new Random();
             String name = "client" + random.nextInt(10000000);
             String password = "password" + random.nextInt(1000);
@@ -42,7 +42,7 @@ public class UserDaoImplTest {
     @Test
     public void testAddTrainer() throws DaoException {
         for (int i = 0; i < 10; i++) {
-            WebCipher cipher = new WebCipher();
+            CipherService cipher = new CipherService();
             Random random = new Random();
             String name = "trainer" + random.nextInt(10000000);
             String password = "password" + random.nextInt(1000);
@@ -73,7 +73,7 @@ public class UserDaoImplTest {
         for (int i = 0; i<10; i++) {
             String name = StaticDataProvider.ADMIN_NAME;
             String password = StaticDataProvider.ADMIN_PASSWORD;
-            WebCipher cipher = new WebCipher();
+            CipherService cipher = new CipherService();
             byte[] encryptedBytes = cipher.encryptMessage(password.getBytes());
             boolean result = dao.checkLoginPassword(name, encryptedBytes);
             assertTrue(result);
@@ -84,7 +84,7 @@ public class UserDaoImplTest {
     public void testGet() throws DaoException {
         String name = StaticDataProvider.ADMIN_NAME;
         String password = StaticDataProvider.ADMIN_PASSWORD;
-        WebCipher cipher = new WebCipher();
+        CipherService cipher = new CipherService();
         byte[] encryptedBytes = cipher.encryptMessage(password.getBytes());
         User actualUser = dao.get(name, encryptedBytes).get();
         User expectedUser = StaticDataProvider.USER_ADMIN;
