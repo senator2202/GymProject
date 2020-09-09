@@ -11,18 +11,18 @@ import java.sql.SQLException;
 public class DataBaseHelper {
     private static final DataBaseHelper INSTANCE = new DataBaseHelper();
     private static final String SQL_INSERT_ACCOUNT =
-            "INSERT INTO accounts(name, password, email, role) VALUES(?,?,?,?)";
+            "INSERT INTO accounts(login, password, email, role) VALUES(?,?,?,?)";
     private static final String SQL_INSERT_USER =
-            "INSERT INTO users(account_id) VALUES(?)";
+            "INSERT INTO users(user_id) VALUES(?)";
     private static final String SQL_INSERT_CLIENT =
-            "INSERT INTO clients(account_id) VALUES(?)";
+            "INSERT INTO clients(client_id) VALUES(?)";
     private static final String SQL_INSERT_TRAINER =
-            "INSERT INTO trainers(account_id) VALUES(?)";
+            "INSERT INTO trainers(trainer_id) VALUES(?)";
     private static final String SQL_SELECT_ACCOUNT =
-            "SELECT account_id, name, password, email, role, registration_date FROM " +
-                    "accounts WHERE name=? AND password=?";
+            "SELECT account_id, login, password, email, role, registration_date FROM " +
+                    "accounts WHERE login=? AND password=?";
     private static final String SQL_SELECT_ALL_ACCOUNTS =
-            "SELECT account_id, name, password, email, role, registration_date " +
+            "SELECT account_id, login, password, email, role, registration_date " +
                     "FROM accounts";
 
     private DataBaseHelper() {}
@@ -33,13 +33,13 @@ public class DataBaseHelper {
 
     public PreparedStatement statementInsertAccount(Connection connection,
                                                     User user,
-                                                    byte[] password)
+                                                    String password)
             throws DaoException {
         try {
             PreparedStatement statement =
                     connection.prepareStatement(SQL_INSERT_ACCOUNT);
             statement.setString(1, user.getAccount().getName());
-            statement.setBytes(2, password);
+            statement.setString(2, password);
             statement.setString(3, user.getAccount().getEmail());
             statement.setString(4, user.getAccount().getRole().toString());
             return statement;
@@ -87,13 +87,13 @@ public class DataBaseHelper {
 
     public PreparedStatement statementSelect(Connection connection,
                                              String name,
-                                             byte[] password)
+                                             String password)
             throws DaoException {
         try {
             PreparedStatement statement =
                     connection.prepareStatement(SQL_SELECT_ACCOUNT);
             statement.setString(1, name);
-            statement.setBytes(2, password);
+            statement.setString(2, password);
             return statement;
         } catch (SQLException e) {
             throw new DaoException("Error, while getting statement!", e);

@@ -50,6 +50,10 @@ public class Training {
         isBought = bought;
     }
 
+    public boolean isBought() {
+        return isBought;
+    }
+
     public double getCost() {
         return cost;
     }

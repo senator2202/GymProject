@@ -39,7 +39,7 @@
 					<img src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d" alt="" />
 				</div>
 				<div class="cont_form_login">
-					<a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
+					<a href="#" onclick="ocultar_login_sign_up()" ><em class="material-icons">&#xE5C4;</em></a>
 					<h2>LOGIN</h2>
 					<input type="text" placeholder="Email" />
 					<input type="password" placeholder="Password" />
@@ -47,7 +47,7 @@
 				</div>
 
 				<div class="cont_form_sign_up">
-					<a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+					<a href="#" onclick="ocultar_login_sign_up()"><em class="material-icons">&#xE5C4;</em></a>
 					<h2>SIGN UP</h2>
 					<input type="text" placeholder="Email" />
 					<input type="text" placeholder="User" />

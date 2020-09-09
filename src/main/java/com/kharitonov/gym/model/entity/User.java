@@ -49,7 +49,7 @@ public class User implements UserFunctionality {
 
     @Override
     public void updateUserInfo(User user) {
-
+        //empty now
     }
 
     public static class UserBuilder {

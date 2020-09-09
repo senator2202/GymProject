@@ -31,25 +31,20 @@ public class MailSender {
     public void send() {
         try {
             initMessage();
-            Transport.send(message); // sending mail
+            Transport.send(message);
             LOGGER.info("Message to '{}' was successfully send!", mailSubject);
         } catch (AddressException e) {
-            LOGGER.error("Invalid email address: ", e); // in log
+            LOGGER.error("Invalid email address: ", e);
         } catch (MessagingException e) {
-            LOGGER.error("Error generating or sending message: ", e); // in log
+            LOGGER.error("Error generating or sending message: ", e);
         }
     }
 
     private void initMessage() throws MessagingException {
         Session mailSession = null;
-        try {
-            mailSession = SessionFactory.createSession(properties);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        mailSession = SessionFactory.createSession(properties);
         mailSession.setDebug(true);
-        message = new MimeMessage(mailSession); // create a mailing object
-        // loading parameters into the mail message object
+        message = new MimeMessage(mailSession);
         message.setSubject(mailSubject);
         message.setContent(mailText, "text/html");
         message.setRecipient(Message.RecipientType.TO,

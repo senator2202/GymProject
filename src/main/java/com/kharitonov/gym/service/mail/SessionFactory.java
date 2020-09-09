@@ -11,6 +11,7 @@ public class SessionFactory {
         try {
             return Session.getDefaultInstance(configProperties,
                     new javax.mail.Authenticator() {
+                        @Override
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(userName, userPassword);
                         }
@@ -19,4 +20,6 @@ public class SessionFactory {
             return null;
         }
     }
+
+    private SessionFactory() {}
 }

@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
             DataBaseHelper.getINSTANCE();
 
     @Override
-    public void add(User user, byte[] password) throws DaoException {
+    public void add(User user, String password) throws DaoException {
         Connection connection = POOL.getConnection();
         try {
             connection.setAutoCommit(false);
@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     private void addAccount(Connection connection, User user,
-                            byte[] password) throws SQLException, DaoException {
+                            String password) throws SQLException, DaoException {
         PreparedStatement insertAccount =
                 DB_HELPER.statementInsertAccount(connection, user, password);
         insertAccount.execute();
@@ -74,7 +74,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    private void defineAccountId(Connection connection, User user, byte[] password)
+    private void defineAccountId(Connection connection, User user, String password)
             throws SQLException, DaoException {
         String userName = user.getAccount().getName();
         PreparedStatement select =
@@ -87,7 +87,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> get(String name, byte[] encryptedPassword)
+    public Optional<User> get(String name, String encryptedPassword)
             throws DaoException {
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementSelect =
@@ -122,7 +122,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean checkLoginPassword(String name, byte[] encryptedPassword)
+    public boolean checkLoginPassword(String name, String encryptedPassword)
             throws DaoException {
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementSelect =

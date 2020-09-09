@@ -28,7 +28,7 @@ public class BasicConnectionPool implements ConnectionPool {
     private BlockingQueue<ProxyConnection> freeConnections;
     private List<ProxyConnection> usedConnections;
 
-    private BasicConnectionPool() throws RuntimeException {
+    private BasicConnectionPool() {
         PropertiesReader reader = new PropertiesReader();
         String propertiesPath = PropertiesPath.DB_PROPERTIES;
         Properties properties;
@@ -71,6 +71,7 @@ public class BasicConnectionPool implements ConnectionPool {
             usedConnections.add(connection);
         } catch (InterruptedException e) {
             LOGGER.error("Unable to provide connection", e);
+            Thread.currentThread().interrupt();
         }
         return connection;
     }
@@ -95,6 +96,7 @@ public class BasicConnectionPool implements ConnectionPool {
                 freeConnections.take().reallyClose();
             } catch (SQLException | InterruptedException e) {
                 LOGGER.warn("Unable to close connection!", e);
+                Thread.currentThread().interrupt();
             }
         }
         deregisterDrivers();

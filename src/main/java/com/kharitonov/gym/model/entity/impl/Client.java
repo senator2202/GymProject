@@ -34,7 +34,7 @@ public class Client extends User implements ClientFunctionality, SportFunctional
     @Override
     public void buyTraining(int trainingId) {
         plannedTrainings.stream().filter(tr -> tr.getTrainingId() == trainingId)
-                .findFirst().ifPresent((tr) -> tr.setIsBought(true));
+                .findFirst().ifPresent(tr -> tr.setIsBought(true));
     }
 
     @Override

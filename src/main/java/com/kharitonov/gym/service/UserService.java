@@ -6,7 +6,7 @@ import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.factory.UserFactory;
-import com.kharitonov.gym.service.security.CipherService;
+import com.kharitonov.gym.service.security.CryptoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,11 +33,10 @@ public class UserService {
     public boolean checkLoginPassword(String login, String password)
             throws ServiceException {
         boolean result;
-        CipherService cipher = new CipherService();
-        byte[] sourceBytes = password.getBytes();
-        byte[] encryptedBytes = cipher.encryptMessage(sourceBytes);
+        CryptoService cryptoService = new CryptoService();
+        String encryptedPassword = cryptoService.encryptMessage(password);
         try {
-            result = dao.checkLoginPassword(login, encryptedBytes);
+            result = dao.checkLoginPassword(login, encryptedPassword);
             LOGGER.info("Login result: {}", result);
         } catch (DaoException e) {
             throw new ServiceException("Error, accessing database!", e);
@@ -54,14 +53,13 @@ public class UserService {
         if (!email.matches(REGEX_EMAIL)) {
             throw new ServiceException("Invalid email format!");
         }
-        CipherService cipher = new CipherService();
-        byte[] sourceBytes = password.getBytes();
-        byte[] encryptedBytes = cipher.encryptMessage(sourceBytes);
+        CryptoService cryptoService = new CryptoService();
+        String encryptedPassword = cryptoService.encryptMessage(password);
         User user = UserFactory.createUser(role);
         user.getAccount().setName(login);
         user.getAccount().setEmail(email);
         try {
-            dao.add(user, encryptedBytes);
+            dao.add(user, encryptedPassword);
             LOGGER.info("User '{}' was successfully registered!", login);
         } catch (DaoException e) {
             throw new ServiceException(e);

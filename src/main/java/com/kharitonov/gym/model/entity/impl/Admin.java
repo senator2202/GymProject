@@ -18,11 +18,11 @@ public class Admin extends User implements AdminFunctionality {
 
     @Override
     public void addTrainer() {
-
+        //empty now
     }
 
     @Override
     public void deleteTrainer() {
-
+        //empty now
     }
 }

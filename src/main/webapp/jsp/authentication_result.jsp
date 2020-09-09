@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<html>
+<html lang="en">
 <head>
     <title>Title</title>
 </head>

@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao {
-    void add(User user, byte[] encryptedPassword) throws DaoException;
+    void add(User user, String encryptedPassword) throws DaoException;
 
-    Optional<User> get(String name, byte[] encryptedPassword) throws DaoException;
+    Optional<User> get(String name, String encryptedPassword) throws DaoException;
 
     List<User> getAll() throws DaoException;
 
-    boolean checkLoginPassword(String name, byte[] encryptedPassword)
+    boolean checkLoginPassword(String name, String encryptedPassword)
             throws DaoException;
 
     default void close(ResultSet resultSet) throws DaoException {
