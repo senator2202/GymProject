@@ -30,13 +30,24 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void add(User user, byte[] password) throws DaoException {
-        try (Connection connection = POOL.getConnection()) {
+        Connection connection = POOL.getConnection();
+        try {
+            connection.setAutoCommit(false);
             addAccount(connection, user, password);
             defineAccountId(connection, user, password);
             addUser(connection, user.getAccount().getId());
             addUserInheritor(connection, user);
+            connection.commit();
+            connection.setAutoCommit(true);
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                LOGGER.error("Unable to rollback!", e);
+            }
             throw new DaoException(e);
+        } finally {
+            POOL.releaseConnection(connection);
         }
     }
 
