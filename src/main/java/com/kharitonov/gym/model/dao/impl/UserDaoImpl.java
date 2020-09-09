@@ -82,7 +82,7 @@ public class UserDaoImpl implements UserDao {
         ResultSet resultSet = select.executeQuery();
         int id;
         resultSet.next();
-        id = resultSet.getInt(TableColumnName.USER_ID);
+        id = resultSet.getInt(TableColumnName.ACCOUNT_ID);
         user.getAccount().setId(id);
     }
 

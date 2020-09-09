@@ -1,12 +1,12 @@
 package com.kharitonov.gym.model.creator;
 
 public class TableColumnName {
-    public static final String USER_ID = "id";
-    public static final String USER_NAME = "name";
-    public static final String USER_PASSWORD = "password";
-    public static final String USER_EMAIL = "email";
-    public static final String USER_ROLE = "role";
-    public static final String USER_REGISTRATION_DATE = "registration_date";
+    public static final String ACCOUNT_ID = "account_id";
+    public static final String ACCOUNT_NAME = "name";
+    public static final String ACCOUNT_PASSWORD = "password";
+    public static final String ACCOUNT_EMAIL = "email";
+    public static final String ACCOUNT_ROLE = "role";
+    public static final String ACCOUNT_REGISTRATION_DATE = "registration_date";
 
     private TableColumnName() {
 

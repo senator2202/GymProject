@@ -15,14 +15,14 @@ public class UserCreator {
     }
 
     public static User create(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt(TableColumnName.USER_ID);
-        String name = resultSet.getString(TableColumnName.USER_NAME);
+        int id = resultSet.getInt(TableColumnName.ACCOUNT_ID);
+        String name = resultSet.getString(TableColumnName.ACCOUNT_NAME);
         byte[] encryptedBytes = resultSet
-                .getBytes(TableColumnName.USER_PASSWORD);
-        String email = resultSet.getString(TableColumnName.USER_EMAIL);
-        String role = resultSet.getString(TableColumnName.USER_ROLE);
+                .getBytes(TableColumnName.ACCOUNT_PASSWORD);
+        String email = resultSet.getString(TableColumnName.ACCOUNT_EMAIL);
+        String role = resultSet.getString(TableColumnName.ACCOUNT_ROLE);
         UserRole userRole = UserRole.valueOf(role);
-        Date date = resultSet.getDate(TableColumnName.USER_REGISTRATION_DATE);
+        Date date = resultSet.getDate(TableColumnName.ACCOUNT_REGISTRATION_DATE);
         WebCipher cipher = new WebCipher();
         byte[] decryptedBytes = cipher.decryptMessage(encryptedBytes);
         String password = new String(decryptedBytes);

@@ -11,19 +11,19 @@ import java.sql.SQLException;
 public class DataBaseHelper {
     private static final DataBaseHelper INSTANCE = new DataBaseHelper();
     private static final String SQL_INSERT_ACCOUNT =
-            "INSERT INTO account(name, password, email, role) VALUES(?,?,?,?)";
+            "INSERT INTO accounts(name, password, email, role) VALUES(?,?,?,?)";
     private static final String SQL_INSERT_USER =
-            "INSERT INTO user(account_id) VALUES(?)";
+            "INSERT INTO users(account_id) VALUES(?)";
     private static final String SQL_INSERT_CLIENT =
-            "INSERT INTO client(account_id) VALUES(?)";
+            "INSERT INTO clients(account_id) VALUES(?)";
     private static final String SQL_INSERT_TRAINER =
-            "INSERT INTO trainer(account_id) VALUES(?)";
+            "INSERT INTO trainers(account_id) VALUES(?)";
     private static final String SQL_SELECT_ACCOUNT =
-            "SELECT id, name, password, email, role, registration_date FROM " +
-                    "account WHERE name=? AND password=?";
+            "SELECT account_id, name, password, email, role, registration_date FROM " +
+                    "accounts WHERE name=? AND password=?";
     private static final String SQL_SELECT_ALL_ACCOUNTS =
-            "SELECT id, name, password, email, role, registration_date " +
-                    "FROM account";
+            "SELECT account_id, name, password, email, role, registration_date " +
+                    "FROM accounts";
 
     private DataBaseHelper() {}
 
