@@ -24,8 +24,11 @@ public class DataBaseHelper {
     private static final String SQL_SELECT_ALL_ACCOUNTS =
             "SELECT account_id, login, password, email, role, registration_date " +
                     "FROM accounts";
+    private static final String SQL_UPDATE_ACTIVE =
+            "UPDATE accounts SET active=1 WHERE  account_id=?";
 
-    private DataBaseHelper() {}
+    private DataBaseHelper() {
+    }
 
     public static DataBaseHelper getINSTANCE() {
         return INSTANCE;
@@ -49,7 +52,7 @@ public class DataBaseHelper {
     }
 
     public PreparedStatement statementInsertUser(Connection connection,
-                                                  int accountId)
+                                                 int accountId)
             throws DaoException {
         try {
             PreparedStatement statement =
@@ -104,6 +107,18 @@ public class DataBaseHelper {
             throws DaoException {
         try {
             return connection.prepareStatement(SQL_SELECT_ALL_ACCOUNTS);
+        } catch (SQLException e) {
+            throw new DaoException("Error, while getting statement!", e);
+        }
+    }
+
+    public PreparedStatement statementUpdateActive(Connection connection,
+                                                   int id) throws DaoException {
+        try {
+            PreparedStatement statement =
+                    connection.prepareStatement(SQL_UPDATE_ACTIVE);
+            statement.setInt(1, id);
+            return statement;
         } catch (SQLException e) {
             throw new DaoException("Error, while getting statement!", e);
         }

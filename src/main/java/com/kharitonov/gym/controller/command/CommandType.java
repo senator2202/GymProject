@@ -7,7 +7,8 @@ public enum CommandType {
     INVALID(new InvalidCommand()),
     LOGOUT(new LogoutCommand()),
     REGISTER(new RegisterCommand()),
-    OPEN_PAGE(new OpenPageCommand());
+    OPEN_PAGE(new OpenPageCommand()),
+    CONFIRM_ACCOUNT(new ConfirmAccountCommand());
 
     private final ActionCommand command;
 

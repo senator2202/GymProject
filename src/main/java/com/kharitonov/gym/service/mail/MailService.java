@@ -4,16 +4,34 @@ import com.kharitonov.gym.exception.PropertiesReaderException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.util.PropertiesPath;
 import com.kharitonov.gym.util.PropertiesReader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Properties;
 
 public class MailService {
-    private static final String MESSAGE_TEXT = "Thank you!";
+    private static final Logger LOGGER =
+            LogManager.getLogger(MailService.class);
+    private static final MailService INSTANCE = new MailService();
+    private static final String MESSAGE_TEXT = "Here is your confirmation" +
+            " link: \n%s";
     private static final String MESSAGE_SUBJECT = "Email confirmation";
+    private static final String CONFIRM_LINK =
+            "http://localhost:8083/mainController?command=confirm_account" +
+                    "&id=%d";
 
-    public void sendConfirmMessage(String email) throws ServiceException {
+    private MailService() {
+    }
+
+    public static MailService getInstance() {
+        return INSTANCE;
+    }
+
+    public void sendConfirmMessage(String email, int id) throws ServiceException {
         PropertiesReader reader = new PropertiesReader();
         String path = PropertiesPath.MAIL_PROPERTIES;
+        String confirmLink = prepareConfirmLink(id);
+        String text = String.format(MESSAGE_TEXT, confirmLink);
         Properties properties;
         try {
             properties = reader.readProperties(path);
@@ -21,7 +39,12 @@ public class MailService {
             throw new ServiceException("Unable to read mail properties!", e);
         }
         MailSender sender = new MailSender(email, MESSAGE_SUBJECT,
-                MESSAGE_TEXT, properties);
+                text, properties);
         sender.send();
+        LOGGER.info("Confirmation link was sent to '{}'", email);
+    }
+
+    private String prepareConfirmLink(int id) {
+        return String.format(CONFIRM_LINK, id);
     }
 }

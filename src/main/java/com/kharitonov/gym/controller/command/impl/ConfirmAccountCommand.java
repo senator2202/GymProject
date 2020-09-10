@@ -1,0 +1,30 @@
+package com.kharitonov.gym.controller.command.impl;
+
+import com.kharitonov.gym.controller.PagePath;
+import com.kharitonov.gym.controller.RequestAttributeName;
+import com.kharitonov.gym.controller.RequestAttributeValue;
+import com.kharitonov.gym.controller.RequestParameter;
+import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.exception.ServiceException;
+import com.kharitonov.gym.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+
+public class ConfirmAccountCommand implements ActionCommand {
+    private final UserService service = UserService.getInstance();
+
+    @Override
+    public String execute(HttpServletRequest request) {
+        String stringId = request.getParameter(RequestParameter.ID);
+        int id = Integer.parseInt(stringId);
+        try {
+            service.confirmAccount(id);
+            request.setAttribute(RequestAttributeName.CONFIRM_ACCOUNT_RESULT,
+                    RequestAttributeValue.CONFIRM_SUCCESS);
+        } catch (ServiceException e) {
+            request.setAttribute(RequestAttributeName.CONFIRM_ACCOUNT_RESULT,
+                    RequestAttributeValue.CONFIRM_ERROR);
+        }
+        return PagePath.CONFIRM_RESULT;
+    }
+}

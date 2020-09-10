@@ -6,6 +6,7 @@ import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.factory.UserFactory;
+import com.kharitonov.gym.service.mail.MailService;
 import com.kharitonov.gym.service.security.CryptoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,8 +60,22 @@ public class UserService {
         user.getAccount().setName(login);
         user.getAccount().setEmail(email);
         try {
+            MailService service;
             dao.add(user, encryptedPassword);
+            service = MailService.getInstance();
+            service.sendConfirmMessage(email, user.getAccount().getId());
             LOGGER.info("User '{}' was successfully registered!", login);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void confirmAccount(int id) throws ServiceException {
+        if (id < 0) {
+            throw new ServiceException("Incorrect id value!");
+        }
+        try {
+            dao.confirmAccount(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

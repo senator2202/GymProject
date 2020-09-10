@@ -133,4 +133,15 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(e);
         }
     }
+
+    @Override
+    public void confirmAccount(int id) throws DaoException {
+        try (Connection connection = POOL.getConnection();
+             PreparedStatement statementUpdate =
+                     DB_HELPER.statementUpdateActive(connection, id)) {
+            statementUpdate.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
 }

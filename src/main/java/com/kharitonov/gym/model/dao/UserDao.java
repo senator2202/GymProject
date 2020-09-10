@@ -19,6 +19,8 @@ public interface UserDao {
     boolean checkLoginPassword(String name, String encryptedPassword)
             throws DaoException;
 
+    void confirmAccount(int id) throws DaoException;
+
     default void close(ResultSet resultSet) throws DaoException {
         if (resultSet != null) {
             try {

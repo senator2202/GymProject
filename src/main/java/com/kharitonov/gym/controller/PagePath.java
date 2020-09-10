@@ -7,6 +7,8 @@ public class PagePath {
             "/jsp/authentication_result.jsp";
     public static final String ERROR = "/jsp/error.jsp";
     public static final String REGISTER = "/jsp/register.jsp";
+    public static final String CONFIRM_RESULT =
+            "/jsp/confirm_account_result.jsp";
 
     private PagePath() {
     }
