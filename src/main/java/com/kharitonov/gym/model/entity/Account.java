@@ -5,7 +5,6 @@ import java.sql.Date;
 public class Account {
     private int id;
     private String name;
-    private String password;
     private String email;
     private UserRole type;
     private Date registrationDate;
@@ -19,10 +18,6 @@ public class Account {
 
     public String getName() {
         return name;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getEmail() {
@@ -45,10 +40,6 @@ public class Account {
         this.name = name;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -64,7 +55,6 @@ public class Account {
     public static class AccountBuilder {
         private int id;
         private String name;
-        private String password;
         private String email;
         private UserRole type;
         private Date registrationDate;
@@ -83,11 +73,6 @@ public class Account {
 
         public AccountBuilder withName(String name) {
             this.name = name;
-            return this;
-        }
-
-        public AccountBuilder withPassword(String password) {
-            this.password = password;
             return this;
         }
 
@@ -110,7 +95,6 @@ public class Account {
             Account account = new Account();
             account.setId(id);
             account.setName(name);
-            account.setPassword(password);
             account.setEmail(email);
             account.setRole(type);
             account.setRegistrationDate(registrationDate);
@@ -127,8 +111,6 @@ public class Account {
 
         if (name != null ? !name.equals(account.name) : account.name != null)
             return false;
-        if (password != null ? !password.equals(account.password) : account.password != null)
-            return false;
         if (email != null ? !email.equals(account.email) : account.email != null)
             return false;
         if (type != account.type) return false;
@@ -138,7 +120,6 @@ public class Account {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);

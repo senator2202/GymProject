@@ -13,10 +13,8 @@ public class StaticDataProvider {
     static {
         Account account = Account.AccountBuilder.anAccount()
                 .withName(ADMIN_NAME)
-                .withPassword(ADMIN_PASSWORD)
                 .withEmail(ADMIN_EMAIL)
                 .build();
         USER_ADMIN = new Admin(account);
-        CryptoService cipher = new CryptoService();
     }
 }

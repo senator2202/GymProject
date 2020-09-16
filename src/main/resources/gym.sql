@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
 -- Хост:                         127.0.0.1
--- Версия сервера:               8.0.21 - MySQL Community Server - GPL
--- Операционная система:         Win64
+-- Версия сервера:               5.7.31-log - MySQL Community Server (GPL)
+-- Операционная система:         Win32
 -- HeidiSQL Версия:              11.0.0.5919
 -- --------------------------------------------------------
 
@@ -14,29 +14,29 @@
 
 -- Дамп структуры базы данных gym
 DROP DATABASE IF EXISTS `gym`;
-CREATE DATABASE IF NOT EXISTS `gym` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `gym` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `gym`;
 
 -- Дамп структуры для таблица gym.accounts
 DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `account_id` int NOT NULL AUTO_INCREMENT,
-  `login` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `password` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `account_id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(30) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `role` enum('ADMIN','TRAINER','CLIENT') NOT NULL DEFAULT 'CLIENT',
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `active` tinyint NOT NULL DEFAULT '0',
+  `active` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`account_id`) USING BTREE,
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `id` (`account_id`) USING BTREE,
   UNIQUE KEY `name` (`login`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=284 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=285 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.accounts: ~5 rows (приблизительно)
+-- Дамп данных таблицы gym.accounts: ~41 rows (приблизительно)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `registration_date`, `active`) VALUES
-	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 0),
+	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 1),
 	(244, 'trainer71859', 'AonR|Uqgzh7g~JKg', 'email7284605@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
 	(245, 'trainer645552', 'AoHQ}Uqgzh7g~JKg', 'email6685704@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
 	(246, 'trainer2029481', 'AQHQ7Uqgzh7g~JKg', 'email5884185@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
@@ -76,185 +76,167 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(280, 'client4520749', 'AU~R~Uqgzh7g~JKg', 'email5670315@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0);
+	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 1),
+	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 1);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
--- Дамп структуры для таблица gym.clients
-DROP TABLE IF EXISTS `clients`;
-CREATE TABLE IF NOT EXISTS `clients` (
-  `client_id` int NOT NULL,
-  `discount` double(22,0) DEFAULT '0',
-  PRIMARY KEY (`client_id`),
-  UNIQUE KEY `client_id` (`client_id`),
-  CONSTRAINT `FK_clients_users` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
+-- Дамп структуры для таблица gym.diets
+DROP TABLE IF EXISTS `diets`;
+CREATE TABLE IF NOT EXISTS `diets` (
+  `diet_id` int(11) NOT NULL AUTO_INCREMENT,
+  `diet_type` enum('SLIMMING','WEIGHT_GAIN','KEEPING_SHAPE') NOT NULL DEFAULT 'KEEPING_SHAPE',
+  PRIMARY KEY (`diet_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Дамп данных таблицы gym.diets: ~1 rows (приблизительно)
+/*!40000 ALTER TABLE `diets` DISABLE KEYS */;
+REPLACE INTO `diets` (`diet_id`, `diet_type`) VALUES
+	(1, 'KEEPING_SHAPE');
+/*!40000 ALTER TABLE `diets` ENABLE KEYS */;
+
+-- Дамп структуры для таблица gym.diet_meals
+DROP TABLE IF EXISTS `diet_meals`;
+CREATE TABLE IF NOT EXISTS `diet_meals` (
+  `diet_id` int(11) NOT NULL AUTO_INCREMENT,
+  `meal_type` enum('BREAKFAST','LUNCH','DINNER','SUPPER') NOT NULL,
+  `meal_description` mediumtext CHARACTER SET utf8mb4 NOT NULL,
+  KEY `FK_meals_diets` (`diet_id`),
+  CONSTRAINT `FK_meals_diets` FOREIGN KEY (`diet_id`) REFERENCES `diets` (`diet_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Дамп данных таблицы gym.diet_meals: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `diet_meals` DISABLE KEYS */;
+REPLACE INTO `diet_meals` (`diet_id`, `meal_type`, `meal_description`) VALUES
+	(1, 'BREAKFAST', 'Яичница с сыром, 2 тоста с арахисовым маслом, кофе с молоком');
+/*!40000 ALTER TABLE `diet_meals` ENABLE KEYS */;
+
+-- Дамп структуры для таблица gym.marks
+DROP TABLE IF EXISTS `marks`;
+CREATE TABLE IF NOT EXISTS `marks` (
+  `client_id` int(11) NOT NULL,
+  `trainer_id` int(11) NOT NULL,
+  `mark` int(11) NOT NULL DEFAULT '0',
+  `mark_date` datetime NOT NULL,
+  KEY `FK__users` (`client_id`),
+  KEY `FK__users_2` (`trainer_id`),
+  CONSTRAINT `FK__users` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `FK__users_2` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.clients: ~133 rows (приблизительно)
-/*!40000 ALTER TABLE `clients` DISABLE KEYS */;
-REPLACE INTO `clients` (`client_id`, `discount`) VALUES
-	(254, 0),
-	(255, 0),
-	(256, 0),
-	(257, 0),
-	(258, 0),
-	(259, 0),
-	(260, 0),
-	(261, 0),
-	(262, 0),
-	(263, 0),
-	(264, 0),
-	(265, 0),
-	(266, 0),
-	(267, 0),
-	(268, 0),
-	(269, 0),
-	(270, 0),
-	(271, 0),
-	(272, 0),
-	(273, 0),
-	(274, 0),
-	(275, 0),
-	(276, 0),
-	(277, 0),
-	(278, 0),
-	(279, 0),
-	(280, 0),
-	(281, 0),
-	(282, 0),
-	(283, 0);
-/*!40000 ALTER TABLE `clients` ENABLE KEYS */;
+-- Дамп данных таблицы gym.marks: ~2 rows (приблизительно)
+/*!40000 ALTER TABLE `marks` DISABLE KEYS */;
+REPLACE INTO `marks` (`client_id`, `trainer_id`, `mark`, `mark_date`) VALUES
+	(260, 250, 5, '2020-09-16 15:34:06'),
+	(255, 253, 3, '2020-09-16 15:35:23');
+/*!40000 ALTER TABLE `marks` ENABLE KEYS */;
 
--- Дамп структуры для таблица gym.exercises
-DROP TABLE IF EXISTS `exercises`;
-CREATE TABLE IF NOT EXISTS `exercises` (
-  `training_id` int NOT NULL,
+-- Дамп структуры для таблица gym.trainings
+DROP TABLE IF EXISTS `trainings`;
+CREATE TABLE IF NOT EXISTS `trainings` (
+  `training_id` int(11) NOT NULL AUTO_INCREMENT,
+  `trainer_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `cost` double NOT NULL DEFAULT '0',
+  `date` date NOT NULL,
+  `start` time NOT NULL,
+  `end` time NOT NULL,
+  `bought` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`training_id`) USING BTREE,
+  UNIQUE KEY `id` (`training_id`) USING BTREE,
+  KEY `FK_trainings_users` (`trainer_id`),
+  KEY `FK_trainings_users_2` (`client_id`),
+  CONSTRAINT `FK_trainings_users` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Дамп данных таблицы gym.trainings: ~3 rows (приблизительно)
+/*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
+REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `cost`, `date`, `start`, `end`, `bought`) VALUES
+	(1, 253, 254, 20, '2020-09-20', '16:00:00', '17:00:00', 1),
+	(2, 253, 255, 20, '2020-09-20', '18:00:00', '19:00:00', 0),
+	(3, 250, 260, 25, '2020-09-18', '12:00:00', '13:00:00', 0);
+/*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
+
+-- Дамп структуры для таблица gym.training_exercises
+DROP TABLE IF EXISTS `training_exercises`;
+CREATE TABLE IF NOT EXISTS `training_exercises` (
+  `training_id` int(11) NOT NULL,
   `type` enum('BENCH_PRESS','DEADLIFT','SQUATS') NOT NULL,
   `weight` double DEFAULT NULL,
   KEY `FK_exercises_trainings` (`training_id`),
   CONSTRAINT `FK_exercises_trainings` FOREIGN KEY (`training_id`) REFERENCES `trainings` (`training_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.exercises: ~0 rows (приблизительно)
-/*!40000 ALTER TABLE `exercises` DISABLE KEYS */;
-/*!40000 ALTER TABLE `exercises` ENABLE KEYS */;
-
--- Дамп структуры для таблица gym.trainers
-DROP TABLE IF EXISTS `trainers`;
-CREATE TABLE IF NOT EXISTS `trainers` (
-  `trainer_id` int NOT NULL,
-  `rating` double(22,0) DEFAULT '0',
-  PRIMARY KEY (`trainer_id`),
-  UNIQUE KEY `trainer_id` (`trainer_id`),
-  CONSTRAINT `FK_trainers_users` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Дамп данных таблицы gym.trainers: ~18 rows (приблизительно)
-/*!40000 ALTER TABLE `trainers` DISABLE KEYS */;
-REPLACE INTO `trainers` (`trainer_id`, `rating`) VALUES
-	(244, 0),
-	(245, 0),
-	(246, 0),
-	(247, 0),
-	(248, 0),
-	(249, 0),
-	(250, 0),
-	(251, 0),
-	(252, 0),
-	(253, 0);
-/*!40000 ALTER TABLE `trainers` ENABLE KEYS */;
-
--- Дамп структуры для таблица gym.trainings
-DROP TABLE IF EXISTS `trainings`;
-CREATE TABLE IF NOT EXISTS `trainings` (
-  `training_id` int NOT NULL AUTO_INCREMENT,
-  `trainer_id` int NOT NULL,
-  `client_id` int NOT NULL,
-  `cost` double NOT NULL DEFAULT '0',
-  `date` date NOT NULL,
-  `start` time NOT NULL,
-  `end` time NOT NULL,
-  `bought` tinyint NOT NULL DEFAULT '0',
-  PRIMARY KEY (`training_id`) USING BTREE,
-  UNIQUE KEY `id` (`training_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Дамп данных таблицы gym.trainings: ~0 rows (приблизительно)
-/*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
-/*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
+-- Дамп данных таблицы gym.training_exercises: ~4 rows (приблизительно)
+/*!40000 ALTER TABLE `training_exercises` DISABLE KEYS */;
+REPLACE INTO `training_exercises` (`training_id`, `type`, `weight`) VALUES
+	(1, 'BENCH_PRESS', 100),
+	(1, 'DEADLIFT', 150),
+	(1, 'SQUATS', 140),
+	(2, 'BENCH_PRESS', 60),
+	(2, 'SQUATS', 100);
+/*!40000 ALTER TABLE `training_exercises` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int NOT NULL,
+  `user_id` int(11) NOT NULL,
   `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `phone` varchar(30) DEFAULT '',
+  `discount` double DEFAULT NULL,
+  `rating` double DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`),
   CONSTRAINT `FK_users_accounts` FOREIGN KEY (`user_id`) REFERENCES `accounts` (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.users: ~0 rows (приблизительно)
+-- Дамп данных таблицы gym.users: ~42 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`) VALUES
-	(243, '', '', ''),
-	(244, '', '', ''),
-	(245, '', '', ''),
-	(246, '', '', ''),
-	(247, '', '', ''),
-	(248, '', '', ''),
-	(249, '', '', ''),
-	(250, '', '', ''),
-	(251, '', '', ''),
-	(252, '', '', ''),
-	(253, '', '', ''),
-	(254, '', '', ''),
-	(255, '', '', ''),
-	(256, '', '', ''),
-	(257, '', '', ''),
-	(258, '', '', ''),
-	(259, '', '', ''),
-	(260, '', '', ''),
-	(261, '', '', ''),
-	(262, '', '', ''),
-	(263, '', '', ''),
-	(264, '', '', ''),
-	(265, '', '', ''),
-	(266, '', '', ''),
-	(267, '', '', ''),
-	(268, '', '', ''),
-	(269, '', '', ''),
-	(270, '', '', ''),
-	(271, '', '', ''),
-	(272, '', '', ''),
-	(273, '', '', ''),
-	(274, '', '', ''),
-	(275, '', '', ''),
-	(276, '', '', ''),
-	(277, '', '', ''),
-	(278, '', '', ''),
-	(279, '', '', ''),
-	(280, '', '', ''),
-	(281, '', '', ''),
-	(282, '', '', ''),
-	(283, '', '', '');
+REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `discount`, `rating`) VALUES
+	(243, '', '', '', NULL, NULL),
+	(244, '', '', '', NULL, NULL),
+	(245, '', '', '', NULL, NULL),
+	(246, '', '', '', NULL, NULL),
+	(247, '', '', '', NULL, NULL),
+	(248, '', '', '', NULL, NULL),
+	(249, '', '', '', NULL, NULL),
+	(250, '', '', '', NULL, NULL),
+	(251, '', '', '', NULL, NULL),
+	(252, '', '', '', NULL, NULL),
+	(253, '', '', '', NULL, NULL),
+	(254, '', '', '', NULL, NULL),
+	(255, '', '', '', NULL, NULL),
+	(256, '', '', '', NULL, NULL),
+	(257, '', '', '', NULL, NULL),
+	(258, '', '', '', NULL, NULL),
+	(259, '', '', '', NULL, NULL),
+	(260, '', '', '', NULL, NULL),
+	(261, '', '', '', NULL, NULL),
+	(262, '', '', '', NULL, NULL),
+	(263, '', '', '', NULL, NULL),
+	(264, '', '', '', NULL, NULL),
+	(265, '', '', '', NULL, NULL),
+	(266, '', '', '', NULL, NULL),
+	(267, '', '', '', NULL, NULL),
+	(268, '', '', '', NULL, NULL),
+	(269, '', '', '', NULL, NULL),
+	(270, '', '', '', NULL, NULL),
+	(271, '', '', '', NULL, NULL),
+	(272, '', '', '', NULL, NULL),
+	(273, '', '', '', NULL, NULL),
+	(274, '', '', '', NULL, NULL),
+	(275, '', '', '', NULL, NULL),
+	(276, '', '', '', NULL, NULL),
+	(277, '', '', '', NULL, NULL),
+	(278, '', '', '', NULL, NULL),
+	(279, '', '', '', NULL, NULL),
+	(280, '', '', '', NULL, NULL),
+	(281, '', '', '', NULL, NULL),
+	(282, '', '', '', NULL, NULL),
+	(283, '', '', '', NULL, NULL),
+	(284, '', '', '', NULL, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
-
--- Дамп структуры для таблица gym.users_trainings
-DROP TABLE IF EXISTS `users_trainings`;
-CREATE TABLE IF NOT EXISTS `users_trainings` (
-  `user_id_fk` int NOT NULL,
-  `training_id_fk` int NOT NULL,
-  `done` tinyint NOT NULL DEFAULT '0',
-  KEY `FK_users_trainings_users` (`user_id_fk`),
-  KEY `FK_users_trainings_trainings` (`training_id_fk`),
-  CONSTRAINT `FK_users_trainings_trainings` FOREIGN KEY (`training_id_fk`) REFERENCES `trainings` (`training_id`),
-  CONSTRAINT `FK_users_trainings_users` FOREIGN KEY (`user_id_fk`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Дамп данных таблицы gym.users_trainings: ~0 rows (приблизительно)
-/*!40000 ALTER TABLE `users_trainings` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users_trainings` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
