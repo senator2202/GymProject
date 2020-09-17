@@ -2,6 +2,7 @@ package com.kharitonov.gym.model.dao;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.model.entity.UserRole;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +17,9 @@ public interface UserDao {
 
     List<User> getAll() throws DaoException;
 
-    boolean checkLoginPassword(String name, String encryptedPassword)
+    String getPassword(String login) throws DaoException;
+
+    Optional<UserRole> checkLoginPassword(String login, String encryptedPassword)
             throws DaoException;
 
     void confirmAccount(int id) throws DaoException;

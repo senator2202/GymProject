@@ -1,4 +1,6 @@
-package com.kharitonov.gym.model.entity;
+package com.kharitonov.gym.model.entity.functionality;
+
+import com.kharitonov.gym.model.entity.Training;
 
 import java.util.List;
 

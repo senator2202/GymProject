@@ -4,8 +4,8 @@ import com.kharitonov.gym.data_provider.StaticDataProvider;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.model.entity.impl.Client;
-import com.kharitonov.gym.model.entity.impl.Trainer;
+import com.kharitonov.gym.model.entity.Client;
+import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.service.security.CryptoService;
 import org.testng.annotations.Test;
 
@@ -20,7 +20,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testAddClient() throws DaoException {
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 10; i++) {
             CryptoService cipher = new CryptoService();
             Random random = new Random();
             String name = "client" + random.nextInt(10000000);
@@ -34,7 +34,7 @@ public class UserDaoImplTest {
                     .build();
             Client client = new Client(account);
             dao.add(client, encryptedPassword);
-            result = dao.checkLoginPassword(name, encryptedPassword);
+            result = dao.checkLoginPassword(name, encryptedPassword).isPresent();
             assertTrue(result);
         }
     }
@@ -55,7 +55,7 @@ public class UserDaoImplTest {
                     .build();
             Trainer trainer = new Trainer(account);
             dao.add(trainer, encryptedString);
-            result = dao.checkLoginPassword(name, encryptedString);
+            result = dao.checkLoginPassword(name, encryptedString).isPresent();
             assertTrue(result);
         }
     }
@@ -72,17 +72,18 @@ public class UserDaoImplTest {
 
     @Test
     public void testCheckLoginPassword() throws DaoException {
-        String name = StaticDataProvider.ADMIN_NAME;
+        String name = StaticDataProvider.ADMIN_LOGIN;
         String password = StaticDataProvider.ADMIN_PASSWORD;
         CryptoService cipher = new CryptoService();
         String encryptedString = cipher.encryptMessage(password);
-        boolean result = dao.checkLoginPassword(name, encryptedString);
+        boolean result =
+                dao.checkLoginPassword(name, encryptedString).isPresent();
         assertTrue(result);
     }
 
     @Test
     public void testGet() throws DaoException {
-        String name = StaticDataProvider.ADMIN_NAME;
+        String name = StaticDataProvider.ADMIN_LOGIN;
         String password = StaticDataProvider.ADMIN_PASSWORD;
         CryptoService cipher = new CryptoService();
         String encryptedString = cipher.encryptMessage(password);

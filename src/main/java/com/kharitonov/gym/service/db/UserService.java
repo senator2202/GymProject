@@ -1,4 +1,4 @@
-package com.kharitonov.gym.service;
+package com.kharitonov.gym.service.db;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
@@ -10,6 +10,8 @@ import com.kharitonov.gym.service.mail.MailService;
 import com.kharitonov.gym.service.security.CryptoService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Optional;
 
 public class UserService {
     private static final String REGEX_EMAIL =
@@ -31,18 +33,18 @@ public class UserService {
         return instance;
     }
 
-    public boolean checkLoginPassword(String login, String password)
+    public Optional<UserRole> checkLoginPassword(String login, String password)
             throws ServiceException {
-        boolean result;
         CryptoService cryptoService = new CryptoService();
         String encryptedPassword = cryptoService.encryptMessage(password);
+        Optional<UserRole> optional;
         try {
-            result = dao.checkLoginPassword(login, encryptedPassword);
-            LOGGER.info("Login result: {}", result);
+            optional = dao.checkLoginPassword(login, encryptedPassword);
+            LOGGER.info("Login result: {}", optional.isPresent());
         } catch (DaoException e) {
             throw new ServiceException("Error, accessing database!", e);
         }
-        return result;
+        return optional;
     }
 
     public void registerUser(String login, String password,

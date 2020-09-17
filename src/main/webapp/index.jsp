@@ -5,6 +5,6 @@
     <title>Start page</title>
 </head>
 <body>
-<jsp:forward page="jsp/login.jsp"/>
+<jsp:forward page="jsp/login/login1.jsp"/>
 </body>
 </html>

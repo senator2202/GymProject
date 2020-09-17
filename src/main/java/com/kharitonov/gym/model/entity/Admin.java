@@ -1,9 +1,6 @@
-package com.kharitonov.gym.model.entity.impl;
+package com.kharitonov.gym.model.entity;
 
-import com.kharitonov.gym.model.entity.Account;
-import com.kharitonov.gym.model.entity.AdminFunctionality;
-import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.entity.functionality.AdminFunctionality;
 
 public class Admin extends User implements AdminFunctionality {
     public Admin() {

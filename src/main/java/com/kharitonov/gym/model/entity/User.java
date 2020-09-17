@@ -1,5 +1,7 @@
 package com.kharitonov.gym.model.entity;
 
+import com.kharitonov.gym.model.entity.functionality.UserFunctionality;
+
 import java.util.List;
 
 public class User implements UserFunctionality {

@@ -1,6 +1,8 @@
 package com.kharitonov.gym.model.dao.impl;
 
 import com.kharitonov.gym.exception.DaoException;
+import com.kharitonov.gym.exception.StatementException;
+import com.kharitonov.gym.model.creator.StatementCreator;
 import com.kharitonov.gym.model.creator.TableColumnName;
 import com.kharitonov.gym.model.creator.UserCreator;
 import com.kharitonov.gym.model.dao.UserDao;
@@ -8,7 +10,6 @@ import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
-import com.kharitonov.gym.model.util.DataBaseHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,8 +26,8 @@ public class UserDaoImpl implements UserDao {
             LogManager.getLogger(UserDaoImpl.class);
     private static final ConnectionPool POOL =
             BasicConnectionPool.getInstance();
-    private static final DataBaseHelper DB_HELPER =
-            DataBaseHelper.getINSTANCE();
+    private static final StatementCreator STATEMENT_CREATOR =
+            StatementCreator.getINSTANCE();
 
     @Override
     public void add(User user, String password) throws DaoException {
@@ -36,10 +37,9 @@ public class UserDaoImpl implements UserDao {
             addAccount(connection, user, password);
             defineAccountId(connection, user, password);
             addUser(connection, user.getAccount().getId());
-            addUserInheritor(connection, user);
             connection.commit();
             connection.setAutoCommit(true);
-        } catch (SQLException e) {
+        } catch (SQLException | StatementException e) {
             try {
                 connection.rollback();
             } catch (SQLException ex) {
@@ -52,33 +52,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     private void addAccount(Connection connection, User user,
-                            String password) throws SQLException, DaoException {
+                            String password) throws SQLException, StatementException {
         PreparedStatement insertAccount =
-                DB_HELPER.statementInsertAccount(connection, user, password);
+                STATEMENT_CREATOR.statementInsertAccount(connection, user, password);
         insertAccount.execute();
     }
 
-    private void addUser(Connection connection, int id)
-            throws SQLException, DaoException {
-        PreparedStatement insertUser =
-                DB_HELPER.statementInsertUser(connection, id);
-        insertUser.execute();
-    }
-
-    private void addUserInheritor(Connection connection, User user)
-            throws SQLException, DaoException {
-        if (user.getAccount().getRole() != UserRole.ADMIN) {
-            PreparedStatement insertInheritor =
-                    DB_HELPER.statementInsertUserInheritor(connection, user);
-            insertInheritor.execute();
-        }
-    }
-
     private void defineAccountId(Connection connection, User user, String password)
-            throws SQLException, DaoException {
+            throws SQLException, StatementException {
         String userName = user.getAccount().getName();
         PreparedStatement select =
-                DB_HELPER.statementSelect(connection, userName, password);
+                STATEMENT_CREATOR.statementSelectAccount(connection, userName, password);
         ResultSet resultSet = select.executeQuery();
         int id;
         resultSet.next();
@@ -86,12 +70,19 @@ public class UserDaoImpl implements UserDao {
         user.getAccount().setId(id);
     }
 
+    private void addUser(Connection connection, int id)
+            throws SQLException, StatementException {
+        PreparedStatement insertUser =
+                STATEMENT_CREATOR.statementInsertUser(connection, id);
+        insertUser.execute();
+    }
+
     @Override
     public Optional<User> get(String name, String encryptedPassword)
             throws DaoException {
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementSelect =
-                     DB_HELPER.statementSelect(connection, name, encryptedPassword);
+                     STATEMENT_CREATOR.statementSelectAccount(connection, name, encryptedPassword);
              ResultSet resultSet = statementSelect.executeQuery()) {
             if (resultSet.next()) {
                 return Optional.of(UserCreator.create(resultSet));
@@ -99,7 +90,7 @@ public class UserDaoImpl implements UserDao {
                 LOGGER.warn("There is no user with such name and password!");
                 return Optional.empty();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | StatementException e) {
             throw new DaoException(e);
         }
     }
@@ -109,27 +100,51 @@ public class UserDaoImpl implements UserDao {
         List<User> users = new ArrayList<>();
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementSelect =
-                     DB_HELPER.statementSelectAll(connection);
+                     STATEMENT_CREATOR.statementSelectAll(connection);
              ResultSet resultSet = statementSelect.executeQuery()) {
             while (resultSet.next()) {
                 User user = UserCreator.create(resultSet);
                 users.add(user);
             }
             return users;
-        } catch (SQLException e) {
+        } catch (SQLException | StatementException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public boolean checkLoginPassword(String name, String encryptedPassword)
+    public String getPassword(String login) throws DaoException {
+        String password = new String();
+        try (Connection connection = POOL.getConnection();
+             PreparedStatement statementSelect =
+                     STATEMENT_CREATOR.statementSelectPassword(connection, login);
+             ResultSet resultSet = statementSelect.executeQuery()) {
+            if (resultSet.next()) {
+                String column = TableColumnName.ACCOUNT_PASSWORD;
+                password = resultSet.getString(column);
+            }
+            return password;
+        } catch (SQLException | StatementException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public Optional<UserRole> checkLoginPassword(String name, String encryptedPassword)
             throws DaoException {
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementSelect =
-                     DB_HELPER.statementSelect(connection, name, encryptedPassword);
+                     STATEMENT_CREATOR.statementSelectAccount(connection, name, encryptedPassword);
              ResultSet resultSet = statementSelect.executeQuery()) {
-            return resultSet.next();
-        } catch (SQLException e) {
+            Optional<UserRole> optional = Optional.empty();
+            if (resultSet.next()) {
+                String column = TableColumnName.ACCOUNT_ROLE;
+                String stringRole = resultSet.getString(column);
+                UserRole role = UserRole.valueOf(stringRole);
+                optional = Optional.of(role);
+            }
+            return optional;
+        } catch (SQLException | StatementException e) {
             throw new DaoException(e);
         }
     }
@@ -138,9 +153,9 @@ public class UserDaoImpl implements UserDao {
     public void confirmAccount(int id) throws DaoException {
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementUpdate =
-                     DB_HELPER.statementUpdateActive(connection, id)) {
+                     STATEMENT_CREATOR.statementUpdateActive(connection, id)) {
             statementUpdate.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | StatementException e) {
             throw new DaoException(e);
         }
     }

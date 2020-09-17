@@ -7,7 +7,7 @@ import com.kharitonov.gym.controller.RequestParameter;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.UserRole;
-import com.kharitonov.gym.service.UserService;
+import com.kharitonov.gym.service.db.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

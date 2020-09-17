@@ -1,6 +1,7 @@
-package com.kharitonov.gym.model.entity.impl;
+package com.kharitonov.gym.model.entity;
 
-import com.kharitonov.gym.model.entity.*;
+import com.kharitonov.gym.model.entity.functionality.SportFunctionality;
+import com.kharitonov.gym.model.entity.functionality.TrainerFunctionality;
 
 import java.util.ArrayList;
 import java.util.Collections;
