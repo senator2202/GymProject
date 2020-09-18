@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `id` (`account_id`) USING BTREE,
   UNIQUE KEY `name` (`login`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=285 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.accounts: ~41 rows (приблизительно)
+-- Дамп данных таблицы gym.accounts: ~46 rows (приблизительно)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `registration_date`, `active`) VALUES
 	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 1),
@@ -77,7 +77,11 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 1),
-	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 1);
+	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 1),
+	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 0),
+	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 0),
+	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 0),
+	(289, 'tuchi', '9Vrgph\\g', 'tuchikakludi@mail.ru', 'CLIENT', '2020-09-17 12:09:46', 0);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.diets
@@ -86,12 +90,14 @@ CREATE TABLE IF NOT EXISTS `diets` (
   `diet_id` int(11) NOT NULL AUTO_INCREMENT,
   `diet_type` enum('SLIMMING','WEIGHT_GAIN','KEEPING_SHAPE') NOT NULL DEFAULT 'KEEPING_SHAPE',
   PRIMARY KEY (`diet_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.diets: ~1 rows (приблизительно)
+-- Дамп данных таблицы gym.diets: ~3 rows (приблизительно)
 /*!40000 ALTER TABLE `diets` DISABLE KEYS */;
 REPLACE INTO `diets` (`diet_id`, `diet_type`) VALUES
-	(1, 'KEEPING_SHAPE');
+	(1, 'SLIMMING'),
+	(2, 'KEEPING_SHAPE'),
+	(3, 'WEIGHT_GAIN');
 /*!40000 ALTER TABLE `diets` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.diet_meals
@@ -102,12 +108,22 @@ CREATE TABLE IF NOT EXISTS `diet_meals` (
   `meal_description` mediumtext CHARACTER SET utf8mb4 NOT NULL,
   KEY `FK_meals_diets` (`diet_id`),
   CONSTRAINT `FK_meals_diets` FOREIGN KEY (`diet_id`) REFERENCES `diets` (`diet_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.diet_meals: ~0 rows (приблизительно)
+-- Дамп данных таблицы gym.diet_meals: ~9 rows (приблизительно)
 /*!40000 ALTER TABLE `diet_meals` DISABLE KEYS */;
 REPLACE INTO `diet_meals` (`diet_id`, `meal_type`, `meal_description`) VALUES
-	(1, 'BREAKFAST', 'Яичница с сыром, 2 тоста с арахисовым маслом, кофе с молоком');
+	(1, 'BREAKFAST', 'Яичница с сыром, 2 тоста с арахисовым маслом, кофе с молоком'),
+	(1, 'DINNER', 'Рис отварной без масла, куриная грудка'),
+	(1, 'SUPPER', 'Салат "Цезарь с курицей", апельсиновый сок '),
+	(2, 'BREAKFAST', 'Гречневая каша с кусочком масла, жареные куриные крылышки, кофе, творожный пудинг'),
+	(2, 'LUNCH', 'Творожная паста "Снежок" с желатином, чай '),
+	(2, 'DINNER', 'Куриный суп, рисовая каша, куриное филе'),
+	(2, 'SUPPER', 'Салат из овощей, консервированный тунец, стакан апельсинового сока'),
+	(3, 'BREAKFAST', 'Хлопья "Nesquick" с молоком, яичница с ветчиной и сыром, кофе со сливками'),
+	(3, 'LUNCH', 'Блинчики с кленовым сиропом, молоко'),
+	(3, 'DINNER', 'Куриный бульон, паста болоньезе, молочный коктейль'),
+	(3, 'SUPPER', 'Салат "Цезарь с курицей", протеиновый коктейль');
 /*!40000 ALTER TABLE `diet_meals` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.marks
@@ -149,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~3 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~2 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `cost`, `date`, `start`, `end`, `bought`) VALUES
 	(1, 253, 254, 20, '2020-09-20', '16:00:00', '17:00:00', 1),
@@ -184,58 +200,65 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `phone` varchar(30) DEFAULT '',
-  `discount` double DEFAULT NULL,
-  `rating` double DEFAULT NULL,
+  `discount` double(22,0) DEFAULT '0',
+  `rating` double(22,0) DEFAULT '0',
+  `diet_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`),
-  CONSTRAINT `FK_users_accounts` FOREIGN KEY (`user_id`) REFERENCES `accounts` (`account_id`)
+  KEY `FK_users_diets` (`diet_id`),
+  CONSTRAINT `FK_users_accounts` FOREIGN KEY (`user_id`) REFERENCES `accounts` (`account_id`),
+  CONSTRAINT `FK_users_diets` FOREIGN KEY (`diet_id`) REFERENCES `diets` (`diet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Дамп данных таблицы gym.users: ~42 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `discount`, `rating`) VALUES
-	(243, '', '', '', NULL, NULL),
-	(244, '', '', '', NULL, NULL),
-	(245, '', '', '', NULL, NULL),
-	(246, '', '', '', NULL, NULL),
-	(247, '', '', '', NULL, NULL),
-	(248, '', '', '', NULL, NULL),
-	(249, '', '', '', NULL, NULL),
-	(250, '', '', '', NULL, NULL),
-	(251, '', '', '', NULL, NULL),
-	(252, '', '', '', NULL, NULL),
-	(253, '', '', '', NULL, NULL),
-	(254, '', '', '', NULL, NULL),
-	(255, '', '', '', NULL, NULL),
-	(256, '', '', '', NULL, NULL),
-	(257, '', '', '', NULL, NULL),
-	(258, '', '', '', NULL, NULL),
-	(259, '', '', '', NULL, NULL),
-	(260, '', '', '', NULL, NULL),
-	(261, '', '', '', NULL, NULL),
-	(262, '', '', '', NULL, NULL),
-	(263, '', '', '', NULL, NULL),
-	(264, '', '', '', NULL, NULL),
-	(265, '', '', '', NULL, NULL),
-	(266, '', '', '', NULL, NULL),
-	(267, '', '', '', NULL, NULL),
-	(268, '', '', '', NULL, NULL),
-	(269, '', '', '', NULL, NULL),
-	(270, '', '', '', NULL, NULL),
-	(271, '', '', '', NULL, NULL),
-	(272, '', '', '', NULL, NULL),
-	(273, '', '', '', NULL, NULL),
-	(274, '', '', '', NULL, NULL),
-	(275, '', '', '', NULL, NULL),
-	(276, '', '', '', NULL, NULL),
-	(277, '', '', '', NULL, NULL),
-	(278, '', '', '', NULL, NULL),
-	(279, '', '', '', NULL, NULL),
-	(280, '', '', '', NULL, NULL),
-	(281, '', '', '', NULL, NULL),
-	(282, '', '', '', NULL, NULL),
-	(283, '', '', '', NULL, NULL),
-	(284, '', '', '', NULL, NULL);
+REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `discount`, `rating`, `diet_id`) VALUES
+	(243, '', '', '', NULL, NULL, NULL),
+	(244, '', '', '', NULL, NULL, NULL),
+	(245, '', '', '', NULL, NULL, NULL),
+	(246, '', '', '', NULL, NULL, NULL),
+	(247, '', '', '', NULL, NULL, NULL),
+	(248, '', '', '', NULL, NULL, NULL),
+	(249, '', '', '', NULL, NULL, NULL),
+	(250, '', '', '', NULL, NULL, NULL),
+	(251, '', '', '', NULL, NULL, NULL),
+	(252, '', '', '', NULL, NULL, NULL),
+	(253, '', '', '', NULL, NULL, NULL),
+	(254, '', '', '', NULL, NULL, NULL),
+	(255, '', '', '', NULL, NULL, NULL),
+	(256, '', '', '', NULL, NULL, NULL),
+	(257, '', '', '', NULL, NULL, NULL),
+	(258, '', '', '', NULL, NULL, NULL),
+	(259, '', '', '', NULL, NULL, NULL),
+	(260, '', '', '', NULL, NULL, NULL),
+	(261, '', '', '', NULL, NULL, NULL),
+	(262, '', '', '', NULL, NULL, NULL),
+	(263, '', '', '', NULL, NULL, NULL),
+	(264, '', '', '', NULL, NULL, NULL),
+	(265, '', '', '', NULL, NULL, NULL),
+	(266, '', '', '', NULL, NULL, NULL),
+	(267, '', '', '', NULL, NULL, NULL),
+	(268, '', '', '', NULL, NULL, NULL),
+	(269, '', '', '', NULL, NULL, NULL),
+	(270, '', '', '', NULL, NULL, NULL),
+	(271, '', '', '', NULL, NULL, NULL),
+	(272, '', '', '', NULL, NULL, NULL),
+	(273, '', '', '', NULL, NULL, NULL),
+	(274, '', '', '', NULL, NULL, NULL),
+	(275, '', '', '', NULL, NULL, NULL),
+	(276, '', '', '', NULL, NULL, NULL),
+	(277, '', '', '', NULL, NULL, NULL),
+	(278, '', '', '', NULL, NULL, NULL),
+	(279, '', '', '', NULL, NULL, NULL),
+	(280, '', '', '', NULL, NULL, NULL),
+	(281, '', '', '', NULL, NULL, NULL),
+	(282, '', '', '', NULL, NULL, NULL),
+	(283, '', '', '', NULL, NULL, 1),
+	(284, '', '', '', NULL, NULL, 1),
+	(285, '', '', '', 0, 0, NULL),
+	(286, '', '', '', 0, 0, NULL),
+	(288, '', '', '', 0, 0, NULL),
+	(289, '', '', '', 0, 0, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
