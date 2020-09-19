@@ -6,12 +6,12 @@ import com.kharitonov.gym.controller.RequestAttributeValue;
 import com.kharitonov.gym.controller.RequestParameter;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.exception.ServiceException;
-import com.kharitonov.gym.service.db.UserService;
+import com.kharitonov.gym.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class ConfirmAccountCommand implements ActionCommand {
-    private final UserService service = UserService.getInstance();
+    private final UserServiceImpl service = new UserServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {

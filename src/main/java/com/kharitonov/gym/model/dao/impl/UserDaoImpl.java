@@ -2,7 +2,6 @@ package com.kharitonov.gym.model.dao.impl;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.StatementException;
-import com.kharitonov.gym.model.creator.StatementCreator;
 import com.kharitonov.gym.model.creator.TableColumnName;
 import com.kharitonov.gym.model.creator.UserCreator;
 import com.kharitonov.gym.model.dao.UserDao;
@@ -26,8 +25,8 @@ public class UserDaoImpl implements UserDao {
             LogManager.getLogger(UserDaoImpl.class);
     private static final ConnectionPool POOL =
             BasicConnectionPool.getInstance();
-    private static final StatementCreator STATEMENT_CREATOR =
-            StatementCreator.getINSTANCE();
+    private static final UserStatementCreator STATEMENT_CREATOR =
+            UserStatementCreator.getINSTANCE();
 
     @Override
     public void add(User user, String password) throws DaoException {
@@ -38,28 +37,23 @@ public class UserDaoImpl implements UserDao {
             defineAccountId(connection, user, password);
             addUser(connection, user.getAccount().getId());
             connection.commit();
-            connection.setAutoCommit(true);
-        } catch (SQLException | StatementException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException ex) {
-                LOGGER.error("Unable to rollback!", e);
-            }
-            throw new DaoException(e);
+        } catch (SQLException e) {
+            rollback(connection);
         } finally {
+            setAutoCommitTrue(connection);
             POOL.releaseConnection(connection);
         }
     }
 
     private void addAccount(Connection connection, User user,
-                            String password) throws SQLException, StatementException {
+                            String password) throws SQLException {
         PreparedStatement insertAccount =
                 STATEMENT_CREATOR.statementInsertAccount(connection, user, password);
         insertAccount.execute();
     }
 
     private void defineAccountId(Connection connection, User user, String password)
-            throws SQLException, StatementException {
+            throws SQLException {
         String userName = user.getAccount().getName();
         PreparedStatement select =
                 STATEMENT_CREATOR.statementSelectAccount(connection, userName, password);
@@ -71,7 +65,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     private void addUser(Connection connection, int id)
-            throws SQLException, StatementException {
+            throws SQLException {
         PreparedStatement insertUser =
                 STATEMENT_CREATOR.statementInsertUser(connection, id);
         insertUser.execute();
@@ -90,7 +84,7 @@ public class UserDaoImpl implements UserDao {
                 LOGGER.warn("There is no user with such name and password!");
                 return Optional.empty();
             }
-        } catch (SQLException | StatementException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
@@ -107,7 +101,7 @@ public class UserDaoImpl implements UserDao {
                 users.add(user);
             }
             return users;
-        } catch (SQLException | StatementException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
@@ -124,7 +118,7 @@ public class UserDaoImpl implements UserDao {
                 password = resultSet.getString(column);
             }
             return password;
-        } catch (SQLException | StatementException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
@@ -144,7 +138,7 @@ public class UserDaoImpl implements UserDao {
                 optional = Optional.of(role);
             }
             return optional;
-        } catch (SQLException | StatementException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
@@ -155,7 +149,7 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement statementUpdate =
                      STATEMENT_CREATOR.statementUpdateActive(connection, id)) {
             statementUpdate.executeUpdate();
-        } catch (SQLException | StatementException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }

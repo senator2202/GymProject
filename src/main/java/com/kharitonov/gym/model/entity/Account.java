@@ -6,8 +6,10 @@ public class Account {
     private int id;
     private String name;
     private String email;
-    private UserRole type;
+    private UserRole role;
     private Date registrationDate;
+    private boolean isActive;
+
 
     private Account() {
     }
@@ -16,48 +18,57 @@ public class Account {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public UserRole getRole() {
-        return type;
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setRole(UserRole type) {
-        this.type = type;
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
     }
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
 
-    public static class AccountBuilder {
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public static final class AccountBuilder {
         private int id;
         private String name;
         private String email;
         private UserRole type;
         private Date registrationDate;
+        private boolean isActive;
 
         private AccountBuilder() {
         }
@@ -91,6 +102,11 @@ public class Account {
             return this;
         }
 
+        public AccountBuilder withIsActive(boolean isActive) {
+            this.isActive = isActive;
+            return this;
+        }
+
         public Account build() {
             Account account = new Account();
             account.setId(id);
@@ -98,6 +114,7 @@ public class Account {
             account.setEmail(email);
             account.setRole(type);
             account.setRegistrationDate(registrationDate);
+            account.setIsActive(isActive);
             return account;
         }
     }
@@ -109,20 +126,24 @@ public class Account {
 
         Account account = (Account) o;
 
+        if (isActive != account.isActive) return false;
         if (name != null ? !name.equals(account.name) : account.name != null)
             return false;
         if (email != null ? !email.equals(account.email) : account.email != null)
             return false;
-        if (type != account.type) return false;
-        return registrationDate != null ? registrationDate.equals(account.registrationDate) : account.registrationDate == null;
+        if (role != account.role) return false;
+        return registrationDate != null
+                ? registrationDate.equals(account.registrationDate)
+                : account.registrationDate == null;
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
+        result = 31 * result + (isActive ? 1 : 0);
         return result;
     }
 }

@@ -1,13 +1,14 @@
-package com.kharitonov.gym.service.security;
+package com.kharitonov.gym.util;
 
 import com.kharitonov.gym.data_provider.StaticDataProvider;
+import com.kharitonov.gym.util.CryptoUtility;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class CryptoServiceTest {
-    private final CryptoService cryptoService = new CryptoService();
+public class CryptoUtilityTest {
+    private final CryptoUtility cryptoUtility = new CryptoUtility();
 
     @DataProvider
     public static Object[][] dataDecrypt() {
@@ -31,7 +32,7 @@ public class CryptoServiceTest {
     @Test(dataProvider = "dataEncrypt")
     public void testEncrypt(String source, String expectedEncrypted,
                             boolean expected) {
-        String actualEncrypted = cryptoService.encryptMessage(source);
+        String actualEncrypted = cryptoUtility.encryptMessage(source);
         boolean actual = actualEncrypted.equals(expectedEncrypted);
         assertEquals(actual, expected);
     }
@@ -39,7 +40,7 @@ public class CryptoServiceTest {
     @Test(dataProvider = "dataDecrypt")
     public void testDecrypt(String encrypted, String expectedSource,
                             boolean expected) {
-        String actualSource = cryptoService.decryptMessage(encrypted);
+        String actualSource = cryptoUtility.decryptMessage(encrypted);
         boolean actual = actualSource.equals(expectedSource);
         assertEquals(actual, expected);
     }

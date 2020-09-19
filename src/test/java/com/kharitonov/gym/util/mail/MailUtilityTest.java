@@ -1,10 +1,10 @@
-package com.kharitonov.gym.service.mail;
+package com.kharitonov.gym.util.mail;
 
 import com.kharitonov.gym.exception.ServiceException;
 import org.testng.annotations.Test;
 
-public class MailServiceTest {
-    private final MailService service = MailService.getInstance();
+public class MailUtilityTest {
+    private final MailUtility service = MailUtility.getInstance();
 
     @Test
     public void testSendConfirmMessage() throws ServiceException {

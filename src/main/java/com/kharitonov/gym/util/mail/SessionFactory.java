@@ -1,4 +1,4 @@
-package com.kharitonov.gym.service.mail;
+package com.kharitonov.gym.util.mail;
 
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;

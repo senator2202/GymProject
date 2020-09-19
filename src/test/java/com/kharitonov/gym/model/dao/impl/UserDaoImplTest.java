@@ -6,7 +6,7 @@ import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Trainer;
-import com.kharitonov.gym.service.security.CryptoService;
+import com.kharitonov.gym.util.CryptoUtility;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class UserDaoImplTest {
     @Test
     public void testAddClient() throws DaoException {
         for (int i = 0; i < 10; i++) {
-            CryptoService cipher = new CryptoService();
+            CryptoUtility cipher = new CryptoUtility();
             Random random = new Random();
             String name = "client" + random.nextInt(10000000);
             String password = "password" + random.nextInt(1000);
@@ -42,7 +42,7 @@ public class UserDaoImplTest {
     @Test
     public void testAddTrainer() throws DaoException {
         for (int i = 0; i < 10; i++) {
-            CryptoService cipher = new CryptoService();
+            CryptoUtility cipher = new CryptoUtility();
             Random random = new Random();
             String name = "trainer" + random.nextInt(10000000);
             String password = "password" + random.nextInt(1000);
@@ -74,7 +74,7 @@ public class UserDaoImplTest {
     public void testCheckLoginPassword() throws DaoException {
         String name = StaticDataProvider.ADMIN_LOGIN;
         String password = StaticDataProvider.ADMIN_PASSWORD;
-        CryptoService cipher = new CryptoService();
+        CryptoUtility cipher = new CryptoUtility();
         String encryptedString = cipher.encryptMessage(password);
         boolean result =
                 dao.checkLoginPassword(name, encryptedString).isPresent();
@@ -85,7 +85,7 @@ public class UserDaoImplTest {
     public void testGet() throws DaoException {
         String name = StaticDataProvider.ADMIN_LOGIN;
         String password = StaticDataProvider.ADMIN_PASSWORD;
-        CryptoService cipher = new CryptoService();
+        CryptoUtility cipher = new CryptoUtility();
         String encryptedString = cipher.encryptMessage(password);
         User actualUser = dao.get(name, encryptedString).get();
         User expectedUser = StaticDataProvider.USER_ADMIN;

@@ -4,6 +4,7 @@ import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,7 +30,7 @@ public interface UserDao {
             try {
                 resultSet.close();
             } catch (SQLException e) {
-                throw new DaoException("Error during closing result set!");
+                throw new DaoException("Error during closing result set!", e);
             }
         }
     }
@@ -39,7 +40,27 @@ public interface UserDao {
             try {
                 statement.close();
             } catch (SQLException e) {
-                throw new DaoException("Error during closing statement!");
+                throw new DaoException("Error during closing statement!", e);
+            }
+        }
+    }
+
+    default void rollback(Connection connection) throws DaoException {
+        if (connection!=null) {
+            try {
+                connection.rollback();
+            } catch (SQLException e) {
+                throw new DaoException("Unable to rollback!", e);
+            }
+        }
+    }
+
+    default void setAutoCommitTrue(Connection connection) throws DaoException {
+        if (connection != null) {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                throw new DaoException("Unable to set autoCommit = true", e);
             }
         }
     }

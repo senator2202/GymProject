@@ -1,8 +1,8 @@
-package com.kharitonov.gym.service.security;
+package com.kharitonov.gym.util;
 
 import java.util.Base64;
 
-public class CryptoService {
+public class CryptoUtility {
     private static final int OFFSET = 4;
 
     public String encryptMessage(String text) {

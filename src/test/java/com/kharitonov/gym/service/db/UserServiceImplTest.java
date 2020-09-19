@@ -2,13 +2,14 @@ package com.kharitonov.gym.service.db;
 
 import com.kharitonov.gym.data_provider.StaticDataProvider;
 import com.kharitonov.gym.exception.ServiceException;
+import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class UserServiceTest {
-    private final UserService service = UserService.getInstance();
+public class UserServiceImplTest {
+    private final UserServiceImpl service = new UserServiceImpl();
 
     @DataProvider
     @Test

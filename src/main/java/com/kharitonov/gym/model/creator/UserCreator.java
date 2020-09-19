@@ -4,7 +4,6 @@ import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.factory.UserFactory;
-import com.kharitonov.gym.service.security.CryptoService;
 
 import java.sql.Date;
 import java.sql.ResultSet;

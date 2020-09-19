@@ -1,4 +1,4 @@
-package com.kharitonov.gym.service.mail;
+package com.kharitonov.gym.util.mail;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

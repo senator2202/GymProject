@@ -1,4 +1,4 @@
-package com.kharitonov.gym.service.db;
+package com.kharitonov.gym.service.impl;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
@@ -6,37 +6,31 @@ import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.factory.UserFactory;
-import com.kharitonov.gym.service.mail.MailService;
-import com.kharitonov.gym.service.security.CryptoService;
+import com.kharitonov.gym.service.UserService;
+import com.kharitonov.gym.util.mail.MailUtility;
+import com.kharitonov.gym.util.CryptoUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class UserService {
+public class UserServiceImpl implements UserService {
     private static final String REGEX_EMAIL =
             "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)" +
                     "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final Logger LOGGER =
-            LogManager.getLogger(UserService.class);
-    private static UserService instance;
+            LogManager.getLogger(UserServiceImpl.class);
     private final UserDaoImpl dao;
 
-    private UserService() {
+    public UserServiceImpl() {
         dao = new UserDaoImpl();
     }
 
-    public static UserService getInstance() {
-        if (instance == null) {
-            instance = new UserService();
-        }
-        return instance;
-    }
-
+    @Override
     public Optional<UserRole> checkLoginPassword(String login, String password)
             throws ServiceException {
-        CryptoService cryptoService = new CryptoService();
-        String encryptedPassword = cryptoService.encryptMessage(password);
+        CryptoUtility cryptoUtility = new CryptoUtility();
+        String encryptedPassword = cryptoUtility.encryptMessage(password);
         Optional<UserRole> optional;
         try {
             optional = dao.checkLoginPassword(login, encryptedPassword);
@@ -47,6 +41,7 @@ public class UserService {
         return optional;
     }
 
+    @Override
     public void registerUser(String login, String password,
                              String email, UserRole role)
             throws ServiceException {
@@ -56,15 +51,15 @@ public class UserService {
         if (!email.matches(REGEX_EMAIL)) {
             throw new ServiceException("Invalid email format!");
         }
-        CryptoService cryptoService = new CryptoService();
-        String encryptedPassword = cryptoService.encryptMessage(password);
+        CryptoUtility cryptoUtility = new CryptoUtility();
+        String encryptedPassword = cryptoUtility.encryptMessage(password);
         User user = UserFactory.createUser(role);
         user.getAccount().setName(login);
         user.getAccount().setEmail(email);
         try {
-            MailService service;
+            MailUtility service;
             dao.add(user, encryptedPassword);
-            service = MailService.getInstance();
+            service = MailUtility.getInstance();
             service.sendConfirmMessage(email, user.getAccount().getId());
             LOGGER.info("User '{}' was successfully registered!", login);
         } catch (DaoException e) {
@@ -72,6 +67,7 @@ public class UserService {
         }
     }
 
+    @Override
     public void confirmAccount(int id) throws ServiceException {
         if (id < 0) {
             throw new ServiceException("Incorrect id value!");
