@@ -1,9 +1,9 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.PagePath;
-import com.kharitonov.gym.controller.RequestAttributeName;
-import com.kharitonov.gym.controller.RequestAttributeValue;
-import com.kharitonov.gym.controller.RequestParameter;
+import com.kharitonov.gym.controller.command.PagePath;
+import com.kharitonov.gym.controller.command.RequestAttributeName;
+import com.kharitonov.gym.controller.command.RequestAttributeValue;
+import com.kharitonov.gym.controller.command.RequestParameter;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.service.impl.UserServiceImpl;

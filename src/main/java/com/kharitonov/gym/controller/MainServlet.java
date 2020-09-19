@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.provider.CommandProvider;
+import com.kharitonov.gym.controller.command.RequestParameter;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 
 import javax.servlet.RequestDispatcher;

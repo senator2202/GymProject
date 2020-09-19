@@ -1,4 +1,4 @@
-package com.kharitonov.gym.controller;
+package com.kharitonov.gym.controller.command;
 
 public class RequestAttributeValue {
     public static final String LOGIN_ERROR = "Incorrect login or password!";

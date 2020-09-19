@@ -12,12 +12,10 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class BasicConnectionPool implements ConnectionPool {
     private static final Logger LOGGER =
@@ -26,7 +24,7 @@ public class BasicConnectionPool implements ConnectionPool {
             new BasicConnectionPool();
     private static final int POOL_SIZE = 10;
     private BlockingQueue<ProxyConnection> freeConnections;
-    private List<ProxyConnection> usedConnections;
+    private BlockingQueue<ProxyConnection> usedConnections;
 
     private BasicConnectionPool() {
         PropertiesReader reader = new PropertiesReader();
@@ -44,8 +42,8 @@ public class BasicConnectionPool implements ConnectionPool {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Unable to register DB driver!", e);
         }
-        freeConnections = new LinkedBlockingDeque<>(POOL_SIZE);
-        usedConnections = new ArrayList<>(POOL_SIZE);
+        freeConnections = new LinkedBlockingQueue<>(POOL_SIZE);
+        usedConnections = new LinkedBlockingQueue<>(POOL_SIZE);
         for (int i = 0; i < POOL_SIZE; i++) {
             try {
                 Connection connection =
@@ -84,7 +82,7 @@ public class BasicConnectionPool implements ConnectionPool {
                 result = freeConnections.offer((ProxyConnection) connection);
             }
         } else {
-            LOGGER.warn("Releasing connection is not proxy!");
+            LOGGER.error("Releasing connection is not proxy!");
         }
         return result;
     }
@@ -95,7 +93,7 @@ public class BasicConnectionPool implements ConnectionPool {
             try {
                 freeConnections.take().reallyClose();
             } catch (SQLException | InterruptedException e) {
-                LOGGER.warn("Unable to close connection!", e);
+                LOGGER.error("Unable to close connection!", e);
                 Thread.currentThread().interrupt();
             }
         }
@@ -108,7 +106,7 @@ public class BasicConnectionPool implements ConnectionPool {
             try {
                 DriverManager.deregisterDriver(driverEnumeration.nextElement());
             } catch (SQLException e) {
-                LOGGER.warn("Unable to deregister driver!", e);
+                LOGGER.error("Unable to deregister driver!", e);
             }
         }
     }

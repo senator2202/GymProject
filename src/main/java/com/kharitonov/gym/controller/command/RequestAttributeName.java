@@ -1,4 +1,4 @@
-package com.kharitonov.gym.controller;
+package com.kharitonov.gym.controller.command;
 
 public class RequestAttributeName {
     public static final String AUTHENTICATION_RESULT = "authResult";

@@ -1,4 +1,4 @@
-package com.kharitonov.gym.controller;
+package com.kharitonov.gym.controller.command;
 
 public class PagePath {
     public static final String INDEX = "/index.jsp";

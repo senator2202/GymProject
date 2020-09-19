@@ -1,4 +1,4 @@
-package com.kharitonov.gym.controller.provider;
+package com.kharitonov.gym.controller;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.CommandType;
@@ -6,7 +6,6 @@ import com.kharitonov.gym.controller.command.impl.InvalidCommand;
 
 public class CommandProvider {
     private CommandProvider() {
-
     }
 
     public static ActionCommand defineCommand(String command) {

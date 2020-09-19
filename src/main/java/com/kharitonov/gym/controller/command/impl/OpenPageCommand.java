@@ -1,6 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.RequestParameter;
+import com.kharitonov.gym.controller.command.RequestParameter;
 import com.kharitonov.gym.controller.command.ActionCommand;
 
 import javax.servlet.http.HttpServletRequest;
