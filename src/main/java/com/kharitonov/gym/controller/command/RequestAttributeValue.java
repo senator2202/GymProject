@@ -9,6 +9,7 @@ public class RequestAttributeValue {
             "Your account is successfully confirmed!";
     public static final String CONFIRM_ERROR =
             "Account confirm error!";
+    public static final String PERSONAL_ACCOUNT = "Personal Account";
 
     private RequestAttributeValue() {
     }

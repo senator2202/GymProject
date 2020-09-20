@@ -1,10 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestAttributeName;
-import com.kharitonov.gym.controller.command.RequestAttributeValue;
-import com.kharitonov.gym.controller.command.RequestParameter;
-import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
@@ -28,9 +24,9 @@ public class LoginCommand implements ActionCommand {
             Optional<UserRole> optional =
                     service.checkLoginPassword(login, password);
             if (optional.isPresent()) {
-                request.setAttribute(RequestAttributeName.AUTHENTICATION_RESULT,
-                        RequestAttributeValue.LOGIN_SUCCESS);
-                page = PagePath.AUTHENTICATION_RESULT;
+                request.setAttribute(RequestAttributeName.PERSONAL_ACCOUNT,
+                        RequestAttributeValue.PERSONAL_ACCOUNT);
+                page = PagePath.INDEX;
             } else {
                 request.setAttribute(RequestAttributeName.AUTHENTICATION_RESULT,
                         RequestAttributeValue.LOGIN_ERROR);

@@ -14,13 +14,13 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../asserts/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
         <div class="container">
             <div class="logo">
                 <a href="../index.jsp">
-                    <img src="../asserts/img/logo-normal.png" alt="">
+                    <img src="../assets/img/logo-normal.png" alt="">
                 </a>
             </div>
             <div class="nav-menu">
@@ -62,7 +62,7 @@
     <!-- Header End -->
 
     <!-- Site Breadcrumb Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="../asserts/img/about-breadcrumb-bg.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="../assets/img/about-breadcrumb-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -85,7 +85,7 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="about-pic">
-                        <img src="../asserts/img/about-us.jpg" alt="">
+                        <img src="../assets/img/about-us.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 offset-lg-1">
@@ -109,7 +109,7 @@
     <!-- About Us Secion End -->
 
     <!-- Why Chose Us Section Begin -->
-    <section class="choseus-section set-bg spad" data-setbg="../asserts/img/chose-us-bg.jpg">
+    <section class="choseus-section set-bg spad" data-setbg="../assets/img/chose-us-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -172,7 +172,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-trainer-item">
                         <div class="trainer-pic">
-                            <img src="../asserts/img/trainer/trainer-1.jpg" alt="">
+                            <img src="../assets/img/trainer/trainer-1.jpg" alt="">
                         </div>
                         <div class="trainer-text">
                             <h5>Noah Leonard</h5>
@@ -188,7 +188,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-trainer-item">
                         <div class="trainer-pic">
-                            <img src="../asserts/img/trainer/trainer-2.jpg" alt="">
+                            <img src="../assets/img/trainer/trainer-2.jpg" alt="">
                         </div>
                         <div class="trainer-text">
                             <h5>Noah Leonard</h5>
@@ -204,7 +204,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-trainer-item">
                         <div class="trainer-pic">
-                            <img src="../asserts/img/trainer/trainer-3.jpg" alt="">
+                            <img src="../assets/img/trainer/trainer-3.jpg" alt="">
                         </div>
                         <div class="trainer-text">
                             <h5>Noah Leonard</h5>
@@ -220,7 +220,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-trainer-item">
                         <div class="trainer-pic">
-                            <img src="../asserts/img/trainer/trainer-4.jpg" alt="">
+                            <img src="../assets/img/trainer/trainer-4.jpg" alt="">
                         </div>
                         <div class="trainer-text">
                             <h5>Noah Leonard</h5>
@@ -248,7 +248,7 @@
                         <div class="map-widget">
                             <i class="fa fa-map-marker"></i>
                             <div class="map-address">
-                                <img src="../asserts/img/map-location.jpg" alt="">
+                                <img src="../assets/img/map-location.jpg" alt="">
                                 <ul class="map-text">
                                     <li><span>Address:</span> Iris Watson, Box 283, NY</li>
                                     <li><span>Phone:</span> 12-456-791</li>
@@ -258,7 +258,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="footer-form set-bg" data-setbg="../asserts/img/contact-form-bg.jpg">
+                    <div class="footer-form set-bg" data-setbg="../assets/img/contact-form-bg.jpg">
                         <div class="row">
                             <div class="col-lg-10">
                                 <div class="section-title">
@@ -327,13 +327,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Search model end -->
 
     <!-- Js Plugins -->
-    <script src="../asserts/js/jquery-3.3.1.min.js"></script>
-    <script src="../asserts/js/bootstrap.min.js"></script>
-    <script src="../asserts/js/jquery.magnific-popup.min.js"></script>
-    <script src="../asserts/js/mixitup.min.js"></script>
-    <script src="../asserts/js/jquery.slicknav.js"></script>
-    <script src="../asserts/js/owl.carousel.min.js"></script>
-    <script src="../asserts/js/main.js"></script>
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="../assets/js/mixitup.min.js"></script>
+    <script src="../assets/js/jquery.slicknav.js"></script>
+    <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

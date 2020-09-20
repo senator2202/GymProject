@@ -14,13 +14,13 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../asserts/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../asserts/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
         <div class="container">
             <div class="logo">
                 <a href="../index.jsp">
-                    <img src="../asserts/img/logo-normal.png" alt="">
+                    <img src="../assets/img/logo-normal.png" alt="">
                 </a>
             </div>
             <div class="nav-menu">
@@ -62,7 +62,7 @@
     <!-- Header End -->
 
     <!-- Site Breadcrumb Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="../asserts/img/about-breadcrumb-bg.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="../assets/img/about-breadcrumb-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -86,7 +86,7 @@
                 <div class="col-lg-8">
                     <div class="blog-details">
                         <div class="bd-text">
-                            <img src="../asserts/img/blog-2.jpg" alt="">
+                            <img src="../assets/img/blog-2.jpg" alt="">
                             <h3>Are Crunches the Best Workout for Abs?</h3>
                             <div class="blog-tag">
                                 <div class="post-info">
@@ -115,7 +115,7 @@
                             <div class="bd-video">
                                 <div class="row">
                                     <div class="col-lg-7">
-                                        <div class="video-bg set-bg" data-setbg="../asserts/img/blog-details-video.jpg">
+                                        <div class="video-bg set-bg" data-setbg="../assets/img/blog-details-video.jpg">
                                             <div class="play-btn">
                                                 <a href="https://www.youtube.com/watch?v=p_dtI2bLWhY"
                                                     class="blog-video-popup">
@@ -179,7 +179,7 @@
                             <h4>2 Comments</h4>
                             <div class="comments-item">
                                 <div class="avatar-pic">
-                                    <img src="../asserts/img/avatar-1.png" alt="">
+                                    <img src="../assets/img/avatar-1.png" alt="">
                                 </div>
                                 <div class="avatar-text">
                                     <span>27 Aug 2018</span>
@@ -194,7 +194,7 @@
                                 <div class="col-lg-11 offset-lg-1">
                                     <div class="comments-item">
                                         <div class="avatar-pic">
-                                            <img src="../asserts/img/avatar-2.png" alt="">
+                                            <img src="../assets/img/avatar-2.png" alt="">
                                         </div>
                                         <div class="avatar-text">
                                             <span>27 Aug 2018</span>
@@ -209,7 +209,7 @@
                             </div>
                             <div class="comments-item">
                                 <div class="avatar-pic">
-                                    <img src="../asserts/img/avatar-3.png" alt="">
+                                    <img src="../assets/img/avatar-3.png" alt="">
                                 </div>
                                 <div class="avatar-text">
                                     <span>27 Aug 2018</span>
@@ -343,7 +343,7 @@
                         <div class="map-widget">
                             <i class="fa fa-map-marker"></i>
                             <div class="map-address">
-                                <img src="../asserts/img/map-location.jpg" alt="">
+                                <img src="../assets/img/map-location.jpg" alt="">
                                 <ul class="map-text">
                                     <li><span>Address:</span> Iris Watson, Box 283, NY</li>
                                     <li><span>Phone:</span> 12-456-791</li>
@@ -353,7 +353,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="footer-form set-bg" data-setbg="../asserts/img/contact-form-bg.jpg">
+                    <div class="footer-form set-bg" data-setbg="../assets/img/contact-form-bg.jpg">
                         <div class="row">
                             <div class="col-lg-10">
                                 <div class="section-title">
@@ -422,13 +422,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- Search model end -->
 
     <!-- Js Plugins -->
-    <script src="../asserts/js/jquery-3.3.1.min.js"></script>
-    <script src="../asserts/js/bootstrap.min.js"></script>
-    <script src="../asserts/js/jquery.magnific-popup.min.js"></script>
-    <script src="../asserts/js/mixitup.min.js"></script>
-    <script src="../asserts/js/jquery.slicknav.js"></script>
-    <script src="../asserts/js/owl.carousel.min.js"></script>
-    <script src="../asserts/js/main.js"></script>
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="../assets/js/mixitup.min.js"></script>
+    <script src="../assets/js/jquery.slicknav.js"></script>
+    <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<link href="${pageContext.request.contextPath}/resources/css/login1.css"
+<link href="assets/css/login.css"
       rel="stylesheet" type="text/css">
 <form action="${pageContext.request.contextPath}/mainController">
     <div class="login-wrap">
@@ -8,7 +8,7 @@
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label
                 for="tab-2" class="tab">Sign Up</label>
             <div class="login-form">
-                <form action="${pageContext.request.contextPath}/mainController">
+                <form action="/mainController">
                     <div class="sign-in-htm">
                         <input type="hidden" name="command" value="login"/>
                         <div class="group">
@@ -38,7 +38,7 @@
                     </div>
                 </form>
 
-                <form action="${pageContext.request.contextPath}/mainController">
+                <form action="/mainController">
                     <div class="sign-up-htm">
                         <input type="hidden" name="command" value="register"/>
                         <div class="group">
@@ -74,7 +74,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </form>

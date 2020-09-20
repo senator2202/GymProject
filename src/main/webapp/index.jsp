@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -16,16 +18,18 @@
 	      rel="stylesheet">
 
 	<!-- Css Styles -->
-	<link rel="stylesheet" href="asserts/css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="asserts/css/font-awesome.min.css"
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css"
 	      type="text/css">
-	<link rel="stylesheet" href="asserts/css/themify-icons.css" type="text/css">
-	<link rel="stylesheet" href="asserts/css/owl.carousel.min.css"
+	<link rel="stylesheet" href="assets/css/themify-icons.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/owl.carousel.min.css"
 	      type="text/css">
-	<link rel="stylesheet" href="asserts/css/magnific-popup.css"
+	<link rel="stylesheet" href="assets/css/magnific-popup.css"
 	      type="text/css">
-	<link rel="stylesheet" href="asserts/css/slicknav.min.css" type="text/css">
-	<link rel="stylesheet" href="asserts/css/style.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/slicknav.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+
+	<c:set var="personalAccount" value="${(empty personalAccount) ? 'Join Us Now' : personalAccount}" />
 </head>
 
 <body>
@@ -39,7 +43,7 @@
 	<div class="container">
 		<div class="logo">
 			<a href="index.jsp">
-				<img src="asserts/img/logo.png" alt="">
+				<img src="assets/img/logo.png" alt="">
 			</a>
 		</div>
 		<div class="nav-menu">
@@ -71,33 +75,33 @@
 <section class="hero-section">
 	<div class="hero-items owl-carousel">
 		<div class="single-hero-item set-bg"
-		     data-setbg="asserts/img/slider-bg-1.jpg">
+		     data-setbg="assets/img/slider-bg-1.jpg">
 			<div class="container">
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="/mainController?command=open_page&page_path=/jsp/login/login1.jsp" class="primary-btn">Join Us Now</a>
+					<a href="/mainController?command=open_page&page_path=/jsp/login.jsp" class="primary-btn">${personalAccount}</a>
 					</form>
 				</div>
 			</div>
 		</div>
 		<div class="single-hero-item set-bg"
-		     data-setbg="asserts/img/slider-bg-2.jpg">
+		     data-setbg="assets/img/slider-bg-2.jpg">
 			<div class="container">
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="#" class="primary-btn">Join Us Now</a>
+					<a href="/mainController?command=open_page&page_path=/jsp/login.jsp" class="primary-btn">${personalAccount}</a>
 				</div>
 			</div>
 		</div>
 		<div class="single-hero-item set-bg"
-		     data-setbg="asserts/img/slider-bg-3.jpg">
+		     data-setbg="assets/img/slider-bg-3.jpg">
 			<div class="container">
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="#" class="primary-btn">Join Us Now</a>
+					<a href="/mainController?command=open_page&page_path=/jsp/login.jsp" class="primary-btn">${personalAccount}</a>
 				</div>
 			</div>
 		</div>
@@ -118,28 +122,28 @@
 				</div>
 				<div class="services-items">
 					<div class="single-service-item">
-						<img src="asserts/img/icon-1.png" alt="">
+						<img src="assets/img/icon-1.png" alt="">
 						<h5>Weight Lifting</h5>
 						<p>We have a wide choice of classes that are a great
 							complement to any training programme.
 						</p>
 					</div>
 					<div class="single-service-item color-1">
-						<img src="asserts/img/icon-2.png" alt="">
+						<img src="assets/img/icon-2.png" alt="">
 						<h5>Body Building</h5>
 						<p>We have a wide choice of classes that are a great
 							complement to any training programme.
 						</p>
 					</div>
 					<div class="single-service-item color-2">
-						<img src="asserts/img/icon-3.png" alt="">
+						<img src="assets/img/icon-3.png" alt="">
 						<h5>Healthy</h5>
 						<p>We have a wide choice of classes that are a great
 							complement to any training programme.
 						</p>
 					</div>
 					<div class="single-service-item color-3">
-						<img src="asserts/img/icon-4.png" alt="">
+						<img src="assets/img/icon-4.png" alt="">
 						<h5>Yoga</h5>
 						<p>We have a wide choice of classes that are a great
 							complement to any training programme.
@@ -149,7 +153,7 @@
 			</div>
 			<div class="col-lg-5 offset-lg-1">
 				<div class="service-video set-bg"
-				     data-setbg="asserts/img/video-bg.jpg">
+				     data-setbg="assets/img/video-bg.jpg">
 					<div class="play-btn">
 						<a href="https://www.youtube.com/watch?v=SlPhMPnQ58k"
 						   class="service-video-popup"><i
@@ -163,7 +167,7 @@
 <!-- Services Section End -->
 
 <!-- Cta Section Begin -->
-<section class="cta-section set-bg spad" data-setbg="asserts/img/cta-bg.jpg">
+<section class="cta-section set-bg spad" data-setbg="assets/img/cta-bg.jpg">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
@@ -205,7 +209,7 @@
 									<div class="single-class-item">
 										<div class="row">
 											<div class="col-lg-6">
-												<img src="asserts/img/class/class-1.jpg"
+												<img src="assets/img/class/class-1.jpg"
 												     alt="">
 											</div>
 											<div class="col-lg-5 offset-lg-1">
@@ -247,7 +251,7 @@
 									<div class="single-class-item">
 										<div class="row">
 											<div class="col-lg-6">
-												<img src="asserts/img/class/class-1.jpg"
+												<img src="assets/img/class/class-1.jpg"
 												     alt="">
 											</div>
 											<div class="col-lg-5 offset-lg-1">
@@ -289,7 +293,7 @@
 									<div class="single-class-item">
 										<div class="row">
 											<div class="col-lg-6">
-												<img src="asserts/img/class/class-1.jpg"
+												<img src="assets/img/class/class-1.jpg"
 												     alt="">
 											</div>
 											<div class="col-lg-5 offset-lg-1">
@@ -331,7 +335,7 @@
 									<div class="single-class-item">
 										<div class="row">
 											<div class="col-lg-6">
-												<img src="asserts/img/class/class-1.jpg"
+												<img src="assets/img/class/class-1.jpg"
 												     alt="">
 											</div>
 											<div class="col-lg-5 offset-lg-1">
@@ -373,7 +377,7 @@
 									<div class="single-class-item">
 										<div class="row">
 											<div class="col-lg-6">
-												<img src="asserts/img/class/class-1.jpg"
+												<img src="assets/img/class/class-1.jpg"
 												     alt="">
 											</div>
 											<div class="col-lg-5 offset-lg-1">
@@ -415,7 +419,7 @@
 									<div class="single-class-item">
 										<div class="row">
 											<div class="col-lg-6">
-												<img src="asserts/img/class/class-1.jpg"
+												<img src="assets/img/class/class-1.jpg"
 												     alt="">
 											</div>
 											<div class="col-lg-5 offset-lg-1">
@@ -464,7 +468,7 @@
 									<a data-toggle="tab" class="active"
 									   href="#class-1" role="tab">
 										<div class="author-text">
-											<img src="asserts/img/class/author-1.jpg"
+											<img src="assets/img/class/author-1.jpg"
 											     alt="">
 											<h5>Body building</h5>
 										</div>
@@ -474,7 +478,7 @@
 									<a data-toggle="tab" href="#class-2"
 									   role="tab">
 										<div class="author-text">
-											<img src="asserts/img/class/author-2.jpg"
+											<img src="assets/img/class/author-2.jpg"
 											     alt="">
 											<h5>Racing runing</h5>
 										</div>
@@ -484,7 +488,7 @@
 									<a data-toggle="tab" href="#class-3"
 									   role="tab">
 										<div class="author-text">
-											<img src="asserts/img/class/author-3.jpg"
+											<img src="assets/img/class/author-3.jpg"
 											     alt="">
 											<h5>Yoga Fitness</h5>
 										</div>
@@ -494,7 +498,7 @@
 									<a data-toggle="tab" href="#class-4"
 									   role="tab">
 										<div class="author-text">
-											<img src="asserts/img/class/author-4.jpg"
+											<img src="assets/img/class/author-4.jpg"
 											     alt="">
 											<h5>Kick boxing</h5>
 										</div>
@@ -504,7 +508,7 @@
 									<a data-toggle="tab" href="#class-5"
 									   role="tab">
 										<div class="author-text">
-											<img src="asserts/img/class/author-5.jpg"
+											<img src="assets/img/class/author-5.jpg"
 											     alt="">
 											<h5>Cardio workout</h5>
 										</div>
@@ -514,7 +518,7 @@
 									<a data-toggle="tab" href="#class-6"
 									   role="tab">
 										<div class="author-text">
-											<img src="asserts/img/class/author-6.jpg"
+											<img src="assets/img/class/author-6.jpg"
 											     alt="">
 											<h5>Martial Arts</h5>
 										</div>
@@ -532,7 +536,7 @@
 
 <!-- Trainer Table Schedule Section Begin -->
 <section class="trainer-schedule set-bg spad"
-         data-setbg="asserts/img/trainer-bg.jpg">
+         data-setbg="assets/img/trainer-bg.jpg">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
@@ -751,7 +755,7 @@
 			<div class="row m-0">
 				<div class="col-lg-4 order-lg-1 p-0">
 					<div class="member-pic first">
-						<img src="asserts/img/trainer-1.jpg" alt="">
+						<img src="assets/img/trainer-1.jpg" alt="">
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-2 p-0">
@@ -771,7 +775,7 @@
 				</div>
 				<div class="col-lg-4 order-lg-3 p-0">
 					<div class="member-pic second">
-						<img src="asserts/img/trainer-2.jpg" alt="">
+						<img src="assets/img/trainer-2.jpg" alt="">
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-6 p-0">
@@ -791,7 +795,7 @@
 				</div>
 				<div class="col-lg-4 order-lg-5 p-0">
 					<div class="member-pic third">
-						<img src="asserts/img/trainer-3.jpg" alt="">
+						<img src="assets/img/trainer-3.jpg" alt="">
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-4 p-0">
@@ -830,7 +834,7 @@
 			<div class="col-lg-4">
 				<div class="latest-items">
 					<div class="latest-pic">
-						<img src="asserts/img/latest-1.jpg" alt="">
+						<img src="assets/img/latest-1.jpg" alt="">
 					</div>
 					<div class="latest-text">
 						<div class="latest-tag">
@@ -851,7 +855,7 @@
 			<div class="col-lg-4">
 				<div class="latest-items">
 					<div class="latest-pic">
-						<img src="asserts/img/latest-2.jpg" alt="">
+						<img src="assets/img/latest-2.jpg" alt="">
 					</div>
 					<div class="latest-text">
 						<div class="latest-tag">
@@ -873,7 +877,7 @@
 			<div class="col-lg-4">
 				<div class="latest-items">
 					<div class="latest-pic">
-						<img src="asserts/img/latest-3.jpg" alt="">
+						<img src="assets/img/latest-3.jpg" alt="">
 					</div>
 					<div class="latest-text">
 						<div class="latest-tag">
@@ -908,7 +912,7 @@
 					<div class="map-widget">
 						<i class="fa fa-map-marker"></i>
 						<div class="map-address">
-							<img src="asserts/img/map-location.jpg" alt="">
+							<img src="assets/img/map-location.jpg" alt="">
 							<ul class="map-text">
 								<li><span>Address:</span> Iris Watson, Box 283,
 									NY
@@ -921,7 +925,7 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="footer-form set-bg"
-				     data-setbg="img/contact-form-bg.jpg">
+				     data-setbg="assets/img/contact-form-bg.jpg">
 					<div class="row">
 						<div class="col-lg-10">
 							<div class="section-title">
@@ -1000,13 +1004,13 @@
 <!-- Search model end -->
 
 <!-- Js Plugins -->
-<script src="asserts/js/jquery-3.3.1.min.js"></script>
-<script src="asserts/js/bootstrap.min.js"></script>
-<script src="asserts/js/jquery.magnific-popup.min.js"></script>
-<script src="asserts/js/mixitup.min.js"></script>
-<script src="asserts/js/jquery.slicknav.js"></script>
-<script src="asserts/js/owl.carousel.min.js"></script>
-<script src="asserts/js/main.js"></script>
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.magnific-popup.min.js"></script>
+<script src="assets/js/mixitup.min.js"></script>
+<script src="assets/js/jquery.slicknav.js"></script>
+<script src="assets/js/owl.carousel.min.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 
 </html>
