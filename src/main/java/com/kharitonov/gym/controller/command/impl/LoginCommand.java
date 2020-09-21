@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class LoginCommand implements ActionCommand {
@@ -24,8 +25,9 @@ public class LoginCommand implements ActionCommand {
             Optional<UserRole> optional =
                     service.checkLoginPassword(login, password);
             if (optional.isPresent()) {
-                request.setAttribute(RequestAttributeName.PERSONAL_ACCOUNT,
-                        RequestAttributeValue.PERSONAL_ACCOUNT);
+                HttpSession session = request.getSession();
+                session.setAttribute(SessionAttributeName.IS_LOGGED,
+                        SessionAttributeValue.LOGIN_SUCCESS);
                 page = PagePath.INDEX;
             } else {
                 request.setAttribute(RequestAttributeName.AUTHENTICATION_RESULT,
