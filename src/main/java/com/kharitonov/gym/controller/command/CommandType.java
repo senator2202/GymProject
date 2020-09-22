@@ -8,7 +8,8 @@ public enum CommandType {
     LOGOUT(new LogoutCommand()),
     REGISTER(new RegisterCommand()),
     OPEN_PAGE(new OpenPageCommand()),
-    CONFIRM_ACCOUNT(new ConfirmAccountCommand());
+    CONFIRM_ACCOUNT(new ConfirmAccountCommand()),
+    UPDATE_PERSONAL_INFO(new UpdatePersonalInfoCommand());
 
     private final ActionCommand command;
 

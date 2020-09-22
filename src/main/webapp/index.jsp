@@ -81,8 +81,8 @@
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
 					<a href="${(sessionScope.isLogged==true)
-						? '/mainController?command=open_page&page_path=/jsp/personal_profile.jsp"'
-						: '/mainController?command=open_page&page_path=/jsp/login.jsp"'}"
+						? '/mainController?command=open_page&page=personal_profile"'
+						: '/mainController?command=open_page&page=login"'}"
 					   class="primary-btn">${personalProfile}
 					</a>
 					</form>
@@ -95,7 +95,11 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="/mainController?command=open_page&page_path=/jsp/login.jsp" class="primary-btn">${personalProfile}</a>
+					<a href="${(sessionScope.isLogged==true)
+						? '/mainController?command=open_page&page=personal_profile"'
+						: '/mainController?command=open_page&page=login"'}"
+					   class="primary-btn">${personalProfile}
+					</a>
 				</div>
 			</div>
 		</div>
@@ -105,7 +109,11 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="/mainController?command=open_page&page_path=/jsp/login.jsp" class="primary-btn">${personalProfile}</a>
+					<a href="${(sessionScope.isLogged==true)
+						? '/mainController?command=open_page&page=personal_profile"'
+						: '/mainController?command=open_page&page=login"'}"
+					   class="primary-btn">${personalProfile}
+					</a>
 				</div>
 			</div>
 		</div>
