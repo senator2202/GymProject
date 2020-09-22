@@ -29,7 +29,8 @@
 	<link rel="stylesheet" href="assets/css/slicknav.min.css" type="text/css">
 	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
 
-	<c:set var="personalProfileLabel" value="${(sessionScope.user!=null) ? 'Personal Profile' : 'Join Us Now'}" />
+	<c:set var="personalProfileLabel" value="${(sessionScope.user!=null) ? 'Personal Profile' : 'Join Us Now'}"/>
+	<c:set var="logLabel" value="${(sessionScope.user!=null) ? 'Log Out' : 'Log In'}"/>
 </head>
 
 <body>
@@ -60,6 +61,13 @@
 						</ul>
 					</li>
 					<li><a href="jsp/contact.jsp">Contacts</a></li>
+					<li>
+						<a href="${(sessionScope.user!=null)
+							? '/mainController?command=logout"'
+							: '/mainController?command=open_page&page=login"'}"
+						   class="primary-btn">${logLabel}
+						</a>
+					</li>
 				</ul>
 			</nav>
 			<div class="nav-right search-switch">
@@ -85,7 +93,6 @@
 						: '/mainController?command=open_page&page=login"'}"
 					   class="primary-btn">${personalProfileLabel}
 					</a>
-					</form>
 				</div>
 			</div>
 		</div>
