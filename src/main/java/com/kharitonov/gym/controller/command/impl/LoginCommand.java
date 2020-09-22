@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
-import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,12 +22,12 @@ public class LoginCommand implements ActionCommand {
         String password = request.getParameter(RequestParameter.PASSWORD);
         String page;
         try {
-            Optional<UserRole> optional =
-                    service.checkLoginPassword(login, password);
+            Optional<User> optional =
+                    service.getUser(login, password);
             if (optional.isPresent()) {
+                User user = optional.get();
                 HttpSession session = request.getSession();
-                session.setAttribute(SessionAttributeName.IS_LOGGED,
-                        SessionAttributeValue.LOGIN_SUCCESS);
+                session.setAttribute(SessionAttributeName.USER, user);
                 page = PagePath.INDEX;
             } else {
                 request.setAttribute(RequestAttributeName.AUTHENTICATION_RESULT,

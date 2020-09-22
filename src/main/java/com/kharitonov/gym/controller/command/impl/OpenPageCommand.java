@@ -1,6 +1,5 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.Page;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.controller.command.RequestParameter;
 import com.kharitonov.gym.controller.command.ActionCommand;

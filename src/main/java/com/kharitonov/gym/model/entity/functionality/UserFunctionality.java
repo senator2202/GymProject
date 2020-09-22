@@ -4,4 +4,5 @@ import com.kharitonov.gym.model.entity.User;
 
 public interface UserFunctionality {
     void updateUserInfo(User user);
+    void planTraining();
 }

@@ -7,8 +7,8 @@ import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.factory.UserFactory;
 import com.kharitonov.gym.service.UserService;
-import com.kharitonov.gym.util.mail.MailUtility;
 import com.kharitonov.gym.util.CryptoUtility;
+import com.kharitonov.gym.util.mail.MailUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,13 +27,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserRole> checkLoginPassword(String login, String password)
+    public Optional<User> getUser(String login, String password)
             throws ServiceException {
         CryptoUtility cryptoUtility = new CryptoUtility();
         String encryptedPassword = cryptoUtility.encryptMessage(password);
-        Optional<UserRole> optional;
+        Optional<User> optional;
         try {
-            optional = dao.checkLoginPassword(login, encryptedPassword);
+            optional = dao.getUser(login, encryptedPassword);
             LOGGER.info("Login result: {}", optional.isPresent());
         } catch (DaoException e) {
             throw new ServiceException("Error, accessing database!", e);
@@ -74,6 +74,18 @@ public class UserServiceImpl implements UserService {
         }
         try {
             dao.confirmAccount(id);
+            LOGGER.info("Account id={} was confirmed!", id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateUserInfo(String firstName, String lastName, String phone, int id)
+            throws ServiceException {
+        try {
+            dao.updateUserInfo(firstName, lastName, phone, id);
+            LOGGER.info("Account id={} was updated!", id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

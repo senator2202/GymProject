@@ -9,8 +9,9 @@ import java.util.List;
 
 
 public class Client extends User implements ClientFunctionality, SportFunctionality {
-    double personalDiscount;
-    List<Training> plannedTrainings;
+    private double personalDiscount;
+    private int dietId;
+    private List<Training> plannedTrainings;
 
     public Client() {
         plannedTrainings = new ArrayList<>();
@@ -24,6 +25,11 @@ public class Client extends User implements ClientFunctionality, SportFunctional
         this.account = account;
     }
 
+    public Client(Account account, String firstName,
+                  String lastName, String phoneNumber) {
+        super(account, firstName, lastName, phoneNumber);
+    }
+
     public double getPersonalDiscount() {
         return personalDiscount;
     }
@@ -32,10 +38,16 @@ public class Client extends User implements ClientFunctionality, SportFunctional
         this.personalDiscount = personalDiscount;
     }
 
-    @Override
-    public void buyTraining(int trainingId) {
-        plannedTrainings.stream().filter(tr -> tr.getTrainingId() == trainingId)
-                .findFirst().ifPresent(tr -> tr.setIsBought(true));
+    public int getDietId() {
+        return dietId;
+    }
+
+    public void setDietId(int dietId) {
+        this.dietId = dietId;
+    }
+
+    public void setPlannedTrainings(List<Training> plannedTrainings) {
+        this.plannedTrainings = plannedTrainings;
     }
 
     @Override
@@ -46,5 +58,15 @@ public class Client extends User implements ClientFunctionality, SportFunctional
     @Override
     public List<Training> allPlannedTrainings() {
         return Collections.unmodifiableList(plannedTrainings);
+    }
+
+    @Override
+    public void updateUserInfo(User user) {
+
+    }
+
+    @Override
+    public void planTraining() {
+
     }
 }

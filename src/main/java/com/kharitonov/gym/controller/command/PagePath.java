@@ -9,6 +9,7 @@ public class PagePath {
     public static final String REGISTER = "/jsp/register.jsp";
     public static final String CONFIRM_RESULT =
             "/jsp/confirm_account_result.jsp";
+    public static final String PERSONAL_PROFILE = "/jsp/personal_profile.jsp";
 
     private PagePath() {
     }

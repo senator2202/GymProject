@@ -82,13 +82,11 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testGet() throws DaoException {
-        String name = StaticDataProvider.ADMIN_LOGIN;
-        String password = StaticDataProvider.ADMIN_PASSWORD;
-        CryptoUtility cipher = new CryptoUtility();
-        String encryptedString = cipher.encryptMessage(password);
-        User actualUser = dao.get(name, encryptedString).get();
-        User expectedUser = StaticDataProvider.USER_ADMIN;
+    public void testGetUser() throws DaoException {
+        String name = StaticDataProvider.CLIENT_LOGIN;
+        String password = StaticDataProvider.CLIENT_PASSWORD_ENCRYPTED;
+        User actualUser = dao.getUser(name, password).get();
+        User expectedUser = null;
         assertEquals(actualUser, expectedUser);
     }
 

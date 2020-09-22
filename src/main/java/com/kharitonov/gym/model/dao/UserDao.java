@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface UserDao {
     void add(User user, String encryptedPassword) throws DaoException;
 
-    Optional<User> get(String name, String encryptedPassword) throws DaoException;
+    Optional<User> getUser(String name, String encryptedPassword) throws DaoException;
 
     List<User> getAll() throws DaoException;
 
@@ -24,6 +24,9 @@ public interface UserDao {
             throws DaoException;
 
     void confirmAccount(int id) throws DaoException;
+
+    void updateUserInfo(String firstName, String lastName, String phone, int id)
+            throws DaoException;
 
     default void close(ResultSet resultSet) throws DaoException {
         if (resultSet != null) {

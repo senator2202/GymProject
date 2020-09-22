@@ -1,7 +1,6 @@
 package com.kharitonov.gym.model.dao.impl;
 
 import com.kharitonov.gym.exception.DaoException;
-import com.kharitonov.gym.exception.StatementException;
 import com.kharitonov.gym.model.creator.TableColumnName;
 import com.kharitonov.gym.model.creator.UserCreator;
 import com.kharitonov.gym.model.dao.UserDao;
@@ -56,7 +55,7 @@ public class UserDaoImpl implements UserDao {
             throws SQLException {
         String userName = user.getAccount().getName();
         PreparedStatement select =
-                STATEMENT_CREATOR.statementSelectAccount(connection, userName, password);
+                STATEMENT_CREATOR.statementSelectUser(connection, userName, password);
         ResultSet resultSet = select.executeQuery();
         int id;
         resultSet.next();
@@ -72,11 +71,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> get(String name, String encryptedPassword)
+    public Optional<User> getUser(String name, String encryptedPassword)
             throws DaoException {
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementSelect =
-                     STATEMENT_CREATOR.statementSelectAccount(connection, name, encryptedPassword);
+                     STATEMENT_CREATOR.statementSelectUser(connection, name, encryptedPassword);
              ResultSet resultSet = statementSelect.executeQuery()) {
             if (resultSet.next()) {
                 return Optional.of(UserCreator.create(resultSet));
@@ -128,7 +127,7 @@ public class UserDaoImpl implements UserDao {
             throws DaoException {
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementSelect =
-                     STATEMENT_CREATOR.statementSelectAccount(connection, name, encryptedPassword);
+                     STATEMENT_CREATOR.statementSelectUser(connection, name, encryptedPassword);
              ResultSet resultSet = statementSelect.executeQuery()) {
             Optional<UserRole> optional = Optional.empty();
             if (resultSet.next()) {
@@ -148,6 +147,19 @@ public class UserDaoImpl implements UserDao {
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementUpdate =
                      STATEMENT_CREATOR.statementUpdateActive(connection, id)) {
+            statementUpdate.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void updateUserInfo(String firstName, String lastName, String phone, int id)
+            throws DaoException {
+        try (Connection connection = POOL.getConnection();
+             PreparedStatement statementUpdate =
+                     STATEMENT_CREATOR.statementUpdateUser(connection,
+                             firstName, lastName, phone, id)) {
             statementUpdate.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

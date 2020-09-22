@@ -2,19 +2,23 @@ package com.kharitonov.gym.model.entity;
 
 import com.kharitonov.gym.model.entity.functionality.UserFunctionality;
 
-import java.util.List;
 
-public class User implements UserFunctionality {
+public abstract class User implements UserFunctionality {
     protected Account account;
     protected String firstName;
     protected String lastName;
     protected String phoneNumber;
 
     protected User() {
+
     }
 
-    protected User(Account account) {
+    protected User(Account account, String firstName,
+                   String lastName, String phoneNumber) {
         this.account = account;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
     }
 
     public Account getAccount() {
@@ -47,59 +51,5 @@ public class User implements UserFunctionality {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public void updateUserInfo(User user) {
-        //empty now
-    }
-
-    public static class UserBuilder {
-        private Account account;
-        private String firstName;
-        private String lastName;
-        private String phoneNumber;
-        private List<Training> plannedTrainings;
-
-        private UserBuilder() {
-        }
-
-        public static UserBuilder aUser() {
-            return new UserBuilder();
-        }
-
-        public UserBuilder withAccount(Account account) {
-            this.account = account;
-            return this;
-        }
-
-        public UserBuilder withFirstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public UserBuilder withLastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-        public UserBuilder withPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
-            return this;
-        }
-
-        public UserBuilder withPlannedTrainings(List<Training> plannedTrainings) {
-            this.plannedTrainings = plannedTrainings;
-            return this;
-        }
-
-        public User build() {
-            User user = new User();
-            user.setAccount(account);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPhoneNumber(phoneNumber);
-            return user;
-        }
     }
 }

@@ -29,7 +29,7 @@
 	<link rel="stylesheet" href="assets/css/slicknav.min.css" type="text/css">
 	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
 
-	<c:set var="personalProfile" value="${(sessionScope.isLogged==true) ? 'Personal Profile' : 'Join Us Now'}" />
+	<c:set var="personalProfileLabel" value="${(sessionScope.user!=null) ? 'Personal Profile' : 'Join Us Now'}" />
 </head>
 
 <body>
@@ -80,10 +80,10 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="${(sessionScope.isLogged==true)
+					<a href="${(sessionScope.user!=null)
 						? '/mainController?command=open_page&page=personal_profile"'
 						: '/mainController?command=open_page&page=login"'}"
-					   class="primary-btn">${personalProfile}
+					   class="primary-btn">${personalProfileLabel}
 					</a>
 					</form>
 				</div>
@@ -95,10 +95,10 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="${(sessionScope.isLogged==true)
+					<a href="${(sessionScope.user!=null)
 						? '/mainController?command=open_page&page=personal_profile"'
 						: '/mainController?command=open_page&page=login"'}"
-					   class="primary-btn">${personalProfile}
+					   class="primary-btn">${personalProfileLabel}
 					</a>
 				</div>
 			</div>
@@ -109,10 +109,10 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="${(sessionScope.isLogged==true)
+					<a href="${(sessionScope.user!=null)
 						? '/mainController?command=open_page&page=personal_profile"'
 						: '/mainController?command=open_page&page=login"'}"
-					   class="primary-btn">${personalProfile}
+					   class="primary-btn">${personalProfileLabel}
 					</a>
 				</div>
 			</div>

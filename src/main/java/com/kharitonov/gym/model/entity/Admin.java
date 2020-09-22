@@ -22,4 +22,14 @@ public class Admin extends User implements AdminFunctionality {
     public void deleteTrainer() {
         //empty now
     }
+
+    @Override
+    public void updateUserInfo(User user) {
+
+    }
+
+    @Override
+    public void planTraining() {
+
+    }
 }

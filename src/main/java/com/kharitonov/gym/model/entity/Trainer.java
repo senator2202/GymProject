@@ -23,6 +23,11 @@ public class Trainer extends User implements TrainerFunctionality, SportFunction
         this.account = account;
     }
 
+    public Trainer(Account account, String firstName,
+                  String lastName, String phoneNumber) {
+        super(account, firstName, lastName, phoneNumber);
+    }
+
     public double getRating() {
         return rating;
     }
@@ -31,8 +36,12 @@ public class Trainer extends User implements TrainerFunctionality, SportFunction
         this.rating = rating;
     }
 
+    public void setPlannedTrainings(List<Training> plannedTrainings) {
+        this.plannedTrainings = plannedTrainings;
+    }
+
     @Override
-    public void planTraining(Training training) {
+    public void appointDiet(Training training) {
         plannedTrainings.add(training);
     }
 
@@ -44,5 +53,15 @@ public class Trainer extends User implements TrainerFunctionality, SportFunction
     @Override
     public List<Training> allPlannedTrainings() {
         return Collections.unmodifiableList(plannedTrainings);
+    }
+
+    @Override
+    public void updateUserInfo(User user) {
+
+    }
+
+    @Override
+    public void planTraining() {
+
     }
 }

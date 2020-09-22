@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -14,6 +17,10 @@
     <link rel="stylesheet" href="assets/css/slicknav.min.css"/>
     <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="assets/css/themify-icons.css"/>
+
+    <c:set var="currentFirstName" value="${sessionScope.user.firstName}"/>
+    <c:set var="currentLastName" value="${sessionScope.user.lastName}"/>
+    <c:set var="currentPhone" value="${sessionScope.user.phoneNumber}"/>
 </head>
 
 <body>
@@ -52,14 +59,15 @@
                         yourself.</p>
                 </div>
                 <form action="/mainController" method="post">
+                    <input type="hidden" name="command" value="update_personal_info">
                     <div class="row">
-                        <div class="col-lg-6"><input type="text"
+                        <div class="col-lg-6"><input type="text" name="firstName" value="${currentFirstName}"
                                                      placeholder="First Name"/>
                         </div>
-                        <div class="col-lg-6"><input type="text"
+                        <div class="col-lg-6"><input type="text" name="lastName" value="${currentLastName}"
                                                      placeholder="Last Name"/>
                         </div>
-                        <div class="col-lg-12"><input type="text"
+                        <div class="col-lg-12"><input type="text" name="phone" value="${currentPhone}"
                                                       placeholder="Phone"/>
                             <button type="submit">Save<i
                                     class="ti-angle-double-right"></i></button>
