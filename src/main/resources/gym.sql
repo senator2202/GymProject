@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Хост:                         127.0.0.1
--- Версия сервера:               5.7.31-log - MySQL Community Server (GPL)
+-- Версия сервера:               5.7.30-log - MySQL Community Server (GPL)
 -- Операционная система:         Win32
 -- HeidiSQL Версия:              11.0.0.5919
 -- --------------------------------------------------------
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `diet_meals` (
   CONSTRAINT `FK_meals_diets` FOREIGN KEY (`diet_id`) REFERENCES `diets` (`diet_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.diet_meals: ~9 rows (приблизительно)
+-- Дамп данных таблицы gym.diet_meals: ~11 rows (приблизительно)
 /*!40000 ALTER TABLE `diet_meals` DISABLE KEYS */;
 REPLACE INTO `diet_meals` (`diet_id`, `meal_type`, `meal_description`) VALUES
 	(1, 'BREAKFAST', 'Яичница с сыром, 2 тоста с арахисовым маслом, кофе с молоком'),
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~2 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~3 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `cost`, `date`, `start`, `end`, `bought`) VALUES
 	(1, 253, 254, 20, '2020-09-20', '16:00:00', '17:00:00', 1),
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `training_exercises` (
   CONSTRAINT `FK_exercises_trainings` FOREIGN KEY (`training_id`) REFERENCES `trainings` (`training_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.training_exercises: ~4 rows (приблизительно)
+-- Дамп данных таблицы gym.training_exercises: ~5 rows (приблизительно)
 /*!40000 ALTER TABLE `training_exercises` DISABLE KEYS */;
 REPLACE INTO `training_exercises` (`training_id`, `type`, `weight`) VALUES
 	(1, 'BENCH_PRESS', 100),
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `FK_users_diets` FOREIGN KEY (`diet_id`) REFERENCES `diets` (`diet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.users: ~42 rows (приблизительно)
+-- Дамп данных таблицы gym.users: ~46 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `discount`, `rating`, `diet_id`) VALUES
 	(243, '', '', '', NULL, NULL, NULL),
@@ -254,7 +254,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `discount`,
 	(281, '', '', '', NULL, NULL, NULL),
 	(282, '', '', '', NULL, NULL, NULL),
 	(283, '', '', '', NULL, NULL, 1),
-	(284, '', '', '', NULL, NULL, 1),
+	(284, 'Dwayne', 'Johnson', '+375331235566', NULL, NULL, 1),
 	(285, '', '', '', 0, 0, NULL),
 	(286, '', '', '', 0, 0, NULL),
 	(288, '', '', '', 0, 0, NULL),
