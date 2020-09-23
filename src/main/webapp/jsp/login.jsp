@@ -29,10 +29,10 @@
                             <input id="user" type="text" name="login" class="input">
                         </div>
                         <div class="group">
-                            <label for="pass" class="label">
+                            <label for="login_password" class="label">
                                 <fmt:message key="login.password"/>
                             </label>
-                            <input id="pass" type="password" name="password" class="input" data-type="password">
+                            <input id="login_password" type="password" name="password" class="input" data-type="password">
                         </div>
                         <div class="group">
                             <input id="check" type="checkbox" class="check" checked>
