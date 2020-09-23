@@ -17,37 +17,10 @@
     <link rel="stylesheet" href="assets/css/slicknav.min.css"/>
     <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="assets/css/themify-icons.css"/>
-
-    <c:set var="currentFirstName" value="${sessionScope.user.firstName}"/>
-    <c:set var="currentLastName" value="${sessionScope.user.lastName}"/>
-    <c:set var="currentPhone" value="${sessionScope.user.phoneNumber}"/>
 </head>
 
 <body>
-<header class="header-section">
-    <div class="container">
-        <div class="logo"><a href="index.jsp"><img src="assets/img/logo.png"
-                                                   alt/></a></div>
-        <div class="nav-menu">
-            <nav class="mainmenu mobile-menu">
-                <ul>
-                    <li class="active"><a href="index.jsp">Home</a></li>
-                    <li><a href="about-us.jsp">About</a></li>
-                    <li><a href="schedule.jsp">Schedule</a></li>
-                    <li><a href="gallery.jsp">Portfolio</a></li>
-                    <li><a href="blog.jsp">Blog</a>
-                        <ul class="dropdown">
-                            <li><a href="blog-details.jsp">Blog Details</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.jsp">Contacts</a></li>
-                </ul>
-            </nav>
-            <div class="nav-right search-switch"><i class="ti-search"></i></div>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-    </div>
-</header>
+<c:import url="part/header.jsp"/>
 
 <%--<div class="col-lg-6">--%>
     <div class="footer-form set-bg" data-setbg="assets/img/contact-form-bg.jpg">
@@ -61,13 +34,13 @@
                 <form action="/mainController" method="post">
                     <input type="hidden" name="command" value="update_personal_info">
                     <div class="row">
-                        <div class="col-lg-6"><input type="text" name="firstName" value="${currentFirstName}"
+                        <div class="col-lg-6"><input type="text" name="firstName" value="${sessionScope.user.firstName}"
                                                      placeholder="First Name"/>
                         </div>
-                        <div class="col-lg-6"><input type="text" name="lastName" value="${currentLastName}"
+                        <div class="col-lg-6"><input type="text" name="lastName" value="${sessionScope.user.lastName}"
                                                      placeholder="Last Name"/>
                         </div>
-                        <div class="col-lg-12"><input type="text" name="phone" value="${currentPhone}"
+                        <div class="col-lg-12"><input type="text" name="phone" value="${sessionScope.user.phoneNumber}"
                                                       placeholder="Phone"/>
                             <button type="submit">Save<i
                                     class="ti-angle-double-right"></i></button>
