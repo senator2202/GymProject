@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
 -- Хост:                         127.0.0.1
--- Версия сервера:               5.7.30-log - MySQL Community Server (GPL)
--- Операционная система:         Win32
+-- Версия сервера:               8.0.21 - MySQL Community Server - GPL
+-- Операционная система:         Win64
 -- HeidiSQL Версия:              11.0.0.5919
 -- --------------------------------------------------------
 
@@ -14,19 +14,20 @@
 
 -- Дамп структуры базы данных gym
 DROP DATABASE IF EXISTS `gym`;
-CREATE DATABASE IF NOT EXISTS `gym` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE IF NOT EXISTS `gym` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gym`;
 
 -- Дамп структуры для таблица gym.accounts
 DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `account_id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` int NOT NULL AUTO_INCREMENT,
   `login` varchar(30) NOT NULL,
   `password` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `role` enum('ADMIN','TRAINER','CLIENT') NOT NULL DEFAULT 'CLIENT',
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `active` tinyint(4) NOT NULL DEFAULT '0',
+  `locale` enum('ENGLISH','RUSSIAN') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'ENGLISH',
+  `active` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`account_id`) USING BTREE,
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `id` (`account_id`) USING BTREE,
@@ -35,59 +36,59 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 
 -- Дамп данных таблицы gym.accounts: ~46 rows (приблизительно)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `registration_date`, `active`) VALUES
-	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 1),
-	(244, 'trainer71859', 'AonR|Uqgzh7g~JKg', 'email7284605@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(245, 'trainer645552', 'AoHQ}Uqgzh7g~JKg', 'email6685704@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(246, 'trainer2029481', 'AQHQ7Uqgzh7g~JKg', 'email5884185@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(247, 'trainer4221846', 'AkHS9Uqgzh7g~JKg', 'email8160483@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(248, 'trainer8841979', 'AU~R9Uqgzh7g~JKg', 'email248612@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(249, 'trainer6324127', 'AonQ|Uqgzh7g~JKg', 'email5628617@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(250, 'trainer6046214', 'AgXQ8Uqgzh7g~JKg', 'email6963601@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(251, 'trainer7928486', 'A]HQ7Uqgzh7g~JKg', 'email2738387@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(252, 'trainer3340977', 'AknQ6Uqgzh7g~JKg', 'email2965659@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(253, 'trainer7525224', 'AUXS8Uqgzh7g~JKg', 'email2822410@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 0),
-	(254, 'client7371660', 'AAER9Uqgzh7g~JKg', 'email4056426@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(255, 'client2361832', 'AoHQ~Uqgzh7g~JKg', 'email3396525@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(256, 'client6704641', 'AQHQ~Uqgzh7g~JKg', 'email222817@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(257, 'client8349252', 'AEnR8Uqgzh7g~JKg', 'email9611103@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(258, 'client6346423', 'AUHR7Uqgzh7g~JKg', 'email325113@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(259, 'client5533317', 'A]XR|Uqgzh7g~JKg', 'email3363978@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(260, 'client7657470', 'AU~R4Uqgzh7g~JKg', 'email599744@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(261, 'client1358051', 'A]HR}Uqgzh7g~JKg', 'email3783797@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(262, 'client6507838', 'AInR|Uqgzh7g~JKg', 'email8795236@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(263, 'client4917933', 'AMnQ5Uqgzh7g~JKg', 'email1941702@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(264, 'client1614015', 'AMnQ7Uqgzh7g~JKg', 'email9659230@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(265, 'client7472113', 'AkXQ4Uqgzh7g~JKg', 'email9791347@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(266, 'client1156353', 'AkHQ~Uqgzh7g~JKg', 'email6479627@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(267, 'client7540930', 'AQHS6Uqgzh7g~JKg', 'email9580039@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(268, 'client4830895', 'AYXR|Uqgzh7g~JKg', 'email4256902@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(269, 'client3455451', 'AIXQ~Uqgzh7g~JKg', 'email2989882@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(270, 'client5316899', 'AgXQ|Uqgzh7g~JKg', 'email5296567@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(271, 'client9546088', 'AEHS~Uqgzh7g~JKg', 'email4773351@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(272, 'client7350415', 'AoXS4Uqgzh7g~JKg', 'email6841707@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(273, 'client4194999', 'AQ~R7Uqgzh7g~JKg', 'email8651424@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(274, 'client5924971', 'AQnQ7Uqgzh7g~JKg', 'email5099860@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(275, 'client9013111', 'AUXS6Uqgzh7g~JKg', 'email2401095@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(276, 'client7357829', 'AMHQ9Uqgzh7g~JKg', 'email1597539@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(277, 'client4959663', 'AEXS|Uqgzh7g~JKg', 'email5838100@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(278, 'client8868321', 'AEnQ}Uqgzh7g~JKg', 'email333149@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(279, 'client3426229', 'AEXQ8Uqgzh7g~JKg', 'email9912052@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(280, 'client4520749', 'AU~R~Uqgzh7g~JKg', 'email5670315@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 0),
-	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 1),
-	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 1),
-	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 0),
-	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 0),
-	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 0),
-	(289, 'tuchi', '9Vrgph\\g', 'tuchikakludi@mail.ru', 'CLIENT', '2020-09-17 12:09:46', 0);
+REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `registration_date`, `locale`, `active`) VALUES
+	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 'RUSSIAN', 1),
+	(244, 'trainer71859', 'AonR|Uqgzh7g~JKg', 'email7284605@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(245, 'trainer645552', 'AoHQ}Uqgzh7g~JKg', 'email6685704@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(246, 'trainer2029481', 'AQHQ7Uqgzh7g~JKg', 'email5884185@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(247, 'trainer4221846', 'AkHS9Uqgzh7g~JKg', 'email8160483@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(248, 'trainer8841979', 'AU~R9Uqgzh7g~JKg', 'email248612@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(249, 'trainer6324127', 'AonQ|Uqgzh7g~JKg', 'email5628617@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(250, 'trainer6046214', 'AgXQ8Uqgzh7g~JKg', 'email6963601@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(251, 'trainer7928486', 'A]HQ7Uqgzh7g~JKg', 'email2738387@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(252, 'trainer3340977', 'AknQ6Uqgzh7g~JKg', 'email2965659@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(253, 'trainer7525224', 'AUXS8Uqgzh7g~JKg', 'email2822410@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
+	(254, 'client7371660', 'AAER9Uqgzh7g~JKg', 'email4056426@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(255, 'client2361832', 'AoHQ~Uqgzh7g~JKg', 'email3396525@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(256, 'client6704641', 'AQHQ~Uqgzh7g~JKg', 'email222817@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(257, 'client8349252', 'AEnR8Uqgzh7g~JKg', 'email9611103@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(258, 'client6346423', 'AUHR7Uqgzh7g~JKg', 'email325113@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(259, 'client5533317', 'A]XR|Uqgzh7g~JKg', 'email3363978@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(260, 'client7657470', 'AU~R4Uqgzh7g~JKg', 'email599744@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(261, 'client1358051', 'A]HR}Uqgzh7g~JKg', 'email3783797@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(262, 'client6507838', 'AInR|Uqgzh7g~JKg', 'email8795236@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(263, 'client4917933', 'AMnQ5Uqgzh7g~JKg', 'email1941702@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(264, 'client1614015', 'AMnQ7Uqgzh7g~JKg', 'email9659230@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(265, 'client7472113', 'AkXQ4Uqgzh7g~JKg', 'email9791347@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(266, 'client1156353', 'AkHQ~Uqgzh7g~JKg', 'email6479627@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(267, 'client7540930', 'AQHS6Uqgzh7g~JKg', 'email9580039@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(268, 'client4830895', 'AYXR|Uqgzh7g~JKg', 'email4256902@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(269, 'client3455451', 'AIXQ~Uqgzh7g~JKg', 'email2989882@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(270, 'client5316899', 'AgXQ|Uqgzh7g~JKg', 'email5296567@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(271, 'client9546088', 'AEHS~Uqgzh7g~JKg', 'email4773351@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(272, 'client7350415', 'AoXS4Uqgzh7g~JKg', 'email6841707@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(273, 'client4194999', 'AQ~R7Uqgzh7g~JKg', 'email8651424@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(274, 'client5924971', 'AQnQ7Uqgzh7g~JKg', 'email5099860@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(275, 'client9013111', 'AUXS6Uqgzh7g~JKg', 'email2401095@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(276, 'client7357829', 'AMHQ9Uqgzh7g~JKg', 'email1597539@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(277, 'client4959663', 'AEXS|Uqgzh7g~JKg', 'email5838100@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(278, 'client8868321', 'AEnQ}Uqgzh7g~JKg', 'email333149@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(279, 'client3426229', 'AEXQ8Uqgzh7g~JKg', 'email9912052@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(280, 'client4520749', 'AU~R~Uqgzh7g~JKg', 'email5670315@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
+	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'ENGLISH', 1),
+	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
+	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
+	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 0),
+	(289, 'tuchi', '9Vrgph\\g', 'tuchikakludi@mail.ru', 'CLIENT', '2020-09-17 12:09:46', 'RUSSIAN', 0);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.diets
 DROP TABLE IF EXISTS `diets`;
 CREATE TABLE IF NOT EXISTS `diets` (
-  `diet_id` int(11) NOT NULL AUTO_INCREMENT,
+  `diet_id` int NOT NULL AUTO_INCREMENT,
   `diet_type` enum('SLIMMING','WEIGHT_GAIN','KEEPING_SHAPE') NOT NULL DEFAULT 'KEEPING_SHAPE',
   PRIMARY KEY (`diet_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -103,9 +104,9 @@ REPLACE INTO `diets` (`diet_id`, `diet_type`) VALUES
 -- Дамп структуры для таблица gym.diet_meals
 DROP TABLE IF EXISTS `diet_meals`;
 CREATE TABLE IF NOT EXISTS `diet_meals` (
-  `diet_id` int(11) NOT NULL AUTO_INCREMENT,
+  `diet_id` int NOT NULL AUTO_INCREMENT,
   `meal_type` enum('BREAKFAST','LUNCH','DINNER','SUPPER') NOT NULL,
-  `meal_description` mediumtext CHARACTER SET utf8mb4 NOT NULL,
+  `meal_description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   KEY `FK_meals_diets` (`diet_id`),
   CONSTRAINT `FK_meals_diets` FOREIGN KEY (`diet_id`) REFERENCES `diets` (`diet_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -129,9 +130,9 @@ REPLACE INTO `diet_meals` (`diet_id`, `meal_type`, `meal_description`) VALUES
 -- Дамп структуры для таблица gym.marks
 DROP TABLE IF EXISTS `marks`;
 CREATE TABLE IF NOT EXISTS `marks` (
-  `client_id` int(11) NOT NULL,
-  `trainer_id` int(11) NOT NULL,
-  `mark` int(11) NOT NULL DEFAULT '0',
+  `client_id` int NOT NULL,
+  `trainer_id` int NOT NULL,
+  `mark` int NOT NULL DEFAULT '0',
   `mark_date` datetime NOT NULL,
   KEY `FK__users` (`client_id`),
   KEY `FK__users_2` (`trainer_id`),
@@ -149,14 +150,14 @@ REPLACE INTO `marks` (`client_id`, `trainer_id`, `mark`, `mark_date`) VALUES
 -- Дамп структуры для таблица gym.trainings
 DROP TABLE IF EXISTS `trainings`;
 CREATE TABLE IF NOT EXISTS `trainings` (
-  `training_id` int(11) NOT NULL AUTO_INCREMENT,
-  `trainer_id` int(11) NOT NULL,
-  `client_id` int(11) NOT NULL,
+  `training_id` int NOT NULL AUTO_INCREMENT,
+  `trainer_id` int NOT NULL,
+  `client_id` int NOT NULL,
   `cost` double NOT NULL DEFAULT '0',
   `date` date NOT NULL,
   `start` time NOT NULL,
   `end` time NOT NULL,
-  `bought` tinyint(4) NOT NULL DEFAULT '0',
+  `bought` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`training_id`) USING BTREE,
   UNIQUE KEY `id` (`training_id`) USING BTREE,
   KEY `FK_trainings_users` (`trainer_id`),
@@ -176,7 +177,7 @@ REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `cost`, `dat
 -- Дамп структуры для таблица gym.training_exercises
 DROP TABLE IF EXISTS `training_exercises`;
 CREATE TABLE IF NOT EXISTS `training_exercises` (
-  `training_id` int(11) NOT NULL,
+  `training_id` int NOT NULL,
   `type` enum('BENCH_PRESS','DEADLIFT','SQUATS') NOT NULL,
   `weight` double DEFAULT NULL,
   KEY `FK_exercises_trainings` (`training_id`),
@@ -196,13 +197,13 @@ REPLACE INTO `training_exercises` (`training_id`, `type`, `weight`) VALUES
 -- Дамп структуры для таблица gym.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int(11) NOT NULL,
+  `user_id` int NOT NULL,
   `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `phone` varchar(30) DEFAULT '',
   `discount` double(22,0) DEFAULT '0',
   `rating` double(22,0) DEFAULT '0',
-  `diet_id` int(11) DEFAULT NULL,
+  `diet_id` int DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`),
   KEY `FK_users_diets` (`diet_id`),
@@ -254,7 +255,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `discount`,
 	(281, '', '', '', NULL, NULL, NULL),
 	(282, '', '', '', NULL, NULL, NULL),
 	(283, '', '', '', NULL, NULL, 1),
-	(284, 'Dwayne', 'Johnson', '+375331235566', NULL, NULL, 1),
+	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, 1),
 	(285, '', '', '', 0, 0, NULL),
 	(286, '', '', '', 0, 0, NULL),
 	(288, '', '', '', 0, 0, NULL),
