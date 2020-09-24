@@ -9,7 +9,21 @@ public class Account {
     private UserRole role;
     private Date registrationDate;
     private boolean isActive;
+    private AccountLocale locale;
 
+    public enum AccountLocale {
+        RUSSIAN("ru"), ENGLISH("en");
+
+        private String postfix;
+
+        AccountLocale(String postfix) {
+            this.postfix = postfix;
+        }
+
+        public String getPostfix() {
+            return postfix;
+        }
+    }
 
     private Account() {
     }
@@ -62,6 +76,14 @@ public class Account {
         this.isActive = isActive;
     }
 
+    public AccountLocale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(AccountLocale locale) {
+        this.locale = locale;
+    }
+
     public static final class AccountBuilder {
         private int id;
         private String name;
@@ -69,6 +91,7 @@ public class Account {
         private UserRole type;
         private Date registrationDate;
         private boolean isActive;
+        private AccountLocale locale;
 
         private AccountBuilder() {
         }
@@ -107,6 +130,11 @@ public class Account {
             return this;
         }
 
+        public AccountBuilder withLocale(AccountLocale locale) {
+            this.locale = locale;
+            return this;
+        }
+
         public Account build() {
             Account account = new Account();
             account.setId(id);
@@ -115,35 +143,9 @@ public class Account {
             account.setRole(type);
             account.setRegistrationDate(registrationDate);
             account.setIsActive(isActive);
+            account.setLocale(locale);
             return account;
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Account account = (Account) o;
-
-        if (isActive != account.isActive) return false;
-        if (name != null ? !name.equals(account.name) : account.name != null)
-            return false;
-        if (email != null ? !email.equals(account.email) : account.email != null)
-            return false;
-        if (role != account.role) return false;
-        return registrationDate != null
-                ? registrationDate.equals(account.registrationDate)
-                : account.registrationDate == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
-        result = 31 * result + (isActive ? 1 : 0);
-        return result;
-    }
 }

@@ -15,6 +15,7 @@ public interface UserService {
 
     void confirmAccount(int id) throws ServiceException;
 
-    void updateUserInfo(String firstName, String lastName, String phone, int id)
+    void updateUserInfo(String firstName, String lastName, String phone,
+                        String locale, int id)
             throws ServiceException;
 }

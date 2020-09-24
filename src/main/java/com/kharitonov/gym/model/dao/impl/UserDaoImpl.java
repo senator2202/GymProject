@@ -38,6 +38,7 @@ public class UserDaoImpl implements UserDao {
             connection.commit();
         } catch (SQLException e) {
             rollback(connection);
+            throw new DaoException(e);
         } finally {
             setAutoCommitTrue(connection);
             POOL.releaseConnection(connection);
@@ -154,15 +155,24 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUserInfo(String firstName, String lastName, String phone, int id)
+    public void updateUserInfo(String firstName, String lastName, String phone,
+                               String locale, int id)
             throws DaoException {
-        try (Connection connection = POOL.getConnection();
-             PreparedStatement statementUpdate =
+        Connection connection = POOL.getConnection();
+        try (PreparedStatement statementUpdateUser =
                      STATEMENT_CREATOR.statementUpdateUser(connection,
-                             firstName, lastName, phone, id)) {
-            statementUpdate.executeUpdate();
+                             firstName, lastName, phone, id);
+             PreparedStatement statementUpdateLocale =
+                STATEMENT_CREATOR.statementUpdateLocale(connection, locale, id)) {
+            connection.setAutoCommit(false);
+            statementUpdateUser.executeUpdate();
+            statementUpdateLocale.executeUpdate();
         } catch (SQLException e) {
+            rollback(connection);
             throw new DaoException(e);
+        } finally {
+            setAutoCommitTrue(connection);
+            POOL.releaseConnection(connection);
         }
     }
 }

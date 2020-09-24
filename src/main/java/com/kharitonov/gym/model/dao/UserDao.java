@@ -25,7 +25,8 @@ public interface UserDao {
 
     void confirmAccount(int id) throws DaoException;
 
-    void updateUserInfo(String firstName, String lastName, String phone, int id)
+    void updateUserInfo(String firstName, String lastName, String phone,
+                        String locale, int id)
             throws DaoException;
 
     default void close(ResultSet resultSet) throws DaoException {

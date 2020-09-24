@@ -10,6 +10,7 @@ public class RequestParameter {
     public static final String FIRST_NAME = "firstName";
     public static final String LAST_NAME = "lastName";
     public static final String PHONE = "phone";
+    public static final String LOCALE = "locale";
 
     private RequestParameter() {
     }

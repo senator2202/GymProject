@@ -13,7 +13,7 @@ class UserStatementCreator {
     private static final String SQL_INSERT_USER =
             "INSERT INTO users(user_id) VALUES(?)";
     private static final String SQL_SELECT_USER =
-            "SELECT account_id, login, email, role, registration_date, " +
+            "SELECT account_id, login, email, role, registration_date, locale, " +
                     "active, first_name, last_name, phone, discount, " +
                     "rating, diet_id FROM accounts " +
                     "JOIN users ON account_id=user_id " +
@@ -27,9 +27,10 @@ class UserStatementCreator {
             "SELECT password FROM accounts WHERE login=?";
     private static final String SQL_SELECT_ROLE =
             "SELECT role FROM accounts WHERE login=? AND password=?";
-
     private static final String SQL_UPDATE_USER =
             "UPDATE users SET first_name=?, last_name=?, phone=? WHERE user_id=?";
+    private static final String SQL_UPDATE_LOCALE =
+            "UPDATE accounts SET locale=? WHERE account_id=?";
 
     private UserStatementCreator() {
     }
@@ -116,6 +117,16 @@ class UserStatementCreator {
         statement.setString(2, lastName);
         statement.setString(3, phone);
         statement.setInt(4, id);
+        return statement;
+    }
+
+    PreparedStatement statementUpdateLocale(Connection connection,
+                                            String locale,
+                                            int id)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_LOCALE);
+        statement.setString(1, locale);
+        statement.setInt(2, id);
         return statement;
     }
 }

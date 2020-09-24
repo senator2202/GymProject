@@ -17,6 +17,8 @@ public class UserCreator {
         String role = resultSet.getString(TableColumnName.ACCOUNT_ROLE);
         UserRole userRole = UserRole.valueOf(role);
         Date date = resultSet.getDate(TableColumnName.ACCOUNT_REGISTRATION_DATE);
+        String locale = resultSet.getString(TableColumnName.ACCOUNT_LOCALE);
+        Account.AccountLocale accountLocale = Account.AccountLocale.valueOf(locale);
         boolean isActive = resultSet.getBoolean(TableColumnName.ACCOUNT_IS_ACTIVE);
         String firstName = resultSet.getString(TableColumnName.USER_FIRST_NAME);
         String lastName = resultSet.getString(TableColumnName.USER_LAST_NAME);
@@ -30,6 +32,7 @@ public class UserCreator {
                 .withEmail(email)
                 .withRole(userRole)
                 .withRegistrationDate(date)
+                .withLocale(accountLocale)
                 .withIsActive(isActive)
                 .build();
         User user = null;
