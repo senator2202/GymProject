@@ -156,14 +156,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUserInfo(String firstName, String lastName, String phone,
-                               String locale, int id)
+                               String email, String locale, int id)
             throws DaoException {
         Connection connection = POOL.getConnection();
         try (PreparedStatement statementUpdateUser =
                      STATEMENT_CREATOR.statementUpdateUser(connection,
                              firstName, lastName, phone, id);
              PreparedStatement statementUpdateLocale =
-                STATEMENT_CREATOR.statementUpdateLocale(connection, locale, id)) {
+                STATEMENT_CREATOR.statementUpdateAccount(connection, email, locale, id)) {
             connection.setAutoCommit(false);
             statementUpdateUser.executeUpdate();
             statementUpdateLocale.executeUpdate();

@@ -23,10 +23,10 @@
                     <div class="sign-in-htm">
                         <input type="hidden" name="command" value="login"/>
                         <div class="group">
-                            <label for="user" class="label">
+                            <label for="login" class="label">
                                 <fmt:message key="login.userName"/>
                             </label>
-                            <input id="user" type="text" name="login" class="input">
+                            <input id="login" type="text" name="login" class="input">
                         </div>
                         <div class="group">
                             <label for="login_password" class="label">

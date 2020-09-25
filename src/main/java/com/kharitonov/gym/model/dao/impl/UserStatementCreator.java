@@ -29,8 +29,8 @@ class UserStatementCreator {
             "SELECT role FROM accounts WHERE login=? AND password=?";
     private static final String SQL_UPDATE_USER =
             "UPDATE users SET first_name=?, last_name=?, phone=? WHERE user_id=?";
-    private static final String SQL_UPDATE_LOCALE =
-            "UPDATE accounts SET locale=? WHERE account_id=?";
+    private static final String SQL_UPDATE_ACCOUNT =
+            "UPDATE accounts SET email=?, locale=? WHERE account_id=?";
 
     private UserStatementCreator() {
     }
@@ -120,13 +120,15 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementUpdateLocale(Connection connection,
-                                            String locale,
-                                            int id)
+    PreparedStatement statementUpdateAccount(Connection connection,
+                                             String email,
+                                             String locale,
+                                             int id)
             throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_LOCALE);
-        statement.setString(1, locale);
-        statement.setInt(2, id);
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_ACCOUNT);
+        statement.setString(1,email);
+        statement.setString(2, locale);
+        statement.setInt(3, id);
         return statement;
     }
 }

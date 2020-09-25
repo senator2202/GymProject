@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
-    <title>Personal profile</title>
+    <title><fmt:message key="personal_profile.personalProfile"/></title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="assets/css/slicknav.min.css"/>
     <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="assets/css/themify-icons.css"/>
+    <link rel="stylesheet" href="assets/css/select-list.css"/>
 </head>
 
 <body>
@@ -38,28 +39,48 @@
                 <input type="hidden" name="command" value="update_personal_info">
                 <div class="row">
                     <div class="col-lg-6">
-                        <fmt:message key="personal_profile.firstNameHint" var="first_hint"/>
-                        <input type="text" name="firstName" value="${sessionScope.user.firstName}" placeholder="${first_hint}"/>
+                        <label for="firstName">
+                            <fmt:message key="personal_profile.firstNameHint"/>
+                        </label>
+                        <input type="text" id="firstName" name="firstName" value="${sessionScope.user.firstName}"/>
                     </div>
                     <div class="col-lg-6">
-                        <fmt:message key="personal_profile.lastNameHint" var="last_hint"/>
-                        <input type="text" name="lastName" value="${sessionScope.user.lastName}" placeholder="${last_hint}"/>
-                    </div>
-                    <div class="col-lg-12">
-                        <fmt:message key="personal_profile.phoneHint" var="phone_hint"/>
-                        <input type="text" name="phone" value="${sessionScope.user.phoneNumber}" placeholder="${phone_hint}"/>
+                        <label for="lasName">
+                            <fmt:message key="personal_profile.lastNameHint"/>
+                        </label>
+                        <input type="text" id="lasName" name="lastName" value="${sessionScope.user.lastName}"/>
                     </div>
                     <div class="col-lg-6">
-                        <select name="locale" >
-                            <option>English</option>
-                            <option>Russian</option>
-                        </select>
+                        <label for="phone">
+                            <fmt:message key="personal_profile.phoneHint"/>
+                        </label>
+                        <input type="text" id="phone" name="phone" value="${sessionScope.user.phoneNumber}"/>
                     </div>
-                    <button type="submit">
-                        <fmt:message key="personal_profile.save"/>
-                        <i class="ti-angle-double-right"></i>
-                    </button>
+                    <div class="col-lg-6">
+                        <label for="phone">
+                            <fmt:message key="personal_profile.email"/>
+                        </label>
+                        <input type="text" id="email" name="email" value="${sessionScope.user.account.email}"/>
+                    </div>
                 </div>
+                <div class="select">
+                    <select name="locale" id="slct">
+                        <option selected disabled><fmt:message key="personal_profile.selectList"/></option>
+                        <option value="english"><fmt:message key="personal_profile.english"/></option>
+                        <option value="russian"><fmt:message key="personal_profile.russian"/></option>
+                    </select>
+                </div>
+                <p/>
+                <p/>
+                <p/>
+                <p/>
+                <p/>
+                <p/>
+                <p/>
+                <button type="submit">
+                    <fmt:message key="personal_profile.save"/>
+                    <i class="ti-angle-double-right"></i>
+                </button>
             </form>
         </div>
     </div>
@@ -74,6 +95,7 @@
 <script src="assets/js/jquery.slicknav.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/select-list.js"></script>
 </body>
 
 </html>

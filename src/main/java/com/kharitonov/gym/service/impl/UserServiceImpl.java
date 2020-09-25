@@ -81,10 +81,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserInfo(String firstName, String lastName, String phone, String locale, int id)
+    public void updateUserInfo(String firstName, String lastName, String phone,
+                               String email, String locale, int id)
             throws ServiceException {
         try {
-            dao.updateUserInfo(firstName, lastName, phone, locale, id);
+            dao.updateUserInfo(firstName, lastName, phone, email, locale, id);
             LOGGER.info("Account id={} was updated!", id);
         } catch (DaoException e) {
             throw new ServiceException(e);
