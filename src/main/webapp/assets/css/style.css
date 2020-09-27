@@ -1152,11 +1152,14 @@ ol {
 }
 
 .footer-form {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    height: 100%;
     margin-left: -15px;
-    margin-right: -15px;
-    height: 610px;
     padding-left: 85px;
-    padding-top: 80px;
+    padding-top: 120px;
 }
 
 .footer-form .section-title h2 {
