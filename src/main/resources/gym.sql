@@ -78,7 +78,7 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
-	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'ENGLISH', 1),
+	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
 	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 0),
@@ -147,6 +147,24 @@ REPLACE INTO `marks` (`client_id`, `trainer_id`, `mark`, `mark_date`) VALUES
 	(255, 253, 3, '2020-09-16 15:35:23');
 /*!40000 ALTER TABLE `marks` ENABLE KEYS */;
 
+-- Дамп структуры для таблица gym.trainer_applications
+DROP TABLE IF EXISTS `trainer_applications`;
+CREATE TABLE IF NOT EXISTS `trainer_applications` (
+  `user_id` int NOT NULL DEFAULT '0',
+  `institution` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `graduation` int NOT NULL,
+  `instagram` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '',
+  `application_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `FK_trainer_applications_users` (`user_id`),
+  CONSTRAINT `FK_trainer_applications_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Дамп данных таблицы gym.trainer_applications: ~0 rows (приблизительно)
+/*!40000 ALTER TABLE `trainer_applications` DISABLE KEYS */;
+REPLACE INTO `trainer_applications` (`user_id`, `institution`, `graduation`, `instagram`, `application_date`) VALUES
+	(284, 'BSUFC', 2013, 'instagram.com/eminem', '2020-09-28 15:19:02');
+/*!40000 ALTER TABLE `trainer_applications` ENABLE KEYS */;
+
 -- Дамп структуры для таблица gym.trainings
 DROP TABLE IF EXISTS `trainings`;
 CREATE TABLE IF NOT EXISTS `trainings` (
@@ -202,8 +220,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `phone` varchar(30) DEFAULT '',
   `discount` double(22,0) DEFAULT '0',
+  `passport_number` varchar(20) DEFAULT '',
   `rating` double(22,0) DEFAULT '0',
   `diet_id` int DEFAULT NULL,
+  `approved` tinyint DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`),
   KEY `FK_users_diets` (`diet_id`),
@@ -213,53 +233,53 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Дамп данных таблицы gym.users: ~46 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `discount`, `rating`, `diet_id`) VALUES
-	(243, '', '', '', NULL, NULL, NULL),
-	(244, '', '', '', NULL, NULL, NULL),
-	(245, '', '', '', NULL, NULL, NULL),
-	(246, '', '', '', NULL, NULL, NULL),
-	(247, '', '', '', NULL, NULL, NULL),
-	(248, '', '', '', NULL, NULL, NULL),
-	(249, '', '', '', NULL, NULL, NULL),
-	(250, '', '', '', NULL, NULL, NULL),
-	(251, '', '', '', NULL, NULL, NULL),
-	(252, '', '', '', NULL, NULL, NULL),
-	(253, '', '', '', NULL, NULL, NULL),
-	(254, '', '', '', NULL, NULL, NULL),
-	(255, '', '', '', NULL, NULL, NULL),
-	(256, '', '', '', NULL, NULL, NULL),
-	(257, '', '', '', NULL, NULL, NULL),
-	(258, '', '', '', NULL, NULL, NULL),
-	(259, '', '', '', NULL, NULL, NULL),
-	(260, '', '', '', NULL, NULL, NULL),
-	(261, '', '', '', NULL, NULL, NULL),
-	(262, '', '', '', NULL, NULL, NULL),
-	(263, '', '', '', NULL, NULL, NULL),
-	(264, '', '', '', NULL, NULL, NULL),
-	(265, '', '', '', NULL, NULL, NULL),
-	(266, '', '', '', NULL, NULL, NULL),
-	(267, '', '', '', NULL, NULL, NULL),
-	(268, '', '', '', NULL, NULL, NULL),
-	(269, '', '', '', NULL, NULL, NULL),
-	(270, '', '', '', NULL, NULL, NULL),
-	(271, '', '', '', NULL, NULL, NULL),
-	(272, '', '', '', NULL, NULL, NULL),
-	(273, '', '', '', NULL, NULL, NULL),
-	(274, '', '', '', NULL, NULL, NULL),
-	(275, '', '', '', NULL, NULL, NULL),
-	(276, '', '', '', NULL, NULL, NULL),
-	(277, '', '', '', NULL, NULL, NULL),
-	(278, '', '', '', NULL, NULL, NULL),
-	(279, '', '', '', NULL, NULL, NULL),
-	(280, '', '', '', NULL, NULL, NULL),
-	(281, '', '', '', NULL, NULL, NULL),
-	(282, '', '', '', NULL, NULL, NULL),
-	(283, '', '', '', NULL, NULL, 1),
-	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, 1),
-	(285, '', '', '', 0, 0, NULL),
-	(286, '', '', '', 0, 0, NULL),
-	(288, '', '', '', 0, 0, NULL),
-	(289, '', '', '', 0, 0, NULL);
+REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `discount`, `passport_number`, `rating`, `diet_id`, `approved`) VALUES
+	(243, '', '', '', NULL, '', NULL, NULL, 0),
+	(244, '', '', '', NULL, '', NULL, NULL, 0),
+	(245, '', '', '', NULL, '', NULL, NULL, 0),
+	(246, '', '', '', NULL, '', NULL, NULL, 0),
+	(247, '', '', '', NULL, '', NULL, NULL, 0),
+	(248, '', '', '', NULL, '', NULL, NULL, 0),
+	(249, '', '', '', NULL, '', NULL, NULL, 0),
+	(250, '', '', '', NULL, '', NULL, NULL, 0),
+	(251, '', '', '', NULL, '', NULL, NULL, 0),
+	(252, '', '', '', NULL, '', NULL, NULL, 0),
+	(253, '', '', '', NULL, '', NULL, NULL, 0),
+	(254, '', '', '', NULL, '', NULL, NULL, 0),
+	(255, '', '', '', NULL, '', NULL, NULL, 0),
+	(256, '', '', '', NULL, '', NULL, NULL, 0),
+	(257, '', '', '', NULL, '', NULL, NULL, 0),
+	(258, '', '', '', NULL, '', NULL, NULL, 0),
+	(259, '', '', '', NULL, '', NULL, NULL, 0),
+	(260, '', '', '', NULL, '', NULL, NULL, 0),
+	(261, '', '', '', NULL, '', NULL, NULL, 0),
+	(262, '', '', '', NULL, '', NULL, NULL, 0),
+	(263, '', '', '', NULL, '', NULL, NULL, 0),
+	(264, '', '', '', NULL, '', NULL, NULL, 0),
+	(265, '', '', '', NULL, '', NULL, NULL, 0),
+	(266, '', '', '', NULL, '', NULL, NULL, 0),
+	(267, '', '', '', NULL, '', NULL, NULL, 0),
+	(268, '', '', '', NULL, '', NULL, NULL, 0),
+	(269, '', '', '', NULL, '', NULL, NULL, 0),
+	(270, '', '', '', NULL, '', NULL, NULL, 0),
+	(271, '', '', '', NULL, '', NULL, NULL, 0),
+	(272, '', '', '', NULL, '', NULL, NULL, 0),
+	(273, '', '', '', NULL, '', NULL, NULL, 0),
+	(274, '', '', '', NULL, '', NULL, NULL, 0),
+	(275, '', '', '', NULL, '', NULL, NULL, 0),
+	(276, '', '', '', NULL, '', NULL, NULL, 0),
+	(277, '', '', '', NULL, '', NULL, NULL, 0),
+	(278, '', '', '', NULL, '', NULL, NULL, 0),
+	(279, '', '', '', NULL, '', NULL, NULL, 0),
+	(280, '', '', '', NULL, '', NULL, NULL, 0),
+	(281, '', '', '', NULL, '', NULL, NULL, 0),
+	(282, '', '', '', NULL, '', NULL, NULL, 0),
+	(283, '', '', '', NULL, '', NULL, 1, 0),
+	(284, 'Angela', 'Merkel', '+375335678962', NULL, '', NULL, 1, 0),
+	(285, '', '', '', 0, '', 0, NULL, 0),
+	(286, '', '', '', 0, '', 0, NULL, 0),
+	(288, '', '', '', 0, '', 0, NULL, 0),
+	(289, '', '', '', 0, '', 0, NULL, 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

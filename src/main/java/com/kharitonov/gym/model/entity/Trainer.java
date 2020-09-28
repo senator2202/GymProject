@@ -9,7 +9,11 @@ import java.util.List;
 
 public class Trainer extends User implements TrainerFunctionality, SportFunctionality {
     private List<Training> plannedTrainings;
+    private String institution;
+    private int graduationYear;
+    private String instagramLink;
     private double rating;
+    private boolean isApproved;
 
     public Trainer() {
         plannedTrainings = new ArrayList<>();

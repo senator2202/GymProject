@@ -11,6 +11,9 @@ public class RequestParameter {
     public static final String LAST_NAME = "lastName";
     public static final String PHONE = "phone";
     public static final String LOCALE = "locale";
+    public static final String INSTITUTION = "institution";
+    public static final String GRADUATION_YEAR = "graduationYear";
+    public static final String INSTAGRAM_LINK = "instagramLink";
 
     private RequestParameter() {
     }

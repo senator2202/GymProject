@@ -9,7 +9,8 @@ public enum CommandType {
     REGISTER(new RegisterCommand()),
     OPEN_PAGE(new OpenPageCommand()),
     CONFIRM_ACCOUNT(new ConfirmAccountCommand()),
-    UPDATE_PERSONAL_INFO(new UpdatePersonalInfoCommand());
+    UPDATE_PERSONAL_INFO(new UpdatePersonalInfoCommand()),
+    SEND_TRAINER_APPLICATION(new SendTrainerApplicationCommand());
 
     private final ActionCommand command;
 

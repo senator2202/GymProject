@@ -14,16 +14,17 @@
 	<meta name="viewport"
 	      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
 	<title><fmt:message key="personal_profile.personalProfile"/></title>
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="assets/css/login.css"/>
-	<link rel="stylesheet" href="assets/css/magnific-popup.css"/>
-	<link rel="stylesheet" href="assets/css/owl.carousel.min.css"/>
-	<link rel="stylesheet" href="assets/css/slicknav.min.css"/>
-	<link rel="stylesheet" href="assets/css/style.css"/>
-	<link rel="stylesheet" href="assets/css/themify-icons.css"/>
-	<link rel="stylesheet" href="assets/css/select-list.css"/>
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="/assets/css/login.css"/>
+	<link rel="stylesheet" href="/assets/css/magnific-popup.css"/>
+	<link rel="stylesheet" href="/assets/css/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="/assets/css/slicknav.min.css"/>
+	<link rel="stylesheet" href="/assets/css/style.css"/>
+	<link rel="stylesheet" href="/assets/css/themify-icons.css"/>
+	<link rel="stylesheet" href="/assets/css/select-list.css"/>
+	<link rel="stylesheet" href="/assets/css/popup.css"/>
 </head>
 
 <body>
@@ -35,6 +36,58 @@
 			<h2><fmt:message key="personal_profile.personalInformation"/></h2>
 			<p><fmt:message key="personal_profile.suggestion"/></p>
 		</div>
+		<a href="#win1">
+			<button class="primary-btn">
+				<fmt:message key="personal_profile.becomeTrainer"/>
+			</button>
+		</a>
+		<c:choose>
+			<c:when test="${applicationResult==true}">
+				<fmt:message key="personal_profile.sentApplication"/>
+			</c:when>
+			<c:when test="${applicationResult==false}">
+				<fmt:message key="personal_profile.failedApplication"/>
+			</c:when>
+			<c:when test="${alreadySent==true}">
+				<fmt:message key="personal_profile.alreadySent"/>
+			</c:when>
+		</c:choose>
+		<form action="/mainController">
+			<input type="hidden" name="command" value="send_trainer_application"/>
+			<a href="#x" class="overlay" id="win1"></a>
+			<div class="popup">
+				<div class="col-lg-6">
+					<label for="institution">
+						<fmt:message key="trainer_popup.institution"/>
+					</label>
+					<input type="text" id="institution" name="institution"/>
+				</div>
+				<div class="col-lg-6">
+					<label for="graduationYear">
+						<fmt:message key="trainer_popup.year"/>
+					</label>
+					<input type="text" id="graduationYear" name="graduationYear"/>
+				</div>
+				<div class="col-lg-6">
+					<label for="instagramLink">
+						<fmt:message key="trainer_popup.instagram"/>
+					</label>
+					<input type="text" id="instagramLink" name="instagramLink"/>
+				</div>
+				<button type="submit">
+					<fmt:message key="trainer_popup.send"/>
+					<i class="ti-angle-double-right"></i>
+				</button>
+				<a class="close" title=<fmt:message key="trainer_popup.close"/> href="#close"></a>
+			</div>
+		</form>
+		<p/>
+		<p/>
+		<p/>
+		<p/>
+		<p/>
+		<p/>
+		<p/>
 		<form action="/mainController" method="post">
 			<input type="hidden" name="command" value="update_personal_info">
 			<div class="row">
@@ -91,7 +144,6 @@
 		</form>
 	</div>
 </div>
-<%--</div>--%>
 
 <!-- Js Plugins -->
 <script src="assets/js/jquery-3.3.1.min.js"></script>
