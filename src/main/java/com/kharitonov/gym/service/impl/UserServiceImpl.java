@@ -4,8 +4,6 @@ import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
 import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.model.entity.UserRole;
-import com.kharitonov.gym.model.factory.UserFactory;
 import com.kharitonov.gym.service.UserService;
 import com.kharitonov.gym.util.CryptoUtility;
 import com.kharitonov.gym.util.mail.MailUtility;
@@ -15,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
+    private static final UserServiceImpl INSTANCE = new UserServiceImpl();
     private static final String REGEX_EMAIL =
             "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)" +
                     "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
@@ -22,8 +21,12 @@ public class UserServiceImpl implements UserService {
             LogManager.getLogger(UserServiceImpl.class);
     private final UserDaoImpl dao;
 
-    public UserServiceImpl() {
+    private UserServiceImpl() {
         dao = new UserDaoImpl();
+    }
+
+    public static UserServiceImpl getInstance() {
+        return INSTANCE;
     }
 
     @Override
@@ -42,8 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(String login, String password,
-                             String email, UserRole role)
+    public User registerUser(String login, String password, String email)
             throws ServiceException {
         if (login.isEmpty() || password.isEmpty() || email.isEmpty()) {
             throw new ServiceException("All fields must be entered!");
@@ -53,15 +55,14 @@ public class UserServiceImpl implements UserService {
         }
         CryptoUtility cryptoUtility = new CryptoUtility();
         String encryptedPassword = cryptoUtility.encryptMessage(password);
-        User user = UserFactory.createUser(role);
-        user.getAccount().setName(login);
-        user.getAccount().setEmail(email);
         try {
             MailUtility service;
-            dao.add(user, encryptedPassword);
+            dao.addUser(login, encryptedPassword, email);
+            User user = dao.getUser(login, encryptedPassword).get();
             service = MailUtility.getInstance();
             service.sendConfirmMessage(email, user.getAccount().getId());
             LOGGER.info("User '{}' was successfully registered!", login);
+            return user;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -87,6 +88,16 @@ public class UserServiceImpl implements UserService {
         try {
             dao.updateUserInfo(firstName, lastName, phone, email, locale, id);
             LOGGER.info("Account id={} was updated!", id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void appointTrainer(int userId, String institution,
+                               int graduationYear, String instagramLink) throws ServiceException {
+        try {
+            dao.changeRoleToTrainer(userId, institution, graduationYear, instagramLink);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

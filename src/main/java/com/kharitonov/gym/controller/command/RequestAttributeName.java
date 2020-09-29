@@ -6,6 +6,7 @@ public class RequestAttributeName {
     public static final String PERSONAL_ACCOUNT = "personalAccount";
     public static final String APPLICATION_RESULT = "applicationResult";
     public static final String ALREADY_SENT = "alreadySent";
+    public static final String APPLICATIONS = "applications";
 
     private RequestAttributeName() {
 

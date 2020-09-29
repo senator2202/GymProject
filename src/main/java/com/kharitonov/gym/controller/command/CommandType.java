@@ -10,7 +10,10 @@ public enum CommandType {
     OPEN_PAGE(new OpenPageCommand()),
     CONFIRM_ACCOUNT(new ConfirmAccountCommand()),
     UPDATE_PERSONAL_INFO(new UpdatePersonalInfoCommand()),
-    SEND_TRAINER_APPLICATION(new SendTrainerApplicationCommand());
+    SEND_TRAINER_APPLICATION(new SendTrainerApplicationCommand()),
+    OPEN_ADMIN_PAGE(new OpenAdminPageCommand()),
+    APPROVE_TRAINER_APPLICATION(new ApproveTrainerApplicationCommand()),
+    REFUSE_TRAINER_APPLICATION(new RefuseTrainerApplicationCommand());
 
     private final ActionCommand command;
 

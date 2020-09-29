@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class UserServiceImplTest {
-    private final UserServiceImpl service = new UserServiceImpl();
+    private final UserServiceImpl service = UserServiceImpl.getInstance();
 
     @DataProvider
     @Test

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 public class SendTrainerApplicationCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(SendTrainerApplicationCommand.class);
-    private final TrainerApplicationService service = new TrainerApplicationServiceImpl();
+    private final TrainerApplicationService service = TrainerApplicationServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

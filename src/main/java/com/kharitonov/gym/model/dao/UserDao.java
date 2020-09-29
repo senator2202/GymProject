@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao {
-    void add(User user, String encryptedPassword) throws DaoException;
+    void addUser(String login, String encryptedPassword, String email) throws DaoException;
 
     Optional<User> getUser(String name, String encryptedPassword) throws DaoException;
 
-    List<User> getAll() throws DaoException;
+    List<User> getAllUsers() throws DaoException;
 
     String getPassword(String login) throws DaoException;
 
@@ -28,6 +28,9 @@ public interface UserDao {
     void updateUserInfo(String firstName, String lastName, String phone, String email,
                         String locale, int id)
             throws DaoException;
+
+    void changeRoleToTrainer(int userId, String institution,
+                             int graduationYear, String instagramLink) throws DaoException;
 
     default void close(ResultSet resultSet) throws DaoException {
         if (resultSet != null) {

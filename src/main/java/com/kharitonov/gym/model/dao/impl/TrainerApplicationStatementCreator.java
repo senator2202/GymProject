@@ -8,10 +8,15 @@ class TrainerApplicationStatementCreator {
     private static final TrainerApplicationStatementCreator INSTANCE =
             new TrainerApplicationStatementCreator();
     private static final String SQL_INSERT_APPLICATION =
-            "INSERT INTO trainer_applications (user_id, institution, graduation, instagram) " +
+            "INSERT INTO trainer_applications (user_id, app_institution, app_graduation, app_instagram) " +
                     "VALUES (?, ?, ?, ?)";
     private static final String SQL_SELECT_APPLICATION =
             "SELECT user_id FROM trainer_applications WHERE user_id=?";
+    private static final String SQL_SELECT_ALL_APPLICATIONS =
+            "SELECT users.user_id, first_name, last_name, app_institution, app_graduation, app_instagram, application_date\n" +
+                    "FROM users JOIN trainer_applications ON users.user_id=trainer_applications.user_id";
+    private static final String SQL_DELETE_APPLICATION =
+            "DELETE FROM trainer_applications WHERE user_id=?";
 
     private TrainerApplicationStatementCreator() {
     }
@@ -38,6 +43,19 @@ class TrainerApplicationStatementCreator {
                                                  int userId)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_APPLICATION);
+        statement.setInt(1, userId);
+        return statement;
+    }
+
+    PreparedStatement statementSelectAllApplications(Connection connection)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ALL_APPLICATIONS);
+        return statement;
+    }
+
+    PreparedStatement statementDeleteApplication(Connection connection, int userId)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_DELETE_APPLICATION);
         statement.setInt(1, userId);
         return statement;
     }

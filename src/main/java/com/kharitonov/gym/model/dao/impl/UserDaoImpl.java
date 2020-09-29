@@ -28,13 +28,14 @@ public class UserDaoImpl implements UserDao {
             UserStatementCreator.getINSTANCE();
 
     @Override
-    public void add(User user, String password) throws DaoException {
+    public void addUser(String login, String password, String email) throws DaoException {
         Connection connection = POOL.getConnection();
         try {
+            int id;
             connection.setAutoCommit(false);
-            addAccount(connection, user, password);
-            defineAccountId(connection, user, password);
-            addUser(connection, user.getAccount().getId());
+            addAccount(connection, login, password, email);
+            id = getAccountId(connection, login, password);
+            addUser(connection, id);
             connection.commit();
         } catch (SQLException e) {
             rollback(connection);
@@ -45,23 +46,20 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    private void addAccount(Connection connection, User user,
-                            String password) throws SQLException {
+    private void addAccount(Connection connection, String login,
+                            String password, String email) throws SQLException {
         PreparedStatement insertAccount =
-                STATEMENT_CREATOR.statementInsertAccount(connection, user, password);
+                STATEMENT_CREATOR.statementInsertAccount(connection, login, password, email);
         insertAccount.execute();
     }
 
-    private void defineAccountId(Connection connection, User user, String password)
+    private int getAccountId(Connection connection, String login, String password)
             throws SQLException {
-        String userName = user.getAccount().getName();
         PreparedStatement select =
-                STATEMENT_CREATOR.statementSelectUser(connection, userName, password);
+                STATEMENT_CREATOR.statementSelectId(connection, login, password);
         ResultSet resultSet = select.executeQuery();
-        int id;
         resultSet.next();
-        id = resultSet.getInt(TableColumnName.ACCOUNT_ID);
-        user.getAccount().setId(id);
+        return resultSet.getInt(TableColumnName.ACCOUNT_ID);
     }
 
     private void addUser(Connection connection, int id)
@@ -90,7 +88,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAll() throws DaoException {
+    public List<User> getAllUsers() throws DaoException {
         List<User> users = new ArrayList<>();
         try (Connection connection = POOL.getConnection();
              PreparedStatement statementSelect =
@@ -163,10 +161,30 @@ public class UserDaoImpl implements UserDao {
                      STATEMENT_CREATOR.statementUpdateUser(connection,
                              firstName, lastName, phone, id);
              PreparedStatement statementUpdateLocale =
-                STATEMENT_CREATOR.statementUpdateAccount(connection, email, locale, id)) {
+                     STATEMENT_CREATOR.statementUpdateAccount(connection, email, locale, id)) {
             connection.setAutoCommit(false);
             statementUpdateUser.executeUpdate();
             statementUpdateLocale.executeUpdate();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        } finally {
+            setAutoCommitTrue(connection);
+            POOL.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public void changeRoleToTrainer(int userId, String institution, int graduationYear, String instagramLink) throws DaoException {
+        Connection connection = POOL.getConnection();
+        try ( PreparedStatement statementRole =
+                      STATEMENT_CREATOR.statementUpdateTrainerRole(connection, userId);
+                PreparedStatement statementTrainer =
+                STATEMENT_CREATOR.statementUpdateTrainer(connection,institution, graduationYear,instagramLink, userId)){
+            connection.setAutoCommit(false);
+            statementRole.execute();
+            statementTrainer.execute();
+            connection.commit();
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);

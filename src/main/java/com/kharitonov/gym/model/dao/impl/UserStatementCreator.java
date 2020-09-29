@@ -1,6 +1,6 @@
 package com.kharitonov.gym.model.dao.impl;
 
-import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.model.entity.UserRole;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +18,8 @@ class UserStatementCreator {
                     "rating, diet_id FROM accounts " +
                     "JOIN users ON account_id=user_id " +
                     "WHERE login=? AND password=?";
+    private static final String SQL_SELECT_ID =
+            "SELECT account_id FROM accounts WHERE login=? AND password=?";
     private static final String SQL_SELECT_ALL_ACCOUNTS =
             "SELECT account_id, login, password, email, role, registration_date " +
                     "FROM accounts";
@@ -31,6 +33,10 @@ class UserStatementCreator {
             "UPDATE users SET first_name=?, last_name=?, phone=? WHERE user_id=?";
     private static final String SQL_UPDATE_ACCOUNT =
             "UPDATE accounts SET email=?, locale=? WHERE account_id=?";
+    private static final String SQL_UPDATE_TRAINER_ROLE =
+            "UPDATE accounts SET role='TRAINER' WHERE account_id=?;";
+    private static final String SQL_UPDATE_TRAINER =
+            "UPDATE users SET institution=?, graduation=?, instagram=? WHERE  user_id=?;";
 
     private UserStatementCreator() {
     }
@@ -40,15 +46,16 @@ class UserStatementCreator {
     }
 
     PreparedStatement statementInsertAccount(Connection connection,
-                                             User user,
-                                             String password)
+                                             String login,
+                                             String password,
+                                             String email)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_INSERT_ACCOUNT);
-        statement.setString(1, user.getAccount().getName());
+        statement.setString(1, login);
         statement.setString(2, password);
-        statement.setString(3, user.getAccount().getEmail());
-        statement.setString(4, user.getAccount().getRole().toString());
+        statement.setString(3, email);
+        statement.setString(4, UserRole.CLIENT.toString());
         return statement;
     }
 
@@ -67,6 +74,17 @@ class UserStatementCreator {
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_USER);
+        statement.setString(1, login);
+        statement.setString(2, password);
+        return statement;
+    }
+
+    PreparedStatement statementSelectId(Connection connection,
+                                        String login,
+                                        String password)
+            throws SQLException {
+        PreparedStatement statement =
+                connection.prepareStatement(SQL_SELECT_ID);
         statement.setString(1, login);
         statement.setString(2, password);
         return statement;
@@ -126,9 +144,28 @@ class UserStatementCreator {
                                              int id)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_ACCOUNT);
-        statement.setString(1,email);
+        statement.setString(1, email);
         statement.setString(2, locale);
         statement.setInt(3, id);
+        return statement;
+    }
+
+    PreparedStatement statementUpdateTrainerRole(Connection connection, int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_TRAINER_ROLE);
+        statement.setInt(1, id);
+        return statement;
+    }
+
+    PreparedStatement statementUpdateTrainer(Connection connection,
+                                             String institution,
+                                             int graduation,
+                                             String instagram,
+                                             int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_TRAINER);
+        statement.setString(1, institution);
+        statement.setInt(2, graduation);
+        statement.setString(3, instagram);
+        statement.setInt(4, id);
         return statement;
     }
 }

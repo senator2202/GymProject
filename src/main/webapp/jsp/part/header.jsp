@@ -21,6 +21,7 @@
                         </ul>
                     </li>
                     <li><a href="/jsp/contact.jsp">Contacts</a></li>
+                    <li><a href="/mainController?command=open_admin_page">Admin</a></li>
                     <li>
                         <a href="${(sessionScope.user!=null) ? '/mainController?command=logout"' : '/mainController?command=open_page&page=login"'}"
                            class="primary-btn">

@@ -11,7 +11,7 @@ import com.kharitonov.gym.service.impl.UserServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 
 public class ConfirmAccountCommand implements ActionCommand {
-    private final UserServiceImpl service = new UserServiceImpl();
+    private final UserServiceImpl service = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

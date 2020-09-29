@@ -2,7 +2,6 @@ package com.kharitonov.gym.service;
 
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.model.entity.UserRole;
 
 import java.util.Optional;
 
@@ -10,7 +9,7 @@ public interface UserService {
     Optional<User> getUser(String login, String password)
             throws ServiceException;
 
-    void registerUser(String login, String password, String email, UserRole role)
+    User registerUser(String login, String password, String email)
             throws ServiceException;
 
     void confirmAccount(int id) throws ServiceException;
@@ -18,4 +17,6 @@ public interface UserService {
     void updateUserInfo(String firstName, String lastName, String phone, String email,
                         String locale, int id)
             throws ServiceException;
+    void appointTrainer(int userId, String institution,
+                        int graduationYear, String instagramLink) throws ServiceException;
 }

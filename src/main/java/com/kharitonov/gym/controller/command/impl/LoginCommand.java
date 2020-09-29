@@ -12,9 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class LoginCommand implements ActionCommand {
-    private static final Logger LOGGER =
-            LogManager.getLogger(LoginCommand.class);
-    private final UserServiceImpl service = new UserServiceImpl();
+    private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
+    private final UserServiceImpl service = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

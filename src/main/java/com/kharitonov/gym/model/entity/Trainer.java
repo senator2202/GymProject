@@ -13,7 +13,6 @@ public class Trainer extends User implements TrainerFunctionality, SportFunction
     private int graduationYear;
     private String instagramLink;
     private double rating;
-    private boolean isApproved;
 
     public Trainer() {
         plannedTrainings = new ArrayList<>();

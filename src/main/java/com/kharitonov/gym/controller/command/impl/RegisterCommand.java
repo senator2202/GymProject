@@ -1,22 +1,22 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestAttributeName;
-import com.kharitonov.gym.controller.command.RequestAttributeValue;
-import com.kharitonov.gym.controller.command.RequestParameter;
 import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.PagePath;
+import com.kharitonov.gym.controller.command.RequestParameter;
+import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
-import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class RegisterCommand implements ActionCommand {
     private static final Logger LOGGER =
             LogManager.getLogger(RegisterCommand.class);
-    private final UserServiceImpl service = new UserServiceImpl();
+    private final UserServiceImpl service = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -25,15 +25,13 @@ public class RegisterCommand implements ActionCommand {
         String email = request.getParameter(RequestParameter.EMAIL);
         String page;
         try {
-            service.registerUser(login, password, email, UserRole.CLIENT);
-            request.setAttribute(RequestAttributeName.AUTHENTICATION_RESULT,
-                    RequestAttributeValue.REGISTER_SUCCESS);
-            page = PagePath.AUTHENTICATION_RESULT;
+            User user = service.registerUser(login, password, email);
+            HttpSession session = request.getSession();
+            session.setAttribute(SessionAttributeName.USER, user);
+            page = PagePath.INDEX;
         } catch (ServiceException e) {
             LOGGER.error("Unable to register new user!", e);
-            request.setAttribute(RequestAttributeName.AUTHENTICATION_RESULT,
-                    e.getLocalizedMessage());
-            page = PagePath.REGISTER;
+            page = PagePath.ERROR;
         }
         return page;
     }

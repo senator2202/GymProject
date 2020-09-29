@@ -2,10 +2,7 @@ package com.kharitonov.gym.model.dao.impl;
 
 import com.kharitonov.gym.data_provider.StaticDataProvider;
 import com.kharitonov.gym.exception.DaoException;
-import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.model.entity.Client;
-import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.util.CryptoUtility;
 import org.testng.annotations.Test;
 
@@ -23,18 +20,13 @@ public class UserDaoImplTest {
         for (int i = 0; i < 10; i++) {
             CryptoUtility cipher = new CryptoUtility();
             Random random = new Random();
-            String name = "client" + random.nextInt(10000000);
+            String login = "client" + random.nextInt(10000000);
             String password = "password" + random.nextInt(1000);
             String email = "email" + random.nextInt(10000000) + "@gmail.com";
             String encryptedPassword = cipher.encryptMessage(password);
             boolean result;
-            Account account = Account.AccountBuilder.anAccount()
-                    .withName(name)
-                    .withEmail(email)
-                    .build();
-            Client client = new Client(account);
-            dao.add(client, encryptedPassword);
-            result = dao.checkLoginPassword(name, encryptedPassword).isPresent();
+            dao.addUser(login, encryptedPassword, email);
+            result = dao.checkLoginPassword(login, encryptedPassword).isPresent();
             assertTrue(result);
         }
     }
@@ -44,18 +36,13 @@ public class UserDaoImplTest {
         for (int i = 0; i < 10; i++) {
             CryptoUtility cipher = new CryptoUtility();
             Random random = new Random();
-            String name = "trainer" + random.nextInt(10000000);
+            String login = "trainer" + random.nextInt(10000000);
             String password = "password" + random.nextInt(1000);
             String email = "email" + random.nextInt(10000000) + "@gmail.com";
             String encryptedString = cipher.encryptMessage(password);
             boolean result;
-            Account account = Account.AccountBuilder.anAccount()
-                    .withName(name)
-                    .withEmail(email)
-                    .build();
-            Trainer trainer = new Trainer(account);
-            dao.add(trainer, encryptedString);
-            result = dao.checkLoginPassword(name, encryptedString).isPresent();
+            dao.addUser(login, encryptedString, email);
+            result = dao.checkLoginPassword(login, encryptedString).isPresent();
             assertTrue(result);
         }
     }
@@ -92,7 +79,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testGetAll() throws DaoException {
-        List<User> users = dao.getAll();
+        List<User> users = dao.getAllUsers();
         assertTrue(true);
     }
 }
