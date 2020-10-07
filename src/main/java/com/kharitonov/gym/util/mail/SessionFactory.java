@@ -5,6 +5,9 @@ import javax.mail.Session;
 import java.util.Properties;
 
 public class SessionFactory {
+    private SessionFactory() {
+    }
+
     public static Session createSession(Properties configProperties) {
         String userName = configProperties.getProperty("mail.user.name");
         String userPassword = configProperties.getProperty("mail.user.password");
@@ -20,6 +23,4 @@ public class SessionFactory {
             return null;
         }
     }
-
-    private SessionFactory() {}
 }

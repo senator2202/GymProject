@@ -16,7 +16,7 @@ public class Training {
     private Time endTime;
     private boolean isBought;
     private boolean isDone;
-    private List<Exercise> exercises;
+    private final List<Exercise> exercises;
 
     public Training() {
         exercises = new ArrayList<>();

@@ -27,7 +27,7 @@ public class Trainer extends User implements TrainerFunctionality, SportFunction
     }
 
     public Trainer(Account account, String firstName,
-                  String lastName, String phoneNumber) {
+                   String lastName, String phoneNumber) {
         super(account, firstName, lastName, phoneNumber);
     }
 

@@ -30,7 +30,7 @@ public class ApproveTrainerApplicationCommand implements ActionCommand {
         String instagram = request.getParameter(RequestParameter.APPLICATION_INSTAGRAM);
         try {
             List<TrainerApplication> applications;
-            userService.appointTrainer(id,institution,graduation,instagram);
+            userService.appointTrainer(id, institution, graduation, instagram);
             applications = appService.deleteApplication(id);
             request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
         } catch (ServiceException e) {

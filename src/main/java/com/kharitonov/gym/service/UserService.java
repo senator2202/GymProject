@@ -18,6 +18,7 @@ public interface UserService {
     void updateUserInfo(String firstName, String lastName, String phone, String email,
                         String locale, int id)
             throws ServiceException;
+
     void appointTrainer(int userId, String institution,
                         int graduationYear, String instagramLink) throws ServiceException;
 

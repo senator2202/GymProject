@@ -23,8 +23,8 @@ public class BasicConnectionPool implements ConnectionPool {
     private static final BasicConnectionPool INSTANCE =
             new BasicConnectionPool();
     private static final int POOL_SIZE = 10;
-    private BlockingQueue<ProxyConnection> freeConnections;
-    private BlockingQueue<ProxyConnection> usedConnections;
+    private final BlockingQueue<ProxyConnection> freeConnections;
+    private final BlockingQueue<ProxyConnection> usedConnections;
 
     private BasicConnectionPool() {
         PropertiesReader reader = new PropertiesReader();

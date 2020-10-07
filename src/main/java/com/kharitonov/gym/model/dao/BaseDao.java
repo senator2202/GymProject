@@ -29,7 +29,7 @@ public interface BaseDao {
     }
 
     default void rollback(Connection connection) throws DaoException {
-        if (connection!=null) {
+        if (connection != null) {
             try {
                 connection.rollback();
             } catch (SQLException e) {

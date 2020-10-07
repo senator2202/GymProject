@@ -11,20 +11,6 @@ public class Account {
     private boolean isActive;
     private AccountLocale locale;
 
-    public enum AccountLocale {
-        RUSSIAN("ru"), ENGLISH("en");
-
-        private String postfix;
-
-        AccountLocale(String postfix) {
-            this.postfix = postfix;
-        }
-
-        public String getPostfix() {
-            return postfix;
-        }
-    }
-
     private Account() {
     }
 
@@ -82,6 +68,20 @@ public class Account {
 
     public void setLocale(AccountLocale locale) {
         this.locale = locale;
+    }
+
+    public enum AccountLocale {
+        RUSSIAN("ru"), ENGLISH("en");
+
+        private final String postfix;
+
+        AccountLocale(String postfix) {
+            this.postfix = postfix;
+        }
+
+        public String getPostfix() {
+            return postfix;
+        }
     }
 
     public static final class AccountBuilder {

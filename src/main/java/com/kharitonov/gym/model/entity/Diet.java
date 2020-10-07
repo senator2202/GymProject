@@ -8,6 +8,6 @@ public class Diet {
     private List<Meal> meals;
 
     public enum DietType {
-        SLIMMING, WEIGHT_GAIN, KEEPING_SHAPE;
+        SLIMMING, WEIGHT_GAIN, KEEPING_SHAPE
     }
 }

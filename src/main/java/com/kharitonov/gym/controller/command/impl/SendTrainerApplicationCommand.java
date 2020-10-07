@@ -25,7 +25,7 @@ public class SendTrainerApplicationCommand implements ActionCommand {
         int year = Integer.parseInt(stringYear);
         String instagram = request.getParameter(RequestParameter.INSTAGRAM_LINK);
         try {
-            if (service.sendApplication(id,institution,year,instagram)) {
+            if (service.sendApplication(id, institution, year, instagram)) {
                 request.setAttribute(RequestAttributeName.APPLICATION_RESULT, true);
             } else {
                 request.setAttribute(RequestAttributeName.ALREADY_SENT, true);

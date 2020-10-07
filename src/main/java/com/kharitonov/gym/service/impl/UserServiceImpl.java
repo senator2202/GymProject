@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
         try {
             return dao.findRecentUsers();
         } catch (DaoException e) {
-            throw  new ServiceException(e);
+            throw new ServiceException(e);
         }
     }
 }

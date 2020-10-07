@@ -112,7 +112,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public String findPassword(String login) throws DaoException {
-        String password = new String();
+        String password = "";
         try (Connection connection = pool.getConnection();
              PreparedStatement statementSelect =
                      STATEMENT_CREATOR.statementSelectPassword(connection, login);

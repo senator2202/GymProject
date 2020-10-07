@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
-    private final ConnectionPool pool = BasicConnectionPool.getInstance();
     private static final TrainerApplicationStatementCreator STATEMENT_CREATOR =
             TrainerApplicationStatementCreator.getInstance();
+    private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
     public void addApplication(int userId, String institution,
