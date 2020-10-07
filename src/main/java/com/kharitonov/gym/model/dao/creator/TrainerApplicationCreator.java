@@ -1,4 +1,4 @@
-package com.kharitonov.gym.model.creator;
+package com.kharitonov.gym.model.dao.creator;
 
 import com.kharitonov.gym.model.entity.TrainerApplication;
 

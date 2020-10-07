@@ -1,8 +1,8 @@
 package com.kharitonov.gym.model.dao.impl;
 
 import com.kharitonov.gym.exception.DaoException;
-import com.kharitonov.gym.model.creator.TableColumnName;
-import com.kharitonov.gym.model.creator.UserCreator;
+import com.kharitonov.gym.model.dao.creator.TableColumnName;
+import com.kharitonov.gym.model.dao.creator.UserCreator;
 import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;

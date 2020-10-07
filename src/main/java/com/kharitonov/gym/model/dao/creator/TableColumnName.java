@@ -1,4 +1,4 @@
-package com.kharitonov.gym.model.creator;
+package com.kharitonov.gym.model.dao.creator;
 
 public class TableColumnName {
     public static final String ACCOUNT_ID = "account_id";

@@ -1,7 +1,7 @@
 package com.kharitonov.gym.model.dao.impl;
 
 import com.kharitonov.gym.exception.DaoException;
-import com.kharitonov.gym.model.creator.TrainerApplicationCreator;
+import com.kharitonov.gym.model.dao.creator.TrainerApplicationCreator;
 import com.kharitonov.gym.model.dao.TrainerApplicationDao;
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.model.pool.ConnectionPool;
