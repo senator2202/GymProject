@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
-    private static final ConnectionPool POOL = BasicConnectionPool.getInstance();
+    private final ConnectionPool pool = BasicConnectionPool.getInstance();
     private static final TrainerApplicationStatementCreator STATEMENT_CREATOR =
             TrainerApplicationStatementCreator.getInstance();
 
     @Override
     public void addApplication(int userId, String institution,
                                int graduationYear, String instagramLink) throws DaoException {
-        try (Connection connection = POOL.getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement =
                      STATEMENT_CREATOR.statementInsertApplication(connection, userId,
                              institution, graduationYear, instagramLink)) {
@@ -34,7 +34,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
 
     @Override
     public boolean applicationExists(int userId) throws DaoException {
-        try (Connection connection = POOL.getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement =
                      STATEMENT_CREATOR.statementSelectApplication(connection, userId);
              ResultSet resultSet = statement.executeQuery()) {
@@ -46,7 +46,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
 
     @Override
     public void deleteApplication(int userId) throws DaoException {
-        try (Connection connection = POOL.getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement =
                      STATEMENT_CREATOR.statementDeleteApplication(connection, userId)) {
             statement.execute();
@@ -57,7 +57,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
 
     @Override
     public List<TrainerApplication> getAllApplications() throws DaoException {
-        try (Connection connection = POOL.getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement =
                      STATEMENT_CREATOR.statementSelectAllApplications(connection);
              ResultSet resultSet = statement.executeQuery()) {

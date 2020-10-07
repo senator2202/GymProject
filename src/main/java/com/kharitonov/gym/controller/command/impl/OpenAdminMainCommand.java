@@ -13,8 +13,8 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class OpenAdminPageCommand implements ActionCommand {
-    private static final Logger LOGGER = LogManager.getLogger(OpenAdminPageCommand.class);
+public class OpenAdminMainCommand implements ActionCommand {
+    private static final Logger LOGGER = LogManager.getLogger(OpenAdminMainCommand.class);
     private final TrainerApplicationService service = TrainerApplicationServiceImpl.getInstance();
 
     @Override
@@ -25,6 +25,6 @@ public class OpenAdminPageCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error("Applications loading error!", e);
         }
-        return PagePath.ADMIN;
+        return PagePath.ADMIN_MAIN;
     }
 }

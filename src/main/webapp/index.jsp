@@ -37,7 +37,7 @@
     <div class="loader"></div>
 </div>
 
-<c:import url="jsp/part/header.jsp"/>
+<jsp:include page="jsp/part/header.jsp"/>
 
 <!-- Hero Section Begin -->
 <section class="hero-section">

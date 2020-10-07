@@ -5,7 +5,7 @@ import com.kharitonov.gym.model.entity.TrainerApplication;
 
 import java.util.List;
 
-public interface TrainerApplicationDao {
+public interface TrainerApplicationDao extends BaseDao {
     void addApplication(int userId, String institution,
                         int graduationYear, String instagramLink) throws DaoException;
 
