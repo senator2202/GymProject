@@ -42,7 +42,7 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
         TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
         try {
             dao.deleteApplication(userId);
-            return dao.getAllApplications();
+            return dao.findAllApplications();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -52,7 +52,7 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
     public List<TrainerApplication> getAllApplications() throws ServiceException {
         TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
         try {
-            return dao.getAllApplications();
+            return dao.findAllApplications();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

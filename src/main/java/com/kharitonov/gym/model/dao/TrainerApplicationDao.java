@@ -13,5 +13,5 @@ public interface TrainerApplicationDao extends BaseDao {
 
     void deleteApplication(int userId) throws DaoException;
 
-    List<TrainerApplication> getAllApplications() throws DaoException;
+    List<TrainerApplication> findAllApplications() throws DaoException;
 }

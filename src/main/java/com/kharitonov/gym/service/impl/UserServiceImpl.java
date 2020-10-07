@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         UserDao dao = new UserDaoImpl();
         Optional<User> optional;
         try {
-            optional = dao.getUser(login, encryptedPassword);
+            optional = dao.findUser(login, encryptedPassword);
             LOGGER.info("Login result: {}", optional.isPresent());
         } catch (DaoException e) {
             throw new ServiceException("Error, accessing database!", e);
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
         try {
             MailUtility service;
             dao.addUser(login, encryptedPassword, email);
-            User user = dao.getUser(login, encryptedPassword).get();
+            User user = dao.findUser(login, encryptedPassword).get();
             service = MailUtility.getInstance();
             service.sendConfirmMessage(email, user.getAccount().getId());
             LOGGER.info("User '{}' was successfully registered!", login);

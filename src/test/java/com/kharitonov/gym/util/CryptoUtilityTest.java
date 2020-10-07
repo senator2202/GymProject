@@ -36,12 +36,4 @@ public class CryptoUtilityTest {
         boolean actual = actualEncrypted.equals(expectedEncrypted);
         assertEquals(actual, expected);
     }
-
-    @Test(dataProvider = "dataDecrypt")
-    public void testDecrypt(String encrypted, String expectedSource,
-                            boolean expected) {
-        String actualSource = cryptoUtility.decryptMessage(encrypted);
-        boolean actual = actualSource.equals(expectedSource);
-        assertEquals(actual, expected);
-    }
 }

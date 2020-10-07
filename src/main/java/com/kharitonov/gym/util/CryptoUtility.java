@@ -15,13 +15,4 @@ public class CryptoUtility {
         }
         return tmp.toString();
     }
-
-    public String decryptMessage(String text) {
-        StringBuilder tmp = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
-            tmp.append((char) (text.charAt(i) - OFFSET));
-        }
-        String reversed = new StringBuffer(tmp.toString()).reverse().toString();
-        return new String(Base64.getDecoder().decode(reversed));
-    }
 }

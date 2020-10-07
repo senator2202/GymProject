@@ -72,14 +72,14 @@ public class UserDaoImplTest {
     public void testGetUser() throws DaoException {
         String name = StaticDataProvider.CLIENT_LOGIN;
         String password = StaticDataProvider.CLIENT_PASSWORD_ENCRYPTED;
-        User actualUser = dao.getUser(name, password).get();
+        User actualUser = dao.findUser(name, password).get();
         User expectedUser = null;
         assertEquals(actualUser, expectedUser);
     }
 
     @Test
     public void testGetAll() throws DaoException {
-        List<User> users = dao.getAllUsers();
+        List<User> users = dao.findAllUsers();
         assertTrue(true);
     }
 }

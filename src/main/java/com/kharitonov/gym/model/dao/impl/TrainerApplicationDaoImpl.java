@@ -56,7 +56,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     }
 
     @Override
-    public List<TrainerApplication> getAllApplications() throws DaoException {
+    public List<TrainerApplication> findAllApplications() throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement =
                      STATEMENT_CREATOR.statementSelectAllApplications(connection);

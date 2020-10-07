@@ -21,8 +21,8 @@ import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
-    private final ConnectionPool pool = BasicConnectionPool.getInstance();
     private static final UserStatementCreator STATEMENT_CREATOR = UserStatementCreator.getINSTANCE();
+    private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
     public void addUser(String login, String password, String email) throws DaoException {
@@ -44,30 +44,39 @@ public class UserDaoImpl implements UserDao {
     }
 
     private void addAccount(Connection connection, String login,
-                            String password, String email) throws SQLException {
-        PreparedStatement insertAccount =
-                STATEMENT_CREATOR.statementInsertAccount(connection, login, password, email);
-        insertAccount.execute();
+                            String password, String email) throws DaoException {
+        try (PreparedStatement insertAccount =
+                     STATEMENT_CREATOR.statementInsertAccount(connection, login, password, email)) {
+            insertAccount.execute();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        }
     }
 
-    private int getAccountId(Connection connection, String login, String password)
-            throws SQLException {
-        PreparedStatement select =
-                STATEMENT_CREATOR.statementSelectId(connection, login, password);
-        ResultSet resultSet = select.executeQuery();
-        resultSet.next();
-        return resultSet.getInt(TableColumnName.ACCOUNT_ID);
+    private int getAccountId(Connection connection, String login, String password) throws DaoException {
+        try (PreparedStatement select =
+                     STATEMENT_CREATOR.statementSelectId(connection, login, password);
+             ResultSet resultSet = select.executeQuery()) {
+            resultSet.next();
+            return resultSet.getInt(TableColumnName.ACCOUNT_ID);
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        }
     }
 
-    private void addUser(Connection connection, int id)
-            throws SQLException {
-        PreparedStatement insertUser =
-                STATEMENT_CREATOR.statementInsertUser(connection, id);
-        insertUser.execute();
+    private void addUser(Connection connection, int id) throws DaoException {
+        try (PreparedStatement insertUser = STATEMENT_CREATOR.statementInsertUser(connection, id)) {
+            insertUser.execute();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        }
     }
 
     @Override
-    public Optional<User> getUser(String name, String encryptedPassword)
+    public Optional<User> findUser(String name, String encryptedPassword)
             throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statementSelect =
@@ -85,7 +94,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAllUsers() throws DaoException {
+    public List<User> findAllUsers() throws DaoException {
         List<User> users = new ArrayList<>();
         try (Connection connection = pool.getConnection();
              PreparedStatement statementSelect =
@@ -102,7 +111,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public String getPassword(String login) throws DaoException {
+    public String findPassword(String login) throws DaoException {
         String password = new String();
         try (Connection connection = pool.getConnection();
              PreparedStatement statementSelect =
