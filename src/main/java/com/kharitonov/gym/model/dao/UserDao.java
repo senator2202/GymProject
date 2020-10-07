@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserDao {
+public interface UserDao extends BaseDao {
     void addUser(String login, String encryptedPassword, String email) throws DaoException;
 
     Optional<User> getUser(String name, String encryptedPassword) throws DaoException;
@@ -32,43 +32,5 @@ public interface UserDao {
     void changeRoleToTrainer(int userId, String institution,
                              int graduationYear, String instagramLink) throws DaoException;
 
-    default void close(ResultSet resultSet) throws DaoException {
-        if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                throw new DaoException("Error during closing result set!", e);
-            }
-        }
-    }
-
-    default void close(Statement statement) throws DaoException {
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                throw new DaoException("Error during closing statement!", e);
-            }
-        }
-    }
-
-    default void rollback(Connection connection) throws DaoException {
-        if (connection!=null) {
-            try {
-                connection.rollback();
-            } catch (SQLException e) {
-                throw new DaoException("Unable to rollback!", e);
-            }
-        }
-    }
-
-    default void setAutoCommitTrue(Connection connection) throws DaoException {
-        if (connection != null) {
-            try {
-                connection.setAutoCommit(true);
-            } catch (SQLException e) {
-                throw new DaoException("Unable to set autoCommit = true", e);
-            }
-        }
-    }
+    List<User> findRecentUsers() throws DaoException;
 }

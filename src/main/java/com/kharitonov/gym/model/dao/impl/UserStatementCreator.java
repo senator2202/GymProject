@@ -37,6 +37,10 @@ class UserStatementCreator {
             "UPDATE accounts SET role='TRAINER' WHERE account_id=?;";
     private static final String SQL_UPDATE_TRAINER =
             "UPDATE users SET institution=?, graduation=?, instagram=? WHERE  user_id=?;";
+    private static final String SQL_SELECT_RECENT =
+            "SELECT users.user_id, first_name, last_name, phone, email\n" +
+                    "FROM users JOIN accounts ON users.user_id=accounts.account_id\n" +
+                    "WHERE date(registration_date) >= CURDATE() - INTERVAL 20 DAY ";
 
     private UserStatementCreator() {
     }
@@ -166,6 +170,11 @@ class UserStatementCreator {
         statement.setInt(2, graduation);
         statement.setString(3, instagram);
         statement.setInt(4, id);
+        return statement;
+    }
+
+    PreparedStatement statementSelectRecent(Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_RECENT);
         return statement;
     }
 }

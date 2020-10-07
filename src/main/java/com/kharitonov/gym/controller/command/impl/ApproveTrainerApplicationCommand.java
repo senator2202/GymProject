@@ -36,6 +36,6 @@ public class ApproveTrainerApplicationCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return PagePath.ADMIN;
+        return PagePath.ADMIN_MAIN;
     }
 }

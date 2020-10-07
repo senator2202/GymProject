@@ -2,6 +2,7 @@ package com.kharitonov.gym.service.impl;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
+import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.UserService;
@@ -10,6 +11,7 @@ import com.kharitonov.gym.util.mail.MailUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -19,11 +21,7 @@ public class UserServiceImpl implements UserService {
                     "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final Logger LOGGER =
             LogManager.getLogger(UserServiceImpl.class);
-    private final UserDaoImpl dao;
 
-    private UserServiceImpl() {
-        dao = new UserDaoImpl();
-    }
 
     public static UserServiceImpl getInstance() {
         return INSTANCE;
@@ -34,6 +32,7 @@ public class UserServiceImpl implements UserService {
             throws ServiceException {
         CryptoUtility cryptoUtility = new CryptoUtility();
         String encryptedPassword = cryptoUtility.encryptMessage(password);
+        UserDao dao = new UserDaoImpl();
         Optional<User> optional;
         try {
             optional = dao.getUser(login, encryptedPassword);
@@ -55,6 +54,7 @@ public class UserServiceImpl implements UserService {
         }
         CryptoUtility cryptoUtility = new CryptoUtility();
         String encryptedPassword = cryptoUtility.encryptMessage(password);
+        UserDao dao = new UserDaoImpl();
         try {
             MailUtility service;
             dao.addUser(login, encryptedPassword, email);
@@ -73,6 +73,7 @@ public class UserServiceImpl implements UserService {
         if (id < 0) {
             throw new ServiceException("Incorrect id value!");
         }
+        UserDao dao = new UserDaoImpl();
         try {
             dao.confirmAccount(id);
             LOGGER.info("Account id={} was confirmed!", id);
@@ -85,6 +86,7 @@ public class UserServiceImpl implements UserService {
     public void updateUserInfo(String firstName, String lastName, String phone,
                                String email, String locale, int id)
             throws ServiceException {
+        UserDao dao = new UserDaoImpl();
         try {
             dao.updateUserInfo(firstName, lastName, phone, email, locale, id);
             LOGGER.info("Account id={} was updated!", id);
@@ -96,10 +98,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public void appointTrainer(int userId, String institution,
                                int graduationYear, String instagramLink) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
         try {
             dao.changeRoleToTrainer(userId, institution, graduationYear, instagramLink);
         } catch (DaoException e) {
             throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<User> getRecentUsers() throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            return dao.findRecentUsers();
+        } catch (DaoException e) {
+            throw  new ServiceException(e);
         }
     }
 }
