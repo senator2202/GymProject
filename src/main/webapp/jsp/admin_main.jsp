@@ -1,8 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.adminLocale}" scope="session"/>
+<fmt:setBundle basename="property/pagecontent"/>
 
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
   <meta charset="utf-8" />
@@ -10,7 +13,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Admin PoniGym
+    <fmt:message key="admin.title"/>
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -31,32 +34,32 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">New Trainer Applications</h4>
+                  <h4 class="card-title "><fmt:message key="admin_main.newTrainerApplications"/></h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          ID
+                         <fmt:message key="admin_main.id"/>
                         </th>
                         <th>
-                          First Name
+                          <fmt:message key="admin_main.firstName"/>
                         </th>
                         <th>
-                          Last Name
+                          <fmt:message key="admin_main.lastName"/>
                         </th>
                         <th>
-                          Institution
+                          <fmt:message key="admin_main.institution"/>
                         </th>
                         <th>
-                          Graduation year
+                          <fmt:message key="admin_main.graduationYear"/>
                         </th>
                         <th>
-                          Instagram Profile
+                          <fmt:message key="admin_main.instagram"/>
                         </th>
                         <th>
-                          Application Date
+                          <fmt:message key="admin_main.applicationDate"/>
                         </th>
                       </thead>
                       <tbody>
@@ -91,7 +94,7 @@
                               <input type="hidden" name="appGraduation" value="${application.graduationYear}"/>
                               <input type="hidden" name="appInstagram" value="${application.instagramLink}"/>
                               <button type="submit">
-                                Approve
+                                <fmt:message key="admin_main.approve"/>
                               </button>
                             </form>
                           </td>
@@ -100,7 +103,7 @@
                               <input type="hidden" name="command" value="refuse_trainer_application"/>
                               <input type="hidden" name="appId" value="${application.id}"/>
                               <button type="submit">
-                                Refuse
+                                <fmt:message key="admin_main.refuse"/>
                               </button>
                             </form>
                           </td>

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    Optional<User> getUser(String login, String password)
+    Optional<User> findUser(String login, String password)
             throws ServiceException;
 
     User registerUser(String login, String password, String email)
@@ -22,5 +22,5 @@ public interface UserService {
     void appointTrainer(int userId, String institution,
                         int graduationYear, String instagramLink) throws ServiceException;
 
-    List<User> getRecentUsers() throws ServiceException;
+    List<User> findRecentUsers(int days) throws ServiceException;
 }

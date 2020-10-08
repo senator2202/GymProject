@@ -18,6 +18,7 @@ public class RequestParameter {
     public static final String APPLICATION_INSTITUTION = "appInstitution";
     public static final String APPLICATION_GRADUATION = "appGraduation";
     public static final String APPLICATION_INSTAGRAM = "appInstagram";
+    public static final String RECENT_DAYS = "days";
 
     private RequestParameter() {
     }

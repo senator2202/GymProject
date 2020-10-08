@@ -38,9 +38,9 @@ class UserStatementCreator {
     private static final String SQL_UPDATE_TRAINER =
             "UPDATE users SET institution=?, graduation=?, instagram=? WHERE  user_id=?;";
     private static final String SQL_SELECT_RECENT =
-            "SELECT users.user_id, first_name, last_name, phone, email\n" +
+            "SELECT users.user_id, first_name, last_name, phone, email, registration_date\n" +
                     "FROM users JOIN accounts ON users.user_id=accounts.account_id\n" +
-                    "WHERE date(registration_date) >= CURDATE() - INTERVAL 20 DAY ";
+                    "WHERE date(registration_date) >= CURDATE() - INTERVAL ? DAY ";
 
     private UserStatementCreator() {
     }
@@ -173,8 +173,9 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectRecent(Connection connection) throws SQLException {
+    PreparedStatement statementSelectRecent(Connection connection, int days) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_RECENT);
+        statement.setInt(1, days);
         return statement;
     }
 }

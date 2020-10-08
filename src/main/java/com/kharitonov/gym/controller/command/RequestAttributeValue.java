@@ -10,6 +10,8 @@ public class RequestAttributeValue {
     public static final String CONFIRM_ERROR =
             "Account confirm error!";
     public static final String PERSONAL_ACCOUNT = "Personal Account";
+    public static final String ACTIVE_TAB = "nav-item active";
+    public static final String NOT_ACTIVE_TAB = "nav-item";
 
     private RequestAttributeValue() {
     }

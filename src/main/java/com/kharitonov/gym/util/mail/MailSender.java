@@ -14,11 +14,11 @@ import java.util.Properties;
 
 public class MailSender {
     private static final Logger LOGGER = LogManager.getLogger(MailSender.class);
-    private MimeMessage message;
     private final String sendToEmail;
     private final String mailSubject;
     private final String mailText;
     private final Properties properties;
+    private MimeMessage message;
 
     public MailSender(String sendToEmail, String mailSubject, String mailText,
                       Properties properties) {

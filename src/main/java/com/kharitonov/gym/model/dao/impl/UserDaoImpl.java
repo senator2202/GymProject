@@ -1,9 +1,10 @@
 package com.kharitonov.gym.model.dao.impl;
 
 import com.kharitonov.gym.exception.DaoException;
+import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.dao.creator.TableColumnName;
 import com.kharitonov.gym.model.dao.creator.UserCreator;
-import com.kharitonov.gym.model.dao.UserDao;
+import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.pool.ConnectionPool;
@@ -11,10 +12,7 @@ import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -201,13 +199,23 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findRecentUsers() throws DaoException {
+    public List<User> findRecentUsers(int days) throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = STATEMENT_CREATOR.statementSelectRecent(connection);
+             PreparedStatement statement = STATEMENT_CREATOR.statementSelectRecent(connection, days);
              ResultSet resultSet = statement.executeQuery()) {
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
-                User user = UserCreator.create(resultSet);
+                User user = new Client();
+                int id = resultSet.getInt(TableColumnName.USER_ID);
+                String firstName = resultSet.getString(TableColumnName.USER_FIRST_NAME);
+                String lastName = resultSet.getString(TableColumnName.USER_LAST_NAME);
+                String email = resultSet.getString(TableColumnName.ACCOUNT_EMAIL);
+                Date date = resultSet.getDate(TableColumnName.ACCOUNT_REGISTRATION_DATE);
+                user.getAccount().setId(id);
+                user.getAccount().setEmail(email);
+                user.getAccount().setRegistrationDate(date);
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
                 users.add(user);
             }
             return users;

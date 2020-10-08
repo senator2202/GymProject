@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUser(String login, String password)
+    public Optional<User> findUser(String login, String password)
             throws ServiceException {
         CryptoUtility cryptoUtility = new CryptoUtility();
         String encryptedPassword = cryptoUtility.encryptMessage(password);
@@ -107,10 +107,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getRecentUsers() throws ServiceException {
+    public List<User> findRecentUsers(int days) throws ServiceException {
         UserDao dao = new UserDaoImpl();
         try {
-            return dao.findRecentUsers();
+            return dao.findRecentUsers(days);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

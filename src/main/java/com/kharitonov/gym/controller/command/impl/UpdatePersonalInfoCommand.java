@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class UpdatePersonalInfoCommand implements ActionCommand {
-    private static final Logger LOGGER =
-            LogManager.getLogger(UpdatePersonalInfoCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(UpdatePersonalInfoCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();
 
     @Override

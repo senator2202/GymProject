@@ -28,5 +28,5 @@ public interface UserDao extends BaseDao {
     void changeRoleToTrainer(int userId, String institution,
                              int graduationYear, String instagramLink) throws DaoException;
 
-    List<User> findRecentUsers() throws DaoException;
+    List<User> findRecentUsers(int days) throws DaoException;
 }

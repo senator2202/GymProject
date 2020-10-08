@@ -14,7 +14,8 @@ public enum CommandType {
     OPEN_ADMIN_MAIN(new OpenAdminMainCommand()),
     APPROVE_TRAINER_APPLICATION(new ApproveTrainerApplicationCommand()),
     REFUSE_TRAINER_APPLICATION(new RefuseTrainerApplicationCommand()),
-    OPEN_ADMIN_REGISTRATIONS(new OpenAdminRegistrationsCommand());
+    OPEN_ADMIN_REGISTRATIONS(new OpenAdminRegistrationsCommand()),
+    CHANGE_ADMIN_LOCALE(new ChangeAdminLocaleCommand());
 
     private final ActionCommand command;
 

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Training {
+    private final List<Exercise> exercises;
     private int trainingId;
     private int trainerId;
     private int clientId;
@@ -16,7 +17,6 @@ public class Training {
     private Time endTime;
     private boolean isBought;
     private boolean isDone;
-    private final List<Exercise> exercises;
 
     public Training() {
         exercises = new ArrayList<>();

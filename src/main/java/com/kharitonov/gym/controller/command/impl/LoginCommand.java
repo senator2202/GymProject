@@ -21,8 +21,7 @@ public class LoginCommand implements ActionCommand {
         String password = request.getParameter(RequestParameter.PASSWORD);
         String page;
         try {
-            Optional<User> optional =
-                    service.getUser(login, password);
+            Optional<User> optional = service.findUser(login, password);
             if (optional.isPresent()) {
                 User user = optional.get();
                 HttpSession session = request.getSession();
