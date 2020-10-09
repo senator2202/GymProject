@@ -39,11 +39,11 @@ public class MainServlet extends HttpServlet {
         String page = command.execute(request);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         request.getSession().setAttribute(SessionAttributeName.PREVIOUS_PAGE, page);
-        savePageAttributes(request);
+        saveRequestAttributes(request);
         dispatcher.forward(request, response);
     }
 
-    private void savePageAttributes(HttpServletRequest request) {
+    private void saveRequestAttributes(HttpServletRequest request) {
         Enumeration<String> attrNames = request.getAttributeNames();
         Iterator<String> iterator = attrNames.asIterator();
         RequestAttributesWrapper wrapper = new RequestAttributesWrapper();
