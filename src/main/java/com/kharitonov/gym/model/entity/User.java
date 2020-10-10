@@ -8,6 +8,7 @@ public abstract class User implements UserFunctionality {
     protected String firstName;
     protected String lastName;
     protected String phoneNumber;
+    protected String imageName;
 
     protected User() {
 
@@ -51,5 +52,13 @@ public abstract class User implements UserFunctionality {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

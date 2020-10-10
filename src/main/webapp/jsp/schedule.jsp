@@ -1,3 +1,7 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -21,6 +25,7 @@
     <link rel="stylesheet" href="../assets/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="../assets/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/popup.css"/>
 </head>
 
 <body>
@@ -29,55 +34,45 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Header Section Begin -->
-    <header class="header-section header-normal">
-        <div class="container">
-            <div class="logo">
-                <a href="../index.jsp">
-                    <img src="../assets/img/logo-normal.png" alt="">
-                </a>
-            </div>
-            <div class="nav-menu">
-                <nav class="mainmenu mobile-menu">
-                    <ul>
-                        <li><a href="../index.jsp">Home</a></li>
-                        <li><a href="about-us.jsp">About</a></li>
-                        <li class="active"><a href="schedule.jsp">Schedule</a></li>
-                        <li><a href="gallery.jsp">Portfolio</a> </li>
-                        <li><a href="blog.jsp">Blog</a>
-                            <ul class="dropdown">
-                                <li><a href="blog-details.jsp">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.jsp">Contacts</a></li>
-                    </ul>
-                </nav>
-                <div class="nav-right search-switch">
-                    <i class="ti-search"></i>
-                </div>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
+    <jsp:include page="/jsp/part/header_black.jsp"/>
 
-    <!-- Site Breadcrumb Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="../assets/img/about-breadcrumb-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="site-text">
-                        <h2>Schedule</h2>
-                        <div class="site-breadcrumb">
-                            <a href="./home.html" class="sb-item">Home</a>
-                            <span class="sb-item">Schedule</span>
+    <!-- PopUp Buy Start -->
+    <form>
+        <a href="#x" class="overlay" id="win1"></a>
+        <div class="popup">
+            <div class="text-center">
+                    <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="/mainController?command=buy_trainings">
+                                    <img class="card-img-top mb-3 w-auto" src="/assets/img/five.png"  alt="Buy" >
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/mainController?command=buy_trainings">
+                                    <img class="card-img-top mb-3 w-auto" src="/assets/img/ten.png"  alt="Buy" >
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="/mainController?command=buy_trainings">
+                                    <img class="card-img-top mb-3 w-auto" src="/assets/img/twenty.png"  alt="Buy" >
+                                </a>
+                            </div>
                         </div>
+                        <!-- Navigation -->
+                        <a class="carousel-control-prev bg-dark" href="#carousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Предыдущий</span>
+                        </a>
+                        <a class="carousel-control-next bg-dark" href="#carousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Следующий</span>
+                        </a>
                     </div>
-                </div>
             </div>
         </div>
-    </section>
-    <!-- Site Breadcrumb End -->
+    </form>
+    <!-- PopUp Buy Start -->
 
     <!-- Trainer Table Schedule Section Begin -->
     <section class="trainer-schedule class-timetable spad">
@@ -85,7 +80,29 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Class Timetable</h2>
+                        <a href="#win1"style="alignment: center;">
+                            <button class="primary-btn">
+                                Buy Trainings
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="site-text">
+                        You have 0 bought trainings!
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>
+
+                        </h2>
                         <div class="nav-controls">
                             <ul class="schedule-filter">
                                 <li class="active" data-tsfilter="all">All Class</li>

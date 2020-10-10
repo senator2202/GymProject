@@ -17,16 +17,20 @@ public class ChangeAdminLocaleCommand implements ActionCommand {
         String newLocale = oldLocale.equals(SessionAttributeValue.EN_LOCALE)
                 ? SessionAttributeValue.RU_LOCALE
                 : SessionAttributeValue.EN_LOCALE;
+        restoreAttributes(request);
+        request.getSession().setAttribute(SessionAttributeName.ADMIN_LOCALE, newLocale);
+        page = (String) request.getSession().getAttribute(SessionAttributeName.PREVIOUS_PAGE);
+        return page;
+    }
+
+    private void restoreAttributes(HttpServletRequest request) {
         RequestAttributesWrapper wrapper =
-                (RequestAttributesWrapper) request.getSession().getAttribute(SessionAttributeName.SAVED_ATTRIBUTES);
+            (RequestAttributesWrapper) request.getSession().getAttribute(SessionAttributeName.SAVED_ATTRIBUTES);
         Set<Map.Entry<String, Object>> set = wrapper.entrySet();
         for (Map.Entry<String, Object> entry : set) {
             String key = entry.getKey();
             Object value = entry.getValue();
             request.setAttribute(key, value);
         }
-        request.getSession().setAttribute(SessionAttributeName.ADMIN_LOCALE, newLocale);
-        page = (String) request.getSession().getAttribute(SessionAttributeName.PREVIOUS_PAGE);
-        return page;
     }
 }

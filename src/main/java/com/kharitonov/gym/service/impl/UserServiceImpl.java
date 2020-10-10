@@ -115,4 +115,14 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void updateUserImage(int userId, String imageName) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            dao.updateUserImage(userId, imageName);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

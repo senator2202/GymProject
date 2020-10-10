@@ -223,4 +223,14 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(e);
         }
     }
+
+    @Override
+    public void updateUserImage(int userId, String imageName) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = STATEMENT_CREATOR.statementUpdateImage(connection, userId, imageName)) {
+            statement.execute();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
 }

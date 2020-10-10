@@ -29,4 +29,6 @@ public interface UserDao extends BaseDao {
                              int graduationYear, String instagramLink) throws DaoException;
 
     List<User> findRecentUsers(int days) throws DaoException;
+
+    void updateUserImage(int userId, String imageName) throws DaoException;
 }

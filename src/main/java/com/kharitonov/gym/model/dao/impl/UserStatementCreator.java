@@ -15,7 +15,7 @@ class UserStatementCreator {
     private static final String SQL_SELECT_USER =
             "SELECT account_id, login, email, role, registration_date, locale, " +
                     "active, first_name, last_name, phone, discount, " +
-                    "rating, diet_id FROM accounts " +
+                    "rating, diet_id, image_name FROM accounts " +
                     "JOIN users ON account_id=user_id " +
                     "WHERE login=? AND password=?";
     private static final String SQL_SELECT_ID =
@@ -41,6 +41,8 @@ class UserStatementCreator {
             "SELECT users.user_id, first_name, last_name, phone, email, registration_date\n" +
                     "FROM users JOIN accounts ON users.user_id=accounts.account_id\n" +
                     "WHERE date(registration_date) >= CURDATE() - INTERVAL ? DAY ";
+    private static final String SQL_UPDATE_IMAGE =
+            "UPDATE users SET image_name=? WHERE user_id=?";
 
     private UserStatementCreator() {
     }
@@ -176,6 +178,13 @@ class UserStatementCreator {
     PreparedStatement statementSelectRecent(Connection connection, int days) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_RECENT);
         statement.setInt(1, days);
+        return statement;
+    }
+
+    PreparedStatement statementUpdateImage(Connection connection, int userId, String imageName) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_IMAGE);
+        statement.setString(1, imageName);
+        statement.setInt(2, userId);
         return statement;
     }
 }

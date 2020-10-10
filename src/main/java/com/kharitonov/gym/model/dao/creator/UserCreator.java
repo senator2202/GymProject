@@ -26,6 +26,7 @@ public class UserCreator {
         double discount = resultSet.getDouble(TableColumnName.USER_DISCOUNT);
         double rating = resultSet.getDouble(TableColumnName.USER_RATING);
         int dietId = resultSet.getInt(TableColumnName.USER_DIET_ID);
+        String imageName = resultSet.getString(TableColumnName.USER_IMAGE);
         Account account = Account.AccountBuilder.anAccount()
                 .withId(id)
                 .withName(login)
@@ -44,6 +45,7 @@ public class UserCreator {
             user = new Trainer(account, firstName, lastName, phone);
             ((Trainer) user).setRating(rating);
         }
+        user.setImageName(imageName);
         return user;
     }
 

@@ -36,11 +36,32 @@
 			<h2><fmt:message key="personal_profile.personalInformation"/></h2>
 			<p><fmt:message key="personal_profile.suggestion"/></p>
 		</div>
-		<a href="#win1">
-			<button class="primary-btn">
-				<fmt:message key="personal_profile.becomeTrainer"/>
-			</button>
-		</a>
+		<img src="${user.imageName}" style="max-width: 200px; max-height: 300px;"/>
+		<c:choose>
+			<c:when test="${user.imageName==null}">
+				<form action="/uploadController" enctype="multipart/form-data" method="post">
+					<input MULTIPLE type="file" name="content" height="130"/>
+					<button type="submit">
+						add image
+						<i class="ti-angle-double-right"></i>
+					</button>
+				</form>
+			</c:when>
+		</c:choose>
+		<p/>
+		<p/>
+		<p/>
+		<p/>
+		<p/>
+		<c:choose>
+			<c:when test="${user.account.role.toString()=='CLIENT'}">
+				<a href="#win1">
+					<button class="primary-btn">
+						<fmt:message key="personal_profile.becomeTrainer"/>
+					</button>
+				</a>
+			</c:when>
+		</c:choose>
 		<c:choose>
 			<c:when test="${applicationResult==true}">
 				<fmt:message key="personal_profile.sentApplication"/>
@@ -52,6 +73,8 @@
 				<fmt:message key="personal_profile.alreadySent"/>
 			</c:when>
 		</c:choose>
+
+		<!--popup window-->
 		<form action="/mainController">
 			<input type="hidden" name="command" value="send_trainer_application"/>
 			<a href="#x" class="overlay" id="win1"></a>
@@ -81,6 +104,7 @@
 				<a class="close" title=<fmt:message key="trainer_popup.close"/> href="#close"></a>
 			</div>
 		</form>
+		<!--popup window-->
 		<p/>
 		<p/>
 		<p/>
@@ -142,6 +166,9 @@
 				<i class="ti-angle-double-right"></i>
 			</button>
 		</form>
+	</div>
+	<div class="col-lg-10">
+
 	</div>
 </div>
 

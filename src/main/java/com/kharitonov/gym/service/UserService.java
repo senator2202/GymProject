@@ -23,4 +23,6 @@ public interface UserService {
                         int graduationYear, String instagramLink) throws ServiceException;
 
     List<User> findRecentUsers(int days) throws ServiceException;
+
+    void updateUserImage(int userId, String imageName) throws ServiceException;
 }
