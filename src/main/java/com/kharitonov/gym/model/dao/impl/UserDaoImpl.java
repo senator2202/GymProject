@@ -233,4 +233,24 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(e);
         }
     }
+
+    @Override
+    public void updateBalanceAndBoughtTrainings(int userId, double decreaseBalance, int increaseTrainings) throws DaoException {
+        Connection connection = pool.getConnection();
+        try (PreparedStatement statementDecrease =
+                     STATEMENT_CREATOR.statementDecreaseBalance(connection, userId, decreaseBalance);
+             PreparedStatement statementIncrease =
+                     STATEMENT_CREATOR.statementIncreaseTrainings(connection, userId, increaseTrainings)) {
+            connection.setAutoCommit(false);
+            statementDecrease.execute();
+            statementIncrease.execute();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        } finally {
+            setAutoCommitTrue(connection);
+            pool.releaseConnection(connection);
+        }
+    }
 }

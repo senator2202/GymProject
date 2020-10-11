@@ -25,12 +25,13 @@
 	<link rel="stylesheet" href="/assets/css/themify-icons.css"/>
 	<link rel="stylesheet" href="/assets/css/select-list.css"/>
 	<link rel="stylesheet" href="/assets/css/popup.css"/>
+	<link rel="stylesheet" href="/assets/css/calendar.css"/>
 </head>
 
 <body>
 <c:import url="part/header.jsp"/>
 
-<div class="footer-form set-bg" data-setbg="assets/img/contact-form-bg.jpg">
+<div class="footer-form set-bg"<%-- data-setbg="assets/img/contact-form-bg.jpg"--%>>
 	<div class="col-lg-10">
 		<div class="section-title">
 			<h2><fmt:message key="personal_profile.personalInformation"/></h2>
@@ -42,7 +43,7 @@
 				<form action="/uploadController" enctype="multipart/form-data" method="post">
 					<input MULTIPLE type="file" name="content" height="130"/>
 					<button type="submit">
-						add image
+						<fmt:message key="personal_profile.addImage"/>
 						<i class="ti-angle-double-right"></i>
 					</button>
 				</form>
@@ -74,7 +75,7 @@
 			</c:when>
 		</c:choose>
 
-		<!--popup window-->
+		<!--popup window start-->
 		<form action="/mainController">
 			<input type="hidden" name="command" value="send_trainer_application"/>
 			<a href="#x" class="overlay" id="win1"></a>
@@ -104,7 +105,7 @@
 				<a class="close" title=<fmt:message key="trainer_popup.close"/> href="#close"></a>
 			</div>
 		</form>
-		<!--popup window-->
+		<!--popup window end-->
 		<p/>
 		<p/>
 		<p/>
@@ -144,6 +145,24 @@
 					       value="${sessionScope.user.account.email}"/>
 				</div>
 			</div>
+
+			<c:if test="${user.account.role.toString()=='CLIENT'}">
+				<div class="text-light">
+					<fmt:message key="personal_profile.moneyBalance"/> ${user.moneyBalance}
+				</div>
+				<p/>
+				<p/>
+				<p/>
+				<p/>
+				<div class="text-light">
+					<fmt:message key="personal_profile.personalDiscount"/> ${user.personalDiscount}
+				</div>
+				<p/>
+				<p/>
+				<p/>
+				<p/>
+			</c:if>
+
 			<div class="select">
 				<select name="locale" id="slct">
 					<option selected disabled><fmt:message

@@ -13,9 +13,10 @@ public class OpenPageCommand implements ActionCommand {
 
     {
         pageMap = new HashMap<>();
-        pageMap.put("login", "/jsp/login.jsp");
-        pageMap.put("personal_profile", "/jsp/personal_profile.jsp");
-        pageMap.put("admin_main", "/jsp/admin_main.jsp");
+        pageMap.put("login", PagePath.LOGIN);
+        pageMap.put("personal_profile", PagePath.PERSONAL_PROFILE);
+        pageMap.put("admin_main", PagePath.ADMIN_MAIN);
+        pageMap.put("schedule", PagePath.SCHEDULE);
     }
 
     @Override

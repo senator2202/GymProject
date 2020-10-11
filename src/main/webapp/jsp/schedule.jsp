@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
+               scope="session"/>
+<fmt:setBundle basename="property/pagecontent"/>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -18,13 +22,13 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/popup.css"/>
 </head>
 
@@ -37,41 +41,52 @@
     <jsp:include page="/jsp/part/header_black.jsp"/>
 
     <!-- PopUp Buy Start -->
-    <form>
-        <a href="#x" class="overlay" id="win1"></a>
+        <a href="#x" class="overlay" id="popupBuy"></a>
         <div class="popup">
             <div class="text-center">
                     <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <a href="/mainController?command=buy_trainings">
-                                    <img class="card-img-top mb-3 w-auto" src="/assets/img/five.png"  alt="Buy" >
+                                <img class="card-img-top mb-3 w-auto" src="/assets/img/five.png"  alt="Buy" >
+                                <p/>
+                                <a href="/mainController?command=buy_trainings&number=5">
+                                    <button class="primary-btn">
+                                        <fmt:message key="buy_trainings.buyFor"/> ${(100 - user.personalDiscount)/100*5*20} <fmt:message key="buy_trainings.br"/>
+                                    </button>
                                 </a>
                             </div>
                             <div class="carousel-item">
-                                <a href="/mainController?command=buy_trainings">
-                                    <img class="card-img-top mb-3 w-auto" src="/assets/img/ten.png"  alt="Buy" >
+                                <img class="card-img-top mb-3 w-auto" src="/assets/img/ten.png"  alt="Buy" >
+                                <p/>
+                                <a href="/mainController?command=buy_trainings&number=10">
+                                    <button class="primary-btn">
+                                        <fmt:message key="buy_trainings.buyFor"/> ${(100 - user.personalDiscount)/100*10*20} <fmt:message key="buy_trainings.br"/>
+                                    </button>
                                 </a>
                             </div>
                             <div class="carousel-item">
-                                <a href="/mainController?command=buy_trainings">
-                                    <img class="card-img-top mb-3 w-auto" src="/assets/img/twenty.png"  alt="Buy" >
+                                <img class="card-img-top mb-3 w-auto" src="/assets/img/twenty.png"  alt="Buy" >
+                                <p/>
+                                <a href="/mainController?command=buy_trainings&number=20">
+                                    <button class="primary-btn">
+                                        <fmt:message key="buy_trainings.buyFor"/> ${(100 - user.personalDiscount)/100*20*20} <fmt:message key="buy_trainings.br"/>
+                                    </button>
                                 </a>
                             </div>
                         </div>
                         <!-- Navigation -->
                         <a class="carousel-control-prev bg-dark" href="#carousel" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Предыдущий</span>
+                            <span class="sr-only"><fmt:message key="buy_trainings.next"/></span>
                         </a>
                         <a class="carousel-control-next bg-dark" href="#carousel" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Следующий</span>
+                            <span class="sr-only"><fmt:message key="buy_trainings.previous"/></span>
                         </a>
                     </div>
             </div>
+            <a class="close" title=<fmt:message key="trainer_popup.close"/> href="#close"></a>
         </div>
-    </form>
     <!-- PopUp Buy Start -->
 
     <!-- Trainer Table Schedule Section Begin -->
@@ -80,9 +95,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <a href="#win1"style="alignment: center;">
+                        <a href="#popupBuy" style="alignment: center;">
                             <button class="primary-btn">
-                                Buy Trainings
+                                <fmt:message key="schedule.buyTrainings"/>
                             </button>
                         </a>
                     </div>
@@ -92,219 +107,23 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="site-text">
-                        You have 0 bought trainings!
+                        <fmt:message key="schedule.yourBalance"/> ${user.moneyBalance} <fmt:message key="schedule.br"/>
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>
-
-                        </h2>
-                        <div class="nav-controls">
-                            <ul class="schedule-filter">
-                                <li class="active" data-tsfilter="all">All Class</li>
-                                <li data-tsfilter="gym">Gym</li>
-                                <li data-tsfilter="crossfit">Crossfit</li>
-                                <li data-tsfilter="cardio">Cardio</li>
-                                <li data-tsfilter="body">Body</li>
-                                <li data-tsfilter="yoga">Yoga</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="schedule-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Monday</th>
-                                    <th>Tuesday</th>
-                                    <th>Wednesday</th>
-                                    <th>Thursday</th>
-                                    <th>Friday</th>
-                                    <th>Saturday</th>
-                                    <th>Sunday</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="workout-time">10.00</td>
-                                    <td class="gym ts-item" data-tsmeta="gym">
-                                        <h6>Gym</h6>
-                                        <span>10.00 - 11.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="yoga ts-item" data-tsmeta="yoga">
-                                        <h6>Yoga</h6>
-                                        <span>10.00 - 12.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="body ts-item" data-tsmeta="body">
-                                        <h6>Body</h6>
-                                        <span>10.00 - 12.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="cardio ts-item" data-tsmeta="cardio">
-                                        <h6>Cardio</h6>
-                                        <span>10.00 - 11.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="workout-time">14.00</td>
-                                    <td></td>
-                                    <td class="running ts-item" data-tsmeta="running">
-                                        <h6>Running</h6>
-                                        <span>14.00 - 16.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="box ts-item" data-tsmeta="box">
-                                        <h6>Box</h6>
-                                        <span>14.00 - 15.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="gym ts-item" data-tsmeta="gym">
-                                        <h6>Gym</h6>
-                                        <span>14.00 - 16.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="workout-time">16.00</td>
-                                    <td class="cardio ts-item" data-tsmeta="cardio">
-                                        <h6>Cardio</h6>
-                                        <span>16.00 - 18.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="gym ts-item" data-tsmeta="gym">
-                                        <h6>Gym</h6>
-                                        <span>16.00 - 19.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="yoga ts-item" data-tsmeta="yoga">
-                                        <h6>Yoga</h6>
-                                        <span>16.00 - 18.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="gym ts-item" data-tsmeta="gym">
-                                        <h6>Gym</h6>
-                                        <span>16.00 - 20.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="workout-time">18.00</td>
-                                    <td class="box ts-item" data-tsmeta="box">
-                                        <h6>Box</h6>
-                                        <span>18.00 - 22.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td class="body ts-item" data-tsmeta="body">
-                                        <h6>Body</h6>
-                                        <span>18.00 - 20.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="crossfit ts-item" data-tsmeta="crossfit">
-                                        <h6>Crossfit</h6>
-                                        <span>18.00 - 21.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="cardio ts-item" data-tsmeta="cardio">
-                                        <h6>Cardio</h6>
-                                        <span>18.00 - 22.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="workout-time">20.00</td>
-                                    <td></td>
-                                    <td class="gym ts-item" data-tsmeta="">
-                                        <h6>Gym</h6>
-                                        <span>20.00 - 12.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td class="body ts-item" data-tsmeta="">
-                                        <h6>Body</h6>
-                                        <span>20.00 - 21.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="cardio ts-item" data-tsmeta="">
-                                        <h6>Cardio</h6>
-                                        <span>20.00 - 22.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                    <td></td>
-                                    <td class="crossfit ts-item" data-tsmeta="">
-                                        <h6>Crossfit</h6>
-                                        <span>20.00 - 21.00</span>
-                                        <div class="trainer-name">
-                                            John Smith
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="site-text">
+                        <fmt:message key="schedule.youHave"/> ${user.boughtTrainings} <fmt:message key="schedule.boughtTrainings"/>
                     </div>
                 </div>
             </div>
         </div>
+        <jsp:include page="part/calendar.jsp"/>
     </section>
-    <!-- Trainer Table Schedule Section End -->
+
+
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">

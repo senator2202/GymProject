@@ -31,4 +31,6 @@ public interface UserDao extends BaseDao {
     List<User> findRecentUsers(int days) throws DaoException;
 
     void updateUserImage(int userId, String imageName) throws DaoException;
+
+    void updateBalanceAndBoughtTrainings(int userId, double decreaseBalance, int increaseTrainings) throws DaoException;
 }

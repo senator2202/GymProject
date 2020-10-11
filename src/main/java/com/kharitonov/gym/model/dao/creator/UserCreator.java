@@ -27,6 +27,8 @@ public class UserCreator {
         double rating = resultSet.getDouble(TableColumnName.USER_RATING);
         int dietId = resultSet.getInt(TableColumnName.USER_DIET_ID);
         String imageName = resultSet.getString(TableColumnName.USER_IMAGE);
+        double moneyBalance = resultSet.getDouble(TableColumnName.USER_MONEY_BALANCE);
+        int boughtTrainings = resultSet.getInt(TableColumnName.USER_BOUGHT_TRAININGS);
         Account account = Account.AccountBuilder.anAccount()
                 .withId(id)
                 .withName(login)
@@ -41,6 +43,8 @@ public class UserCreator {
             user = new Client(account, firstName, lastName, phone);
             ((Client) user).setPersonalDiscount(discount);
             ((Client) user).setDietId(dietId);
+            ((Client) user).setMoneyBalance(moneyBalance);
+            ((Client) user).setBoughtTrainings(boughtTrainings);
         } else if (userRole == UserRole.TRAINER) {
             user = new Trainer(account, firstName, lastName, phone);
             ((Trainer) user).setRating(rating);

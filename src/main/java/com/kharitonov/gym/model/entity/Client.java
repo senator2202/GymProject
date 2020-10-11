@@ -3,24 +3,21 @@ package com.kharitonov.gym.model.entity;
 import com.kharitonov.gym.model.entity.functionality.ClientFunctionality;
 import com.kharitonov.gym.model.entity.functionality.SportFunctionality;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
 public class Client extends User implements ClientFunctionality, SportFunctionality {
+    private double moneyBalance;
     private double personalDiscount;
     private int dietId;
-    private List<Training> plannedTrainings;
+    private int boughtTrainings;
 
     public Client() {
-        plannedTrainings = new ArrayList<>();
         account = Account.AccountBuilder.anAccount().build();
         account.setRole(UserRole.CLIENT);
     }
 
     public Client(Account account) {
-        plannedTrainings = new ArrayList<>();
         account.setRole(UserRole.CLIENT);
         this.account = account;
     }
@@ -28,6 +25,14 @@ public class Client extends User implements ClientFunctionality, SportFunctional
     public Client(Account account, String firstName,
                   String lastName, String phoneNumber) {
         super(account, firstName, lastName, phoneNumber);
+    }
+
+    public double getMoneyBalance() {
+        return moneyBalance;
+    }
+
+    public void setMoneyBalance(double moneyBalance) {
+        this.moneyBalance = moneyBalance;
     }
 
     public double getPersonalDiscount() {
@@ -46,18 +51,22 @@ public class Client extends User implements ClientFunctionality, SportFunctional
         this.dietId = dietId;
     }
 
-    public void setPlannedTrainings(List<Training> plannedTrainings) {
-        this.plannedTrainings = plannedTrainings;
+    public int getBoughtTrainings() {
+        return boughtTrainings;
+    }
+
+    public void setBoughtTrainings(int boughtTrainings) {
+        this.boughtTrainings = boughtTrainings;
     }
 
     @Override
     public void doTraining(Training training) {
-        plannedTrainings.remove(training);
+
     }
 
     @Override
     public List<Training> allPlannedTrainings() {
-        return Collections.unmodifiableList(plannedTrainings);
+        return null;
     }
 
     @Override

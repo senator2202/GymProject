@@ -17,6 +17,8 @@ public class TableColumnName {
     public static final String USER_RATING = "rating";
     public static final String USER_DIET_ID = "diet_id";
     public static final String USER_IMAGE = "image_name";
+    public static final String USER_MONEY_BALANCE = "money_balance";
+    public static final String USER_BOUGHT_TRAININGS = "bought_trainings";
     public static final String TRAINER_APPLICATION_INSTITUTION = "app_institution";
     public static final String TRAINER_APPLICATION_GRADUATION_YEAR = "app_graduation";
     public static final String TRAINER_APPLICATION_INSTAGRAM_LINK = "app_instagram";

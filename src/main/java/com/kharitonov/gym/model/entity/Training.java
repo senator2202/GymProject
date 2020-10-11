@@ -11,11 +11,8 @@ public class Training {
     private int trainingId;
     private int trainerId;
     private int clientId;
-    private double cost;
     private Date date;
-    private Time startTime;
-    private Time endTime;
-    private boolean isBought;
+    private Time time;
     private boolean isDone;
 
     public Training() {
@@ -46,22 +43,6 @@ public class Training {
         this.clientId = clientId;
     }
 
-    public void setIsBought(boolean bought) {
-        isBought = bought;
-    }
-
-    public boolean isBought() {
-        return isBought;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -70,20 +51,12 @@ public class Training {
         this.date = date;
     }
 
-    public Time getStartTime() {
-        return startTime;
+    public Time getTime() {
+        return time;
     }
 
-    public void setStartTime(Time startTime) {
-        this.startTime = startTime;
-    }
-
-    public Time getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Time endTime) {
-        this.endTime = endTime;
+    public void setTime(Time time) {
+        this.time = time;
     }
 
     public boolean isDone() {

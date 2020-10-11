@@ -1,6 +1,7 @@
 package com.kharitonov.gym.service;
 
 import com.kharitonov.gym.exception.ServiceException;
+import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.User;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface UserService {
     List<User> findRecentUsers(int days) throws ServiceException;
 
     void updateUserImage(int userId, String imageName) throws ServiceException;
+
+    void buyTrainings(Client client, int trainingsNumber,  double trainingCost) throws ServiceException;
 }

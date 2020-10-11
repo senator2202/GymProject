@@ -30,12 +30,7 @@
         display: none;
     }
 
-    &.bs-tether-element-attached-top:after{
-        border-bottom-color:$white-color;
-        top: -9px;
-    }
-
-    &.popover-primary{
+  &.popover-primary{
         @include popover-color($primary-color, $white-color);
     }
 

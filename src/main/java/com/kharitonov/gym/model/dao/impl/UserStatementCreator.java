@@ -15,8 +15,8 @@ class UserStatementCreator {
     private static final String SQL_SELECT_USER =
             "SELECT account_id, login, email, role, registration_date, locale, " +
                     "active, first_name, last_name, phone, discount, " +
-                    "rating, diet_id, image_name FROM accounts " +
-                    "JOIN users ON account_id=user_id " +
+                    "rating, diet_id, image_name, money_balance, bought_trainings " +
+                    "FROM accounts JOIN users ON account_id=user_id " +
                     "WHERE login=? AND password=?";
     private static final String SQL_SELECT_ID =
             "SELECT account_id FROM accounts WHERE login=? AND password=?";
@@ -43,6 +43,10 @@ class UserStatementCreator {
                     "WHERE date(registration_date) >= CURDATE() - INTERVAL ? DAY ";
     private static final String SQL_UPDATE_IMAGE =
             "UPDATE users SET image_name=? WHERE user_id=?";
+    private static final String SQL_DECREASE_BALANCE =
+            "UPDATE users SET money_balance=money_balance - ? WHERE user_id=?";
+    private static final String SQL_INCREASE_TRAININGS =
+            "UPDATE users SET bought_trainings=bought_trainings + ? WHERE user_id=?";
 
     private UserStatementCreator() {
     }
@@ -184,6 +188,22 @@ class UserStatementCreator {
     PreparedStatement statementUpdateImage(Connection connection, int userId, String imageName) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_IMAGE);
         statement.setString(1, imageName);
+        statement.setInt(2, userId);
+        return statement;
+    }
+
+    PreparedStatement statementDecreaseBalance(Connection connection, int userId, double decreaseBalance)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_DECREASE_BALANCE);
+        statement.setDouble(1, decreaseBalance);
+        statement.setInt(2, userId);
+        return statement;
+    }
+
+    PreparedStatement statementIncreaseTrainings(Connection connection, int userId, int boughtTrainings)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_INCREASE_TRAININGS);
+        statement.setInt(1, boughtTrainings);
         statement.setInt(2, userId);
         return statement;
     }

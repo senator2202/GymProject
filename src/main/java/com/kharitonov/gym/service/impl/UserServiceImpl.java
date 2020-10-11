@@ -4,6 +4,7 @@ import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
+import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.UserService;
 import com.kharitonov.gym.util.CryptoUtility;
@@ -19,8 +20,7 @@ public class UserServiceImpl implements UserService {
     private static final String REGEX_EMAIL =
             "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)" +
                     "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-    private static final Logger LOGGER =
-            LogManager.getLogger(UserServiceImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
 
     public static UserServiceImpl getInstance() {
@@ -121,6 +121,27 @@ public class UserServiceImpl implements UserService {
         UserDao dao = new UserDaoImpl();
         try {
             dao.updateUserImage(userId, imageName);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void buyTrainings(Client client, int trainingsNumber, double trainingCost) throws ServiceException {
+        double discount = client.getPersonalDiscount();
+        double balance = client.getMoneyBalance();
+        double sum = trainingsNumber * trainingCost;
+        double absoluteDiscount = sum * discount / 100;
+        sum -= absoluteDiscount;
+        if (balance < sum) {
+            throw new ServiceException("Money balance is too low!");
+        }
+        int id = client.getAccount().getId();
+        UserDao dao = new UserDaoImpl();
+        try {
+            dao.updateBalanceAndBoughtTrainings(id, sum, trainingsNumber);
+            client.setBoughtTrainings(client.getBoughtTrainings() + trainingsNumber);
+            client.setMoneyBalance(client.getMoneyBalance() - sum);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
