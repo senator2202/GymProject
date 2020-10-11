@@ -23,6 +23,11 @@ public class TableColumnName {
     public static final String TRAINER_APPLICATION_GRADUATION_YEAR = "app_graduation";
     public static final String TRAINER_APPLICATION_INSTAGRAM_LINK = "app_instagram";
     public static final String TRAINER_APPLICATION_APPLICATION_DATE = "application_date";
+    public static final String TRAINING_ID = "training_id";
+    public static final String TRAINER_ID = "trainer_id";
+    public static final String TRAINER_FIRST_NAME = "trainer_first_name";
+    public static final String TRAINER_LAST_NAME = "trainer_last_name";
+    public static final String TRAINING_DATE = "training_date";
 
     private TableColumnName() {
     }

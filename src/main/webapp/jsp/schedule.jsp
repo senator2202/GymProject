@@ -22,14 +22,20 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/assets/css/login.css"/>
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="/assets/css/slicknav.min.css"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
+    <link rel="stylesheet" href="/assets/css/themify-icons.css"/>
+    <link rel="stylesheet" href="/assets/css/select-list.css"/>
     <link rel="stylesheet" href="/assets/css/popup.css"/>
+    <link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -89,6 +95,40 @@
         </div>
     <!-- PopUp Buy Start -->
 
+    <!-- PopUp Add Training Start -->
+    <form action="/mainController" class="col-lg-10">
+        <input type="hidden" name="command" value="add_training"/>
+        <a href="#x" class="overlay" id="popupAdd"></a>
+        <div class="popup">
+            <div class="col-lg-6">
+                <div class="select">
+                    <select name="trainer" id="slct">
+                        <option selected disabled>Select trainer</option>
+                        <c:forEach items="${trainers}" var="trainer">
+                            <option>${trainer.firstName} ${trainer.lastName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <p/>
+            <p/>
+            <div class="col-lg-6">
+                <input type="date" name="trainingDate"/>
+            </div>
+            <p/>
+            <p/>
+            <div class="col-lg-6">
+                <a href="#">
+                    <button class="primary-btn" type="submit">
+                        Add training
+                    </button>
+                </a>
+            </div>
+            <a class="close" title=<fmt:message key="trainer_popup.close"/> href="#close"></a>
+        </div>
+    </form>
+    <!-- PopUp Add Training End -->
+
     <!-- Trainer Table Schedule Section Begin -->
     <section class="trainer-schedule class-timetable spad">
         <div class="container">
@@ -120,107 +160,69 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="part/calendar.jsp"/>
-    </section>
 
-
-
-    <!-- Footer Section Begin -->
-    <footer class="footer-section">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="map-location">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d33245.297803635964!2d-73.76987401620775!3d40.704774398815005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1575866843291!5m2!1sen!2sbd" style="border:0;" allowfullscreen=""></iframe>
-                        <div class="map-widget">
-                            <i class="fa fa-map-marker"></i>
-                            <div class="map-address">
-                                <img src="../assets/img/map-location.jpg" alt="">
-                                <ul class="map-text">
-                                    <li><span>Address:</span> Iris Watson, Box 283, NY</li>
-                                    <li><span>Phone:</span> 12-456-791</li>
-                                </ul>
-                            </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title "><fmt:message key="schedule.tableTitle"/></h4>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="footer-form set-bg" data-setbg="../assets/img/contact-form-bg.jpg">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="section-title">
-                                    <h2>Request A Call Back</h2>
-                                    <p>Shape your body and burn fat with strength training. With the right equipment
-                                        such as free weights or resistance machines.</p>
-                                </div>
-                                <form action="#">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder="Name">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" placeholder="Email">
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <input type="text" placeholder="Subject">
-                                            <textarea placeholder="Message"></textarea>
-                                            <button type="submit">Submit <i class="ti-angle-double-right"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="register normal-register">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="copyright">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
-                        <div class="footer-widget">
-                            <ul>
-                                <li class="active">Privacy Policy</li>
-                                <li>Terms Of Service</li>
-                                <li>Careers</li>
-                            </ul>
-                        </div>
-                        <div class="footer-links">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>
+                                            <fmt:message key="schedule.trainer"/>
+                                        </th>
+                                        <th>
+                                            <fmt:message key="schedule.date"/>
+                                        </th>
+                                        <th>
+                                            <fmt:message key="schedule.description"/>
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${trainings}" var="training">
+                                        <tr>
+                                            <td>
+                                                    ${training.trainerFirstName}  ${training.trainerLastName}
+                                            </td>
+                                            <td>
+                                                    ${training.date}
+                                            </td>
+                                            <td>
 
-    <!-- Search model Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+
+                                </table>
+                                <a href="#popupAdd" style="alignment: center;">
+                                    <button class="primary-btn">
+                                        Add
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <!-- Search model end -->
+
+    </section>
+
+    <jsp:include page="/jsp/part/footer.jsp"/>
 
     <!-- Js Plugins -->
-    <script src="../assets/js/jquery-3.3.1.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="../assets/js/mixitup.min.js"></script>
-    <script src="../assets/js/jquery.slicknav.js"></script>
-    <script src="../assets/js/owl.carousel.min.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="/assets/js/mixitup.min.js"></script>
+    <script src="/assets/js/jquery.slicknav.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
 
 </html>

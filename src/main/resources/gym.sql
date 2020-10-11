@@ -34,20 +34,10 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   UNIQUE KEY `name` (`login`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.accounts: ~46 rows (приблизительно)
+-- Дамп данных таблицы gym.accounts: ~40 rows (приблизительно)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `registration_date`, `locale`, `active`) VALUES
 	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 'RUSSIAN', 1),
-	(244, 'trainer71859', 'AonR|Uqgzh7g~JKg', 'email7284605@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
-	(245, 'trainer645552', 'AoHQ}Uqgzh7g~JKg', 'email6685704@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
-	(246, 'trainer2029481', 'AQHQ7Uqgzh7g~JKg', 'email5884185@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
-	(247, 'trainer4221846', 'AkHS9Uqgzh7g~JKg', 'email8160483@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
-	(248, 'trainer8841979', 'AU~R9Uqgzh7g~JKg', 'email248612@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
-	(249, 'trainer6324127', 'AonQ|Uqgzh7g~JKg', 'email5628617@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
-	(250, 'trainer6046214', 'AgXQ8Uqgzh7g~JKg', 'email6963601@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
-	(251, 'trainer7928486', 'A]HQ7Uqgzh7g~JKg', 'email2738387@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
-	(252, 'trainer3340977', 'AknQ6Uqgzh7g~JKg', 'email2965659@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
-	(253, 'trainer7525224', 'AUXS8Uqgzh7g~JKg', 'email2822410@gmail.com', 'TRAINER', '2020-09-09 21:29:17', 'RUSSIAN', 0),
 	(254, 'client7371660', 'AAER9Uqgzh7g~JKg', 'email4056426@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(255, 'client2361832', 'AoHQ~Uqgzh7g~JKg', 'email3396525@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(256, 'client6704641', 'AQHQ~Uqgzh7g~JKg', 'email222817@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
@@ -78,7 +68,7 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
-	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'ENGLISH', 1),
+	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
 	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 1),
@@ -144,11 +134,8 @@ CREATE TABLE IF NOT EXISTS `marks` (
   CONSTRAINT `FK__users_2` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.marks: ~2 rows (приблизительно)
+-- Дамп данных таблицы gym.marks: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `marks` DISABLE KEYS */;
-REPLACE INTO `marks` (`client_id`, `trainer_id`, `mark`, `mark_date`) VALUES
-	(260, 250, 5, '2020-09-16 15:34:06'),
-	(255, 253, 3, '2020-09-16 15:35:23');
 /*!40000 ALTER TABLE `marks` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.trainer_applications
@@ -163,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `trainer_applications` (
   CONSTRAINT `FK_trainer_applications_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы gym.trainer_applications: ~2 rows (приблизительно)
+-- Дамп данных таблицы gym.trainer_applications: ~1 rows (приблизительно)
 /*!40000 ALTER TABLE `trainer_applications` DISABLE KEYS */;
 REPLACE INTO `trainer_applications` (`user_id`, `app_institution`, `app_graduation`, `app_instagram`, `application_date`) VALUES
 	(288, 'MGU', 2015, 'instagram.com/xzibit', '2020-09-29 11:10:54');
@@ -175,25 +162,25 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   `training_id` int NOT NULL AUTO_INCREMENT,
   `trainer_id` int NOT NULL,
   `client_id` int NOT NULL,
-  `cost` double NOT NULL DEFAULT '0',
-  `date` date NOT NULL,
-  `start` time NOT NULL,
-  `end` time NOT NULL,
-  `bought` tinyint NOT NULL DEFAULT '0',
+  `training_date` date DEFAULT NULL,
+  `training_time` time DEFAULT NULL,
+  `done` tinyint DEFAULT '0',
   PRIMARY KEY (`training_id`) USING BTREE,
   UNIQUE KEY `id` (`training_id`) USING BTREE,
   KEY `FK_trainings_users` (`trainer_id`),
   KEY `FK_trainings_users_2` (`client_id`),
   CONSTRAINT `FK_trainings_users` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~3 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~4 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
-REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `cost`, `date`, `start`, `end`, `bought`) VALUES
-	(1, 253, 254, 20, '2020-09-20', '16:00:00', '17:00:00', 1),
-	(2, 253, 255, 20, '2020-09-20', '18:00:00', '19:00:00', 0),
-	(3, 250, 260, 25, '2020-09-18', '12:00:00', '13:00:00', 0);
+REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`) VALUES
+	(1, 274, 254, '2020-09-20', '16:00:00', NULL),
+	(2, 301, 255, '2020-09-20', '18:00:00', NULL),
+	(3, 302, 260, '2020-09-18', '12:00:00', NULL),
+	(9, 301, 284, '2020-10-15', '12:00:00', 0),
+	(10, 302, 284, '2020-10-16', '12:00:00', 0);
 /*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.training_exercises
@@ -222,73 +209,66 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int NOT NULL,
   `first_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
   `last_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
-  `phone` varchar(30) DEFAULT '',
+  `phone` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '',
   `rating` double(22,0) DEFAULT '0',
-  `institution` varchar(30) DEFAULT NULL,
+  `institution` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `graduation` int DEFAULT NULL,
-  `instagram` varchar(30) DEFAULT NULL,
+  `instagram` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `discount` double(22,0) DEFAULT '0',
   `diet_id` int DEFAULT NULL,
+  `image_name` varchar(90) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `money_balance` int DEFAULT '100',
+  `bought_trainings` double DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`),
   KEY `FK_users_diets` (`diet_id`),
   CONSTRAINT `FK_users_accounts` FOREIGN KEY (`user_id`) REFERENCES `accounts` (`account_id`),
   CONSTRAINT `FK_users_diets` FOREIGN KEY (`diet_id`) REFERENCES `diets` (`diet_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы gym.users: ~48 rows (приблизительно)
+-- Дамп данных таблицы gym.users: ~40 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `institution`, `graduation`, `instagram`, `discount`, `diet_id`) VALUES
-	(243, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(244, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(245, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(246, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(247, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(248, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(249, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(250, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(251, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(252, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(253, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(254, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(255, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(256, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(257, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(258, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(259, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(260, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(261, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(262, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(263, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(264, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(265, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(266, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(267, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(268, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(269, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(270, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(271, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(272, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(273, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(274, 'Sveta', 'Tuhto', '+375296459988', NULL, 'BSUFC', 2019, 'instagram.com/arni', NULL, NULL),
-	(275, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(276, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(277, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(278, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(279, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(280, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
-	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1),
-	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, NULL, NULL, NULL, 1),
-	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL),
-	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL),
-	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2),
-	(289, '', '', '', 0, NULL, NULL, NULL, 0, NULL),
-	(301, 'Anastacia', 'Lipinskaya', '+375441234598', 0, 'MSLU', 2012, 'instagram.com/mslu', 0, NULL),
-	(302, 'Pipko', 'Dmitrii', '80296558891', 0, 'BSUIR', 2008, 'instagram.com/pipko', 0, NULL),
-	(303, 'Bill', 'Perkins', '80291111111', 0, NULL, NULL, NULL, 0, NULL),
-	(304, 'Perr', 'Billkins', '80292222222', 0, NULL, NULL, NULL, 0, NULL);
+REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `institution`, `graduation`, `instagram`, `discount`, `diet_id`, `image_name`, `money_balance`, `bought_trainings`) VALUES
+	(243, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(254, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(255, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(256, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(257, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(258, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(259, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(260, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(261, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(262, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(263, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(264, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(265, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(266, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(267, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(268, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(269, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(270, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(271, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(272, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(273, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(274, 'Sveta', 'Tuhto', '+375296459988', NULL, 'BSUFC', 2019, 'instagram.com/arni', NULL, NULL, NULL, NULL, NULL),
+	(275, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(276, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(277, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(278, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(279, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(280, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, 'uploads\\f5aa226a-22e0-47af-9eea-8aeb53576973.jpg', 410, 5),
+	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
+	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
+	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2, NULL, NULL, NULL),
+	(289, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
+	(301, 'Anastacia', 'Lipinskaya', '+375441234598', 0, 'MSLU', 2012, 'instagram.com/mslu', 0, NULL, NULL, NULL, NULL),
+	(302, 'Pipko', 'Dmitrii', '80296558891', 0, 'BSUIR', 2008, 'instagram.com/pipko', 0, NULL, NULL, NULL, NULL),
+	(303, 'Bill', 'Perkins', '80291111111', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
+	(304, 'Perr', 'Billkins', '80292222222', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

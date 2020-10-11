@@ -25,7 +25,7 @@ public class ChangeAdminLocaleCommand implements ActionCommand {
 
     private void restoreAttributes(HttpServletRequest request) {
         RequestAttributesWrapper wrapper =
-            (RequestAttributesWrapper) request.getSession().getAttribute(SessionAttributeName.SAVED_ATTRIBUTES);
+                (RequestAttributesWrapper) request.getSession().getAttribute(SessionAttributeName.SAVED_ATTRIBUTES);
         Set<Map.Entry<String, Object>> set = wrapper.entrySet();
         for (Map.Entry<String, Object> entry : set) {
             String key = entry.getKey();

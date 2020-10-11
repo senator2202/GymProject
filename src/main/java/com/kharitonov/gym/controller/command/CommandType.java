@@ -18,7 +18,8 @@ public enum CommandType {
     CHANGE_ADMIN_LOCALE(new ChangeAdminLocaleCommand()),
     UPLOAD_IMAGE(new UploadImageCommand()),
     BUY_TRAININGS(new BuyTrainingsCommand()),
-    OPEN_SCHEDULE(new OpenScheduleCommand());
+    OPEN_SCHEDULE(new OpenScheduleCommand()),
+    ADD_TRAINING(new AddTrainingCommand());
 
     private final ActionCommand command;
 

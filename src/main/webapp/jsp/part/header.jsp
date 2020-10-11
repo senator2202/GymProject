@@ -13,7 +13,7 @@
                 <ul>
                     <li class="active"><a href="/index.jsp">Home</a></li>
                     <li><a href="/jsp/about-us.jsp">About</a></li>
-                    <li><a href="/mainController?command=open_page&page=schedule">Schedule</a></li>
+                    <li><a href="/mainController?command=open_schedule">Schedule</a></li>
                     <li><a href="/jsp/gallery.jsp">Portfolio</a></li>
                     <li><a href="/jsp/contact.jsp">Contacts</a></li>
                     <li><a href="/mainController?command=open_admin_main">Admin</a></li>

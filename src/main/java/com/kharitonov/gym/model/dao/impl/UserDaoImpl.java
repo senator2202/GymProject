@@ -4,9 +4,7 @@ import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.dao.creator.TableColumnName;
 import com.kharitonov.gym.model.dao.creator.UserCreator;
-import com.kharitonov.gym.model.entity.Client;
-import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.entity.*;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -251,6 +249,40 @@ public class UserDaoImpl implements UserDao {
         } finally {
             setAutoCommitTrue(connection);
             pool.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public List<User> findAllTrainers() throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = STATEMENT_CREATOR.statementSelectAllTrainers(connection);
+             ResultSet resultSet = statement.executeQuery()) {
+            List<User> trainers = new ArrayList<>();
+            while (resultSet.next()) {
+                Account account = Account.AccountBuilder.anAccount()
+                        .withId(resultSet.getInt(TableColumnName.ACCOUNT_ID))
+                        .build();
+                User user = new Trainer(account);
+                user.setFirstName(resultSet.getString(TableColumnName.USER_FIRST_NAME));
+                user.setLastName(resultSet.getString(TableColumnName.USER_LAST_NAME));
+                trainers.add(user);
+            }
+            return trainers;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public int findId(String firstName, String lastName) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement select =
+                     STATEMENT_CREATOR.statementSelectUserId(connection, firstName, lastName);
+             ResultSet resultSet = select.executeQuery()) {
+            resultSet.next();
+            return resultSet.getInt(TableColumnName.USER_ID);
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
     }
 }

@@ -17,6 +17,7 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private static final UserServiceImpl INSTANCE = new UserServiceImpl();
+    private static final String SPACE = " ";
     private static final String REGEX_EMAIL =
             "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)" +
                     "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
@@ -142,6 +143,29 @@ public class UserServiceImpl implements UserService {
             dao.updateBalanceAndBoughtTrainings(id, sum, trainingsNumber);
             client.setBoughtTrainings(client.getBoughtTrainings() + trainingsNumber);
             client.setMoneyBalance(client.getMoneyBalance() - sum);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<User> findAllTrainers() throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            return dao.findAllTrainers();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public int findId(String name) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        String[] temp = name.split(SPACE);
+        String firstName = temp[0];
+        String lastName = temp[1];
+        try {
+            return dao.findId(firstName, lastName);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class UploadImageCommand implements ActionCommand {
-    private final UserServiceImpl service = UserServiceImpl.getInstance();
     private static final Logger LOGGER = LogManager.getLogger(UploadImageCommand.class);
     private static final String UPLOAD_DIR = "uploads";
     private static final String SLASH = "\\";
@@ -28,6 +27,7 @@ public class UploadImageCommand implements ActionCommand {
     private static final String EXTENSION_SEPARATOR = ".";
     private static final int FILE_SIZE_THRESHOLD = 1024 * 1024;
     private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 5 * 5;
+    private final UserServiceImpl service = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -68,12 +68,12 @@ public class UploadImageCommand implements ActionCommand {
         String uploadPath = defineUploadPath(request);
         String uploadName = generateName(fileItem.getName());
         File uploadedFile = new File(uploadPath + uploadName);
-        String contextPath ;
+        String contextPath;
         try {
             String itemName = fileItem.getName();
             fileItem.write(uploadedFile);
             LOGGER.info("File {} was successfully uploaded!", itemName);
-            contextPath =  UPLOAD_DIR + SLASH + uploadName;
+            contextPath = UPLOAD_DIR + SLASH + uploadName;
         } catch (Exception e) {
             LOGGER.info("Unable to save file!", e);
             contextPath = null;

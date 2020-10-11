@@ -15,7 +15,6 @@
 	      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
 	<title><fmt:message key="personal_profile.personalProfile"/></title>
 	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="/assets/css/login.css"/>
 	<link rel="stylesheet" href="/assets/css/magnific-popup.css"/>
@@ -25,7 +24,6 @@
 	<link rel="stylesheet" href="/assets/css/themify-icons.css"/>
 	<link rel="stylesheet" href="/assets/css/select-list.css"/>
 	<link rel="stylesheet" href="/assets/css/popup.css"/>
-	<link rel="stylesheet" href="/assets/css/calendar.css"/>
 </head>
 
 <body>
@@ -117,28 +115,28 @@
 			<input type="hidden" name="command" value="update_personal_info">
 			<div class="row">
 				<div class="col-lg-6">
-					<label for="firstName">
+					<label for="firstName" class="text-light">
 						<fmt:message key="personal_profile.firstNameHint"/>
 					</label>
 					<input type="text" id="firstName" name="firstName"
 					       value="${sessionScope.user.firstName}"/>
 				</div>
 				<div class="col-lg-6">
-					<label for="lasName">
+					<label for="lastName" class="text-light">
 						<fmt:message key="personal_profile.lastNameHint"/>
 					</label>
-					<input type="text" id="lasName" name="lastName"
+					<input type="text" id="lastName" name="lastName"
 					       value="${sessionScope.user.lastName}"/>
 				</div>
 				<div class="col-lg-6">
-					<label for="phone">
+					<label for="phone" class="text-light">
 						<fmt:message key="personal_profile.phoneHint"/>
 					</label>
 					<input type="text" id="phone" name="phone"
 					       value="${sessionScope.user.phoneNumber}"/>
 				</div>
 				<div class="col-lg-6">
-					<label for="phone">
+					<label for="phone" class="text-light">
 						<fmt:message key="personal_profile.email"/>
 					</label>
 					<input type="text" id="email" name="email"

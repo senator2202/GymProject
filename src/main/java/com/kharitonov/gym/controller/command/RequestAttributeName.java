@@ -13,6 +13,8 @@ public class RequestAttributeName {
     public static final String REGISTRATIONS_TAB = "registrationsTab";
     public static final String DAYS_NUMBER = "days";
     public static final String PROFILE_IMAGE = "imageProfile";
+    public static final String TRAINERS = "trainers";
+    public static final String TRAININGS = "trainings";
 
     private RequestAttributeName() {
 

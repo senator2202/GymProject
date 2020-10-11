@@ -10,7 +10,11 @@ public class Training {
     private final List<Exercise> exercises;
     private int trainingId;
     private int trainerId;
+    private String trainerFirstName;
+    private String trainerLastName;
     private int clientId;
+    private String clientFirstName;
+    private String clientLastName;
     private Date date;
     private Time time;
     private boolean isDone;
@@ -35,12 +39,44 @@ public class Training {
         this.trainerId = trainerId;
     }
 
+    public String getTrainerFirstName() {
+        return trainerFirstName;
+    }
+
+    public void setTrainerFirstName(String trainerFirstName) {
+        this.trainerFirstName = trainerFirstName;
+    }
+
+    public String getTrainerLastName() {
+        return trainerLastName;
+    }
+
+    public void setTrainerLastName(String trainerLastName) {
+        this.trainerLastName = trainerLastName;
+    }
+
     public int getClientId() {
         return clientId;
     }
 
     public void setClientId(int clientId) {
         this.clientId = clientId;
+    }
+
+    public String getClientFirstName() {
+        return clientFirstName;
+    }
+
+    public void setClientFirstName(String clientFirstName) {
+        this.clientFirstName = clientFirstName;
+    }
+
+    public String getClientLastName() {
+        return clientLastName;
+    }
+
+    public void setClientLastName(String clientLastName) {
+        this.clientLastName = clientLastName;
     }
 
     public Date getDate() {

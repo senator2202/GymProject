@@ -20,6 +20,8 @@ public class RequestParameter {
     public static final String APPLICATION_INSTAGRAM = "appInstagram";
     public static final String RECENT_DAYS = "days";
     public static final String TRAININGS_NUMBER = "number";
+    public static final String TRAINER = "trainer";
+    public static final String TRAINING_DATE = "trainingDate";
 
     private RequestParameter() {
     }

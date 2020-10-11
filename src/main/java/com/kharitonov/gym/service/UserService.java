@@ -27,5 +27,9 @@ public interface UserService {
 
     void updateUserImage(int userId, String imageName) throws ServiceException;
 
-    void buyTrainings(Client client, int trainingsNumber,  double trainingCost) throws ServiceException;
+    void buyTrainings(Client client, int trainingsNumber, double trainingCost) throws ServiceException;
+
+    List<User> findAllTrainers() throws ServiceException;
+
+    int findId(String name) throws ServiceException;
 }

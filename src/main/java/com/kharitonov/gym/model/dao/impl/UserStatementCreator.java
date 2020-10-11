@@ -47,6 +47,12 @@ class UserStatementCreator {
             "UPDATE users SET money_balance=money_balance - ? WHERE user_id=?";
     private static final String SQL_INCREASE_TRAININGS =
             "UPDATE users SET bought_trainings=bought_trainings + ? WHERE user_id=?";
+    private static final String SQL_SELECT_ALL_TRAINERS =
+            "SELECT account_id, first_name, last_name " +
+                    "FROM users JOIN accounts ON user_id=account_id " +
+                    "WHERE role='TRAINER'";
+    private static final String SQL_SELECT_USER_ID =
+            "SELECT user_id FROM users WHERE first_name=? AND last_name=?";
 
     private UserStatementCreator() {
     }
@@ -205,6 +211,19 @@ class UserStatementCreator {
         PreparedStatement statement = connection.prepareStatement(SQL_INCREASE_TRAININGS);
         statement.setInt(1, boughtTrainings);
         statement.setInt(2, userId);
+        return statement;
+    }
+
+    PreparedStatement statementSelectAllTrainers(Connection connection) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ALL_TRAINERS);
+        return statement;
+    }
+
+    PreparedStatement statementSelectUserId(Connection connection, String firstName, String lastName)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_USER_ID);
+        statement.setString(1, firstName);
+        statement.setString(2, lastName);
         return statement;
     }
 }
