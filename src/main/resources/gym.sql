@@ -68,7 +68,7 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
-	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
+	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'ENGLISH', 1),
 	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 1),
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `trainer_applications` (
   CONSTRAINT `FK_trainer_applications_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы gym.trainer_applications: ~1 rows (приблизительно)
+-- Дамп данных таблицы gym.trainer_applications: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `trainer_applications` DISABLE KEYS */;
 REPLACE INTO `trainer_applications` (`user_id`, `app_institution`, `app_graduation`, `app_instagram`, `application_date`) VALUES
 	(288, 'MGU', 2015, 'instagram.com/xzibit', '2020-09-29 11:10:54');
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   `trainer_id` int NOT NULL,
   `client_id` int NOT NULL,
   `training_date` date DEFAULT NULL,
-  `training_time` time DEFAULT NULL,
+  `training_time` time DEFAULT '12:00:00',
   `done` tinyint DEFAULT '0',
   PRIMARY KEY (`training_id`) USING BTREE,
   UNIQUE KEY `id` (`training_id`) USING BTREE,
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   KEY `FK_trainings_users_2` (`client_id`),
   CONSTRAINT `FK_trainings_users` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- Дамп данных таблицы gym.trainings: ~4 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
@@ -180,22 +180,24 @@ REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_da
 	(2, 301, 255, '2020-09-20', '18:00:00', NULL),
 	(3, 302, 260, '2020-09-18', '12:00:00', NULL),
 	(9, 301, 284, '2020-10-15', '12:00:00', 0),
-	(10, 302, 284, '2020-10-16', '12:00:00', 0);
+	(10, 302, 284, '2020-10-16', '12:00:00', 0),
+	(12, 301, 284, '2020-10-23', '12:00:00', 0),
+	(13, 301, 284, '2020-10-24', '12:00:00', 0);
 /*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.training_exercises
 DROP TABLE IF EXISTS `training_exercises`;
 CREATE TABLE IF NOT EXISTS `training_exercises` (
-  `training_id` int NOT NULL,
+  `training_id_fk` int NOT NULL,
   `type` enum('BENCH_PRESS','DEADLIFT','SQUATS') NOT NULL,
   `weight` double DEFAULT NULL,
-  KEY `FK_exercises_trainings` (`training_id`),
-  CONSTRAINT `FK_exercises_trainings` FOREIGN KEY (`training_id`) REFERENCES `trainings` (`training_id`)
+  KEY `FK_exercises_trainings` (`training_id_fk`),
+  CONSTRAINT `FK_exercises_trainings` FOREIGN KEY (`training_id_fk`) REFERENCES `trainings` (`training_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Дамп данных таблицы gym.training_exercises: ~5 rows (приблизительно)
 /*!40000 ALTER TABLE `training_exercises` DISABLE KEYS */;
-REPLACE INTO `training_exercises` (`training_id`, `type`, `weight`) VALUES
+REPLACE INTO `training_exercises` (`training_id_fk`, `type`, `weight`) VALUES
 	(1, 'BENCH_PRESS', 100),
 	(1, 'DEADLIFT', 150),
 	(1, 'SQUATS', 140),
@@ -215,20 +217,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `graduation` int DEFAULT NULL,
   `instagram` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `discount` double(22,0) DEFAULT '0',
-  `diet_id` int DEFAULT NULL,
+  `diet_id_fk` int DEFAULT NULL,
   `image_name` varchar(90) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `money_balance` int DEFAULT '100',
-  `bought_trainings` double DEFAULT NULL,
+  `bought_trainings` int DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`),
-  KEY `FK_users_diets` (`diet_id`),
+  KEY `FK_users_diets` (`diet_id_fk`),
   CONSTRAINT `FK_users_accounts` FOREIGN KEY (`user_id`) REFERENCES `accounts` (`account_id`),
-  CONSTRAINT `FK_users_diets` FOREIGN KEY (`diet_id`) REFERENCES `diets` (`diet_id`)
+  CONSTRAINT `FK_users_diets` FOREIGN KEY (`diet_id_fk`) REFERENCES `diets` (`diet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Дамп данных таблицы gym.users: ~40 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `institution`, `graduation`, `instagram`, `discount`, `diet_id`, `image_name`, `money_balance`, `bought_trainings`) VALUES
+REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `institution`, `graduation`, `instagram`, `discount`, `diet_id_fk`, `image_name`, `money_balance`, `bought_trainings`) VALUES
 	(243, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(254, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(255, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -260,7 +262,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, 'uploads\\f5aa226a-22e0-47af-9eea-8aeb53576973.jpg', 410, 5),
+	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, 'uploads\\f5aa226a-22e0-47af-9eea-8aeb53576973.jpg', 410, 3),
 	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2, NULL, NULL, NULL),

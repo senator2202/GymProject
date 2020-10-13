@@ -36,5 +36,7 @@ public interface UserDao extends BaseDao {
 
     List<User> findAllTrainers() throws DaoException;
 
-    int findId(String fristName, String lastName) throws DaoException;
+    int findId(String firstName, String lastName) throws DaoException;
+
+    void decrementBoughtTrainings(int userId) throws DaoException;
 }

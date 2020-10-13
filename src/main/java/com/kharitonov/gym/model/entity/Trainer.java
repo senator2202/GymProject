@@ -1,13 +1,9 @@
 package com.kharitonov.gym.model.entity;
 
-import com.kharitonov.gym.model.entity.functionality.SportFunctionality;
-import com.kharitonov.gym.model.entity.functionality.TrainerFunctionality;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class Trainer extends User implements TrainerFunctionality, SportFunctionality {
+public class Trainer extends User {
     private List<Training> plannedTrainings;
     private String institution;
     private int graduationYear;
@@ -41,30 +37,5 @@ public class Trainer extends User implements TrainerFunctionality, SportFunction
 
     public void setPlannedTrainings(List<Training> plannedTrainings) {
         this.plannedTrainings = plannedTrainings;
-    }
-
-    @Override
-    public void appointDiet(Training training) {
-        plannedTrainings.add(training);
-    }
-
-    @Override
-    public void doTraining(Training training) {
-        plannedTrainings.remove(training);
-    }
-
-    @Override
-    public List<Training> allPlannedTrainings() {
-        return Collections.unmodifiableList(plannedTrainings);
-    }
-
-    @Override
-    public void updateUserInfo(User user) {
-
-    }
-
-    @Override
-    public void planTraining() {
-
     }
 }

@@ -12,7 +12,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport"
-	      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+	      content="width=device-width, initial-scale=1.0, shrink-to-fit=yes"/>
 	<title><fmt:message key="personal_profile.personalProfile"/></title>
 	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
@@ -27,9 +27,10 @@
 </head>
 
 <body>
+
 <c:import url="part/header.jsp"/>
 
-<div class="footer-form set-bg"<%-- data-setbg="assets/img/contact-form-bg.jpg"--%>>
+<div class="footer-form set-bg" data-setbg="assets/img/contact-form-bg.jpg">
 	<div class="col-lg-10">
 		<div class="section-title">
 			<h2><fmt:message key="personal_profile.personalInformation"/></h2>
@@ -183,9 +184,6 @@
 				<i class="ti-angle-double-right"></i>
 			</button>
 		</form>
-	</div>
-	<div class="col-lg-10">
-
 	</div>
 </div>
 

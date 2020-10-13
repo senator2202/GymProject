@@ -1,8 +1,6 @@
 package com.kharitonov.gym.model.entity;
 
-import com.kharitonov.gym.model.entity.functionality.AdminFunctionality;
-
-public class Admin extends User implements AdminFunctionality {
+public class Admin extends User {
     public Admin() {
         account = Account.AccountBuilder.anAccount().build();
         account.setRole(UserRole.ADMIN);
@@ -11,25 +9,5 @@ public class Admin extends User implements AdminFunctionality {
     public Admin(Account account) {
         account.setRole(UserRole.ADMIN);
         this.account = account;
-    }
-
-    @Override
-    public void addTrainer() {
-        //empty now
-    }
-
-    @Override
-    public void deleteTrainer() {
-        //empty now
-    }
-
-    @Override
-    public void updateUserInfo(User user) {
-
-    }
-
-    @Override
-    public void planTraining() {
-
     }
 }

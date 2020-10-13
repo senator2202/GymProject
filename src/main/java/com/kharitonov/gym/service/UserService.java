@@ -32,4 +32,6 @@ public interface UserService {
     List<User> findAllTrainers() throws ServiceException;
 
     int findId(String name) throws ServiceException;
+
+    void decrementBoughtTrainings(int userId) throws ServiceException;
 }

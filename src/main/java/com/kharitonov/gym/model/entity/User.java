@@ -1,9 +1,6 @@
 package com.kharitonov.gym.model.entity;
 
-import com.kharitonov.gym.model.entity.functionality.UserFunctionality;
-
-
-public abstract class User implements UserFunctionality {
+public abstract class User {
     protected Account account;
     protected String firstName;
     protected String lastName;

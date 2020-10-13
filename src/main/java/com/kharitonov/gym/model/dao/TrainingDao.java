@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.List;
 
 public interface TrainingDao extends BaseDao {
-    void addTraining(int trainer_id, int client_id, Date trainingDate) throws DaoException;
+    void addTraining(int trainerId, int clientId, Date trainingDate) throws DaoException;
 
     List<Training> findClientTrainings(int clientId) throws DaoException;
 }

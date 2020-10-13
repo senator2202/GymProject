@@ -170,4 +170,14 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void decrementBoughtTrainings(int userId) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            dao.decrementBoughtTrainings(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

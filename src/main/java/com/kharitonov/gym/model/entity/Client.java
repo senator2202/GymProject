@@ -1,12 +1,6 @@
 package com.kharitonov.gym.model.entity;
 
-import com.kharitonov.gym.model.entity.functionality.ClientFunctionality;
-import com.kharitonov.gym.model.entity.functionality.SportFunctionality;
-
-import java.util.List;
-
-
-public class Client extends User implements ClientFunctionality, SportFunctionality {
+public class Client extends User {
     private double moneyBalance;
     private double personalDiscount;
     private int dietId;
@@ -57,25 +51,5 @@ public class Client extends User implements ClientFunctionality, SportFunctional
 
     public void setBoughtTrainings(int boughtTrainings) {
         this.boughtTrainings = boughtTrainings;
-    }
-
-    @Override
-    public void doTraining(Training training) {
-
-    }
-
-    @Override
-    public List<Training> allPlannedTrainings() {
-        return null;
-    }
-
-    @Override
-    public void updateUserInfo(User user) {
-
-    }
-
-    @Override
-    public void planTraining() {
-
     }
 }
