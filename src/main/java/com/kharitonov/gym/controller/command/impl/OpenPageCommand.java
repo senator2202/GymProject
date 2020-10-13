@@ -17,11 +17,12 @@ public class OpenPageCommand implements ActionCommand {
         pageMap.put("personal_profile", PagePath.PERSONAL_PROFILE);
         pageMap.put("admin_main", PagePath.ADMIN_MAIN);
         pageMap.put("schedule", PagePath.SCHEDULE);
+        pageMap.put("home", PagePath.HOME);
     }
 
     @Override
     public String execute(HttpServletRequest request) {
         String page = request.getParameter(RequestParameter.PAGE);
-        return pageMap.containsKey(page) ? pageMap.get(page) : PagePath.ERROR;
+        return pageMap.containsKey(page) ? pageMap.get(page) : PagePath.INDEX;
     }
 }

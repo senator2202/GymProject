@@ -11,6 +11,7 @@ public class PagePath {
     public static final String SCHEDULE = "/jsp/schedule.jsp";
     public static final String ADMIN_MAIN = "/jsp/admin_main.jsp";
     public static final String ADMIN_REGISTRATIONS = "/jsp/admin_registrations.jsp";
+    public static final String HOME = "/jsp/home.jsp";
 
     private PagePath() {
     }

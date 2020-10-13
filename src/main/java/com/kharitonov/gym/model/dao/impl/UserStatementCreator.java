@@ -229,7 +229,7 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementDecrementTrainings (Connection connection, int userId) throws SQLException {
+    PreparedStatement statementDecrementTrainings(Connection connection, int userId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_DECREMENT_TRAININGS);
         statement.setInt(1, userId);
         return statement;

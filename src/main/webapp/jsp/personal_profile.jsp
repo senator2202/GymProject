@@ -36,7 +36,6 @@
 			<h2><fmt:message key="personal_profile.personalInformation"/></h2>
 			<p><fmt:message key="personal_profile.suggestion"/></p>
 		</div>
-		<img src="${user.imageName}" style="max-width: 200px; max-height: 300px;"/>
 		<c:choose>
 			<c:when test="${user.imageName==null}">
 				<form action="/uploadController" enctype="multipart/form-data" method="post">
@@ -47,6 +46,9 @@
 					</button>
 				</form>
 			</c:when>
+			<c:otherwise>
+				<img src="${user.imageName}" style="max-width: 200px; max-height: 200px;"/>
+			</c:otherwise>
 		</c:choose>
 		<p/>
 		<p/>
@@ -54,7 +56,7 @@
 		<p/>
 		<p/>
 		<c:choose>
-			<c:when test="${user.account.role.toString()=='CLIENT'}">
+			<c:when test="${user.account.role=='CLIENT'}">
 				<a href="#win1">
 					<button class="primary-btn">
 						<fmt:message key="personal_profile.becomeTrainer"/>

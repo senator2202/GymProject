@@ -25,7 +25,7 @@ public class AddTrainingCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String name = request.getParameter(RequestParameter.TRAINER);
         User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
-        if (((Client)user).getBoughtTrainings() == 0) {
+        if (((Client) user).getBoughtTrainings() == 0) {
             LOGGER.error("You have 0 bought trainings!");
             return PagePath.SCHEDULE;
         }
@@ -38,7 +38,7 @@ public class AddTrainingCommand implements ActionCommand {
             trainingService.addTraining(trainerId, userId, date);
             restoreRequestAttributes(request);
             trainings = trainingService.findClientTrainings(userId);
-            request.setAttribute(RequestAttributeName.TRAININGS,trainings);
+            request.setAttribute(RequestAttributeName.TRAININGS, trainings);
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
