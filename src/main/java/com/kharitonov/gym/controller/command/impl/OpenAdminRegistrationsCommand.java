@@ -18,7 +18,7 @@ public class OpenAdminRegistrationsCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         try {
-            String daysParameter = request.getParameter(RequestParameter.RECENT_DAYS);
+            String daysParameter = request.getParameter(RequestParameterName.RECENT_DAYS);
             int days = daysParameter != null
                     ? Integer.parseInt(daysParameter)
                     : DEFAULT_USERS_NUMBER;

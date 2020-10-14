@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestParameter;
+import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
@@ -20,9 +20,9 @@ public class RegisterCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String login = request.getParameter(RequestParameter.LOGIN);
-        String password = request.getParameter(RequestParameter.PASSWORD);
-        String email = request.getParameter(RequestParameter.EMAIL);
+        String login = request.getParameter(RequestParameterName.LOGIN);
+        String password = request.getParameter(RequestParameterName.PASSWORD);
+        String email = request.getParameter(RequestParameterName.EMAIL);
         String page;
         try {
             User user = service.registerUser(login, password, email);

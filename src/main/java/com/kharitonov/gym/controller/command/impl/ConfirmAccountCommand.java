@@ -11,7 +11,7 @@ public class ConfirmAccountCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String stringId = request.getParameter(RequestParameter.ID);
+        String stringId = request.getParameter(RequestParameterName.ID);
         int id = Integer.parseInt(stringId);
         try {
             service.confirmAccount(id);

@@ -53,8 +53,6 @@ class UserStatementCreator {
                     "WHERE role='TRAINER'";
     private static final String SQL_SELECT_USER_ID =
             "SELECT user_id FROM users WHERE first_name=? AND last_name=?";
-    private static final String SQL_DECREMENT_TRAININGS =
-            "UPDATE users SET bought_trainings=bought_trainings-1 WHERE user_id=?";
 
     private UserStatementCreator() {
     }
@@ -226,12 +224,6 @@ class UserStatementCreator {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_USER_ID);
         statement.setString(1, firstName);
         statement.setString(2, lastName);
-        return statement;
-    }
-
-    PreparedStatement statementDecrementTrainings(Connection connection, int userId) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SQL_DECREMENT_TRAININGS);
-        statement.setInt(1, userId);
         return statement;
     }
 }

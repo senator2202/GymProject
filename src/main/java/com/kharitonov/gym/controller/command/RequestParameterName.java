@@ -1,6 +1,6 @@
 package com.kharitonov.gym.controller.command;
 
-public class RequestParameter {
+public class RequestParameterName {
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
     public static final String COMMAND = "command";
@@ -23,6 +23,6 @@ public class RequestParameter {
     public static final String TRAINER = "trainer";
     public static final String TRAINING_DATE = "trainingDate";
 
-    private RequestParameter() {
+    private RequestParameterName() {
     }
 }

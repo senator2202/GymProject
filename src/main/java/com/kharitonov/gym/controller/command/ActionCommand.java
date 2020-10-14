@@ -19,4 +19,8 @@ public interface ActionCommand {
             request.setAttribute(key, value);
         }
     }
+
+    default String getPreviousPage(HttpServletRequest request) {
+        return (String) request.getSession().getAttribute(SessionAttributeName.PREVIOUS_PAGE);
+    }
 }

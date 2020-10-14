@@ -17,12 +17,20 @@ public class TrainingDaoImpl implements TrainingDao {
 
     @Override
     public void addTraining(int trainerId, int clientId, Date trainingDate) throws DaoException {
-        try (Connection connection = pool.getConnection();
-             PreparedStatement statement =
-                     STATEMENT_CREATOR.statementInsertTraining(connection, trainerId, clientId, trainingDate)) {
-            statement.execute();
+        Connection connection = pool.getConnection();
+        try (PreparedStatement statementAdd =
+                     STATEMENT_CREATOR.statementInsertTraining(connection, trainerId, clientId, trainingDate);
+             PreparedStatement statementDecrement =
+                     STATEMENT_CREATOR.statementDecrementTrainings(connection, clientId)) {
+            connection.setAutoCommit(false);
+            statementAdd.execute();
+            statementDecrement.executeUpdate();
         } catch (SQLException e) {
+            rollback(connection);
             throw new DaoException(e);
+        } finally {
+            setAutoCommitTrue(connection);
+            pool.releaseConnection(connection);
         }
     }
 

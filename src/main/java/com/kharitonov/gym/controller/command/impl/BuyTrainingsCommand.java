@@ -2,11 +2,10 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestParameter;
+import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
-import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,14 +19,15 @@ public class BuyTrainingsCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String parameter = request.getParameter(RequestParameter.TRAININGS_NUMBER);
+        String parameter = request.getParameter(RequestParameterName.TRAININGS_NUMBER);
         int trainingsNumber = Integer.parseInt(parameter);
-        User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
+        Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
         try {
-            userService.buyTrainings((Client) user, trainingsNumber, DEFAULT_TRAINING_COST);
+            userService.buyTrainings(client, trainingsNumber, DEFAULT_TRAINING_COST);
+            //restoreRequestAttributes(request);
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return PagePath.SCHEDULE;
+        return getPreviousPage(request);
     }
 }

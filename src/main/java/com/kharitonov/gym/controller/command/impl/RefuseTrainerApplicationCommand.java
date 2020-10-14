@@ -3,7 +3,7 @@ package com.kharitonov.gym.controller.command.impl;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.controller.command.RequestAttributeName;
-import com.kharitonov.gym.controller.command.RequestParameter;
+import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.service.TrainerApplicationService;
@@ -20,7 +20,7 @@ public class RefuseTrainerApplicationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String stringId = request.getParameter(RequestParameter.APPLICATION_ID);
+        String stringId = request.getParameter(RequestParameterName.APPLICATION_ID);
         int id = Integer.parseInt(stringId);
         try {
             List<TrainerApplication> applications = service.deleteApplication(id);

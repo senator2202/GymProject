@@ -284,16 +284,6 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    @Override
-    public void decrementBoughtTrainings(int userId) throws DaoException {
-        try (Connection connection = pool.getConnection();
-             PreparedStatement statement = STATEMENT_CREATOR.statementDecrementTrainings(connection, userId)) {
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
     private User create(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt(TableColumnName.ACCOUNT_ID);
         String login = resultSet.getString(TableColumnName.ACCOUNT_LOGIN);

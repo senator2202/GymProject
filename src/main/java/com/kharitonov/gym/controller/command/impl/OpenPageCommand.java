@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestParameter;
+import com.kharitonov.gym.controller.command.RequestParameterName;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class OpenPageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = request.getParameter(RequestParameter.PAGE);
+        String page = request.getParameter(RequestParameterName.PAGE);
         return pageMap.containsKey(page) ? pageMap.get(page) : PagePath.INDEX;
     }
 }

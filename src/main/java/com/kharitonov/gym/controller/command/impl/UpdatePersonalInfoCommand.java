@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestParameter;
+import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Account;
@@ -23,13 +23,13 @@ public class UpdatePersonalInfoCommand implements ActionCommand {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttributeName.USER);
         int id = user.getAccount().getId();
-        String firstName = request.getParameter(RequestParameter.FIRST_NAME);
-        String lastName = request.getParameter(RequestParameter.LAST_NAME);
-        String phone = request.getParameter(RequestParameter.PHONE);
-        String email = request.getParameter(RequestParameter.EMAIL);
-        String localeName = request.getParameter(RequestParameter.LOCALE) == null
+        String firstName = request.getParameter(RequestParameterName.FIRST_NAME);
+        String lastName = request.getParameter(RequestParameterName.LAST_NAME);
+        String phone = request.getParameter(RequestParameterName.PHONE);
+        String email = request.getParameter(RequestParameterName.EMAIL);
+        String localeName = request.getParameter(RequestParameterName.LOCALE) == null
                 ? user.getAccount().getLocale().name()
-                : request.getParameter(RequestParameter.LOCALE).toUpperCase();
+                : request.getParameter(RequestParameterName.LOCALE).toUpperCase();
         Account.AccountLocale locale = Account.AccountLocale.valueOf(localeName);
         String page;
         try {

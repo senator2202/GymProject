@@ -17,8 +17,8 @@ public class LoginCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String login = request.getParameter(RequestParameter.LOGIN);
-        String password = request.getParameter(RequestParameter.PASSWORD);
+        String login = request.getParameter(RequestParameterName.LOGIN);
+        String password = request.getParameter(RequestParameterName.PASSWORD);
         String page;
         try {
             Optional<User> optional = service.findUser(login, password);
@@ -33,7 +33,7 @@ public class LoginCommand implements ActionCommand {
                 page = PagePath.LOGIN;
             }
         } catch (ServiceException e) {
-            LOGGER.error("Database access error!", e);
+            LOGGER.error(e);
             page = PagePath.ERROR;
         }
         return page;

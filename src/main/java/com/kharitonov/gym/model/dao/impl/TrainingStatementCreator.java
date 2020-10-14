@@ -15,6 +15,8 @@ class TrainingStatementCreator {
                     "(SELECT last_name FROM users WHERE user_id=trainings.trainer_id) AS trainer_last_name, " +
                     "training_date " +
                     "FROM trainings WHERE client_id=?";
+    private static final String SQL_DECREMENT_TRAININGS =
+            "UPDATE users SET bought_trainings=bought_trainings-1 WHERE user_id=?";
 
     private TrainingStatementCreator() {
 
@@ -35,6 +37,12 @@ class TrainingStatementCreator {
     PreparedStatement statementSelectClientTrainings(Connection connection, int clientId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_CLIENT_TRAININGS);
         statement.setInt(1, clientId);
+        return statement;
+    }
+
+    PreparedStatement statementDecrementTrainings(Connection connection, int userId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_DECREMENT_TRAININGS);
+        statement.setInt(1, userId);
         return statement;
     }
 }

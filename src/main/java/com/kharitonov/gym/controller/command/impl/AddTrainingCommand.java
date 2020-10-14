@@ -4,7 +4,6 @@ import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
-import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.TrainingService;
 import com.kharitonov.gym.service.UserService;
 import com.kharitonov.gym.service.impl.TrainingServiceImpl;
@@ -23,19 +22,21 @@ public class AddTrainingCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String name = request.getParameter(RequestParameter.TRAINER);
-        User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
-        if (((Client) user).getBoughtTrainings() == 0) {
+        String name = request.getParameter(RequestParameterName.TRAINER);
+        Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
+        int boughtTrainings = client.getBoughtTrainings();
+        if (boughtTrainings == 0) {
             LOGGER.error("You have 0 bought trainings!");
             return PagePath.SCHEDULE;
         }
-        int userId = user.getAccount().getId();
-        String stringDate = request.getParameter(RequestParameter.TRAINING_DATE);
+        int userId = client.getAccount().getId();
+        String stringDate = request.getParameter(RequestParameterName.TRAINING_DATE);
         Date date = Date.valueOf(stringDate);
         try {
             List<Training> trainings;
             int trainerId = userService.findId(name);
             trainingService.addTraining(trainerId, userId, date);
+            client.setBoughtTrainings(boughtTrainings - 1);
             restoreRequestAttributes(request);
             trainings = trainingService.findClientTrainings(userId);
             request.setAttribute(RequestAttributeName.TRAININGS, trainings);

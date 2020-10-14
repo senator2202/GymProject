@@ -15,29 +15,35 @@
                 <div class="carousel-item active">
                     <img class="card-img-top mb-3 w-auto" src="/assets/img/five.png"  alt="Buy" >
                     <p/>
-                    <a href="/mainController?command=buy_trainings&number=5">
+                    <form action="/mainController" method="post">
+                        <input type="hidden" name="command" value="buy_trainings"/>
+                        <input type="hidden" name="number" value="5"/>
                         <button class="primary-btn">
                             <fmt:message key="buy_trainings.buyFor"/> ${(100 - user.personalDiscount)/100*5*20} <fmt:message key="buy_trainings.br"/>
                         </button>
-                    </a>
+                    </form>
                 </div>
                 <div class="carousel-item">
                     <img class="card-img-top mb-3 w-auto" src="/assets/img/ten.png"  alt="Buy" >
                     <p/>
-                    <a href="/mainController?command=buy_trainings&number=10">
-                        <button class="primary-btn">
+                    <form action="/mainController" method="post">
+                        <input type="hidden" name="command" value="buy_trainings"/>
+                        <input type="hidden" name="number" value="10"/>
+                        <button class="primary-btn" type="submit">
                             <fmt:message key="buy_trainings.buyFor"/> ${(100 - user.personalDiscount)/100*10*20} <fmt:message key="buy_trainings.br"/>
                         </button>
-                    </a>
+                    </form>
                 </div>
                 <div class="carousel-item">
                     <img class="card-img-top mb-3 w-auto" src="/assets/img/twenty.png"  alt="Buy" >
                     <p/>
-                    <a href="/mainController?command=buy_trainings&number=20">
+                    <form action="/mainController" method="post">
+                        <input type="hidden" name="command" value="buy_trainings"/>
+                        <input type="hidden" name="number" value="20"/>
                         <button class="primary-btn">
                             <fmt:message key="buy_trainings.buyFor"/> ${(100 - user.personalDiscount)/100*20*20} <fmt:message key="buy_trainings.br"/>
                         </button>
-                    </a>
+                    </form>
                 </div>
             </div>
             <!-- Navigation -->
@@ -56,7 +62,7 @@
 <!-- PopUp Buy Start -->
 
 <!-- PopUp Add Training Start -->
-<form action="/mainController" class="col-lg-10">
+<form action="/mainController" class="col-lg-10" method="post">
     <input type="hidden" name="command" value="add_training"/>
     <a href="#x" class="overlay" id="popupAdd"></a>
     <div class="popup">
@@ -78,11 +84,9 @@
         <p/>
         <p/>
         <div class="col-lg-6">
-            <a href="#">
-                <button class="primary-btn" type="submit">
-                    Add training
-                </button>
-            </a>
+            <button class="primary-btn" type="submit">
+                <fmt:message key="add_training.add"/>
+            </button>
         </div>
         <a class="close" title=<fmt:message key="trainer_popup.close"/> href="#close"></a>
     </div>
@@ -161,7 +165,7 @@
                             </table>
                             <a href="#popupAdd" style="alignment: center;">
                                 <button class="primary-btn">
-                                    Add
+                                    <fmt:message key="schedule.add"/>
                                 </button>
                             </a>
                         </div>

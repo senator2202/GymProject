@@ -20,10 +20,10 @@ public class SendTrainerApplicationCommand implements ActionCommand {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttributeName.USER);
         int id = user.getAccount().getId();
-        String institution = request.getParameter(RequestParameter.INSTITUTION);
-        String stringYear = request.getParameter(RequestParameter.GRADUATION_YEAR);
+        String institution = request.getParameter(RequestParameterName.INSTITUTION);
+        String stringYear = request.getParameter(RequestParameterName.GRADUATION_YEAR);
         int year = Integer.parseInt(stringYear);
-        String instagram = request.getParameter(RequestParameter.INSTAGRAM_LINK);
+        String instagram = request.getParameter(RequestParameterName.INSTAGRAM_LINK);
         try {
             if (service.sendApplication(id, institution, year, instagram)) {
                 request.setAttribute(RequestAttributeName.APPLICATION_RESULT, true);

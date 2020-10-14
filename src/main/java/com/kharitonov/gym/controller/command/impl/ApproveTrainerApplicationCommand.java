@@ -3,7 +3,7 @@ package com.kharitonov.gym.controller.command.impl;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.controller.command.RequestAttributeName;
-import com.kharitonov.gym.controller.command.RequestParameter;
+import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.service.TrainerApplicationService;
@@ -22,12 +22,12 @@ public class ApproveTrainerApplicationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String institution = request.getParameter(RequestParameter.APPLICATION_INSTITUTION);
-        String stringId = request.getParameter(RequestParameter.APPLICATION_ID);
+        String institution = request.getParameter(RequestParameterName.APPLICATION_INSTITUTION);
+        String stringId = request.getParameter(RequestParameterName.APPLICATION_ID);
         int id = Integer.parseInt(stringId);
-        String stringGraduation = request.getParameter(RequestParameter.APPLICATION_GRADUATION);
+        String stringGraduation = request.getParameter(RequestParameterName.APPLICATION_GRADUATION);
         int graduation = Integer.parseInt(stringGraduation);
-        String instagram = request.getParameter(RequestParameter.APPLICATION_INSTAGRAM);
+        String instagram = request.getParameter(RequestParameterName.APPLICATION_INSTAGRAM);
         try {
             List<TrainerApplication> applications;
             userService.appointTrainer(id, institution, graduation, instagram);
