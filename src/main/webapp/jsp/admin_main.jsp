@@ -86,24 +86,29 @@
                           <td>
                               ${application.applicationDate}
                           </td>
-                          <td>
-                            <form action="/mainController">
+                          <td class="td-actions text-right">
+                            <button type="button" rel="tooltip" class="btn btn-info btn-round">
+                              <i class="material-icons">person</i>
+                            </button>
+                          </td>
+                          <td class="td-actions text-right">
+                          <form action="/mainController" method="post">
                               <input type="hidden" name="command" value="approve_trainer_application"/>
                               <input type="hidden" name="appId" value="${application.id}"/>
                               <input type="hidden" name="appInstitution" value="${application.institution}"/>
                               <input type="hidden" name="appGraduation" value="${application.graduationYear}"/>
                               <input type="hidden" name="appInstagram" value="${application.instagramLink}"/>
-                              <button type="submit">
-                                <fmt:message key="admin_main.approve"/>
+                              <button type="submit" rel="tooltip" class="btn btn-success btn-round">
+                                <i class="material-icons">done</i>
                               </button>
                             </form>
                           </td>
-                          <td>
-                            <form action="/mainController">
+                          <td class="td-actions text-right">
+                          <form action="/mainController" method="post">
                               <input type="hidden" name="command" value="refuse_trainer_application"/>
                               <input type="hidden" name="appId" value="${application.id}"/>
-                              <button type="submit">
-                                <fmt:message key="admin_main.refuse"/>
+                              <button type="submit" rel="tooltip" class="btn btn-danger btn-round">
+                                <i class="material-icons">close</i>
                               </button>
                             </form>
                           </td>

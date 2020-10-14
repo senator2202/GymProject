@@ -12,6 +12,7 @@ class ServletNavigator {
         navigationMap = new HashMap<>();
         navigationMap.put(PagePath.SCHEDULE, "/mainController?command=open_schedule");
         navigationMap.put(PagePath.INDEX, "/index.jsp");
+        navigationMap.put(PagePath.ADMIN_MAIN, "/mainController?command=open_admin_main");
     }
 
     static String get(Object key) {

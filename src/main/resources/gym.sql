@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `id` (`account_id`) USING BTREE,
   UNIQUE KEY `name` (`login`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=309 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.accounts: ~40 rows (приблизительно)
+-- Дамп данных таблицы gym.accounts: ~41 rows (приблизительно)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `registration_date`, `locale`, `active`) VALUES
 	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 'RUSSIAN', 1),
@@ -68,7 +68,7 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
-	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'ENGLISH', 1),
+	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
 	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 1),
@@ -76,7 +76,8 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(301, 'romashka', '9Vrgph\\g', 'romashka@tut.by', 'TRAINER', '2020-09-29 13:35:56', 'RUSSIAN', 0),
 	(302, 'kentavr', '9Vrgph\\g', 'kentavr@mail.ru', 'TRAINER', '2020-09-29 13:37:49', 'ENGLISH', 0),
 	(303, 'recent_user', '9Vrgph\\g', 'recent@mail.ru', 'CLIENT', '2020-10-07 16:07:32', 'ENGLISH', 0),
-	(304, 'recent_user2', '9Vrgph\\g', 'recent2@mail.ru', 'CLIENT', '2020-10-07 16:08:09', 'ENGLISH', 0);
+	(304, 'recent_user2', '9Vrgph\\g', 'recent2@mail.ru', 'CLIENT', '2020-10-07 16:08:09', 'ENGLISH', 0),
+	(308, 'babushka', '9Vrgph\\g', 'babushka@tut.by', 'CLIENT', '2020-10-14 14:17:38', 'ENGLISH', 0);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.diets
@@ -171,9 +172,9 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   KEY `FK_trainings_users_2` (`client_id`),
   CONSTRAINT `FK_trainings_users` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~4 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~10 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`) VALUES
 	(1, 274, 254, '2020-09-20', '16:00:00', NULL),
@@ -182,7 +183,10 @@ REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_da
 	(9, 301, 284, '2020-10-15', '12:00:00', 0),
 	(10, 302, 284, '2020-10-16', '12:00:00', 0),
 	(12, 301, 284, '2020-10-23', '12:00:00', 0),
-	(13, 301, 284, '2020-10-24', '12:00:00', 0);
+	(13, 301, 284, '2020-10-24', '12:00:00', 0),
+	(14, 301, 284, '2020-10-25', '12:00:00', 0),
+	(15, 301, 284, '2020-10-26', '12:00:00', 0),
+	(16, 274, 284, '2020-10-21', '12:00:00', 0);
 /*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.training_exercises
@@ -228,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `FK_users_diets` FOREIGN KEY (`diet_id_fk`) REFERENCES `diets` (`diet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы gym.users: ~40 rows (приблизительно)
+-- Дамп данных таблицы gym.users: ~41 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `institution`, `graduation`, `instagram`, `discount`, `diet_id_fk`, `image_name`, `money_balance`, `bought_trainings`) VALUES
 	(243, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -238,7 +242,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(257, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(258, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(259, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(260, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(260, '', '', '', NULL, 'BSU', 2009, 'instagram.com/none', NULL, NULL, NULL, NULL, NULL),
 	(261, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(262, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(263, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -262,7 +266,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, 'uploads\\f5aa226a-22e0-47af-9eea-8aeb53576973.jpg', 410, 3),
+	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, NULL, 1000, 4),
 	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2, NULL, NULL, NULL),
@@ -270,7 +274,8 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(301, 'Anastacia', 'Lipinskaya', '+375441234598', 0, 'MSLU', 2012, 'instagram.com/mslu', 0, NULL, NULL, NULL, NULL),
 	(302, 'Pipko', 'Dmitrii', '80296558891', 0, 'BSUIR', 2008, 'instagram.com/pipko', 0, NULL, NULL, NULL, NULL),
 	(303, 'Bill', 'Perkins', '80291111111', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
-	(304, 'Perr', 'Billkins', '80292222222', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL);
+	(304, 'Perr', 'Billkins', '80292222222', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
+	(308, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
