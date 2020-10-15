@@ -39,7 +39,9 @@
 												${training.date}
 										</td>
 										<td>
-
+											<label for="trainingDescription">Training description</label>
+											<textarea class="form-control" id="trainingDescription" rows="2">
+											</textarea>
 										</td>
 									</tr>
 								</c:forEach>
