@@ -5,8 +5,8 @@
 <fmt:setLocale value="en" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<link href="/assets/css/login.css"
-      rel="stylesheet" type="text/css">
+<link href="/assets/css/login.css" rel="stylesheet" type="text/css">
+
 <form action="/mainController" method="post">
     <div class="login-wrap">
         <div class="login-html">

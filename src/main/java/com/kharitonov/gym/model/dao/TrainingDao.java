@@ -10,4 +10,6 @@ public interface TrainingDao extends BaseDao {
     void addTraining(int trainerId, int clientId, Date trainingDate) throws DaoException;
 
     List<Training> findClientTrainings(int clientId) throws DaoException;
+
+    List<Training> findTrainerTrainings(int trainerId) throws DaoException;
 }

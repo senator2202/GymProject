@@ -51,6 +51,23 @@ public class TrainingDaoImpl implements TrainingDao {
         }
     }
 
+    @Override
+    public List<Training> findTrainerTrainings(int trainerId) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement =
+                     STATEMENT_CREATOR.statementSelectTrainerTrainings(connection, trainerId);
+             ResultSet resultSet = statement.executeQuery()) {
+            List<Training> trainings = new ArrayList<>();
+            while (resultSet.next()) {
+                Training training = createTraining(resultSet);
+                trainings.add(training);
+            }
+            return trainings;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
     private Training createTraining(ResultSet resultSet) throws DaoException {
         Training training = new Training();
         try {
@@ -58,6 +75,9 @@ public class TrainingDaoImpl implements TrainingDao {
             training.setTrainerId(resultSet.getInt(TableColumnName.TRAINER_ID));
             training.setTrainerFirstName(resultSet.getString(TableColumnName.TRAINER_FIRST_NAME));
             training.setTrainerLastName(resultSet.getString(TableColumnName.TRAINER_LAST_NAME));
+            training.setClientId(resultSet.getInt(TableColumnName.CLIENT_ID));
+            training.setClientFirstName(resultSet.getString(TableColumnName.CLIENT_FIRST_NAME));
+            training.setClientLastName(resultSet.getString(TableColumnName.CLIENT_LAST_NAME));
             training.setDate(resultSet.getDate(TableColumnName.TRAINING_DATE));
         } catch (SQLException e) {
             throw new DaoException("Training creation error!", e);

@@ -1,4 +1,10 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
+               scope="session"/>
+<fmt:setBundle basename="property/pagecontent"/>
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -12,19 +18,20 @@
 	<title>PONIGYM | Template</title>
 
 	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
-	      rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap"
-	      rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
 
 	<!-- Css Styles -->
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
-	<link rel="stylesheet" href="/assets/css/themify-icons.css" type="text/css">
-	<link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
-	<link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
-	<link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
-	<link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="/assets/css/themify-icons.css"/>
+	<link rel="stylesheet" href="/assets/css/magnific-popup.css"/>
+	<link rel="stylesheet" href="/assets/css/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="/assets/css/slicknav.min.css"/>
+	<link rel="stylesheet" href="/assets/css/style.css"/>
+	<link rel="stylesheet" href="/assets/css/popup.css"/>
+	<link href="/assets/css/login.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -33,46 +40,7 @@
 	<div class="loader"></div>
 </div>
 
-<%--<jsp:include page="jsp/part/header.jsp"/>--%>
-<header class="header-section">
-	<div class="container">
-		<div class="logo">
-			<a href="/index.jsp">
-				<img src="/assets/img/logo.png" alt="">
-			</a>
-		</div>
-		<div class="nav-menu">
-			<nav class="mainmenu mobile-menu">
-				<ul>
-					<li class="active"><a href="/index.jsp">Home</a></li>
-					<li><a href="/jsp/about-us.jsp">About</a></li>
-					<li><a href="/mainController?command=open_schedule">Schedule</a></li>
-					<li><a href="/jsp/gallery.jsp">Portfolio</a></li>
-					<li><a href="/jsp/contact.jsp">Contacts</a></li>
-					<li><a href="/mainController?command=open_admin_main">Admin</a></li>
-					<c:choose>
-						<c:when test="${sessionScope.user!=null}">
-							<li>
-								<a href="/mainController?command=open_page&page=personal_profile">Personal profile</a>
-								<ul class="dropdown">
-									<li><a href="/mainController?command=logout">Log Out</a>
-									</li>
-								</ul>
-							</li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="/mainController?command=open_page&page=login">Log In</a></li>
-						</c:otherwise>
-					</c:choose>
-				</ul>
-			</nav>
-			<div class="nav-right search-switch">
-				<i class="ti-search"></i>
-			</div>
-		</div>
-		<div id="mobile-menu-wrap"></div>
-	</div>
-</header>
+<jsp:include page="part/header.jsp"/>
 
 <!-- Hero Section Begin -->
 <section class="hero-section">

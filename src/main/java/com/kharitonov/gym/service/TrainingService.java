@@ -10,4 +10,6 @@ public interface TrainingService {
     void addTraining(int trainerId, int clientId, Date trainingDate) throws ServiceException;
 
     List<Training> findClientTrainings(int clientId) throws ServiceException;
+
+    List<Training> findTrainerTrainings(int trainerId) throws ServiceException;
 }

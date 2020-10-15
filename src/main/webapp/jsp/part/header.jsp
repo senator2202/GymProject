@@ -1,4 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
+               scope="session"/>
+<fmt:setBundle basename="property/pagecontent"/>
+
+<jsp:include page="../popup/login.jsp"/>
 
 <header class="header-section">
 	<div class="container">
@@ -27,7 +34,12 @@
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/mainController?command=open_page&page=login">Log In</a></li>
+							<li>
+								</button>
+								<a href="#popupLogin">
+										Log in
+								</a>
+							</li>
 						</c:otherwise>
 					</c:choose>
 				</ul>

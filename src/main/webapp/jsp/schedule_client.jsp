@@ -17,7 +17,7 @@
                 <div class="section-title">
                     <a href="#popupBuy" style="alignment: center;">
                         <button class="primary-btn">
-                            <fmt:message key="schedule.buyTrainings"/>
+                            <fmt:message key="schedule_client.buyTrainings"/>
                         </button>
                     </a>
                 </div>
@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="site-text">
-                    <fmt:message key="schedule.yourBalance"/> ${user.moneyBalance} <fmt:message key="schedule.br"/>
+                    <fmt:message key="schedule_client.yourBalance"/> ${user.moneyBalance} <fmt:message key="schedule_client.br"/>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="site-text">
-                    <fmt:message key="schedule.youHave"/> ${user.boughtTrainings} <fmt:message key="schedule.boughtTrainings"/>
+                    <fmt:message key="schedule_client.youHave"/> ${user.boughtTrainings} <fmt:message key="schedule_client.boughtTrainings"/>
                 </div>
             </div>
         </div>
@@ -46,20 +46,20 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title "><fmt:message key="schedule.tableTitle"/></h4>
+                        <h4 class="card-title "><fmt:message key="schedule_client.tableTitle"/></h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
                                 <th>
-                                    <fmt:message key="schedule.trainer"/>
+                                    <fmt:message key="schedule_client.trainer"/>
                                 </th>
                                 <th>
-                                    <fmt:message key="schedule.date"/>
+                                    <fmt:message key="schedule_client.date"/>
                                 </th>
                                 <th>
-                                    <fmt:message key="schedule.description"/>
+                                    <fmt:message key="schedule_client.description"/>
                                 </th>
                                 </thead>
                                 <tbody>
@@ -81,7 +81,7 @@
                             </table>
                             <a href="#popupAdd" style="alignment: center;">
                                 <button class="primary-btn">
-                                    <fmt:message key="schedule.add"/>
+                                    <fmt:message key="schedule_client.add"/>
                                 </button>
                             </a>
                         </div>

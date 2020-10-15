@@ -39,4 +39,14 @@ public class TrainingServiceImpl implements TrainingService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public List<Training> findTrainerTrainings(int trainerId) throws ServiceException {
+        TrainingDao dao = new TrainingDaoImpl();
+        try {
+            return dao.findTrainerTrainings(trainerId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

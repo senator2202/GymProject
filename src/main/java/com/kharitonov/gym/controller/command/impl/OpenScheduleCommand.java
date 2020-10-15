@@ -50,6 +50,8 @@ public class OpenScheduleCommand implements ActionCommand {
     }
 
     private void doTrainerScenario(HttpServletRequest request, User user) throws ServiceException {
-
+        int userId = user.getAccount().getId();
+        List<Training> trainings = trainingService.findTrainerTrainings(userId);
+        request.setAttribute(RequestAttributeName.TRAININGS, trainings);
     }
 }

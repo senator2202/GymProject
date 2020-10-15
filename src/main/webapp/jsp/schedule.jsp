@@ -46,9 +46,14 @@
 
     <jsp:include page="/jsp/part/header_black.jsp"/>
 
-    <c:if test="${user.account.role=='CLIENT'}">
-        <jsp:include page="schedule_client.jsp"/>
-    </c:if>
+    <c:choose>
+        <c:when test="${user.account.role=='CLIENT'}">
+            <jsp:include page="schedule_client.jsp"/>
+        </c:when>
+        <c:when test="${user.account.role=='TRAINER'}">
+            <jsp:include page="schedule_trainer.jsp"/>
+        </c:when>
+    </c:choose>
 
     <jsp:include page="/jsp/part/footer.jsp"/>
 
