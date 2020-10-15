@@ -19,25 +19,24 @@ import java.util.Iterator;
 @WebServlet("/mainController")
 public class MainServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String page = processRequest(request, response);
-        String url = ServletNavigator.get(page);
-        response.sendRedirect(url);
-    }
-
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String page = processRequest(request, response);
+        String page = processRequest(request);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         request.getSession().setAttribute(SessionAttributeName.PREVIOUS_PAGE, page);
         saveRequestAttributes(request);
         dispatcher.forward(request, response);
     }
 
-    private String processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String page = processRequest(request);
+        String url = ServletNavigator.get(page);
+        response.sendRedirect(url);
+    }
+
+    private String processRequest(HttpServletRequest request) {
         String commandName = request.getParameter(RequestParameterName.COMMAND);
         ActionCommand command = CommandProvider.defineCommand(commandName);
         String page = command.execute(request);

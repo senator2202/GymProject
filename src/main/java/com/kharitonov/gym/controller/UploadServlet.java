@@ -1,6 +1,7 @@
 package com.kharitonov.gym.controller;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.impl.UploadImageCommand;
 
 import javax.servlet.RequestDispatcher;
@@ -16,22 +17,22 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    private void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ActionCommand command = new UploadImageCommand();
         String page = command.execute(request);
-        RequestDispatcher dispatcher =
-                getServletContext().getRequestDispatcher(page);
-        dispatcher.forward(request, response);
+        String url = ServletNavigator.get(page);
+        response.sendRedirect(url);
+    }
+
+    private String processRequest(HttpServletRequest request) {
+        String commandName = request.getParameter(RequestParameterName.COMMAND);
+        ActionCommand command = CommandProvider.defineCommand(commandName);
+        String page = command.execute(request);
+        return page;
     }
 }

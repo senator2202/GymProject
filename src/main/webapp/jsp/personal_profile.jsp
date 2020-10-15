@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
-               scope="session"/>
+			   scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
 <!DOCTYPE html>
@@ -12,8 +12,10 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport"
-	      content="width=device-width, initial-scale=1.0, shrink-to-fit=yes"/>
+		  content="width=device-width, initial-scale=1.0, shrink-to-fit=yes"/>
 	<title><fmt:message key="personal_profile.personalProfile"/></title>
+
+
 	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="/assets/css/login.css"/>
@@ -28,6 +30,7 @@
 
 <body>
 
+
 <c:import url="part/header.jsp"/>
 
 <div class="footer-form set-bg" data-setbg="assets/img/contact-form-bg.jpg">
@@ -36,6 +39,8 @@
 			<h2><fmt:message key="personal_profile.personalInformation"/></h2>
 			<p><fmt:message key="personal_profile.suggestion"/></p>
 		</div>
+	</div>
+	<div class="col-lg-10">
 		<c:choose>
 			<c:when test="${user.imageName==null}">
 				<form action="/uploadController" enctype="multipart/form-data" method="post">
@@ -50,6 +55,8 @@
 				<img src="${user.imageName}" style="max-width: 200px; max-height: 200px;"/>
 			</c:otherwise>
 		</c:choose>
+	</div>
+	<div class="col-lg-10">
 		<p/>
 		<p/>
 		<p/>
@@ -122,28 +129,28 @@
 						<fmt:message key="personal_profile.firstNameHint"/>
 					</label>
 					<input type="text" id="firstName" name="firstName"
-					       value="${sessionScope.user.firstName}"/>
+						   value="${sessionScope.user.firstName}"/>
 				</div>
 				<div class="col-lg-6">
 					<label for="lastName" class="text-light">
 						<fmt:message key="personal_profile.lastNameHint"/>
 					</label>
 					<input type="text" id="lastName" name="lastName"
-					       value="${sessionScope.user.lastName}"/>
+						   value="${sessionScope.user.lastName}"/>
 				</div>
 				<div class="col-lg-6">
 					<label for="phone" class="text-light">
 						<fmt:message key="personal_profile.phoneHint"/>
 					</label>
 					<input type="text" id="phone" name="phone"
-					       value="${sessionScope.user.phoneNumber}"/>
+						   value="${sessionScope.user.phoneNumber}"/>
 				</div>
 				<div class="col-lg-6">
 					<label for="phone" class="text-light">
 						<fmt:message key="personal_profile.email"/>
 					</label>
 					<input type="text" id="email" name="email"
-					       value="${sessionScope.user.account.email}"/>
+						   value="${sessionScope.user.account.email}"/>
 				</div>
 			</div>
 
@@ -189,14 +196,16 @@
 	</div>
 </div>
 
+
+
 <!-- Js Plugins -->
-<script src="assets/js/jquery-3.3.1.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/mixitup.min.js"></script>
-<script src="assets/js/jquery.slicknav.js"></script>
-<script src="assets/js/owl.carousel.min.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/mixitup.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 
 </html>

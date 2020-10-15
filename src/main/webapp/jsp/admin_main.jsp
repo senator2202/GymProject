@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -38,7 +39,7 @@
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table">
+                    <table id="appTable" class="table">
                       <thead class=" text-primary">
                         <th>
                          <fmt:message key="admin_main.id"/>

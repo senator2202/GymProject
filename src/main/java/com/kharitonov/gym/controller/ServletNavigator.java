@@ -13,6 +13,7 @@ class ServletNavigator {
         navigationMap.put(PagePath.SCHEDULE, "/mainController?command=open_schedule");
         navigationMap.put(PagePath.INDEX, "/index.jsp");
         navigationMap.put(PagePath.ADMIN_MAIN, "/mainController?command=open_admin_main");
+        navigationMap.put(PagePath.PERSONAL_PROFILE, "/mainController?command=open_page&page=personal_profile");
     }
 
     static String get(Object key) {

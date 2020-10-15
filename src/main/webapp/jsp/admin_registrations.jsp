@@ -22,7 +22,6 @@
     <!-- CSS Files -->
     <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/select-list.css"/>
-
 </head>
 <body>
 <div class="wrapper ">
@@ -67,7 +66,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table" id="regTable">
                                         <thead class=" text-primary">
                                         <th>
                                             <fmt:message key="admin_registrations.id"/>
