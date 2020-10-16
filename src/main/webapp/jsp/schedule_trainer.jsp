@@ -39,9 +39,7 @@
 												${training.date}
 										</td>
 										<td>
-											<label for="trainingDescription">Training description</label>
-											<textarea class="form-control" id="trainingDescription" rows="2">
-											</textarea>
+											<textarea class="form-control" rows="2" placeholder="<fmt:message key="schedule_trainer.addDescription"/>">${training.description}</textarea>
 										</td>
 									</tr>
 								</c:forEach>

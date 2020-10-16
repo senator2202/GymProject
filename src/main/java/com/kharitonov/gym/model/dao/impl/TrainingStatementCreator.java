@@ -17,7 +17,8 @@ class TrainingStatementCreator {
                     "client_id, \n" +
                     "(SELECT first_name FROM users WHERE user_id=trainings.client_id) AS client_first_name, \n" +
                     "(SELECT last_name FROM users WHERE user_id=trainings.client_id) AS client_last_name, \n" +
-                    "training_date\n" +
+                    "training_date, \n" +
+                    "description \n" +
                     "FROM trainings WHERE client_id=?";
     private static final String SQL_DECREMENT_TRAININGS =
             "UPDATE users SET bought_trainings=bought_trainings-1 WHERE user_id=?";
@@ -30,7 +31,8 @@ class TrainingStatementCreator {
                     "client_id, \n" +
                     "(SELECT first_name FROM users WHERE user_id=trainings.client_id) AS client_first_name, \n" +
                     "(SELECT last_name FROM users WHERE user_id=trainings.client_id) AS client_last_name, \n" +
-                    "training_date\n" +
+                    "training_date, \n" +
+                    "description \n" +
                     "FROM trainings WHERE trainer_id=?";
 
     private TrainingStatementCreator() {

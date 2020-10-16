@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Training {
-    private final List<Exercise> exercises;
     private int trainingId;
     private int trainerId;
     private String trainerFirstName;
@@ -18,10 +17,7 @@ public class Training {
     private Date date;
     private Time time;
     private boolean isDone;
-
-    public Training() {
-        exercises = new ArrayList<>();
-    }
+    private String description;
 
     public int getTrainingId() {
         return trainingId;
@@ -103,11 +99,11 @@ public class Training {
         isDone = done;
     }
 
-    public void addExercise(Exercise exercise) {
-        exercises.add(exercise);
+    public String getDescription() {
+        return description;
     }
 
-    public List<Exercise> getAllExercises() {
-        return Collections.unmodifiableList(exercises);
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -79,6 +79,7 @@ public class TrainingDaoImpl implements TrainingDao {
             training.setClientFirstName(resultSet.getString(TableColumnName.CLIENT_FIRST_NAME));
             training.setClientLastName(resultSet.getString(TableColumnName.CLIENT_LAST_NAME));
             training.setDate(resultSet.getDate(TableColumnName.TRAINING_DATE));
+            training.setDescription(resultSet.getString(TableColumnName.TRAINING_DESCRIPTION));
         } catch (SQLException e) {
             throw new DaoException("Training creation error!", e);
         }

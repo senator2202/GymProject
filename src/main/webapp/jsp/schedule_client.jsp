@@ -72,7 +72,7 @@
                                                 ${training.date}
                                         </td>
                                         <td>
-
+                                            <textarea class="form-control" placeholder="<fmt:message key="schedule_client.notReady"/>" rows="2" readonly>${training.description}</textarea>
                                         </td>
                                     </tr>
                                 </c:forEach>

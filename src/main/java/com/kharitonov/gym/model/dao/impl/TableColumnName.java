@@ -31,7 +31,7 @@ class TableColumnName {
     static final String CLIENT_ID = "client_id";
     static final String CLIENT_FIRST_NAME = "client_first_name";
     static final String CLIENT_LAST_NAME = "client_last_name";
-    static final String CLIENT_DATE = "client_date";
+    static final String TRAINING_DESCRIPTION = "description";
 
     private TableColumnName() {
     }
