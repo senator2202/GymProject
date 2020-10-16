@@ -20,7 +20,8 @@ public enum CommandType {
     BUY_TRAININGS(new BuyTrainingsCommand()),
     OPEN_SCHEDULE(new OpenScheduleCommand()),
     ADD_TRAINING(new AddTrainingCommand()),
-    UPDATE_TRAINING_DESCRIPTION(new UpdateTrainingDescriptionCommand());
+    UPDATE_TRAINING_DESCRIPTION(new UpdateTrainingDescriptionCommand()),
+    CANCEL_TRAINING(new CancelTrainingCommand());
 
     private final ActionCommand command;
 

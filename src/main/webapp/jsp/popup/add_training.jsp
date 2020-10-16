@@ -28,6 +28,11 @@
         <p/>
         <p/>
         <div class="col-lg-6">
+            <input type="time" name="trainingTime"/>
+        </div>
+        <p/>
+        <p/>
+        <div class="col-lg-6">
             <button class="primary-btn" type="submit">
                 <fmt:message key="add_training.add"/>
             </button>

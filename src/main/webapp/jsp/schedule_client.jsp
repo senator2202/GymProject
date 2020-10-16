@@ -59,6 +59,9 @@
                                     <fmt:message key="schedule_client.date"/>
                                 </th>
                                 <th>
+                                    <fmt:message key="schedule_client.time"/>
+                                </th>
+                                <th>
                                     <fmt:message key="schedule_client.description"/>
                                 </th>
                                 </thead>
@@ -72,7 +75,20 @@
                                                 ${training.date}
                                         </td>
                                         <td>
+                                                ${training.time}
+                                        </td>
+                                        <td>
                                             <textarea class="form-control" placeholder="<fmt:message key="schedule_client.notReady"/>" rows="2" readonly>${training.description}</textarea>
+                                        </td>
+                                        <td class="td-actions text-right">
+                                            <fmt:message key="schedule_client.tooltipCancel" var="cancel"/>
+                                            <form action="/mainController" method="post">
+                                                <input type="hidden" name="command" value="cancel_training"/>
+                                                <input type="hidden" name="trainingId" value="${training.trainingId}"/>
+                                                <button type="submit" rel="tooltip" class="btn btn-danger btn-round" data-toggle="tooltip" title="${cancel}">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </c:forEach>

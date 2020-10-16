@@ -22,6 +22,7 @@ public class RequestParameterName {
     public static final String TRAININGS_NUMBER = "number";
     public static final String TRAINER = "trainer";
     public static final String TRAINING_DATE = "trainingDate";
+    public static final String TRAINING_TIME = "trainingTime";
     public static final String TRAINING_ID = "trainingId";
     public static final String TRAINING_DESCRIPTION = "trainingDescription";
 

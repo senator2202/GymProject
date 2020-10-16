@@ -26,6 +26,9 @@
 								</th>
 								<th>
 									<fmt:message key="schedule_trainer.date"/>
+								<th>
+									<fmt:message key="schedule_trainer.time"/>
+								</th>
 								</th>
 								<th>
 									<fmt:message key="schedule_trainer.description"/>
@@ -41,17 +44,18 @@
 												${training.date}
 										</td>
 										<td>
-											<textarea class="form-control" rows="2" placeholder="<fmt:message key="schedule_trainer.addDescription"/>">${training.description}</textarea>
+												${training.time}
 										</td>
-										<td class="td-actions text-right">
-											<form action="/mainController" method="post">
-												<input type="hidden" name="command" value="update_training_description"/>
-												<input type="hidden" name="trainingId" value="${training.trainingId}"/>
-												<input type="hidden" name="trainingDescription" value="${training.description}"/>
-												<button type="submit" rel="tooltip" class="btn btn-danger btn-round">
-													<i class="material-icons">save</i>
+										<td>
+											<textarea class="form-control" readonly rows="2" placeholder="<fmt:message key="schedule_trainer.addDescription"/>">${training.description}</textarea>
+										</td>
+										<td>
+											<fmt:message key="schedule_trainer.tooltipEdite" var="editTraining"/>
+											<a href="#popupDescription">
+												<button type="submit" rel="tooltip" class="btn btn-danger btn-round" data-toggle="tooltip" title="${editTraining}" onclick="updateDescriptionOnClick('${training.description}', '${training.trainingId}')">
+													<i class="material-icons">edit</i>
 												</button>
-											</form>
+											</a>
 										</td>
 									</tr>
 								</c:forEach>
@@ -65,3 +69,10 @@
 		</div>
 	</div>
 </section>
+
+<script>
+    function updateDescriptionOnClick(descr, trId) {
+        document.getElementById('trainingDescription').innerText = descr;
+        document.getElementById('trainingId').setAttribute('value', trId);
+    }
+</script>

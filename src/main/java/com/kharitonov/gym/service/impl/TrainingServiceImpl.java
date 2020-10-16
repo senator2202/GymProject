@@ -8,6 +8,7 @@ import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.service.TrainingService;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 public class TrainingServiceImpl implements TrainingService {
@@ -21,10 +22,10 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void addTraining(int trainerId, int clientId, Date trainingDate) throws ServiceException {
+    public void addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws ServiceException {
         TrainingDao dao = new TrainingDaoImpl();
         try {
-            dao.addTraining(trainerId, clientId, trainingDate);
+            dao.addTraining(trainerId, clientId, trainingDate, trainingTime);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -55,6 +56,16 @@ public class TrainingServiceImpl implements TrainingService {
         TrainingDao dao = new TrainingDaoImpl();
         try {
             dao.updateDescription(trainingId, description);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void deleteTraining(int trainingId, int userId) throws ServiceException {
+        TrainingDao dao = new TrainingDaoImpl();
+        try {
+            dao.deleteTraining(trainingId, userId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

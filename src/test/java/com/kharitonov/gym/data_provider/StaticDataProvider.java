@@ -1,10 +1,8 @@
 package com.kharitonov.gym.data_provider;
 
 import com.kharitonov.gym.model.entity.Account;
-import com.kharitonov.gym.model.entity.Admin;
 
 public class StaticDataProvider {
-    public static final Admin USER_ADMIN;
     public static final String ADMIN_LOGIN = "admin";
     public static final String ADMIN_PASSWORD = "admin";
     public static final String ADMIN_EMAIL = "admin@gmail.com";
@@ -18,6 +16,5 @@ public class StaticDataProvider {
                 .withName(ADMIN_LOGIN)
                 .withEmail(ADMIN_EMAIL)
                 .build();
-        USER_ADMIN = new Admin(account);
     }
 }

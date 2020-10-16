@@ -16,10 +16,10 @@ public class TrainingDaoImpl implements TrainingDao {
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
-    public void addTraining(int trainerId, int clientId, Date trainingDate) throws DaoException {
+    public void addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException {
         Connection connection = pool.getConnection();
         try (PreparedStatement statementAdd =
-                     STATEMENT_CREATOR.statementInsertTraining(connection, trainerId, clientId, trainingDate);
+                     STATEMENT_CREATOR.statementInsertTraining(connection, trainerId, clientId, trainingDate, trainingTime);
              PreparedStatement statementDecrement =
                      STATEMENT_CREATOR.statementDecrementTrainings(connection, clientId)) {
             connection.setAutoCommit(false);
@@ -79,6 +79,25 @@ public class TrainingDaoImpl implements TrainingDao {
         }
     }
 
+    @Override
+    public void deleteTraining(int trainingId, int userId) throws DaoException {
+        Connection connection = pool.getConnection();
+        try (PreparedStatement statementAdd =
+                     STATEMENT_CREATOR.statementDeleteTraining(connection, trainingId);
+             PreparedStatement statementDecrement =
+                     STATEMENT_CREATOR.statementIncrementTrainings(connection, userId)) {
+            connection.setAutoCommit(false);
+            statementAdd.execute();
+            statementDecrement.executeUpdate();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        } finally {
+            setAutoCommitTrue(connection);
+            pool.releaseConnection(connection);
+        }
+    }
+
     private Training createTraining(ResultSet resultSet) throws DaoException {
         Training training = new Training();
         try {
@@ -90,6 +109,7 @@ public class TrainingDaoImpl implements TrainingDao {
             training.setClientFirstName(resultSet.getString(TableColumnName.CLIENT_FIRST_NAME));
             training.setClientLastName(resultSet.getString(TableColumnName.CLIENT_LAST_NAME));
             training.setDate(resultSet.getDate(TableColumnName.TRAINING_DATE));
+            training.setTime(resultSet.getTime(TableColumnName.TRAINING_TIME));
             training.setDescription(resultSet.getString(TableColumnName.TRAINING_DESCRIPTION));
         } catch (SQLException e) {
             throw new DaoException("Training creation error!", e);

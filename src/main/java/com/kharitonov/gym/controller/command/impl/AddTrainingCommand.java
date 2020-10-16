@@ -13,9 +13,11 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 public class AddTrainingCommand implements ActionCommand {
+    private static final String SECONDS_POSTFIX = ":00";
     private static final Logger LOGGER = LogManager.getLogger(AddTrainingCommand.class);
     private final UserService userService = UserServiceImpl.getInstance();
     private final TrainingService trainingService = TrainingServiceImpl.getInstance();
@@ -32,10 +34,12 @@ public class AddTrainingCommand implements ActionCommand {
         int userId = client.getAccount().getId();
         String stringDate = request.getParameter(RequestParameterName.TRAINING_DATE);
         Date date = Date.valueOf(stringDate);
+        String stringTime = request.getParameter(RequestParameterName.TRAINING_TIME) + SECONDS_POSTFIX;
+        Time time = Time.valueOf(stringTime);
         try {
             List<Training> trainings;
             int trainerId = userService.findId(name);
-            trainingService.addTraining(trainerId, userId, date);
+            trainingService.addTraining(trainerId, userId, date, time);
             client.setBoughtTrainings(boughtTrainings - 1);
             restoreRequestAttributes(request);
             trainings = trainingService.findClientTrainings(userId);

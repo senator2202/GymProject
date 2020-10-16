@@ -28,6 +28,7 @@ class TableColumnName {
     static final String TRAINER_FIRST_NAME = "trainer_first_name";
     static final String TRAINER_LAST_NAME = "trainer_last_name";
     static final String TRAINING_DATE = "training_date";
+    static final String TRAINING_TIME = "training_time";
     static final String CLIENT_ID = "client_id";
     static final String CLIENT_FIRST_NAME = "client_first_name";
     static final String CLIENT_LAST_NAME = "client_last_name";
