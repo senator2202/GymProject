@@ -35,6 +35,9 @@ class TrainingStatementCreator {
                     "description \n" +
                     "FROM trainings WHERE trainer_id=?";
 
+    private static final String SQL_UPDATE_DESCRIPTION =
+            "UPDATE trainings SET description=? WHERE training_id=?";
+
     private TrainingStatementCreator() {
 
     }
@@ -66,6 +69,14 @@ class TrainingStatementCreator {
     PreparedStatement statementSelectTrainerTrainings(Connection connection, int trainerId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_TRAINER_TRAININGS);
         statement.setInt(1, trainerId);
+        return statement;
+    }
+
+    PreparedStatement statementUpdateDescription(Connection connection, int trainingId, String description)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_DESCRIPTION);
+        statement.setString(1, description);
+        statement.setInt(2, trainingId);
         return statement;
     }
 }

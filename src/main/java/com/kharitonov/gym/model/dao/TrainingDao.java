@@ -12,4 +12,6 @@ public interface TrainingDao extends BaseDao {
     List<Training> findClientTrainings(int clientId) throws DaoException;
 
     List<Training> findTrainerTrainings(int trainerId) throws DaoException;
+
+    void updateDescription(int trainingId, String description) throws DaoException;
 }

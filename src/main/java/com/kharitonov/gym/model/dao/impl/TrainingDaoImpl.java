@@ -68,6 +68,17 @@ public class TrainingDaoImpl implements TrainingDao {
         }
     }
 
+    @Override
+    public void updateDescription(int trainingId, String description) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement =
+                     STATEMENT_CREATOR.statementUpdateDescription(connection, trainingId, description)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
     private Training createTraining(ResultSet resultSet) throws DaoException {
         Training training = new Training();
         try {

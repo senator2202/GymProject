@@ -68,12 +68,12 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
-	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'ENGLISH', 1),
+	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
 	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 1),
 	(289, 'tuchi', '9Vrgph\\g', 'tuchikakludi@mail.ru', 'CLIENT', '2020-09-17 12:09:46', 'RUSSIAN', 0),
-	(301, 'romashka', '9Vrgph\\g', 'romashka@tut.by', 'TRAINER', '2020-09-29 13:35:56', 'RUSSIAN', 0),
+	(301, 'romashka', '9Vrgph\\g', 'romashka@tut.by', 'TRAINER', '2020-09-29 13:35:56', 'ENGLISH', 0),
 	(302, 'kentavr', '9Vrgph\\g', 'kentavr@mail.ru', 'TRAINER', '2020-09-29 13:37:49', 'ENGLISH', 0),
 	(303, 'recent_user', '9Vrgph\\g', 'recent@mail.ru', 'CLIENT', '2020-10-07 16:07:32', 'ENGLISH', 0),
 	(304, 'recent_user2', '9Vrgph\\g', 'recent2@mail.ru', 'CLIENT', '2020-10-07 16:08:09', 'ENGLISH', 0),
@@ -166,6 +166,7 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   `training_date` date DEFAULT NULL,
   `training_time` time DEFAULT '12:00:00',
   `done` tinyint DEFAULT '0',
+  `description` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci,
   PRIMARY KEY (`training_id`) USING BTREE,
   UNIQUE KEY `id` (`training_id`) USING BTREE,
   KEY `FK_trainings_users` (`trainer_id`),
@@ -174,17 +175,17 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~10 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~8 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
-REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`) VALUES
-	(9, 301, 284, '2020-10-15', '12:00:00', 0),
-	(10, 302, 284, '2020-10-16', '12:00:00', 0),
-	(12, 301, 288, '2020-10-23', '12:00:00', 0),
-	(13, 301, 284, '2020-10-24', '12:00:00', 0),
-	(14, 301, 303, '2020-10-25', '12:00:00', 0),
-	(15, 301, 284, '2020-10-26', '12:00:00', 0),
-	(16, 274, 284, '2020-10-21', '12:00:00', 0),
-	(17, 274, 284, '2020-10-30', '12:00:00', 0);
+REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`, `description`) VALUES
+	(9, 301, 284, '2020-10-15', '12:00:00', 0, NULL),
+	(10, 302, 284, '2020-10-16', '12:00:00', 0, NULL),
+	(12, 301, 288, '2020-10-23', '12:00:00', 0, NULL),
+	(13, 301, 284, '2020-10-24', '12:00:00', 0, 'Бег на дорожке 10 мин.\r\nЖим лежа 4 подхода на 10 повторений'),
+	(14, 301, 303, '2020-10-25', '12:00:00', 0, NULL),
+	(15, 301, 284, '2020-10-26', '12:00:00', 0, NULL),
+	(16, 274, 284, '2020-10-21', '12:00:00', 0, NULL),
+	(17, 301, 288, '2020-10-21', '12:00:00', 0, 'trainingDescription');
 /*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.training_exercises
@@ -264,7 +265,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, NULL, 640, 23),
+	(284, 'Angela', 'Merkel', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, NULL, 550, 28),
 	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2, NULL, NULL, NULL),

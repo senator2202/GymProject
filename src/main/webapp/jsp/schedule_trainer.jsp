@@ -6,6 +6,8 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
+<jsp:include page="popup/training_description.jsp"/>
+
 <!-- Client Schedule Section Begin -->
 <section class="trainer-schedule class-timetable spad">
 	<div class="container-fluid">
@@ -40,6 +42,16 @@
 										</td>
 										<td>
 											<textarea class="form-control" rows="2" placeholder="<fmt:message key="schedule_trainer.addDescription"/>">${training.description}</textarea>
+										</td>
+										<td class="td-actions text-right">
+											<form action="/mainController" method="post">
+												<input type="hidden" name="command" value="update_training_description"/>
+												<input type="hidden" name="trainingId" value="${training.trainingId}"/>
+												<input type="hidden" name="trainingDescription" value="${training.description}"/>
+												<button type="submit" rel="tooltip" class="btn btn-danger btn-round">
+													<i class="material-icons">save</i>
+												</button>
+											</form>
 										</td>
 									</tr>
 								</c:forEach>

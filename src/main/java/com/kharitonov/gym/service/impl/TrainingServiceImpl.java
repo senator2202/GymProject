@@ -49,4 +49,14 @@ public class TrainingServiceImpl implements TrainingService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void updateDescription(int trainingId, String description) throws ServiceException {
+        TrainingDao dao = new TrainingDaoImpl();
+        try {
+            dao.updateDescription(trainingId, description);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

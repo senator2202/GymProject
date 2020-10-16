@@ -19,7 +19,8 @@ public enum CommandType {
     UPLOAD_IMAGE(new UploadImageCommand()),
     BUY_TRAININGS(new BuyTrainingsCommand()),
     OPEN_SCHEDULE(new OpenScheduleCommand()),
-    ADD_TRAINING(new AddTrainingCommand());
+    ADD_TRAINING(new AddTrainingCommand()),
+    UPDATE_TRAINING_DESCRIPTION(new UpdateTrainingDescriptionCommand());
 
     private final ActionCommand command;
 
