@@ -8,9 +8,7 @@ public class RequestAttributeName {
     public static final String ALREADY_SENT = "alreadySent";
     public static final String APPLICATIONS = "applications";
     public static final String RECENT_USERS = "recentUsers";
-    public static final String REGISTRATIONS_TAB = "registrationsTab";
-    public static final String APPLICATIONS_TAB = "applicationsTab";
-    public static final String FEEDBACKS_TAB = "feedbacksTab";
+    public static final String ACTIVE_TAB = "activeTab";
     public static final String DAYS_NUMBER = "days";
     public static final String PROFILE_IMAGE = "imageProfile";
     public static final String TRAINERS = "trainers";

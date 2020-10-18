@@ -5,8 +5,9 @@ public class RequestAttributeValue {
             "Your account is successfully confirmed!";
     public static final String CONFIRM_ERROR =
             "Account confirm error!";
-    public static final String ACTIVE_TAB = "nav-item active";
-    public static final String NOT_ACTIVE_TAB = "nav-item";
+    public static final String REGISTRATIONS_TAB = "registrationsTab";
+    public static final String APPLICATIONS_TAB = "applicationsTab";
+    public static final String FEEDBACKS_TAB = "feedbacksTab";
 
     private RequestAttributeValue() {
     }

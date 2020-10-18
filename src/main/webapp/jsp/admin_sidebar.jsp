@@ -12,17 +12,17 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="${feedbacksTab}">
+            <li class="${activeTab == 'feedbacksTab' ? 'nav-item active' : 'nav-item'}">
                 <a class="nav-link" href="/mainController?command=open_admin_feedbacks">
                     <p><fmt:message key="admin_sidebar.feedbacks"/></p>
                 </a>
             </li>
-            <li class="${registrationsTab}">
+            <li class="${activeTab == 'registrationsTab' ? 'nav-item active' : 'nav-item'}">
                 <a class="nav-link" href="/mainController?command=open_admin_registrations">
                     <p><fmt:message key="admin_sidebar.recentRegistrations"/></p>
                 </a>
             </li>
-            <li class="${applicationsTab}">
+            <li class="${activeTab == 'applicationsTab' ? 'nav-item active' : 'nav-item'}">
                 <a class="nav-link" href="/mainController?command=open_admin_main">
                     <p><fmt:message key="admin_sidebar.newTrainerApplications"/></p>
                 </a>

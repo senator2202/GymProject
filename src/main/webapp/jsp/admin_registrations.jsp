@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="ctg" uri="customtags" %>
 
 <fmt:setLocale value="${sessionScope.adminLocale}" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
@@ -107,6 +108,17 @@
                                         </c:forEach>
                                         </tbody>
                                     </table>
+                                    <ctg:pagination tableId="regTable"/>
+                                    <%--<script src="/assets/js/jquery-3.3.1.min.js"></script>
+                                    <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#regTable').DataTable({
+                                                "scrollX": false
+                                            });
+                                            $('.dataTables_length').addClass('bs-select');
+                                        });
+                                    </script>--%>
                                 </div>
                             </div>
                         </div>
@@ -116,6 +128,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

@@ -22,9 +22,7 @@ public class OpenAdminFeedbacksCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         try {
             List<Feedback> feedbacks = service.findAllFeedbacks();
-            request.setAttribute(RequestAttributeName.APPLICATIONS_TAB, RequestAttributeValue.NOT_ACTIVE_TAB);
-            request.setAttribute(RequestAttributeName.REGISTRATIONS_TAB, RequestAttributeValue.NOT_ACTIVE_TAB);
-            request.setAttribute(RequestAttributeName.FEEDBACKS_TAB, RequestAttributeValue.ACTIVE_TAB);
+            request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.FEEDBACKS_TAB);
             request.setAttribute(RequestAttributeName.FEEDBACKS, feedbacks);
         } catch (ServiceException e) {
             LOGGER.error(e);

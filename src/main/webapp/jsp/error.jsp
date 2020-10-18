@@ -12,3 +12,11 @@ Oops, invalid request!<br/>
 </p>
 </body>
 </html>
+
+<%--
+<script>
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>--%>
