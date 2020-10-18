@@ -12,9 +12,9 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="${trainingsTab}">
-                <a class="nav-link" href="#">
-                    <p><fmt:message key="admin_sidebar.nearbyTrainings"/></p>
+            <li class="${feedbacksTab}">
+                <a class="nav-link" href="/mainController?command=open_admin_feedbacks">
+                    <p><fmt:message key="admin_sidebar.feedbacks"/></p>
                 </a>
             </li>
             <li class="${registrationsTab}">
@@ -24,7 +24,7 @@
             </li>
             <li class="${applicationsTab}">
                 <a class="nav-link" href="/mainController?command=open_admin_main">
-                    <p><fmt:message key="admin_sidebar.trainerApplications"/></p>
+                    <p><fmt:message key="admin_sidebar.newTrainerApplications"/></p>
                 </a>
             </li>
             <li class="nav-item">

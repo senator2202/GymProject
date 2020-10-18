@@ -1,7 +1,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="en" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
+
 
 <a href="#x" class="overlay" id="popupLogin"></a>
 <div class="popup ">
@@ -20,23 +20,19 @@
 						<div class="sign-in-htm">
 							<input type="hidden" name="command" value="login"/>
 							<div class="group">
-								<label for="login" class="label">
-									<fmt:message key="login.userName"/>
-								</label>
-								<input id="login" type="text" name="login" class="input">
+								<label for="login"><fmt:message key="login.userName"/></label>
+								<input class="input" type="text" id="login" name="login">
 							</div>
 							<div class="group">
-								<label for="login_password" class="label">
-									<fmt:message key="login.password"/>
-								</label>
-								<input id="login_password" type="password" name="password" class="input" data-type="password">
+								<label for="login_password" class="label"><fmt:message key="login.password"/></label>
+								<input class="input" id="login_password" type="password" name="password" required>
 							</div>
-							<div class="group">
+							<%--<div class="group">
 								<input id="check" type="checkbox" class="check" checked>
 								<label for="check"><span class="icon"></span>
 									<fmt:message key="login.keepSigned" />
 								</label>
-							</div>
+							</div>--%>
 							<div class="group">
 								<fmt:message key="login.signIn" var="login_submit" scope="page"/>
 								<input type="submit" class="button" value="${login_submit}">
@@ -57,30 +53,19 @@
 								<label for="reg_user" class="label">
 									<fmt:message key="login.userName"/>
 								</label>
-								<input id="reg_user" type="text" name="login"
-								       class="input">
+								<input id="reg_user" type="text" name="login" class="input" required pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}">
 							</div>
 							<div class="group">
-								<label for="reg_password" class="label">
-									<fmt:message key="login.password"/>
-								</label>
-								<input id="reg_password" type="password" name="password"
-								       class="input"
-								       data-type="password">
+								<label for="reg_password" class="label"><fmt:message key="login.password"/></label>
+								<input id="reg_password" type="password" name="password" class="input" required pattern="[a-zA-Z0-9_]{6,30}">
 							</div>
 							<div class="group">
-								<label for="repeat_password" class="label">
-									<fmt:message key="login.repeatPassword"/>
-								</label>
-								<input id="repeat_password" type="password" class="input"
-								       data-type="password">
+								<label for="repeat_password" class="label"><fmt:message key="login.repeatPassword"/></label>
+								<input id="repeat_password" type="password" class="input" required oninput="this.value != document.getElementById('reg_password').value ? this.setCustomValidity('Passwords are not the same!') : this.setCustomValidity('')">
 							</div>
 							<div class="group">
-								<label for="email" class="label">
-									<fmt:message key="login.email"/>
-								</label>
-								<input id="email" type="email" name="email"
-								       class="input">
+								<label for="email" class="label"><fmt:message key="login.email"/></label>
+								<input id="email" type="email" name="email" class="input"  required>
 							</div>
 							<div class="group">
 								<fmt:message key="login.signUp" var="reg_submit" scope="page" />
@@ -88,9 +73,7 @@
 							</div>
 							<div class="hr"></div>
 							<div class="foot-lnk">
-								<label for="tab-1">
-									<fmt:message key="login.alreadyRegistered"/>
-								</label>
+								<label for="tab-1"><fmt:message key="login.alreadyRegistered"/></label>
 							</div>
 						</div>
 					</form>

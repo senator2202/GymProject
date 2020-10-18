@@ -25,8 +25,8 @@ public class OpenAdminRegistrationsCommand implements ActionCommand {
             List<User> users = service.findRecentUsers(days);
             request.setAttribute(RequestAttributeName.DAYS_NUMBER, days);
             request.setAttribute(RequestAttributeName.APPLICATIONS_TAB, RequestAttributeValue.NOT_ACTIVE_TAB);
-            request.setAttribute(RequestAttributeName.TRAININGS_TAB, RequestAttributeValue.NOT_ACTIVE_TAB);
             request.setAttribute(RequestAttributeName.REGISTRATIONS_TAB, RequestAttributeValue.ACTIVE_TAB);
+            request.setAttribute(RequestAttributeName.FEEDBACKS_TAB, RequestAttributeValue.NOT_ACTIVE_TAB);
             request.setAttribute(RequestAttributeName.RECENT_USERS, users);
         } catch (ServiceException e) {
             LOGGER.error(e);

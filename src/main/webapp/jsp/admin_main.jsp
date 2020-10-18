@@ -88,7 +88,7 @@
                               ${application.applicationDate}
                           </td>
                           <td class="td-actions text-right">
-                            <button type="button" rel="tooltip" class="btn btn-info btn-round">
+                            <button type="button" rel="tooltip" class="btn btn-info btn-round" data-toggle="tooltip" title="ABRACADABRA">
                               <i class="material-icons">person</i>
                             </button>
                           </td>

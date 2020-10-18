@@ -10,9 +10,12 @@
 <div class="popup">
     <form action="/mainController" class="col-lg-10" method="post" id="descriptionForm" accept-charset="UTF-8">
         <input type="hidden" name="command" value="update_training_description"/>
-        <input type="text" name="trainingId" id="trainingId" value=""/>
+        <input type="hidden" name="trainingId" id="trainingId" value=""/>
         <div class="row">
-            <textarea class="form-control" rows="5" id="trainingDescription" name="trainingDescription"></textarea>
+            <label for="trainingDescription" class="label-on-left">
+                edit
+            </label>
+            <textarea class="form-control" rows="2" id="trainingDescription" name="trainingDescription"></textarea>
         </div>
         <div class="row">
             <button class="primary-btn" type="submit">

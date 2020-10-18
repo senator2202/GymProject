@@ -10,8 +10,7 @@ import com.kharitonov.gym.service.TrainerApplicationService;
 import java.util.List;
 
 public class TrainerApplicationServiceImpl implements TrainerApplicationService {
-    private static final TrainerApplicationServiceImpl INSTANCE =
-            new TrainerApplicationServiceImpl();
+    private static final TrainerApplicationServiceImpl INSTANCE = new TrainerApplicationServiceImpl();
 
     private TrainerApplicationServiceImpl() {
     }

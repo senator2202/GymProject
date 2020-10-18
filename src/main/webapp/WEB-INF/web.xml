@@ -6,11 +6,13 @@
 
     <filter>
         <filter-name>CharacterSetFilter</filter-name>
-        <filter-class>com.kharitonov.gym.controller.filter.CharacterSetFilter</filter-class>
+        <filter-class>com.kharitonov.gym.controller.filter.CharacterSetFilter
+        </filter-class>
     </filter>
 
     <filter-mapping>
         <filter-name>CharacterSetFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
 </web-app>

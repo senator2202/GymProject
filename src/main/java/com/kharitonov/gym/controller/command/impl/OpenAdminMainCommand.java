@@ -24,8 +24,8 @@ public class OpenAdminMainCommand implements ActionCommand {
                 request.getSession().setAttribute(SessionAttributeName.ADMIN_LOCALE, SessionAttributeValue.EN_LOCALE);
             }
             request.setAttribute(RequestAttributeName.APPLICATIONS_TAB, RequestAttributeValue.ACTIVE_TAB);
-            request.setAttribute(RequestAttributeName.TRAININGS_TAB, RequestAttributeValue.NOT_ACTIVE_TAB);
             request.setAttribute(RequestAttributeName.REGISTRATIONS_TAB, RequestAttributeValue.NOT_ACTIVE_TAB);
+            request.setAttribute(RequestAttributeName.FEEDBACKS_TAB, RequestAttributeValue.NOT_ACTIVE_TAB);
             request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
         } catch (ServiceException e) {
             LOGGER.error("Applications loading error!", e);

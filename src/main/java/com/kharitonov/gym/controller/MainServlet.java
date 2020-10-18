@@ -1,7 +1,6 @@
 package com.kharitonov.gym.controller;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
@@ -53,6 +52,11 @@ public class MainServlet extends HttpServlet {
             wrapper.put(name, value);
         }
         request.getSession().setAttribute(SessionAttributeName.SAVED_ATTRIBUTES, wrapper);
+    }
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
     }
 
     @Override

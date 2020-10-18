@@ -2,9 +2,6 @@ package com.kharitonov.gym.model.entity;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Training {
     private int trainingId;

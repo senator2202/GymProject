@@ -3,25 +3,28 @@ package com.kharitonov.gym.controller.command;
 import com.kharitonov.gym.controller.command.impl.*;
 
 public enum CommandType {
-    LOGIN(new LoginCommand()),
-    INVALID(new InvalidCommand()),
-    LOGOUT(new LogoutCommand()),
-    REGISTER(new RegisterCommand()),
-    OPEN_PAGE(new OpenPageCommand()),
-    CONFIRM_ACCOUNT(new ConfirmAccountCommand()),
-    UPDATE_PERSONAL_INFO(new UpdatePersonalInfoCommand()),
-    SEND_TRAINER_APPLICATION(new SendTrainerApplicationCommand()),
-    OPEN_ADMIN_MAIN(new OpenAdminMainCommand()),
-    APPROVE_TRAINER_APPLICATION(new ApproveTrainerApplicationCommand()),
-    REFUSE_TRAINER_APPLICATION(new RefuseTrainerApplicationCommand()),
-    OPEN_ADMIN_REGISTRATIONS(new OpenAdminRegistrationsCommand()),
-    CHANGE_ADMIN_LOCALE(new ChangeAdminLocaleCommand()),
-    UPLOAD_IMAGE(new UploadImageCommand()),
-    BUY_TRAININGS(new BuyTrainingsCommand()),
-    OPEN_SCHEDULE(new OpenScheduleCommand()),
+    ADD_FEEDBACK(new AddFeedbackCommand()),
     ADD_TRAINING(new AddTrainingCommand()),
+    APPROVE_TRAINER_APPLICATION(new ApproveTrainerApplicationCommand()),
+    BUY_TRAININGS(new BuyTrainingsCommand()),
+    CANCEL_TRAINING(new CancelTrainingCommand()),
+    CHANGE_ADMIN_LOCALE(new ChangeAdminLocaleCommand()),
+    CONFIRM_ACCOUNT(new ConfirmAccountCommand()),
+    INVALID(new InvalidCommand()),
+    LOGIN(new LoginCommand()),
+    LOGOUT(new LogoutCommand()),
+    OPEN_PAGE(new OpenPageCommand()),
+    OPEN_ADMIN_MAIN(new OpenAdminMainCommand()),
+    OPEN_ADMIN_REGISTRATIONS(new OpenAdminRegistrationsCommand()),
+    OPEN_ADMIN_FEEDBACKS(new OpenAdminFeedbacksCommand()),
+    OPEN_SCHEDULE(new OpenScheduleCommand()),
+    REFUSE_TRAINER_APPLICATION(new RefuseTrainerApplicationCommand()),
+    REGISTER(new RegisterCommand()),
+    SEND_TRAINER_APPLICATION(new SendTrainerApplicationCommand()),
+    UPDATE_PERSONAL_INFO(new UpdatePersonalInfoCommand()),
+    UPLOAD_IMAGE(new UploadImageCommand()),
     UPDATE_TRAINING_DESCRIPTION(new UpdateTrainingDescriptionCommand()),
-    CANCEL_TRAINING(new CancelTrainingCommand());
+    ;
 
     private final ActionCommand command;
 

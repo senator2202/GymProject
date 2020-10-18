@@ -33,6 +33,12 @@ class TableColumnName {
     static final String CLIENT_FIRST_NAME = "client_first_name";
     static final String CLIENT_LAST_NAME = "client_last_name";
     static final String TRAINING_DESCRIPTION = "description";
+    static final String FEEDBACK_ID = "feedback_id";
+    static final String FEEDBACK_SENDER_NAME = "sender_name";
+    static final String FEEDBACK_SENDER_EMAIL = "sender_email";
+    static final String FEEDBCAK_SUBJECT = "feedback_subject";
+    static final String FEEDBACK_MESSAGE = "feedback_message";
+    static final String FEEDBACK_DATETIME = "feedback_datetime";
 
     private TableColumnName() {
     }

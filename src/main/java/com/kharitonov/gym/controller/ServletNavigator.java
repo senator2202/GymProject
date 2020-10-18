@@ -14,6 +14,7 @@ class ServletNavigator {
         navigationMap.put(PagePath.INDEX, "/index.jsp");
         navigationMap.put(PagePath.ADMIN_MAIN, "/mainController?command=open_admin_main");
         navigationMap.put(PagePath.PERSONAL_PROFILE, "/mainController?command=open_page&page=personal_profile");
+        navigationMap.put(PagePath.HOME, "/jsp/home.jsp");
     }
 
     static String get(Object key) {

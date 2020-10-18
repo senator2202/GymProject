@@ -1,6 +1,9 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.*;
+import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.PagePath;
+import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
@@ -28,8 +31,6 @@ public class LoginCommand implements ActionCommand {
                 session.setAttribute(SessionAttributeName.USER, user);
                 page = PagePath.INDEX;
             } else {
-                request.setAttribute(RequestAttributeName.AUTHENTICATION_RESULT,
-                        RequestAttributeValue.LOGIN_ERROR);
                 page = PagePath.LOGIN;
             }
         } catch (ServiceException e) {

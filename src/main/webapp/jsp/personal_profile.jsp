@@ -146,11 +146,11 @@
 						   value="${sessionScope.user.phoneNumber}"/>
 				</div>
 				<div class="col-lg-6">
-					<label for="phone" class="text-light">
+					<label for="profileEmail" class="text-light">
 						<fmt:message key="personal_profile.email"/>
 					</label>
-					<input type="text" id="email" name="email"
-						   value="${sessionScope.user.account.email}"/>
+					<input type="text" id="profileEmail" name="email"
+					       value="${sessionScope.user.account.email}"/>
 				</div>
 			</div>
 
