@@ -36,6 +36,9 @@
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -58,7 +61,15 @@
     <jsp:include page="/jsp/part/footer.jsp"/>
 
     <!-- Js Plugins -->
-    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+
+    <%--<script>
+        $(document).ready(function () {
+            $('#clientTrainings').DataTable({
+                "scrollX": false
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>--%>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/jquery.magnific-popup.min.js"></script>
     <script src="/assets/js/mixitup.min.js"></script>

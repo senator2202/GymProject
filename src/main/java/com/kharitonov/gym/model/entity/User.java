@@ -1,11 +1,15 @@
 package com.kharitonov.gym.model.entity;
 
-public abstract class User {
+public class User {
     protected Account account;
     protected String firstName;
     protected String lastName;
     protected String phoneNumber;
     protected String imageName;
+
+    public User(Account account) {
+        this.account = account;
+    }
 
     protected User() {
 

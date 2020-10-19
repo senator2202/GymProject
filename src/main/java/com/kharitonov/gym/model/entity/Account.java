@@ -82,6 +82,15 @@ public class Account {
         public String getPostfix() {
             return postfix;
         }
+
+        public static AccountLocale localeByPostfix(String postfix) {
+            for (AccountLocale value : values()) {
+                if (value.postfix.equals(postfix)) {
+                    return value;
+                }
+            }
+            return null;
+        }
     }
 
     public static final class AccountBuilder {

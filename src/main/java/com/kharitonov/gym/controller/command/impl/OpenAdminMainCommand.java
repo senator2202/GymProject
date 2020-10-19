@@ -7,6 +7,7 @@ import com.kharitonov.gym.service.TrainerApplicationService;
 import com.kharitonov.gym.service.impl.TrainerApplicationServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.tomcat.jni.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -19,10 +20,6 @@ public class OpenAdminMainCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         try {
             List<TrainerApplication> applications = service.getAllApplications();
-            String locale = (String) request.getSession().getAttribute(SessionAttributeName.ADMIN_LOCALE);
-            if (locale == null) {
-                request.getSession().setAttribute(SessionAttributeName.ADMIN_LOCALE, SessionAttributeValue.EN_LOCALE);
-            }
             request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.APPLICATIONS_TAB);
             request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
         } catch (ServiceException e) {

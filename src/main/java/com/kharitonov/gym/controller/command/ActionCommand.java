@@ -16,7 +16,9 @@ public interface ActionCommand {
         for (Map.Entry<String, Object> entry : set) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            request.setAttribute(key, value);
+            if (!key.equals(SessionAttributeName.USER)) {
+                request.setAttribute(key, value);
+            }
         }
     }
 

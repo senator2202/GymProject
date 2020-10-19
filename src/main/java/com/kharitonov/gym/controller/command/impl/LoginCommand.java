@@ -6,6 +6,7 @@ import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +30,11 @@ public class LoginCommand implements ActionCommand {
                 User user = optional.get();
                 HttpSession session = request.getSession();
                 session.setAttribute(SessionAttributeName.USER, user);
-                page = PagePath.INDEX;
+                if (user.getAccount().getRole() != UserRole.ADMIN) {
+                    page = PagePath.INDEX;
+                } else {
+                    page = PagePath.ADMIN_MAIN;
+                }
             } else {
                 page = PagePath.LOGIN;
             }

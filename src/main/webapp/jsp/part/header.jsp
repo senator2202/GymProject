@@ -22,7 +22,6 @@
 					<li><a href="/mainController?command=open_schedule">Schedule</a></li>
 					<li><a href="/jsp/gallery.jsp">Portfolio</a></li>
 					<li><a href="/jsp/contact.jsp">Contacts</a></li>
-					<li><a href="/mainController?command=open_admin_main">Admin</a></li>
 					<c:choose>
 						<c:when test="${sessionScope.user!=null}">
 							<li>

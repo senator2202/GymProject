@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="ctg" uri="customtags" %>
 
-<fmt:setLocale value="${sessionScope.adminLocale}" scope="session"/>
+<fmt:setLocale value="${sessionScope.user.account.locale.postfix}" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
 <!DOCTYPE html>
@@ -21,6 +22,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+
+  <script src="/assets/js/jquery-3.3.1.min.js"></script>
+  <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
 
 </head>
 
@@ -61,6 +65,15 @@
                         </th>
                         <th>
                           <fmt:message key="admin_main.applicationDate"/>
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+
                         </th>
                       </thead>
                       <tbody>
@@ -116,6 +129,8 @@
                         </tr>
                       </c:forEach>
                       </tbody>
+
+                      <ctg:pagination tableId="appTable"/>
                     </table>
                   </div>
                 </div>

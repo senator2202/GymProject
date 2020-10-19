@@ -3,6 +3,7 @@ package com.kharitonov.gym.controller;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
+import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 
 import javax.servlet.RequestDispatcher;
@@ -39,6 +40,7 @@ public class MainServlet extends HttpServlet {
         String commandName = request.getParameter(RequestParameterName.COMMAND);
         ActionCommand command = CommandProvider.defineCommand(commandName);
         String page = command.execute(request);
+        User user = (User) request.getSession().getAttribute("user");
         return page;
     }
 

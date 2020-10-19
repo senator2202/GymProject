@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="ctg" uri="customtags" %>
 
-<fmt:setLocale value="${sessionScope.adminLocale}" scope="session"/>
+<fmt:setLocale value="${sessionScope.user.account.locale.postfix}" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
 <!DOCTYPE html>
@@ -23,6 +23,9 @@
     <!-- CSS Files -->
     <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/select-list.css"/>
+
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
 </head>
 <body>
 <div class="wrapper ">
@@ -109,16 +112,6 @@
                                         </tbody>
                                     </table>
                                     <ctg:pagination tableId="regTable"/>
-                                    <%--<script src="/assets/js/jquery-3.3.1.min.js"></script>
-                                    <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
-                                    <script>
-                                        $(document).ready(function () {
-                                            $('#regTable').DataTable({
-                                                "scrollX": false
-                                            });
-                                            $('.dataTables_length').addClass('bs-select');
-                                        });
-                                    </script>--%>
                                 </div>
                             </div>
                         </div>

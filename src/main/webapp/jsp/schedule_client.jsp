@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="ctg" uri="customtags" %>
 
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
                scope="session"/>
@@ -50,7 +51,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="clientTrainings">
                                 <thead class=" text-primary">
                                 <th>
                                     <fmt:message key="schedule_client.trainer"/>
@@ -63,6 +64,9 @@
                                 </th>
                                 <th>
                                     <fmt:message key="schedule_client.description"/>
+                                </th>
+                                <th>
+
                                 </th>
                                 </thead>
                                 <tbody>
@@ -93,7 +97,7 @@
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-
+                                <ctg:pagination tableId="clientTrainings"/>
                             </table>
                             <a href="#popupAdd" style="alignment: center;">
                                 <button class="primary-btn">

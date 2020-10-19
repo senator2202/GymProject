@@ -322,6 +322,8 @@ public class UserDaoImpl implements UserDao {
         } else if (userRole == UserRole.TRAINER) {
             user = new Trainer(account, firstName, lastName, phone);
             ((Trainer) user).setRating(rating);
+        } else if (userRole == UserRole.ADMIN) {
+            user = new User(account);
         }
         user.setImageName(imageName);
         return user;
