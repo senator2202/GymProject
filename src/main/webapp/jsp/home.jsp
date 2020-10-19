@@ -33,9 +33,6 @@
 	<link rel="stylesheet" href="/assets/css/style.css" type="text/css"/>
 	<link rel="stylesheet" href="/assets/css/popup.css" type="text/css"/>
 	<link rel="stylesheet" href="/assets/css/login.css" type="text/css">
-	<style>
-		
-	</style>
 </head>
 
 <body>

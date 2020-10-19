@@ -15,6 +15,10 @@
 		  content="width=device-width, initial-scale=1.0, shrink-to-fit=yes"/>
 	<title><fmt:message key="personal_profile.personalProfile"/></title>
 
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
 
 	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
@@ -30,10 +34,14 @@
 
 <body>
 
+<div id="preloder">
+	<div class="loader"></div>
+</div>
 
-<c:import url="part/header.jsp"/>
+<jsp:include page="part/header_black.jsp"/>
 
-<div class="footer-form set-bg" data-setbg="assets/img/contact-form-bg.jpg">
+
+<%--<div class="footer-form set-bg" data-setbg="assets/img/contact-form-bg.jpg">
 	<div class="col-lg-10">
 		<div class="section-title">
 			<h2><fmt:message key="personal_profile.personalInformation"/></h2>
@@ -194,7 +202,7 @@
 			</button>
 		</form>
 	</div>
-</div>
+</div>--%>
 
 
 

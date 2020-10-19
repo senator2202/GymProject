@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 
 <fmt:setBundle basename="property/pagecontent"/>
 
@@ -16,34 +17,33 @@
 					<fmt:message key="login.signUp"/>
 				</label>
 				<div class="login-form">
-					<form action="/mainController" method="post">
+					<form action="/mainController" method="post" class="needs-validation" novalidate>
 						<div class="sign-in-htm">
 							<input type="hidden" name="command" value="login"/>
 							<div class="group">
-								<label for="login"><fmt:message key="login.userName"/></label>
-								<input class="input" type="text" id="login" name="login" value="${loginValid}">
+								<label for="login" class="label"><fmt:message key="login.userName"/></label>
+								<input data-toggle="tooltip" class="input" type="text" id="login" name="login" value="${loginValid}" required pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}">
+								<div class="invalid-feedback">
+									<fmt:message key="login.invalidLogin"/>
+								</div>
 							</div>
 							<div class="group">
 								<label for="login_password" class="label"><fmt:message key="login.password"/></label>
-								<input class="input" id="login_password" type="password" name="password" value="${passwordValid}" required>
+								<input class="input" id="login_password" type="password" name="password"
+								       value="${passwordValid}" required pattern="[a-zA-Z0-9_]{5,30}">
+								<div class="invalid-feedback">
+									<fmt:message key="login.invalidPassword"/>
+								</div>
 							</div>
-
-							<%--<div class="group">
-								<input id="check" type="checkbox" class="check" checked>
-								<label for="check"><span class="icon"></span>
-									<fmt:message key="login.keepSigned" />
-								</label>
-							</div>--%>
 							<div class="group">
 								<fmt:message key="login.signIn" var="login_submit" scope="page"/>
-								<input type="submit" class="button" value="${login_submit}">
+								<input type="submit" class="button" value="${login_submit}" id="submitLogin">
 							</div>
+
+							<c:if test="${incorrectLoginPassword==true}">
+								<label style="color: red; font-size: medium"><fmt:message key="login.incorrectLoginPassword"/></label>
+							</c:if>
 							<div class="hr"></div>
-							<div class="foot-lnk">
-								<a href="#forgot">
-									<fmt:message key="login.forgotPassword"/>
-								</a>
-							</div>
 						</div>
 					</form>
 
@@ -62,7 +62,7 @@
 							</div>
 							<div class="group">
 								<label for="repeat_password" class="label"><fmt:message key="login.repeatPassword"/></label>
-								<input id="repeat_password" type="password" class="input" required oninput="this.value != document.getElementById('reg_password').value ? this.setCustomValidity('Passwords are not the same!') : this.setCustomValidity('')">
+								<input id="repeat_password" type="password" class="input" required oninput="checkSimilarPasswords()">
 							</div>
 							<div class="group">
 								<label for="email" class="label"><fmt:message key="login.email"/></label>
@@ -83,3 +83,5 @@
 		</div>
 	<a class="close" title=<fmt:message key="trainer_popup.close"/> href="#close"></a>
 </div>
+
+<script src="/assets/js/login.js"></script>

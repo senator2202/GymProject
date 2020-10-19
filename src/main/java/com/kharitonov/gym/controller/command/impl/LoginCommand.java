@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.NavigationPath;
-import com.kharitonov.gym.controller.command.RequestParameterName;
-import com.kharitonov.gym.controller.command.SessionAttributeName;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
@@ -45,6 +42,7 @@ public class LoginCommand implements ActionCommand {
                 for (Map.Entry<String, String> entry : parameters.entrySet()) {
                     request.getSession().setAttribute(entry.getKey() + VALID_POSTFIX, entry.getValue());
                 }
+                request.getSession().setAttribute(RequestAttributeName.INCORRECT_LOGIN_PASSWORD, true);
                 page = NavigationPath.LOGIN_INDEX;
             }
         } catch (ServiceException e) {
