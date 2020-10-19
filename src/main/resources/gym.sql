@@ -21,8 +21,8 @@ USE `gym`;
 DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE IF NOT EXISTS `accounts` (
   `account_id` int NOT NULL AUTO_INCREMENT,
-  `login` varchar(30) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `login` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `password` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `email` varchar(50) NOT NULL,
   `role` enum('ADMIN','TRAINER','CLIENT') NOT NULL DEFAULT 'CLIENT',
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `id` (`account_id`) USING BTREE,
   UNIQUE KEY `name` (`login`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=310 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=320 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.accounts: ~42 rows (приблизительно)
+-- Дамп данных таблицы gym.accounts: ~46 rows (приблизительно)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `registration_date`, `locale`, `active`) VALUES
 	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 'RUSSIAN', 1),
@@ -68,17 +68,25 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
-	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'ENGLISH', 1),
+	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
 	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 1),
 	(289, 'tuchi', '9Vrgph\\g', 'tuchikakludi@mail.ru', 'CLIENT', '2020-09-17 12:09:46', 'RUSSIAN', 0),
-	(301, 'romashka', '9Vrgph\\g', 'romashka@tut.by', 'TRAINER', '2020-09-29 13:35:56', 'ENGLISH', 0),
+	(301, 'romashka', '9Vrgph\\g', 'romashka@tut.by', 'TRAINER', '2020-09-29 13:35:56', 'RUSSIAN', 0),
 	(302, 'kentavr', '9Vrgph\\g', 'kentavr@mail.ru', 'TRAINER', '2020-09-29 13:37:49', 'ENGLISH', 0),
 	(303, 'recent_user', '9Vrgph\\g', 'recent@mail.ru', 'CLIENT', '2020-10-07 16:07:32', 'ENGLISH', 0),
 	(304, 'recent_user2', '9Vrgph\\g', 'recent2@mail.ru', 'CLIENT', '2020-10-07 16:08:09', 'ENGLISH', 0),
 	(308, 'babushka', '9Vrgph\\g', 'babushka@tut.by', 'CLIENT', '2020-10-14 14:17:38', 'ENGLISH', 0),
-	(309, 'clint', '9Vrgph\\g', 'clint@mail.ru', 'CLIENT', '2020-10-16 22:05:05', 'RUSSIAN', 0);
+	(309, 'clint', '9Vrgph\\g', 'clint@mail.ru', 'CLIENT', '2020-10-16 22:05:05', 'RUSSIAN', 0),
+	(312, 'bam', '9Vrgph\\g', 'abrams@tut.by', 'CLIENT', '2020-10-18 00:17:16', 'ENGLISH', 0),
+	(313, 'borov', '9Vrgph\\g', 'borov@mail.ru', 'CLIENT', '2020-10-18 00:35:21', 'ENGLISH', 0),
+	(314, 'zubr', 'AAER~MXQ9Vrgph\\g', 'z1@maul.ru', 'CLIENT', '2020-10-18 00:36:33', 'ENGLISH', 0),
+	(315, 'terminator', 'AA{Q}I~Q}I~Q}InQ', 'sam@tut.by', 'CLIENT', '2020-10-18 01:17:06', 'ENGLISH', 0),
+	(316, 'kaban', '9Vrgph\\g', 'kaban@mail.ru', 'CLIENT', '2020-10-18 01:34:33', 'ENGLISH', 0),
+	(317, 'banana', '9Vrgph\\g', 'banana@tut.by', 'CLIENT', '2020-10-18 01:46:35', 'ENGLISH', 0),
+	(318, 'dunda', '9Vrgph\\g', 'dunda@tut.by', 'CLIENT', '2020-10-18 03:27:34', 'ENGLISH', 0),
+	(319, 'bugaga', '9Vrgph\\g', 'bugaga@tut.by', 'CLIENT', '2020-10-18 03:37:29', 'ENGLISH', 0);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.diets
@@ -122,6 +130,29 @@ REPLACE INTO `diet_meals` (`diet_id`, `meal_type`, `meal_description`) VALUES
 	(3, 'DINNER', 'Куриный бульон, паста болоньезе, молочный коктейль'),
 	(3, 'SUPPER', 'Салат "Цезарь с курицей", протеиновый коктейль');
 /*!40000 ALTER TABLE `diet_meals` ENABLE KEYS */;
+
+-- Дамп структуры для таблица gym.feedbacks
+DROP TABLE IF EXISTS `feedbacks`;
+CREATE TABLE IF NOT EXISTS `feedbacks` (
+  `feedback_id` int NOT NULL AUTO_INCREMENT,
+  `sender_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `sender_email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `feedback_subject` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `feedback_message` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `feedback_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`feedback_id`),
+  UNIQUE KEY `report_id` (`feedback_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Дамп данных таблицы gym.feedbacks: ~5 rows (приблизительно)
+/*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
+REPLACE INTO `feedbacks` (`feedback_id`, `sender_name`, `sender_email`, `feedback_subject`, `feedback_message`, `feedback_datetime`) VALUES
+	(1, 'Alex', 'alex222@mail.ru', 'service', 'service is good', NULL),
+	(2, 'Serj', 'serg333@gmail.com', 'trainer', 'all trainers are so stupid', NULL),
+	(3, 'Анатолий', 'tolik@rambler.ru', NULL, 'дороговатые тренировки', NULL),
+	(4, 'Аноним', 'anonimous@gmail.com', 'Отзыв', 'Хороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\n', NULL),
+	(9, 'Admiral', 'buldog@tut.by', 'conditions', 'two hot in gym', NULL);
+/*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.marks
 DROP TABLE IF EXISTS `marks`;
@@ -174,9 +205,9 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   KEY `FK_trainings_users_2` (`client_id`),
   CONSTRAINT `FK_trainings_users` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~7 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~8 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`, `description`) VALUES
 	(9, 301, 284, '2020-10-15', '12:00:00', 0, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.'),
@@ -185,7 +216,8 @@ REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_da
 	(13, 301, 284, '2020-10-24', '12:00:00', 0, 'Бег на дорожке 10 мин. Жим лежа 4 подхода на 10 повторений'),
 	(14, 301, 303, '2020-10-25', '12:00:00', 0, 'Тест на ошибку\r\nСработает\r\nИли нет?'),
 	(16, 274, 284, '2020-10-21', '12:00:00', 0, NULL),
-	(17, 301, 288, '2020-10-21', '12:00:00', 0, NULL);
+	(17, 301, 288, '2020-10-21', '12:00:00', 0, NULL),
+	(22, 302, 284, '2020-10-26', '17:59:00', 0, NULL);
 /*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.training_exercises
@@ -225,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `FK_users_diets` FOREIGN KEY (`diet_id_fk`) REFERENCES `diets` (`diet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы gym.users: ~42 rows (приблизительно)
+-- Дамп данных таблицы gym.users: ~46 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `institution`, `graduation`, `instagram`, `discount`, `diet_id_fk`, `image_name`, `money_balance`, `bought_trainings`) VALUES
 	(243, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -259,7 +291,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-	(284, 'Ангела', 'Меркель', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, NULL, 550, 27),
+	(284, 'Ангела', 'Меркель', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, NULL, 460, 31),
 	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2, NULL, NULL, NULL),
@@ -269,7 +301,15 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(303, 'Bill', 'Perkins', '80291111111', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(304, 'Perr', 'Billkins', '80292222222', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(308, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
-	(309, 'Клинт', 'Иствуд', '+372644646464', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0);
+	(309, 'Клинт', 'Иствуд', '+372644646464', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(312, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(313, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(314, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(315, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(316, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(317, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(318, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(319, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
