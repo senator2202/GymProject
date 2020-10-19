@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
+import com.kharitonov.gym.controller.command.NavigationPath;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,16 +13,16 @@ public class OpenPageCommand implements ActionCommand {
 
     {
         pageMap = new HashMap<>();
-        pageMap.put("login", PagePath.LOGIN);
-        pageMap.put("personal_profile", PagePath.PERSONAL_PROFILE);
-        pageMap.put("admin_main", PagePath.ADMIN_MAIN);
-        pageMap.put("schedule", PagePath.SCHEDULE);
-        pageMap.put("home", PagePath.HOME);
+        pageMap.put("login", NavigationPath.LOGIN);
+        pageMap.put("personal_profile", NavigationPath.PERSONAL_PROFILE);
+        pageMap.put("admin_main", NavigationPath.ADMIN_MAIN);
+        pageMap.put("schedule", NavigationPath.SCHEDULE);
+        pageMap.put("home", NavigationPath.HOME);
     }
 
     @Override
     public String execute(HttpServletRequest request) {
         String page = request.getParameter(RequestParameterName.PAGE);
-        return pageMap.containsKey(page) ? pageMap.get(page) : PagePath.INDEX;
+        return pageMap.containsKey(page) ? pageMap.get(page) : NavigationPath.INDEX;
     }
 }

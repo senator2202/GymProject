@@ -21,12 +21,13 @@
 							<input type="hidden" name="command" value="login"/>
 							<div class="group">
 								<label for="login"><fmt:message key="login.userName"/></label>
-								<input class="input" type="text" id="login" name="login">
+								<input class="input" type="text" id="login" name="login" value="${loginValid}">
 							</div>
 							<div class="group">
 								<label for="login_password" class="label"><fmt:message key="login.password"/></label>
-								<input class="input" id="login_password" type="password" name="password" required>
+								<input class="input" id="login_password" type="password" name="password" value="${passwordValid}" required>
 							</div>
+
 							<%--<div class="group">
 								<input id="check" type="checkbox" class="check" checked>
 								<label for="check"><span class="icon"></span>
@@ -57,7 +58,7 @@
 							</div>
 							<div class="group">
 								<label for="reg_password" class="label"><fmt:message key="login.password"/></label>
-								<input id="reg_password" type="password" name="password" class="input" required pattern="[a-zA-Z0-9_]{6,30}">
+								<input id="reg_password" type="password" name="password" class="input" required pattern="[a-zA-Z0-9_]{5,30}">
 							</div>
 							<div class="group">
 								<label for="repeat_password" class="label"><fmt:message key="login.repeatPassword"/></label>

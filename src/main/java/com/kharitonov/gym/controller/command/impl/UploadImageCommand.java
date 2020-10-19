@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
+import com.kharitonov.gym.controller.command.NavigationPath;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
@@ -51,7 +51,7 @@ public class UploadImageCommand implements ActionCommand {
         } catch (FileUploadException | ServiceException e) {
             LOGGER.error(e);
         }
-        return PagePath.PERSONAL_PROFILE;
+        return NavigationPath.OPEN_PERSONAL_PROFILE;
     }
 
     private String defineUploadPath(HttpServletRequest request) {

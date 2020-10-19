@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
+import com.kharitonov.gym.controller.command.NavigationPath;
 import com.kharitonov.gym.controller.command.RequestAttributeName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
@@ -33,10 +33,10 @@ public class OpenScheduleCommand implements ActionCommand {
             if (role == UserRole.TRAINER) {
                 doTrainerScenario(request, user);
             }
-            page = PagePath.SCHEDULE;
+            page = NavigationPath.SCHEDULE;
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = PagePath.ERROR;
+            page = NavigationPath.ERROR;
         }
         return page;
     }

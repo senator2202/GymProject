@@ -1,6 +1,6 @@
 package com.kharitonov.gym.controller.command;
 
-public class PagePath {
+public class NavigationPath {
     public static final String INDEX = "/index.jsp";
     public static final String LOGIN = "/jsp/login.jsp";
     public static final String ERROR = "/jsp/error.jsp";
@@ -13,7 +13,11 @@ public class PagePath {
     public static final String ADMIN_REGISTRATIONS = "/jsp/admin_registrations.jsp";
     public static final String ADMIN_FEEDBACKS = "/jsp/admin_feedbacks.jsp";
     public static final String HOME = "/jsp/home.jsp";
+    public static final String OPEN_SCHEDULE = "/mainController?command=open_schedule";
+    public static final String OPEN_ADMIN_MAIN = "/mainController?command=open_admin_main";
+    public static final String OPEN_PERSONAL_PROFILE = "/mainController?command=open_page&page=personal_profile";
+    public static final String LOGIN_INDEX = "/index.jsp#popupLogin";
 
-    private PagePath() {
+    private NavigationPath() {
     }
 }

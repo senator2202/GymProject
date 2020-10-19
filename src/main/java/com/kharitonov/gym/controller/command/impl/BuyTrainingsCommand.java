@@ -23,7 +23,6 @@ public class BuyTrainingsCommand implements ActionCommand {
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
         try {
             userService.buyTrainings(client, trainingsNumber, DEFAULT_TRAINING_COST);
-            //restoreRequestAttributes(request);
         } catch (ServiceException e) {
             LOGGER.error(e);
         }

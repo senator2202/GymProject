@@ -21,6 +21,6 @@ public class ConfirmAccountCommand implements ActionCommand {
             request.setAttribute(RequestAttributeName.CONFIRM_ACCOUNT_RESULT,
                     RequestAttributeValue.CONFIRM_ERROR);
         }
-        return PagePath.CONFIRM_RESULT;
+        return NavigationPath.CONFIRM_RESULT;
     }
 }

@@ -5,10 +5,11 @@ import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.User;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface UserService {
-    Optional<User> findUser(String login, String password)
+    Optional<User> findUser(Map<String, String> parameters)
             throws ServiceException;
 
     User registerUser(String login, String password, String email)

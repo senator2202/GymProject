@@ -32,15 +32,13 @@ public class MainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String page = processRequest(request);
-        String url = ServletNavigator.get(page);
-        response.sendRedirect(url);
+        response.sendRedirect(page);
     }
 
     private String processRequest(HttpServletRequest request) {
         String commandName = request.getParameter(RequestParameterName.COMMAND);
         ActionCommand command = CommandProvider.defineCommand(commandName);
         String page = command.execute(request);
-        User user = (User) request.getSession().getAttribute("user");
         return page;
     }
 

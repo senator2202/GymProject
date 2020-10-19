@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
+import com.kharitonov.gym.controller.command.NavigationPath;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
@@ -28,10 +28,10 @@ public class RegisterCommand implements ActionCommand {
             User user = service.registerUser(login, password, email);
             HttpSession session = request.getSession();
             session.setAttribute(SessionAttributeName.USER, user);
-            page = PagePath.INDEX;
+            page = NavigationPath.INDEX;
         } catch (ServiceException e) {
             LOGGER.error("Unable to register new user!", e);
-            page = PagePath.ERROR;
+            page = NavigationPath.ERROR;
         }
         return page;
     }

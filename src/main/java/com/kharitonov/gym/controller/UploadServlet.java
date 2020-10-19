@@ -24,8 +24,7 @@ public class UploadServlet extends HttpServlet {
             throws ServletException, IOException {
         ActionCommand command = new UploadImageCommand();
         String page = command.execute(request);
-        String url = ServletNavigator.get(page);
-        response.sendRedirect(url);
+        response.sendRedirect(page);
     }
 
     private String processRequest(HttpServletRequest request) {

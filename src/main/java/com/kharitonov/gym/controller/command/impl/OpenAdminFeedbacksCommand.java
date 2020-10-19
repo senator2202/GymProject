@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
+import com.kharitonov.gym.controller.command.NavigationPath;
 import com.kharitonov.gym.controller.command.RequestAttributeName;
 import com.kharitonov.gym.controller.command.RequestAttributeValue;
 import com.kharitonov.gym.exception.ServiceException;
@@ -27,6 +27,6 @@ public class OpenAdminFeedbacksCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return PagePath.ADMIN_FEEDBACKS;
+        return NavigationPath.ADMIN_FEEDBACKS;
     }
 }

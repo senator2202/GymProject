@@ -1,5 +1,6 @@
 package com.kharitonov.gym.service.impl;
 
+import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.UserDao;
@@ -9,10 +10,12 @@ import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.UserService;
 import com.kharitonov.gym.util.CryptoUtility;
 import com.kharitonov.gym.util.mail.MailUtility;
+import com.kharitonov.gym.util.validator.FormValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -29,8 +32,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUser(String login, String password)
+    public Optional<User> findUser(Map<String, String> parameters)
             throws ServiceException {
+        if (!FormValidator.validateLoginParameters(parameters)) {
+            return Optional.empty();
+        }
+        String login = parameters.get(RequestParameterName.LOGIN);
+        String password = parameters.get(RequestParameterName.PASSWORD);
         CryptoUtility cryptoUtility = new CryptoUtility();
         String encryptedPassword = cryptoUtility.encryptMessage(password);
         UserDao dao = new UserDaoImpl();
