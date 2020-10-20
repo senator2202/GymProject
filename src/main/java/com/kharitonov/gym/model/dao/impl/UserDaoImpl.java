@@ -333,7 +333,6 @@ public class UserDaoImpl implements UserDao {
         String lastName = resultSet.getString(TableColumnName.USER_LAST_NAME);
         String phone = resultSet.getString(TableColumnName.USER_PHONE);
         double discount = resultSet.getDouble(TableColumnName.USER_DISCOUNT);
-        double rating = resultSet.getDouble(TableColumnName.USER_RATING);
         int dietId = resultSet.getInt(TableColumnName.USER_DIET_ID);
         String imageName = resultSet.getString(TableColumnName.USER_IMAGE);
         double moneyBalance = resultSet.getDouble(TableColumnName.USER_MONEY_BALANCE);
@@ -355,8 +354,15 @@ public class UserDaoImpl implements UserDao {
             ((Client) user).setMoneyBalance(moneyBalance);
             ((Client) user).setBoughtTrainings(boughtTrainings);
         } else if (userRole == UserRole.TRAINER) {
+            double rating = resultSet.getDouble(TableColumnName.USER_RATING);
+            String institution = resultSet.getString(TableColumnName.USER_INSTITUTION);
+            int graduation = resultSet.getInt(TableColumnName.USER_GRADUATION);
+            String instagram = resultSet.getString(TableColumnName.USER_INSTAGRAM);
             user = new Trainer(account, firstName, lastName, phone);
             ((Trainer) user).setRating(rating);
+            ((Trainer) user).setInstitution(institution);
+            ((Trainer) user).setInstagramLink(instagram);
+            ((Trainer) user).setGraduationYear(graduation);
         } else if (userRole == UserRole.ADMIN) {
             user = new User(account);
         }

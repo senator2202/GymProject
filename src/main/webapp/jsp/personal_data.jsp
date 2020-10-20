@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ci" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
                scope="session"/>
@@ -92,6 +93,35 @@
                                                            class="form-control" value="${sessionScope.user.phoneNumber}"/>
                                                 </td>
                                             </tr>
+                                            <c:if test="${sessionScope.user.account.role=='TRAINER'}">
+                                                <tr>
+                                                    <td>
+                                                        Institution
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="phone" name="phone" readonly
+                                                               class="form-control" value="${sessionScope.user.institution}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Graduation year
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="phone" name="phone" readonly
+                                                               class="form-control" value="${sessionScope.user.graduationYear}"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Instagram Link
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="phone" name="phone"
+                                                               class="form-control" value="${sessionScope.user.instagramLink}"/>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
                                             <tr>
                                                 <td>
                                                     <button type="submit" class="btn btn-primary">

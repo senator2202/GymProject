@@ -27,6 +27,30 @@ public class Trainer extends User {
         super(account, firstName, lastName, phoneNumber);
     }
 
+    public String getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(String institution) {
+        this.institution = institution;
+    }
+
+    public int getGraduationYear() {
+        return graduationYear;
+    }
+
+    public void setGraduationYear(int graduationYear) {
+        this.graduationYear = graduationYear;
+    }
+
+    public String getInstagramLink() {
+        return instagramLink;
+    }
+
+    public void setInstagramLink(String instagramLink) {
+        this.instagramLink = instagramLink;
+    }
+
     public double getRating() {
         return rating;
     }

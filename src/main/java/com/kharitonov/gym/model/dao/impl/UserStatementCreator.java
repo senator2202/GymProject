@@ -15,7 +15,8 @@ class UserStatementCreator {
     private static final String SQL_SELECT_USER =
             "SELECT account_id, login, email, role, registration_date, locale, " +
                     "active, first_name, last_name, phone, discount, " +
-                    "rating, diet_id_fk, image_name, money_balance, bought_trainings " +
+                    "rating, diet_id_fk, image_name, money_balance, bought_trainings, " +
+                    "institution, graduation, instagram " +
                     "FROM accounts JOIN users ON account_id=user_id " +
                     "WHERE login=? AND password=?";
     private static final String SQL_SELECT_ID =

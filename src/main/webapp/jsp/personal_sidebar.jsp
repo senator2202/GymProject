@@ -23,11 +23,13 @@
                     <p><fmt:message key="personal_profile.accountData"/></p>
                 </a>
             </li>
-            <li class="${activeTab == 'personalFinanceTab' ? 'nav-item active' : 'nav-item'}">
-                <a class="nav-link" href="/mainController?command=open_personal_finance">
-                    <p><fmt:message key="personal_profile.finance"/></p>
-                </a>
-            </li>
+            <c:if test="${sessionScope.user.account.role=='CLIENT'}">
+                <li class="${activeTab == 'personalFinanceTab' ? 'nav-item active' : 'nav-item'}">
+                    <a class="nav-link" href="/mainController?command=open_personal_finance">
+                        <p><fmt:message key="personal_profile.finance"/></p>
+                    </a>
+                </li>
+            </c:if>
             <li class="${activeTab == 'personalPhotoGalleryTab' ? 'nav-item active' : 'nav-item'}">
                 <a class="nav-link" href="#">
                     <p><fmt:message key="personal_profile.photoGallery"/></p>
