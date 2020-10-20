@@ -14,7 +14,6 @@ public class RequestAttributeName {
     public static final String TRAINERS = "trainers";
     public static final String TRAININGS = "trainings";
     public static final String FEEDBACKS = "feedbacks";
-    public static final String INCORRECT_LOGIN_PASSWORD = "incorrectLoginPassword";
 
     private RequestAttributeName() {
 

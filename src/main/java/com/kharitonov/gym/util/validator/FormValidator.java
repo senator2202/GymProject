@@ -8,6 +8,9 @@ import java.util.Map;
 public class FormValidator {
     private static final String LOGIN_REGEX = "[a-zA-Z][a-zA-Z0-9_]{1,19}";
     private static final String PASSWORD_REGEX = "[a-zA-Z0-9_]{5,30}";
+    private static final String EMAIL_REGEX =
+            "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)" +
+                    "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final String BLANK = "";
 
     public static boolean validateLogin(String login) {
@@ -16,6 +19,10 @@ public class FormValidator {
 
     public static boolean validatePassword(String password) {
         return password != null && password.matches(PASSWORD_REGEX);
+    }
+
+    public static boolean validateEmail(String email) {
+        return email !=null && email.matches(EMAIL_REGEX);
     }
 
     public static boolean validateLoginParameters(Map<String, String> parameters) {

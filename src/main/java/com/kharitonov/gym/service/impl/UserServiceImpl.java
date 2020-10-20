@@ -92,6 +92,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean updateAccountData(int userId, String email, String locale) throws ServiceException {
+        if (!FormValidator.validateEmail(email)) {
+            return false;
+        }
+        UserDao dao = new UserDaoImpl();
+        try {
+            dao.updateAccountData(userId, email, locale);
+            return true;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void updateUserInfo(String firstName, String lastName, String phone,
                                String email, String locale, int id)
             throws ServiceException {
@@ -99,6 +113,17 @@ public class UserServiceImpl implements UserService {
         try {
             dao.updateUserInfo(firstName, lastName, phone, email, locale, id);
             LOGGER.info("Account id={} was updated!", id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updatePersonalData(int userId, String firstName, String lastName, String phone)
+            throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            dao.updatePersonalData(userId, firstName, lastName, phone);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -176,6 +201,23 @@ public class UserServiceImpl implements UserService {
             return dao.findId(firstName, lastName);
         } catch (DaoException e) {
             throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean addToBalance(int clientId, String stringAmount) throws ServiceException {
+        int amount;
+        try {
+            amount = Integer.parseInt(stringAmount);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        UserDao dao = new UserDaoImpl();
+        try {
+            dao.addToBalance(clientId, amount);
+            return true;
+        } catch (DaoException e) {
+            throw new ServiceException();
         }
     }
 }

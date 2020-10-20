@@ -31,6 +31,7 @@ public class RequestParameterName {
     public static final String FEEDBACK_MESSAGE = "feedbackMessage";
     public static final String TABLE_OFFSET = "offset";
     public static final String TOTAL_RECENT_USERS = "totalUsers";
+    public static final String AMOUNT = "amount";
 
     private RequestParameterName() {
     }

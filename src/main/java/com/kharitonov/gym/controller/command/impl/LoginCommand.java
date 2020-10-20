@@ -42,7 +42,7 @@ public class LoginCommand implements ActionCommand {
                 for (Map.Entry<String, String> entry : parameters.entrySet()) {
                     request.getSession().setAttribute(entry.getKey() + VALID_POSTFIX, entry.getValue());
                 }
-                request.getSession().setAttribute(RequestAttributeName.INCORRECT_LOGIN_PASSWORD, true);
+                request.getSession().setAttribute(SessionAttributeName.INCORRECT_LOGIN_PASSWORD, true);
                 page = NavigationPath.LOGIN_INDEX;
             }
         } catch (ServiceException e) {

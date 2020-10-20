@@ -53,6 +53,8 @@ class UserStatementCreator {
                     "WHERE role='TRAINER'";
     private static final String SQL_SELECT_USER_ID =
             "SELECT user_id FROM users WHERE first_name=? AND last_name=?";
+    private static final String SQL_UPDATE_BALANCE =
+            "UPDATE users SET money_balance=money_balance+? WHERE user_id=?";
 
     private UserStatementCreator() {
     }
@@ -224,6 +226,14 @@ class UserStatementCreator {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_USER_ID);
         statement.setString(1, firstName);
         statement.setString(2, lastName);
+        return statement;
+    }
+
+    PreparedStatement statementUpdateBalance(Connection connection, int userId, int amount)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_BALANCE);
+        statement.setInt(1, amount);
+        statement.setInt(2, userId);
         return statement;
     }
 }

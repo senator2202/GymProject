@@ -21,8 +21,12 @@ public interface UserDao extends BaseDao {
 
     void confirmAccount(int id) throws DaoException;
 
+    void updateAccountData(int userId, String email, String locale) throws DaoException;
+
     void updateUserInfo(String firstName, String lastName, String phone, String email,
-                        String locale, int id)
+                        String locale, int id) throws DaoException;
+
+    void updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws DaoException;
 
     void changeRoleToTrainer(int userId, String institution,
@@ -37,4 +41,6 @@ public interface UserDao extends BaseDao {
     List<User> findAllTrainers() throws DaoException;
 
     int findId(String firstName, String lastName) throws DaoException;
+
+    void addToBalance(int userId, int amount) throws DaoException;
 }

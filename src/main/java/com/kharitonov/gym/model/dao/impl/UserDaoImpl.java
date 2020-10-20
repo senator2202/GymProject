@@ -5,6 +5,7 @@ import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.entity.*;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
+import com.mysql.cj.result.SqlDateValueFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -153,6 +154,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void updateAccountData(int userId, String email, String locale) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statementUpdate =
+                     STATEMENT_CREATOR.statementUpdateAccount(connection, email, locale, userId)) {
+            statementUpdate.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
     public void updateUserInfo(String firstName, String lastName, String phone,
                                String email, String locale, int id)
             throws DaoException {
@@ -171,6 +183,18 @@ public class UserDaoImpl implements UserDao {
         } finally {
             setAutoCommitTrue(connection);
             pool.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public void updatePersonalData(int userId, String firstName, String lastName, String phone) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement =
+                     STATEMENT_CREATOR.statementUpdateUser(connection, firstName, lastName, phone, userId)) {
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
     }
 
@@ -279,6 +303,17 @@ public class UserDaoImpl implements UserDao {
              ResultSet resultSet = select.executeQuery()) {
             resultSet.next();
             return resultSet.getInt(TableColumnName.USER_ID);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void addToBalance(int userId, int amount) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement =
+                     STATEMENT_CREATOR.statementUpdateBalance(connection, userId, amount)) {
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }

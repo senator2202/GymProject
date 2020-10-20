@@ -25,7 +25,7 @@
 					<c:choose>
 						<c:when test="${sessionScope.user!=null}">
 							<li>
-								<a href="/mainController?command=open_page&page=personal_profile">Personal profile</a>
+								<a href="/mainController?command=open_personal_data">Personal profile</a>
 								<ul class="dropdown">
 									<li><a href="/mainController?command=logout">Log Out</a>
 									</li>

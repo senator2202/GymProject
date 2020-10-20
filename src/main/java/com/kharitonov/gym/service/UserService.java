@@ -17,8 +17,13 @@ public interface UserService {
 
     void confirmAccount(int id) throws ServiceException;
 
+    boolean updateAccountData(int userId, String email, String locale) throws ServiceException;
+
     void updateUserInfo(String firstName, String lastName, String phone, String email,
                         String locale, int id)
+            throws ServiceException;
+
+    void updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws ServiceException;
 
     void appointTrainer(int userId, String institution,
@@ -33,4 +38,6 @@ public interface UserService {
     List<User> findAllTrainers() throws ServiceException;
 
     int findId(String name) throws ServiceException;
+
+    boolean addToBalance(int clientId, String amount) throws ServiceException;
 }

@@ -18,6 +18,7 @@ public class OpenPageCommand implements ActionCommand {
         pageMap.put("admin_main", NavigationPath.ADMIN_MAIN);
         pageMap.put("schedule", NavigationPath.SCHEDULE);
         pageMap.put("home", NavigationPath.HOME);
+        pageMap.put("personal_data", NavigationPath.PERSONAL_DATA);
     }
 
     @Override

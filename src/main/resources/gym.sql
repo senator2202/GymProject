@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   UNIQUE KEY `name` (`login`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=320 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.accounts: ~46 rows (приблизительно)
+-- Дамп данных таблицы gym.accounts: ~7 rows (приблизительно)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `registration_date`, `locale`, `active`) VALUES
 	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 'RUSSIAN', 1),
@@ -68,7 +68,7 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
-	(284, 'senator2202', 'AAER~MXQ9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
+	(284, 'senator2202', '9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
 	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 1),
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~8 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`, `description`) VALUES
 	(9, 301, 284, '2020-10-15', '12:00:00', 0, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.'),
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `FK_users_diets` FOREIGN KEY (`diet_id_fk`) REFERENCES `diets` (`diet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы gym.users: ~46 rows (приблизительно)
+-- Дамп данных таблицы gym.users: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `institution`, `graduation`, `instagram`, `discount`, `diet_id_fk`, `image_name`, `money_balance`, `bought_trainings`) VALUES
 	(243, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -291,7 +291,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-	(284, 'Ангела', 'Меркель', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, NULL, 460, 31),
+	(284, 'Памела', 'Андерсон', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, NULL, 635, 31),
 	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2, NULL, NULL, NULL),
