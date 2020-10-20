@@ -26,15 +26,15 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `email` varchar(50) NOT NULL,
   `role` enum('ADMIN','TRAINER','CLIENT') NOT NULL DEFAULT 'CLIENT',
   `registration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `locale` enum('ENGLISH','RUSSIAN') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'ENGLISH',
+  `locale` enum('ENGLISH','RUSSIAN') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'RUSSIAN',
   `active` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`account_id`) USING BTREE,
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `id` (`account_id`) USING BTREE,
   UNIQUE KEY `name` (`login`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=320 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=342 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.accounts: ~7 rows (приблизительно)
+-- Дамп данных таблицы gym.accounts: ~50 rows (приблизительно)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `registration_date`, `locale`, `active`) VALUES
 	(243, 'admin', 'A8[exV[]', 'admin@gmail.com', 'ADMIN', '2020-09-09 21:12:50', 'RUSSIAN', 1),
@@ -86,7 +86,16 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(316, 'kaban', '9Vrgph\\g', 'kaban@mail.ru', 'CLIENT', '2020-10-18 01:34:33', 'ENGLISH', 0),
 	(317, 'banana', '9Vrgph\\g', 'banana@tut.by', 'CLIENT', '2020-10-18 01:46:35', 'ENGLISH', 0),
 	(318, 'dunda', '9Vrgph\\g', 'dunda@tut.by', 'CLIENT', '2020-10-18 03:27:34', 'ENGLISH', 0),
-	(319, 'bugaga', '9Vrgph\\g', 'bugaga@tut.by', 'CLIENT', '2020-10-18 03:37:29', 'ENGLISH', 0);
+	(319, 'bugaga', '9Vrgph\\g', 'bugaga@tut.by', 'CLIENT', '2020-10-18 03:37:29', 'ENGLISH', 0),
+	(333, 'tratata', '9Vrgph\\g', 'tratata@mail.ru', 'CLIENT', '2020-10-20 22:33:47', 'RUSSIAN', 0),
+	(334, 'mulan', '9Vrgph\\g', 'mulan@mail.ru', 'CLIENT', '2020-10-20 23:02:57', 'ENGLISH', 0),
+	(335, 'gena228', '9Vrgph\\g', 'gena_bukin@tut.by', 'CLIENT', '2020-10-20 23:04:28', 'ENGLISH', 0),
+	(336, 'buratino', '9Vrgph\\g', 't34@gmail.com', 'CLIENT', '2020-10-20 23:14:28', 'ENGLISH', 0),
+	(337, 'dinamit', '9Vrgph\\g', 'dinamit@rambler.ru', 'CLIENT', '2020-10-20 23:15:27', 'RUSSIAN', 0),
+	(338, 'tarakan', '9Vrgph\\g', 'ybl38408@eoopy.com', 'CLIENT', '2020-10-20 23:16:40', 'RUSSIAN', 1),
+	(339, 'bot_petrovich', '9Vrgph\\g', 'ljx56125@cuoly.com', 'CLIENT', '2020-10-20 23:46:18', 'RUSSIAN', 1),
+	(340, 'badnitos', '9Vrgph\\g', 'vtj36183@cuoly.com', 'CLIENT', '2020-10-21 00:47:59', 'RUSSIAN', 1),
+	(341, 'tarantul322', '9Vrgph\\g', 'wdj72065@cuoly.com', 'CLIENT', '2020-10-21 00:54:32', 'RUSSIAN', 1);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.diets
@@ -207,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~0 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~8 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`, `description`) VALUES
 	(9, 301, 284, '2020-10-15', '12:00:00', 0, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.'),
@@ -257,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `FK_users_diets` FOREIGN KEY (`diet_id_fk`) REFERENCES `diets` (`diet_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы gym.users: ~0 rows (приблизительно)
+-- Дамп данных таблицы gym.users: ~50 rows (приблизительно)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `institution`, `graduation`, `instagram`, `discount`, `diet_id_fk`, `image_name`, `money_balance`, `bought_trainings`) VALUES
 	(243, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -291,7 +300,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-	(284, 'Памела', 'Андерсон', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, NULL, 635, 31),
+	(284, 'Памела', 'Андерсон', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, NULL, 1000, 31),
 	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL),
 	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2, NULL, NULL, NULL),
@@ -309,7 +318,16 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(316, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
 	(317, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
 	(318, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
-	(319, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0);
+	(319, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(333, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(334, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(335, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(336, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(337, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(338, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(339, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(340, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(341, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
