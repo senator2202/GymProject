@@ -23,10 +23,10 @@ public class LoginCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String page;
         String login = request.getParameter(RequestParameterName.LOGIN);
-        String password = request.getParameter(RequestParameterName.PASSWORD);
+        String password = request.getParameter(RequestParameterName.LOGIN_PASSWORD);
         Map<String, String> parameters = new HashMap<>();
         parameters.put(RequestParameterName.LOGIN, login);
-        parameters.put(RequestParameterName.PASSWORD, password);
+        parameters.put(RequestParameterName.LOGIN_PASSWORD, password);
         try {
             Optional<User> optional = service.findUser(parameters);
             if (optional.isPresent()) {
@@ -38,12 +38,14 @@ public class LoginCommand implements ActionCommand {
                 } else {
                     page = NavigationPath.OPEN_ADMIN_MAIN;
                 }
+                clearSessionAttributesExceptUser(request);
             } else {
+                clearSessionAttributesExceptUser(request);
                 for (Map.Entry<String, String> entry : parameters.entrySet()) {
-                    request.getSession().setAttribute(entry.getKey() + VALID_POSTFIX, entry.getValue());
+                    request.getSession().setAttribute(entry.getKey(), entry.getValue());
                 }
                 request.getSession().setAttribute(SessionAttributeName.INCORRECT_LOGIN_PASSWORD, true);
-                page = NavigationPath.LOGIN_INDEX;
+                page = NavigationPath.INDEX_LOGIN;
             }
         } catch (ServiceException e) {
             LOGGER.error(e);

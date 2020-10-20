@@ -8,6 +8,7 @@ public class SessionAttributeName {
     public static final String ACTIVE_TAB = "activeTab";
     public static final String INCORRECT_LOGIN_PASSWORD = "incorrectLoginPassword";
     public static final String INCORRECT_EMAIL_FORMAT = "incorrectEmailFormat";
+    public static final String LOGIN_EMAIL_EXISTS = "loginEmailExists";
 
     private SessionAttributeName() {
     }

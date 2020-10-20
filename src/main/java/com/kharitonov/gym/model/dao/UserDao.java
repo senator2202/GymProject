@@ -16,6 +16,10 @@ public interface UserDao extends BaseDao {
 
     String findPassword(String login) throws DaoException;
 
+    boolean findByLogin(String login) throws DaoException;
+
+    boolean findByEmail(String email) throws DaoException;
+
     Optional<UserRole> checkLoginPassword(String login, String encryptedPassword)
             throws DaoException;
 
@@ -43,4 +47,6 @@ public interface UserDao extends BaseDao {
     int findId(String firstName, String lastName) throws DaoException;
 
     void addToBalance(int userId, int amount) throws DaoException;
+
+    Optional<String> findEmailById(int userId) throws DaoException;
 }

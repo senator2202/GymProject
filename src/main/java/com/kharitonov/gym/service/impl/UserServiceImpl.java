@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
             return Optional.empty();
         }
         String login = parameters.get(RequestParameterName.LOGIN);
-        String password = parameters.get(RequestParameterName.PASSWORD);
+        String password = parameters.get(RequestParameterName.LOGIN_PASSWORD);
         CryptoUtility cryptoUtility = new CryptoUtility();
         String encryptedPassword = cryptoUtility.encryptMessage(password);
         UserDao dao = new UserDaoImpl();
@@ -53,25 +53,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registerUser(String login, String password, String email)
+    public Optional<User> registerUser(Map<String, String> parameters)
             throws ServiceException {
-        if (login.isEmpty() || password.isEmpty() || email.isEmpty()) {
-            throw new ServiceException("All fields must be entered!");
+        if (!FormValidator.validateRegisterParameters(parameters)) {
+            return Optional.empty();
         }
-        if (!email.matches(REGEX_EMAIL)) {
-            throw new ServiceException("Invalid email format!");
-        }
+        String login = parameters.get(RequestParameterName.REGISTRATION_LOGIN);
+        String password = parameters.get(RequestParameterName.REGISTRATION_PASSWORD);
+        String email = parameters.get(RequestParameterName.REGISTRATION_EMAIL);
         CryptoUtility cryptoUtility = new CryptoUtility();
         String encryptedPassword = cryptoUtility.encryptMessage(password);
         UserDao dao = new UserDaoImpl();
         try {
+            if (dao.findByLogin(login) || dao.findByEmail(email)) {
+                return Optional.empty();
+            }
             MailUtility service;
             dao.addUser(login, encryptedPassword, email);
             User user = dao.findUser(login, encryptedPassword).get();
             service = MailUtility.getInstance();
             service.sendConfirmMessage(email, user.getAccount().getId());
             LOGGER.info("User '{}' was successfully registered!", login);
-            return user;
+            return Optional.of(user);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -79,7 +82,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void confirmAccount(int id) throws ServiceException {
-        if (id < 0) {
+        if (id < 1) {
             throw new ServiceException("Incorrect id value!");
         }
         UserDao dao = new UserDaoImpl();
@@ -218,6 +221,16 @@ public class UserServiceImpl implements UserService {
             return true;
         } catch (DaoException e) {
             throw new ServiceException();
+        }
+    }
+
+    @Override
+    public Optional<String> findEmailById(int userId) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            return dao.findEmailById(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
         }
     }
 }

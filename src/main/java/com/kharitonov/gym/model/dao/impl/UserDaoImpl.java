@@ -5,7 +5,6 @@ import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.entity.*;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
-import com.mysql.cj.result.SqlDateValueFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +16,7 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
     private static final UserStatementCreator STATEMENT_CREATOR = UserStatementCreator.getINSTANCE();
+    private static final String BLANK = "";
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
@@ -107,7 +107,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public String findPassword(String login) throws DaoException {
-        String password = "";
+        String password = BLANK;
         try (Connection connection = pool.getConnection();
              PreparedStatement statementSelect =
                      STATEMENT_CREATOR.statementSelectPassword(connection, login);
@@ -117,6 +117,30 @@ public class UserDaoImpl implements UserDao {
                 password = resultSet.getString(column);
             }
             return password;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean findByEmail(String email) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statementSelect =
+                     STATEMENT_CREATOR.statementSelectByEmail(connection, email);
+             ResultSet resultSet = statementSelect.executeQuery()) {
+            return resultSet.next();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean findByLogin(String login) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statementSelect =
+                     STATEMENT_CREATOR.statementSelectByLogin(connection, login);
+             ResultSet resultSet = statementSelect.executeQuery()) {
+            return resultSet.next();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -317,6 +341,26 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
+    }
+
+    @Override
+    public Optional<String> findEmailById(int userId) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement =
+                     STATEMENT_CREATOR.statementSelectEmailById(connection, userId);
+             ResultSet resultSet = statement.executeQuery()) {
+            Optional<String> optional;
+            if (resultSet.next()) {
+                String email = resultSet.getString(TableColumnName.ACCOUNT_EMAIL);
+                optional = Optional.of(email);
+            } else {
+                optional = Optional.empty();
+            }
+            return optional;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     private User create(ResultSet resultSet) throws SQLException {

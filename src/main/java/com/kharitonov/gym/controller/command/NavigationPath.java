@@ -15,10 +15,13 @@ public class NavigationPath {
     public static final String OPEN_SCHEDULE = "/mainController?command=open_schedule";
     public static final String OPEN_ADMIN_MAIN = "/mainController?command=open_admin_main";
     public static final String OPEN_PERSONAL_PROFILE = "/mainController?command=open_page&page=personal_profile";
-    public static final String LOGIN_INDEX = "/index.jsp#popupLogin";
+    public static final String INDEX_LOGIN = "/index.jsp#popupLogin";
     public static final String PERSONAL_DATA = "/jsp/personal_data.jsp";
     public static final String PERSONAL_ACCOUNT = "/jsp/personal_account.jsp";
     public static final String PERSONAL_FINANCE = "/jsp/personal_finance.jsp";
+    public static final String INDEX_CONFIRM_SENT = "/index.jsp#popupConfirmSent";
+    public static final String INDEX_CONFIRMED = "/index.jsp#popupConfirmed";
+    ///////////////////////////////////////////////index.jsp#popupConfirmed
 
     private NavigationPath() {
     }

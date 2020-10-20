@@ -2,7 +2,11 @@ package com.kharitonov.gym.controller.command;
 
 public class RequestParameterName {
     public static final String LOGIN = "login";
-    public static final String PASSWORD = "password";
+    public static final String LOGIN_PASSWORD = "loginPassword";
+    public static final String REGISTRATION_LOGIN = "regLogin";
+    public static final String REGISTRATION_PASSWORD = "regPassword";
+    public static final String REPEAT_PASSWORD = "repeatPassword";
+    public static final String REGISTRATION_EMAIL = "regEmail";
     public static final String COMMAND = "command";
     public static final String EMAIL = "email";
     public static final String PAGE = "page";

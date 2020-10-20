@@ -12,8 +12,7 @@ public interface UserService {
     Optional<User> findUser(Map<String, String> parameters)
             throws ServiceException;
 
-    User registerUser(String login, String password, String email)
-            throws ServiceException;
+    Optional<User> registerUser(Map<String, String> parameters) throws ServiceException;
 
     void confirmAccount(int id) throws ServiceException;
 
@@ -40,4 +39,6 @@ public interface UserService {
     int findId(String name) throws ServiceException;
 
     boolean addToBalance(int clientId, String amount) throws ServiceException;
+
+    Optional<String> findEmailById(int userId) throws ServiceException;
 }

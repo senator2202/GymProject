@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class RegisterCommand implements ActionCommand {
     private static final Logger LOGGER =
@@ -20,15 +23,32 @@ public class RegisterCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String login = request.getParameter(RequestParameterName.LOGIN);
-        String password = request.getParameter(RequestParameterName.PASSWORD);
-        String email = request.getParameter(RequestParameterName.EMAIL);
+        String login = request.getParameter(RequestParameterName.REGISTRATION_LOGIN);
+        String password = request.getParameter(RequestParameterName.REGISTRATION_PASSWORD);
+        String repeatPassword = request.getParameter(RequestParameterName.REPEAT_PASSWORD);
+        String email = request.getParameter(RequestParameterName.REGISTRATION_EMAIL);
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(RequestParameterName.REGISTRATION_LOGIN, login);
+        parameters.put(RequestParameterName.REGISTRATION_PASSWORD, password);
+        parameters.put(RequestParameterName.REPEAT_PASSWORD, repeatPassword);
+        parameters.put(RequestParameterName.REGISTRATION_EMAIL, email);
         String page;
         try {
-            User user = service.registerUser(login, password, email);
-            HttpSession session = request.getSession();
-            session.setAttribute(SessionAttributeName.USER, user);
-            page = NavigationPath.INDEX;
+            Optional<User> optionalUser = service.registerUser(parameters);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                HttpSession session = request.getSession();
+                clearSessionAttributesExceptUser(request);
+                session.setAttribute(SessionAttributeName.USER, user);
+                page = NavigationPath.INDEX_CONFIRM_SENT;
+            } else {
+                clearSessionAttributesExceptUser(request);
+                for (Map.Entry<String, String> entry : parameters.entrySet()) {
+                    request.getSession().setAttribute(entry.getKey(), entry.getValue());
+                }
+                request.getSession().setAttribute(SessionAttributeName.LOGIN_EMAIL_EXISTS, true);
+                page = NavigationPath.INDEX_LOGIN;
+            }
         } catch (ServiceException e) {
             LOGGER.error("Unable to register new user!", e);
             page = NavigationPath.ERROR;

@@ -2,7 +2,6 @@ package com.kharitonov.gym.util.validator;
 
 import com.kharitonov.gym.controller.command.RequestParameterName;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class FormValidator {
@@ -13,6 +12,10 @@ public class FormValidator {
                     "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final String BLANK = "";
 
+    private FormValidator() {
+
+    }
+
     public static boolean validateLogin(String login) {
         return login != null && login.matches(LOGIN_REGEX);
     }
@@ -22,7 +25,7 @@ public class FormValidator {
     }
 
     public static boolean validateEmail(String email) {
-        return email !=null && email.matches(EMAIL_REGEX);
+        return email != null && email.matches(EMAIL_REGEX);
     }
 
     public static boolean validateLoginParameters(Map<String, String> parameters) {
@@ -31,8 +34,31 @@ public class FormValidator {
             parameters.put(RequestParameterName.LOGIN, BLANK);
             result = false;
         }
-        if (!parameters.get(RequestParameterName.PASSWORD).matches(PASSWORD_REGEX)) {
-            parameters.put(RequestParameterName.PASSWORD, BLANK);
+        if (!parameters.get(RequestParameterName.LOGIN_PASSWORD).matches(PASSWORD_REGEX)) {
+            parameters.put(RequestParameterName.LOGIN_PASSWORD, BLANK);
+            result = false;
+        }
+        return result;
+    }
+
+    public static boolean validateRegisterParameters(Map<String, String> parameters) {
+        boolean result = true;
+        if (!parameters.get(RequestParameterName.REGISTRATION_LOGIN).matches(LOGIN_REGEX)) {
+            parameters.put(RequestParameterName.REGISTRATION_LOGIN, BLANK);
+            result = false;
+        }
+        if (!parameters.get(RequestParameterName.REGISTRATION_PASSWORD).matches(PASSWORD_REGEX)) {
+            parameters.put(RequestParameterName.REGISTRATION_PASSWORD, BLANK);
+            result = false;
+        }
+        if (!parameters.get(RequestParameterName.REGISTRATION_EMAIL).matches(EMAIL_REGEX)) {
+            parameters.put(RequestParameterName.REGISTRATION_EMAIL, BLANK);
+            result = false;
+        }
+        if (!parameters.get(RequestParameterName.REGISTRATION_PASSWORD)
+                .matches(parameters.get(RequestParameterName.REPEAT_PASSWORD))) {
+            parameters.put(RequestParameterName.REGISTRATION_PASSWORD, BLANK);
+            parameters.put(RequestParameterName.REPEAT_PASSWORD, BLANK);
             result = false;
         }
         return result;

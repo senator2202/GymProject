@@ -3,6 +3,7 @@
 
 <fmt:setBundle basename="property/pagecontent"/>
 
+<script src="/assets/js/login.js"></script>
 
 <a href="#x" class="overlay" id="popupLogin"></a>
 <div class="popup ">
@@ -22,22 +23,23 @@
 							<input type="hidden" name="command" value="login"/>
 							<div class="group">
 								<label for="login" class="label"><fmt:message key="login.userName"/></label>
-								<input data-toggle="tooltip" class="input" type="text" id="login" name="login" value="${loginValid}" required pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}">
+								<input class="input" type="text" id="login" name="login"
+								       value="${login}" required pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}">
 								<div class="invalid-feedback">
-									<fmt:message key="login.invalidLogin"/>
+									<fmt:message key="login.invalidLoginFormat"/>
 								</div>
 							</div>
 							<div class="group">
-								<label for="login_password" class="label"><fmt:message key="login.password"/></label>
-								<input class="input" id="login_password" type="password" name="password"
-								       value="${passwordValid}" required pattern="[a-zA-Z0-9_]{5,30}">
+								<label for="loginPassword" class="label"><fmt:message key="login.password"/></label>
+								<input class="input" id="loginPassword" type="password" name="loginPassword"
+								       value="${password}" required pattern="[a-zA-Z0-9_]{5,30}">
 								<div class="invalid-feedback">
-									<fmt:message key="login.invalidPassword"/>
+									<fmt:message key="login.invalidPasswordFormat"/>
 								</div>
 							</div>
 							<div class="group">
-								<fmt:message key="login.signIn" var="login_submit" scope="page"/>
-								<input type="submit" class="button" value="${login_submit}" id="submitLogin">
+								<fmt:message key="login.signIn" var="loginSubmit" scope="page"/>
+								<input type="submit" class="button" value="${loginSubmit}" id="submitLogin">
 							</div>
 
 							<c:if test="${incorrectLoginPassword==true}">
@@ -47,35 +49,49 @@
 						</div>
 					</form>
 
-					<form action="/mainController" method="post">
+					<form action="/mainController" method="post" class="needs-validation" novalidate id="regForm">
 						<div class="sign-up-htm">
 							<input type="hidden" name="command" value="register"/>
 							<div class="group">
-								<label for="reg_user" class="label">
+								<label for="regLogin" class="label">
 									<fmt:message key="login.userName"/>
 								</label>
-								<input id="reg_user" type="text" name="login" class="input" required pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}">
+								<input id="regLogin" type="text" name="regLogin" class="input"
+								       value="${regLogin}" required pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}">
+								<div class="invalid-feedback">
+									<fmt:message key="login.invalidLoginFormat"/>
+								</div>
 							</div>
 							<div class="group">
-								<label for="reg_password" class="label"><fmt:message key="login.password"/></label>
-								<input id="reg_password" type="password" name="password" class="input" required pattern="[a-zA-Z0-9_]{5,30}">
+								<label for="regPassword" class="label"><fmt:message key="login.password"/></label>
+								<input id="regPassword" type="password" name="regPassword" class="input"
+								       value="${regPassword}" required pattern="[a-zA-Z0-9_]{5,30}">
+								<div class="invalid-feedback">
+									<fmt:message key="login.invalidPasswordFormat"/>
+								</div>
 							</div>
 							<div class="group">
-								<label for="repeat_password" class="label"><fmt:message key="login.repeatPassword"/></label>
-								<input id="repeat_password" type="password" class="input" required oninput="checkSimilarPasswords()">
+								<label for="repeatPassword" class="label"><fmt:message key="login.repeatPassword"/></label>
+								<input id="repeatPassword" name="repeatPassword" type="password" class="input" required oninput="checkSimilarPasswords()">
+								<div class="invalid-feedback">
+									<fmt:message key="login.passwordsNotEqual"/>
+								</div>
 							</div>
 							<div class="group">
-								<label for="email" class="label"><fmt:message key="login.email"/></label>
-								<input id="email" type="email" name="email" class="input"  required>
+								<label for="regEmail" class="label"><fmt:message key="login.email"/></label>
+								<input id="regEmail" type="email" name="regEmail" class="input" required value="${regEmail}">
+								<div class="invalid-feedback">
+									<fmt:message key="login.invalidEmailFormat"/>
+								</div>
 							</div>
 							<div class="group">
-								<fmt:message key="login.signUp" var="reg_submit" scope="page" />
-								<input type="submit" class="button" value="${reg_submit}">
+								<fmt:message key="login.signUp" var="regSubmit" scope="page" />
+								<input type="submit" class="button" value="${regSubmit}" onclick="checkSimilarPasswords()">
 							</div>
 							<div class="hr"></div>
-							<div class="foot-lnk">
-								<label for="tab-1"><fmt:message key="login.alreadyRegistered"/></label>
-							</div>
+							<c:if test="${loginEmailExists==true}">
+								<label style="color: red; font-size: medium"><fmt:message key="login.loginEmailExists"/></label>
+							</c:if>
 						</div>
 					</form>
 				</div>
@@ -83,5 +99,3 @@
 		</div>
 	<a class="close" title=<fmt:message key="trainer_popup.close"/> href="#close"></a>
 </div>
-
-<script src="/assets/js/login.js"></script>

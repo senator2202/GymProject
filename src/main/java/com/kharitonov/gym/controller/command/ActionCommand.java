@@ -3,10 +3,14 @@ package com.kharitonov.gym.controller.command;
 import com.kharitonov.gym.controller.RequestAttributesWrapper;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 public interface ActionCommand {
+
     String execute(HttpServletRequest request);
 
     default void restoreRequestAttributes(HttpServletRequest request) {
@@ -24,5 +28,17 @@ public interface ActionCommand {
 
     default String getPreviousPage(HttpServletRequest request) {
         return (String) request.getSession().getAttribute(SessionAttributeName.PREVIOUS_PAGE);
+    }
+
+    default void clearSessionAttributesExceptUser(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Enumeration<String> attrs = session.getAttributeNames();
+        Iterator<String> iterator = attrs.asIterator();
+        while (iterator.hasNext()) {
+            String attrName = iterator.next();
+            if (!attrName.equals(SessionAttributeName.USER)) {
+                session.removeAttribute(attrName);
+            }
+        }
     }
 }

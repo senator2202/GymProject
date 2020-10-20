@@ -42,6 +42,13 @@
 </div>
 
 <jsp:include page="part/header.jsp"/>
+<jsp:include page="popup/confirm_sent.jsp"/>
+<jsp:include page="popup/confirmed.jsp"/>
+
+<c:if test="${confirmedAccount!=null}">
+        <a href="#popupConfirmed" id="popRef"></a>
+		<script>document.getElementById("popRef").click();</script>
+</c:if>
 
 <!-- Hero Section Begin -->
 <section class="hero-section">

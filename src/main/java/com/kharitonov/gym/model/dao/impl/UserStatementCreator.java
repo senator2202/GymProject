@@ -21,6 +21,8 @@ class UserStatementCreator {
                     "WHERE login=? AND password=?";
     private static final String SQL_SELECT_ID =
             "SELECT account_id FROM accounts WHERE login=? AND password=?";
+    private static final String SQL_SELECT_EMAIL_BY_ID =
+            "SELECT email FROM accounts WHERE account_id=?";
     private static final String SQL_SELECT_ALL_ACCOUNTS =
             "SELECT account_id, login, password, email, role, registration_date " +
                     "FROM accounts";
@@ -28,6 +30,10 @@ class UserStatementCreator {
             "UPDATE accounts SET active=1 WHERE  account_id=?";
     private static final String SQL_SELECT_PASSWORD =
             "SELECT password FROM accounts WHERE login=?";
+    private static final String SQL_SELECT_BY_LOGIN =
+            "SELECT account_id FROM accounts WHERE login=?";
+    private static final String SQL_SELECT_BY_EMAIL =
+            "SELECT account_id FROM accounts WHERE email=?";
     private static final String SQL_SELECT_ROLE =
             "SELECT role FROM accounts WHERE login=? AND password=?";
     private static final String SQL_UPDATE_USER =
@@ -109,6 +115,12 @@ class UserStatementCreator {
         return statement;
     }
 
+    PreparedStatement statementSelectEmailById(Connection connection, int userId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_EMAIL_BY_ID);
+        statement.setInt(1, userId);
+        return statement;
+    }
+
     PreparedStatement statementSelectAll(Connection connection)
             throws SQLException {
         return connection.prepareStatement(SQL_SELECT_ALL_ACCOUNTS);
@@ -129,6 +141,24 @@ class UserStatementCreator {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_PASSWORD);
         statement.setString(1, login);
+        return statement;
+    }
+
+    PreparedStatement statementSelectByLogin(Connection connection,
+                                              String login)
+            throws SQLException {
+        PreparedStatement statement =
+                connection.prepareStatement(SQL_SELECT_BY_LOGIN);
+        statement.setString(1, login);
+        return statement;
+    }
+
+    PreparedStatement statementSelectByEmail(Connection connection,
+                                              String email)
+            throws SQLException {
+        PreparedStatement statement =
+                connection.prepareStatement(SQL_SELECT_BY_EMAIL);
+        statement.setString(1, email);
         return statement;
     }
 
