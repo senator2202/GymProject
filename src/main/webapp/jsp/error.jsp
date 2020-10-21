@@ -1,22 +1,23 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
+               scope="session"/>
+<fmt:setBundle basename="property/pagecontent"/>
+
 <!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<html lang="en">
+<html>
 <head>
-    <title>Invalid request</title>
+    <title><fmt:message key="error.title"/></title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/css/error.css" type="text/css"/>
 </head>
 <body>
-Oops, invalid request!<br/>
-<p>
-    <img src="https://img.favpng.com/3/20/7/error-http-404-icon-png-favpng-KKu6gkp2aXEFe73qjS9pQmYyP.jpg"
-         alt="error image"/>
-</p>
+<div class="content">
+    <a href="/index.jsp"><fmt:message key="error.goHome"/></a>
+</div>
 </body>
 </html>
-
-<%--
-<script>
-    $(document).ready(function () {
-        $('#dtBasicExample').DataTable();
-        $('.dataTables_length').addClass('bs-select');
-    });
-</script>--%>
