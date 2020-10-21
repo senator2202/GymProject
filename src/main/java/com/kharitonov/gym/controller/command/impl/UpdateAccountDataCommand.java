@@ -36,7 +36,7 @@ public class UpdateAccountDataCommand implements ActionCommand {
             } else {
                 session.setAttribute(SessionAttributeName.INCORRECT_EMAIL_FORMAT, true);
             }
-            page = NavigationPath.PERSONAL_ACCOUNT;
+            page = NavigationPath.PERSONAL_ACCOUNT_SERVLET;
         } catch (ServiceException e) {
             LOGGER.error(e);
             page = NavigationPath.ERROR;

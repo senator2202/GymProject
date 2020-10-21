@@ -7,7 +7,7 @@ import com.kharitonov.gym.controller.command.RequestAttributeValue;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class OpenAccountDataCommand implements ActionCommand {
+public class OpenPersonalAccountCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.PERSONAL_ACCOUNT_TAB);

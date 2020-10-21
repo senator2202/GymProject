@@ -19,7 +19,7 @@
             </li>
             <li class="nav-item">
             <li class="${activeTab == 'personalAccountTab' ? 'nav-item active' : 'nav-item'}">
-                <a class="nav-link" href="/mainController?command=open_account_data">
+                <a class="nav-link" href="/mainController?command=open_personal_account">
                     <p><fmt:message key="personal_profile.accountData"/></p>
                 </a>
             </li>

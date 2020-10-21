@@ -51,7 +51,7 @@ public class RoleControlFilter implements Filter {
                 Arrays.asList(UserRole.CLIENT));
         CONTROL_MAP.put(CommandType.OPEN_ABOUT.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.OPEN_ACCOUNT_DATA.toString().toLowerCase(),
+        CONTROL_MAP.put(CommandType.OPEN_PERSONAL_ACCOUNT.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         CONTROL_MAP.put(CommandType.OPEN_ADMIN_FEEDBACKS.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));

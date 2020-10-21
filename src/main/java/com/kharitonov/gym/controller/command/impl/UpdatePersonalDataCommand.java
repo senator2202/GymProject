@@ -31,7 +31,7 @@ public class UpdatePersonalDataCommand implements ActionCommand {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setPhoneNumber(phone);
-            page = NavigationPath.PERSONAL_DATA;
+            page = NavigationPath.PERSONAL_DATA_SERVLET;
         } catch (ServiceException e) {
             LOGGER.error(e);
             page = NavigationPath.ERROR;
