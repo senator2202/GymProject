@@ -29,37 +29,7 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Header Section Begin -->
-    <header class="header-section header-normal">
-        <div class="container">
-            <div class="logo">
-                <a href="../index.jsp">
-                    <img src="../assets/img/logo-normal.png" alt="">
-                </a>
-            </div>
-            <div class="nav-menu">
-                <nav class="mainmenu mobile-menu">
-                    <ul>
-                        <li><a href="../index.jsp">Home</a></li>
-                        <li><a href="about-us.jsp">About</a></li>
-                        <li><a href="schedule.jsp">Schedule</a></li>
-                        <li class="active"><a href="gallery.jsp">Portfolio</a>
-                        <li><a href="blog.jsp">Blog</a>
-                            <ul class="dropdown">
-                                <li><a href="blog-details.jsp">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.jsp">Contacts</a></li>
-                    </ul>
-                </nav>
-                <div class="nav-right search-switch">
-                    <i class="ti-search"></i>
-                </div>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
+    <jsp:include page="part/header_black.jsp"/>
 
     <!-- Site Breadcrumb Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="../assets/img/about-breadcrumb-bg.jpg">
@@ -67,10 +37,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="site-text">
-                        <h2>Portfolio</h2>
+                        <h2>About Us</h2>
                         <div class="site-breadcrumb">
                             <a href="./home.html" class="sb-item">Home</a>
-                            <span class="sb-item">Portfolio</span>
+                            <span class="sb-item">About</span>
                         </div>
                     </div>
                 </div>
@@ -79,112 +49,164 @@
     </section>
     <!-- Site Breadcrumb End -->
 
-    <!-- Gallery Section Begin -->
-    <section class="gallery-section spad">
+    <!-- About Us Secion Begin -->
+    <section class="about-us-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="filter-controls">
-                        <ul>
-                            <li class="active" data-filter=".all">All Gallery</li>
-                            <li data-filter=".fitness">Fitness</li>
-                            <li data-filter=".coaching">Coaching</li>
-                            <li data-filter=".event">Event</li>
-                            <li data-filter=".other">Other</li>
-                        </ul>
+                <div class="col-lg-5">
+                    <div class="about-pic">
+                        <img src="../assets/img/about-us.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <div class="about-text">
+                        <div class="section-title">
+                            <h2>Wellcome to Ponigym</h2>
+                            <p>Our dedicated Ponigym areas and fitness experts can help you discover new training
+                                techniques and exercises that offer a dynamic and efficient full-body workout.</p>
+                        </div>
+                        <p>Our fitness experts can help you discover new training techniques. Lorem ipsum dolor sit
+                            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </div>
                 </div>
             </div>
-            <div class="row gallery-filter">
-                <div class="col-md-8 mix all fitness">
-                    <div class="gallery-item">
-                        <div class="gi-img">
-                            <img src="../assets/img/gallery/gallery-1.jpg" alt="">
-                        </div>
-                        <div class="gi-text">
-                            <h5>Sweet Berry Farm</h5>
-                            <span>Fitness, Event</span>
-                        </div>
+        </div>
+    </section>
+    <!-- About Us Secion End -->
+
+    <!-- Why Chose Us Section Begin -->
+    <section class="choseus-section set-bg spad" data-setbg="../assets/img/chose-us-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Why Choose Us</h2>
+                        <p>Our fitness experts can help you discover new training techniques.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="row">
-                        <div class="col-lg-12 mix all coaching event">
-                            <div class="gallery-item">
-                                <div class="gi-img">
-                                    <img src="../assets/img/gallery/gallery-2.jpg" alt="">
-                                </div>
-                                <div class="gi-text">
-                                    <h5>Sweet Berry Farm</h5>
-                                    <span>Fitness, Event</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 mix all other fitness">
-                            <div class="gallery-item">
-                                <div class="gi-img">
-                                    <img src="../assets/img/gallery/gallery-3.jpg" alt="">
-                                </div>
-                                <div class="gi-text">
-                                    <h5>Sweet Berry Farm</h5>
-                                    <span>Fitness, Event</span>
-                                </div>
-                            </div>
+            </div>
+            <div class="chose-items">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="ci-item">
+                            <i class="ti-crown"></i>
+                            <h5>How do I become an author?</h5>
+                            <p>Event Calendar and Event Calendar Pro full support out of the box.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="row">
-                        <div class="col-lg-12 mix all coaching">
-                            <div class="gallery-item">
-                                <div class="gi-img">
-                                    <img src="../assets/img/gallery/gallery-4.jpg" alt="">
-                                </div>
-                                <div class="gi-text">
-                                    <h5>Sweet Berry Farm</h5>
-                                    <span>Fitness, Event</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 mix all other event">
-                            <div class="gallery-item">
-                                <div class="gi-img">
-                                    <img src="../assets/img/gallery/gallery-5.jpg" alt="">
-                                </div>
-                                <div class="gi-text">
-                                    <h5>Sweet Berry Farm</h5>
-                                    <span>Fitness, Event</span>
-                                </div>
-                            </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="ci-item">
+                            <i class="ti-package"></i>
+                            <h5>Is my license transferable?</h5>
+                            <p>Event Calendar and Event Calendar Pro full support out of the box.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mix all coaching fitness">
-                    <div class="gallery-item">
-                        <div class="gi-img">
-                            <img src="../assets/img/gallery/gallery-6.jpg" alt="">
-                        </div>
-                        <div class="gi-text">
-                            <h5>Sweet Berry Farm</h5>
-                            <span>Fitness, Event</span>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="ci-item">
+                            <i class="ti-shopping-cart"></i>
+                            <h5>What do you mean by item?</h5>
+                            <p>Event Calendar and Event Calendar Pro full support out of the box.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 mix all event other">
-                    <div class="gallery-item">
-                        <div class="gi-img">
-                            <img src="../assets/img/gallery/gallery-7.jpg" alt="">
-                        </div>
-                        <div class="gi-text">
-                            <h5>Sweet Berry Farm</h5>
-                            <span>Fitness, Event</span>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="ci-item">
+                            <i class="ti-user"></i>
+                            <h5>Top notch customer support</h5>
+                            <p>Event Calendar and Event Calendar Pro full support out of the box.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Gallery Section End -->
+    <!-- Why Chose Us Section End -->
+
+    <!-- About Page Trainer Section Begin -->
+    <section class="about-page-trainer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2>Our Trainer</h2>
+                            <p>Our fitness experts can help you discover new training techniques.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single-trainer-item">
+                        <div class="trainer-pic">
+                            <img src="../assets/img/trainer/trainer-1.jpg" alt="">
+                        </div>
+                        <div class="trainer-text">
+                            <h5>Noah Leonard</h5>
+                            <span>Gymer</span>
+                            <div class="trainer-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single-trainer-item">
+                        <div class="trainer-pic">
+                            <img src="../assets/img/trainer/trainer-2.jpg" alt="">
+                        </div>
+                        <div class="trainer-text">
+                            <h5>Noah Leonard</h5>
+                            <span>Gymer</span>
+                            <div class="trainer-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single-trainer-item">
+                        <div class="trainer-pic">
+                            <img src="../assets/img/trainer/trainer-3.jpg" alt="">
+                        </div>
+                        <div class="trainer-text">
+                            <h5>Noah Leonard</h5>
+                            <span>Gymer</span>
+                            <div class="trainer-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single-trainer-item">
+                        <div class="trainer-pic">
+                            <img src="../assets/img/trainer/trainer-4.jpg" alt="">
+                        </div>
+                        <div class="trainer-text">
+                            <h5>Noah Leonard</h5>
+                            <span>Gymer</span>
+                            <div class="trainer-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Page Trainer Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">

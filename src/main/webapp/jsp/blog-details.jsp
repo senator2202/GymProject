@@ -41,15 +41,15 @@
                 <nav class="mainmenu mobile-menu">
                     <ul>
                         <li><a href="../index.jsp">Home</a></li>
-                        <li><a href="about-us.jsp">About</a></li>
+                        <li><a href="about.jsp">About</a></li>
                         <li><a href="schedule.jsp">Schedule</a></li>
-                        <li><a href="gallery.jsp">Portfolio</a></li>
+                        <li><a href="portfolio.jsp">Portfolio</a></li>
                         <li class="active"><a href="blog.jsp">Blog</a>
                             <ul class="dropdown">
                                 <li><a href="blog-details.jsp">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.jsp">Contacts</a></li>
+                        <li><a href="contacts.jsp">Contacts</a></li>
                     </ul>
                 </nav>
                 <div class="nav-right search-switch">

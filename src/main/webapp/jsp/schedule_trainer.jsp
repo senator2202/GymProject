@@ -30,7 +30,6 @@
 								<th>
 									<fmt:message key="schedule_trainer.time"/>
 								</th>
-								</th>
 								<th>
 									<fmt:message key="schedule_trainer.description"/>
 								</th>

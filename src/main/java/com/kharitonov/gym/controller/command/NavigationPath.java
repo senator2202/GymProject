@@ -21,7 +21,11 @@ public class NavigationPath {
     public static final String PERSONAL_FINANCE = "/jsp/personal_finance.jsp";
     public static final String INDEX_CONFIRM_SENT = "/index.jsp#popupConfirmSent";
     public static final String INDEX_CONFIRMED = "/index.jsp#popupConfirmed";
-    ///////////////////////////////////////////////index.jsp#popupConfirmed
+    public static final String ABOUT = "/jsp/about.jsp";
+    public static final String PORTFOLIO = "/jsp/portfolio.jsp";
+    public static final String CONTACTS = "/jsp/contacts.jsp";
+    public static final String OPEN_ERROR = "/mainController?open_page&page=error";
+    public static final String INVALID = "/mainController?command=invalid";
 
     private NavigationPath() {
     }

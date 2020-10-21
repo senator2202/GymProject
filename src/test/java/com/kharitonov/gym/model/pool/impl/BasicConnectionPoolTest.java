@@ -11,7 +11,7 @@ public class BasicConnectionPoolTest {
             BasicConnectionPool.getInstance();
 
     @Test
-    public void testGetInstance() throws IOException, SQLException {
+    public void testGetInstance() {
         for (int i = 0; i < 10; i++) {
             pool.getConnection();
         }

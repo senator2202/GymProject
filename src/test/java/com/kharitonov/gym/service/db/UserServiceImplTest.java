@@ -6,8 +6,6 @@ import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-
 public class UserServiceImplTest {
     private final UserServiceImpl service = UserServiceImpl.getInstance();
 

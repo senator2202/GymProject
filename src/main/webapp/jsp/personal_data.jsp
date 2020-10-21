@@ -99,7 +99,7 @@
                                                         Institution
                                                     </td>
                                                     <td>
-                                                        <input type="text" id="phone" name="phone" readonly
+                                                        <input type="text" id="institution" name="institution" readonly
                                                                class="form-control" value="${sessionScope.user.institution}"/>
                                                     </td>
                                                 </tr>
@@ -108,7 +108,7 @@
                                                         Graduation year
                                                     </td>
                                                     <td>
-                                                        <input type="text" id="phone" name="phone" readonly
+                                                        <input type="text" id="graduationYear" name="graduationYear" readonly
                                                                class="form-control" value="${sessionScope.user.graduationYear}"/>
                                                     </td>
                                                 </tr>
@@ -117,7 +117,7 @@
                                                         Instagram Link
                                                     </td>
                                                     <td>
-                                                        <input type="text" id="phone" name="phone"
+                                                        <input type="text" id="instagramLink" name="instagramLink"
                                                                class="form-control" value="${sessionScope.user.instagramLink}"/>
                                                     </td>
                                                 </tr>

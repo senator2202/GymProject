@@ -21,9 +21,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private static final UserServiceImpl INSTANCE = new UserServiceImpl();
     private static final String SPACE = " ";
-    private static final String REGEX_EMAIL =
-            "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)" +
-                    "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
 

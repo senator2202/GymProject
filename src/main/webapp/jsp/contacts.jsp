@@ -29,37 +29,7 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Header Section Begin -->
-    <header class="header-section header-normal">
-        <div class="container">
-            <div class="logo">
-                <a href="../index.jsp">
-                    <img src="../assets/img/logo-normal.png" alt="">
-                </a>
-            </div>
-            <div class="nav-menu">
-                <nav class="mainmenu mobile-menu">
-                    <ul>
-                        <li><a href="../index.jsp">Home</a></li>
-                        <li><a href="about-us.jsp">About</a></li>
-                        <li><a href="schedule.jsp">Schedule</a></li>
-                        <li><a href="gallery.jsp">Portfolio</a></li>
-                        <li><a href="blog.jsp">Blog</a>
-                            <ul class="dropdown">
-                                <li><a href="blog-details.jsp">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li class="active"><a href="contact.jsp">Contacts</a></li>
-                    </ul>
-                </nav>
-                <div class="nav-right">
-                    <i class="ti-search"></i>
-                </div>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
+    <jsp:include page="part/header_black.jsp"/>
 
     <!-- Map Section Begin -->
     <div class="contact-map">

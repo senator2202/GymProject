@@ -54,11 +54,6 @@ public class MainServlet extends HttpServlet {
     }
 
     @Override
-    public void init() throws ServletException {
-        super.init();
-    }
-
-    @Override
     public void destroy() {
         BasicConnectionPool.getInstance().destroyPool();
     }
