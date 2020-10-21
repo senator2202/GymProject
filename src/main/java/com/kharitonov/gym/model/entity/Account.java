@@ -79,10 +79,6 @@ public class Account {
             this.postfix = postfix;
         }
 
-        public String getPostfix() {
-            return postfix;
-        }
-
         public static AccountLocale localeByPostfix(String postfix) {
             for (AccountLocale value : values()) {
                 if (value.postfix.equals(postfix)) {
@@ -90,6 +86,10 @@ public class Account {
                 }
             }
             return null;
+        }
+
+        public String getPostfix() {
+            return postfix;
         }
     }
 

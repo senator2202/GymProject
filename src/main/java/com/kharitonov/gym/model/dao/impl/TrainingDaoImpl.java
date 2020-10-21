@@ -10,18 +10,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kharitonov.gym.model.dao.impl.TrainingStatementCreator.*;
+
 public class TrainingDaoImpl implements TrainingDao {
-    private static final TrainingStatementCreator STATEMENT_CREATOR =
-            TrainingStatementCreator.getInstance();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
     public void addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException {
         Connection connection = pool.getConnection();
-        try (PreparedStatement statementAdd =
-                     STATEMENT_CREATOR.statementInsertTraining(connection, trainerId, clientId, trainingDate, trainingTime);
-             PreparedStatement statementDecrement =
-                     STATEMENT_CREATOR.statementDecrementTrainings(connection, clientId)) {
+        try (PreparedStatement statementAdd = statementInsertTraining(connection, trainerId, clientId, trainingDate, trainingTime);
+             PreparedStatement statementDecrement = statementDecrementTrainings(connection, clientId)) {
             connection.setAutoCommit(false);
             statementAdd.execute();
             statementDecrement.executeUpdate();
@@ -37,8 +35,7 @@ public class TrainingDaoImpl implements TrainingDao {
     @Override
     public List<Training> findClientTrainings(int clientId) throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement =
-                     STATEMENT_CREATOR.statementSelectClientTrainings(connection, clientId);
+             PreparedStatement statement = statementSelectClientTrainings(connection, clientId);
              ResultSet resultSet = statement.executeQuery()) {
             List<Training> trainings = new ArrayList<>();
             while (resultSet.next()) {
@@ -54,8 +51,7 @@ public class TrainingDaoImpl implements TrainingDao {
     @Override
     public List<Training> findTrainerTrainings(int trainerId) throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement =
-                     STATEMENT_CREATOR.statementSelectTrainerTrainings(connection, trainerId);
+             PreparedStatement statement = statementSelectTrainerTrainings(connection, trainerId);
              ResultSet resultSet = statement.executeQuery()) {
             List<Training> trainings = new ArrayList<>();
             while (resultSet.next()) {
@@ -71,8 +67,7 @@ public class TrainingDaoImpl implements TrainingDao {
     @Override
     public void updateDescription(int trainingId, String description) throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement =
-                     STATEMENT_CREATOR.statementUpdateDescription(connection, trainingId, description)) {
+             PreparedStatement statement = statementUpdateDescription(connection, trainingId, description)) {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -82,10 +77,8 @@ public class TrainingDaoImpl implements TrainingDao {
     @Override
     public void deleteTraining(int trainingId, int userId) throws DaoException {
         Connection connection = pool.getConnection();
-        try (PreparedStatement statementAdd =
-                     STATEMENT_CREATOR.statementDeleteTraining(connection, trainingId);
-             PreparedStatement statementDecrement =
-                     STATEMENT_CREATOR.statementIncrementTrainings(connection, userId)) {
+        try (PreparedStatement statementAdd = statementDeleteTraining(connection, trainingId);
+             PreparedStatement statementDecrement = statementIncrementTrainings(connection, userId)) {
             connection.setAutoCommit(false);
             statementAdd.execute();
             statementDecrement.executeUpdate();

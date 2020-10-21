@@ -3,7 +3,6 @@ package com.kharitonov.gym.model.dao.impl;
 import java.sql.*;
 
 class TrainingStatementCreator {
-    private static final TrainingStatementCreator INSTANCE = new TrainingStatementCreator();
     private static final String SQL_INSERT_TRAINING =
             "INSERT INTO trainings (trainer_id, client_id, training_date, training_time) VALUES (?, ?, ?, ?)";
     private static final String SQL_SELECT_CLIENT_TRAININGS =
@@ -44,12 +43,8 @@ class TrainingStatementCreator {
 
     }
 
-    static TrainingStatementCreator getInstance() {
-        return INSTANCE;
-    }
-
-    PreparedStatement statementInsertTraining(Connection connection, int trainerId, int clientId,
-                                              Date trainingDate, Time trainingTime) throws SQLException {
+    static PreparedStatement statementInsertTraining(Connection connection, int trainerId, int clientId,
+                                                     Date trainingDate, Time trainingTime) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_INSERT_TRAINING);
         statement.setInt(1, trainerId);
         statement.setInt(2, clientId);
@@ -58,31 +53,31 @@ class TrainingStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectClientTrainings(Connection connection, int clientId) throws SQLException {
+    static PreparedStatement statementSelectClientTrainings(Connection connection, int clientId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_CLIENT_TRAININGS);
         statement.setInt(1, clientId);
         return statement;
     }
 
-    PreparedStatement statementDecrementTrainings(Connection connection, int userId) throws SQLException {
+    static PreparedStatement statementDecrementTrainings(Connection connection, int userId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_DECREMENT_TRAININGS);
         statement.setInt(1, userId);
         return statement;
     }
 
-    PreparedStatement statementIncrementTrainings(Connection connection, int userId) throws SQLException {
+    static PreparedStatement statementIncrementTrainings(Connection connection, int userId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_INCREMENT_TRAININGS);
         statement.setInt(1, userId);
         return statement;
     }
 
-    PreparedStatement statementSelectTrainerTrainings(Connection connection, int trainerId) throws SQLException {
+    static PreparedStatement statementSelectTrainerTrainings(Connection connection, int trainerId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_TRAINER_TRAININGS);
         statement.setInt(1, trainerId);
         return statement;
     }
 
-    PreparedStatement statementUpdateDescription(Connection connection, int trainingId, String description)
+    static PreparedStatement statementUpdateDescription(Connection connection, int trainingId, String description)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_DESCRIPTION);
         statement.setString(1, description);
@@ -90,7 +85,7 @@ class TrainingStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementDeleteTraining(Connection connection, int trainingId) throws SQLException {
+    static PreparedStatement statementDeleteTraining(Connection connection, int trainingId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_DELETE_TRAINING);
         statement.setInt(1, trainingId);
         return statement;

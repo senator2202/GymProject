@@ -3,7 +3,6 @@ package com.kharitonov.gym.controller;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
-import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 
 import javax.servlet.RequestDispatcher;

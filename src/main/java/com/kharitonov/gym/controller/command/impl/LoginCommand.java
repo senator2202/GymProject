@@ -1,6 +1,9 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.*;
+import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.NavigationPath;
+import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
@@ -17,7 +20,6 @@ import java.util.Optional;
 public class LoginCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();
-    private static final String VALID_POSTFIX = "Valid";
 
     @Override
     public String execute(HttpServletRequest request) {

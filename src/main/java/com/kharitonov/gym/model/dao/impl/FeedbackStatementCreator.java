@@ -9,7 +9,8 @@ class FeedbackStatementCreator {
             "INSERT INTO feedbacks (sender_name, sender_email, feedback_subject, feedback_message) " +
                     "VALUES (?, ?, ?, ?)";
     private static final String SQL_SELECT_ALL =
-            "SELECT feedback_id, sender_name, sender_email, feedback_subject, feedback_message, feedback_datetime FROM feedbacks";
+            "SELECT feedback_id, sender_name, sender_email, feedback_subject, feedback_message, feedback_datetime " +
+                    "FROM feedbacks";
 
     private FeedbackStatementCreator() {
 

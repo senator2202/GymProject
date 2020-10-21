@@ -33,7 +33,7 @@ public class UpdateAccountDataCommand implements ActionCommand {
             if (service.updateAccountData(id, email, localeName)) {
                 user.getAccount().setEmail(email);
                 user.getAccount().setLocale(locale);
-            } else  {
+            } else {
                 session.setAttribute(SessionAttributeName.INCORRECT_EMAIL_FORMAT, true);
             }
             page = NavigationPath.PERSONAL_ACCOUNT;

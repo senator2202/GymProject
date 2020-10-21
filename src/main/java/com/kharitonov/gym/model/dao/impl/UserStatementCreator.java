@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 class UserStatementCreator {
-    private static final UserStatementCreator INSTANCE = new UserStatementCreator();
     private static final String SQL_INSERT_ACCOUNT =
             "INSERT INTO accounts(login, password, email, role) VALUES(?,?,?,?)";
     private static final String SQL_INSERT_USER =
@@ -66,14 +65,10 @@ class UserStatementCreator {
     private UserStatementCreator() {
     }
 
-    static UserStatementCreator getINSTANCE() {
-        return INSTANCE;
-    }
-
-    PreparedStatement statementInsertAccount(Connection connection,
-                                             String login,
-                                             String password,
-                                             String email)
+    static PreparedStatement statementInsertAccount(Connection connection,
+                                                    String login,
+                                                    String password,
+                                                    String email)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_INSERT_ACCOUNT);
@@ -84,8 +79,8 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementInsertUser(Connection connection,
-                                          int accountId)
+    static PreparedStatement statementInsertUser(Connection connection,
+                                                 int accountId)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_INSERT_USER);
@@ -93,9 +88,9 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectUser(Connection connection,
-                                          String login,
-                                          String password)
+    static PreparedStatement statementSelectUser(Connection connection,
+                                                 String login,
+                                                 String password)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_USER);
@@ -104,9 +99,9 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectId(Connection connection,
-                                        String login,
-                                        String password)
+    static PreparedStatement statementSelectId(Connection connection,
+                                               String login,
+                                               String password)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_ID);
@@ -115,19 +110,19 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectEmailById(Connection connection, int userId) throws SQLException {
+    static PreparedStatement statementSelectEmailById(Connection connection, int userId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_EMAIL_BY_ID);
         statement.setInt(1, userId);
         return statement;
     }
 
-    PreparedStatement statementSelectAll(Connection connection)
+    static PreparedStatement statementSelectAll(Connection connection)
             throws SQLException {
         return connection.prepareStatement(SQL_SELECT_ALL_ACCOUNTS);
     }
 
-    PreparedStatement statementUpdateActive(Connection connection,
-                                            int id)
+    static PreparedStatement statementUpdateActive(Connection connection,
+                                                   int id)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_UPDATE_ACTIVE);
@@ -135,8 +130,8 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectPassword(Connection connection,
-                                              String login)
+    static PreparedStatement statementSelectPassword(Connection connection,
+                                                     String login)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_PASSWORD);
@@ -144,8 +139,8 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectByLogin(Connection connection,
-                                              String login)
+    static PreparedStatement statementSelectByLogin(Connection connection,
+                                                    String login)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_BY_LOGIN);
@@ -153,8 +148,8 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectByEmail(Connection connection,
-                                              String email)
+    static PreparedStatement statementSelectByEmail(Connection connection,
+                                                    String email)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_BY_EMAIL);
@@ -162,9 +157,9 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectRole(Connection connection,
-                                          String login,
-                                          String password)
+    static PreparedStatement statementSelectRole(Connection connection,
+                                                 String login,
+                                                 String password)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_ROLE);
@@ -173,11 +168,11 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementUpdateUser(Connection connection,
-                                          String firstName,
-                                          String lastName,
-                                          String phone,
-                                          int id)
+    static PreparedStatement statementUpdateUser(Connection connection,
+                                                 String firstName,
+                                                 String lastName,
+                                                 String phone,
+                                                 int id)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_USER);
         statement.setString(1, firstName);
@@ -187,10 +182,10 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementUpdateAccount(Connection connection,
-                                             String email,
-                                             String locale,
-                                             int id)
+    static PreparedStatement statementUpdateAccount(Connection connection,
+                                                    String email,
+                                                    String locale,
+                                                    int id)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_ACCOUNT);
         statement.setString(1, email);
@@ -199,17 +194,17 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementUpdateTrainerRole(Connection connection, int id) throws SQLException {
+    static PreparedStatement statementUpdateTrainerRole(Connection connection, int id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_TRAINER_ROLE);
         statement.setInt(1, id);
         return statement;
     }
 
-    PreparedStatement statementUpdateTrainer(Connection connection,
-                                             String institution,
-                                             int graduation,
-                                             String instagram,
-                                             int id) throws SQLException {
+    static PreparedStatement statementUpdateTrainer(Connection connection,
+                                                    String institution,
+                                                    int graduation,
+                                                    String instagram,
+                                                    int id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_TRAINER);
         statement.setString(1, institution);
         statement.setInt(2, graduation);
@@ -218,20 +213,20 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectRecent(Connection connection, int days) throws SQLException {
+    static PreparedStatement statementSelectRecent(Connection connection, int days) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_RECENT);
         statement.setInt(1, days);
         return statement;
     }
 
-    PreparedStatement statementUpdateImage(Connection connection, int userId, String imageName) throws SQLException {
+    static PreparedStatement statementUpdateImage(Connection connection, int userId, String imageName) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_IMAGE);
         statement.setString(1, imageName);
         statement.setInt(2, userId);
         return statement;
     }
 
-    PreparedStatement statementDecreaseBalance(Connection connection, int userId, double decreaseBalance)
+    static PreparedStatement statementDecreaseBalance(Connection connection, int userId, double decreaseBalance)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_DECREASE_BALANCE);
         statement.setDouble(1, decreaseBalance);
@@ -239,7 +234,7 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementIncreaseTrainings(Connection connection, int userId, int boughtTrainings)
+    static PreparedStatement statementIncreaseTrainings(Connection connection, int userId, int boughtTrainings)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_INCREASE_TRAININGS);
         statement.setInt(1, boughtTrainings);
@@ -247,12 +242,12 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementSelectAllTrainers(Connection connection) throws SQLException {
+    static PreparedStatement statementSelectAllTrainers(Connection connection) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ALL_TRAINERS);
         return statement;
     }
 
-    PreparedStatement statementSelectUserId(Connection connection, String firstName, String lastName)
+    static PreparedStatement statementSelectUserId(Connection connection, String firstName, String lastName)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_USER_ID);
         statement.setString(1, firstName);
@@ -260,7 +255,7 @@ class UserStatementCreator {
         return statement;
     }
 
-    PreparedStatement statementUpdateBalance(Connection connection, int userId, int amount)
+    static PreparedStatement statementUpdateBalance(Connection connection, int userId, int amount)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_BALANCE);
         statement.setInt(1, amount);

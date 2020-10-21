@@ -10,18 +10,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kharitonov.gym.model.dao.impl.TrainerApplicationStatementCreator.*;
+
 public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
-    private static final TrainerApplicationStatementCreator STATEMENT_CREATOR =
-            TrainerApplicationStatementCreator.getInstance();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
     public void addApplication(int userId, String institution,
                                int graduationYear, String instagramLink) throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement =
-                     STATEMENT_CREATOR.statementInsertApplication(connection, userId,
-                             institution, graduationYear, instagramLink)) {
+             PreparedStatement statement = statementInsertApplication(connection, userId,
+                     institution, graduationYear, instagramLink)) {
             statement.execute();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -31,8 +30,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     @Override
     public boolean applicationExists(int userId) throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement =
-                     STATEMENT_CREATOR.statementSelectApplication(connection, userId);
+             PreparedStatement statement = statementSelectApplication(connection, userId);
              ResultSet resultSet = statement.executeQuery()) {
             return resultSet.next();
         } catch (SQLException e) {
@@ -43,8 +41,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     @Override
     public void deleteApplication(int userId) throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement =
-                     STATEMENT_CREATOR.statementDeleteApplication(connection, userId)) {
+             PreparedStatement statement = statementDeleteApplication(connection, userId)) {
             statement.execute();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -54,8 +51,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     @Override
     public List<TrainerApplication> findAllApplications() throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement =
-                     STATEMENT_CREATOR.statementSelectAllApplications(connection);
+             PreparedStatement statement = statementSelectAllApplications(connection);
              ResultSet resultSet = statement.executeQuery()) {
             List<TrainerApplication> applications = new ArrayList<>();
             while (resultSet.next()) {
