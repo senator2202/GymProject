@@ -4,16 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>main</servlet-name>
-        <servlet-class>com.kharitonov.gym.controller.MainServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>main</servlet-name>
-        <url-pattern>/hi</url-pattern>
-    </servlet-mapping>
-
     <filter>
         <filter-name>CharacterSetFilter</filter-name>
         <filter-class>com.kharitonov.gym.controller.filter.CharacterSetFilter</filter-class>
@@ -40,6 +30,11 @@
         <filter-name>RoleControlFilter</filter-name>
         <url-pattern>/mainController</url-pattern>
     </filter-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/error.jsp</location>
+    </error-page>
 
     <jsp-config>
         <taglib>

@@ -60,16 +60,6 @@
 
     <jsp:include page="/jsp/part/footer.jsp"/>
 
-    <!-- Js Plugins -->
-
-    <%--<script>
-        $(document).ready(function () {
-            $('#clientTrainings').DataTable({
-                "scrollX": false
-            });
-            $('.dataTables_length').addClass('bs-select');
-        });
-    </script>--%>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/jquery.magnific-popup.min.js"></script>
     <script src="/assets/js/mixitup.min.js"></script>
