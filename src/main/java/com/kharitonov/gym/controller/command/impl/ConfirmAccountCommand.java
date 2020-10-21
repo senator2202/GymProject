@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.NavigationPath;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.controller.command.RequestAttributeName;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.exception.ServiceException;
@@ -29,10 +29,10 @@ public class ConfirmAccountCommand implements ActionCommand {
                 String email = optional.get();
                 request.setAttribute(RequestAttributeName.CONFIRMED_ACCOUNT, email);
             }
-            page = NavigationPath.INDEX;
+            page = PagePath.INDEX;
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = NavigationPath.ERROR;
+            page = PagePath.ERROR;
         }
         return page;
     }

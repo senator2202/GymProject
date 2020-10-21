@@ -1,6 +1,6 @@
 package com.kharitonov.gym.controller.command;
 
-public class NavigationPath {
+public class PagePath {
     public static final String INDEX = "/index.jsp";
     public static final String LOGIN = "/jsp/login.jsp";
     public static final String ERROR = "/jsp/error.jsp";
@@ -12,23 +12,16 @@ public class NavigationPath {
     public static final String ADMIN_REGISTRATIONS = "/jsp/admin_registrations.jsp";
     public static final String ADMIN_FEEDBACKS = "/jsp/admin_feedbacks.jsp";
     public static final String HOME = "/jsp/home.jsp";
-    public static final String OPEN_SCHEDULE = "/mainController?command=open_schedule";
-    public static final String OPEN_ADMIN_MAIN = "/mainController?command=open_admin_main";
-    public static final String OPEN_PERSONAL_PROFILE = "/mainController?command=open_page&page=personal_profile";
     public static final String INDEX_LOGIN = "/index.jsp#popupLogin";
     public static final String PERSONAL_DATA = "/jsp/personal_data.jsp";
     public static final String PERSONAL_ACCOUNT = "/jsp/personal_account.jsp";
     public static final String PERSONAL_FINANCE = "/jsp/personal_finance.jsp";
-    public static final String PERSONAL_DATA_SERVLET = "/mainController?command=open_personal_data";
-    public static final String PERSONAL_ACCOUNT_SERVLET = "/mainController?command=open_personal_account";
-    public static final String PERSONAL_FINANCE_SERVLET = "/mainController?command=open_personal_finance";
     public static final String INDEX_CONFIRM_SENT = "/index.jsp#popupConfirmSent";
     public static final String INDEX_CONFIRMED = "/index.jsp#popupConfirmed";
     public static final String ABOUT = "/jsp/about.jsp";
     public static final String PORTFOLIO = "/jsp/portfolio.jsp";
     public static final String CONTACTS = "/jsp/contacts.jsp";
-    public static final String INVALID = "/mainController?command=invalid";
 
-    private NavigationPath() {
+    private PagePath() {
     }
 }

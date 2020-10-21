@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.filter;
 
-import com.kharitonov.gym.controller.command.CommandType;
-import com.kharitonov.gym.controller.command.NavigationPath;
-import com.kharitonov.gym.controller.command.RequestParameterName;
-import com.kharitonov.gym.controller.command.SessionAttributeName;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import org.apache.logging.log4j.LogManager;
@@ -104,7 +101,7 @@ public class RoleControlFilter implements Filter {
                 UserRole role = user == null ? UserRole.GUEST : user.getAccount().getRole();
                 if (!roles.contains(role)) {
                     LOGGER.warn("Filter interception: '{}' attempted to execute '{}' command ", role, command);
-                    response.sendRedirect(request.getContextPath() + NavigationPath.INDEX);
+                    response.sendRedirect(request.getContextPath() + PagePath.INDEX);
                 } else {
                     String url = request.getRequestURI();
                     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
@@ -112,7 +109,7 @@ public class RoleControlFilter implements Filter {
                 }
             } else {
                 LOGGER.warn("Filter interception: attemption to execute invalid command!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher(NavigationPath.INVALID);
+                RequestDispatcher dispatcher = request.getRequestDispatcher(ServletPath.INVALID);
                 dispatcher.forward(request, response);
             }
             chain.doFilter(request, response);

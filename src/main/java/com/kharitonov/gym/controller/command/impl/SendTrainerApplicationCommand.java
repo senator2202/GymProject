@@ -34,6 +34,6 @@ public class SendTrainerApplicationCommand implements ActionCommand {
             LOGGER.error(e);
             request.setAttribute(RequestAttributeName.APPLICATION_RESULT, false);
         }
-        return NavigationPath.PERSONAL_PROFILE;
+        return PagePath.PERSONAL_PROFILE;
     }
 }

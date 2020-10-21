@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.NavigationPath;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.controller.command.RequestAttributeName;
 import com.kharitonov.gym.controller.command.RequestAttributeValue;
 import com.kharitonov.gym.exception.ServiceException;
@@ -27,6 +27,6 @@ public class OpenAdminMainCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error("Applications loading error!", e);
         }
-        return NavigationPath.ADMIN_MAIN;
+        return PagePath.ADMIN_MAIN;
     }
 }

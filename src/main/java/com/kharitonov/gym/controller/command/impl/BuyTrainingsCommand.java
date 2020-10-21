@@ -2,6 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.controller.command.ServletPath;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
@@ -26,6 +27,6 @@ public class BuyTrainingsCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return getPreviousPage(request);
+        return ServletPath.SCHEDULE;
     }
 }

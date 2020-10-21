@@ -1,6 +1,6 @@
 package com.kharitonov.gym.controller.filter;
 
-import com.kharitonov.gym.controller.command.NavigationPath;
+import com.kharitonov.gym.controller.command.PagePath;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,7 +23,7 @@ public class PageAccessFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
         if (!response.isCommitted()) {
             LOGGER.warn("Filter interception: attemption of direct access to page '{}'", request.getRequestURI());
-            response.sendRedirect(request.getContextPath() + NavigationPath.INDEX);
+            response.sendRedirect(request.getContextPath() + PagePath.INDEX);
             chain.doFilter(request, response);
         }
 

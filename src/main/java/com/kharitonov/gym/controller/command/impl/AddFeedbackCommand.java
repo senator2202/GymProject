@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.NavigationPath;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.service.FeedbackService;
@@ -27,6 +27,6 @@ public class AddFeedbackCommand implements ActionCommand {
             LOGGER.error(e);
         }
         String page = getPreviousPage(request);
-        return page == null ? NavigationPath.INDEX : page;
+        return page == null ? PagePath.INDEX : page;
     }
 }

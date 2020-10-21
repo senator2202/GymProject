@@ -30,6 +30,6 @@ public class CancelTrainingCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return NavigationPath.SCHEDULE;
+        return PagePath.SCHEDULE;
     }
 }

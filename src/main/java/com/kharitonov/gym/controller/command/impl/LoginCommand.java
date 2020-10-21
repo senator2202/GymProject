@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.NavigationPath;
-import com.kharitonov.gym.controller.command.RequestParameterName;
-import com.kharitonov.gym.controller.command.SessionAttributeName;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
@@ -36,9 +33,9 @@ public class LoginCommand implements ActionCommand {
                 HttpSession session = request.getSession();
                 session.setAttribute(SessionAttributeName.USER, user);
                 if (user.getAccount().getRole() != UserRole.ADMIN) {
-                    page = NavigationPath.INDEX;
+                    page = PagePath.INDEX;
                 } else {
-                    page = NavigationPath.OPEN_ADMIN_MAIN;
+                    page = ServletPath.ADMIN_MAIN;
                 }
                 clearSessionAttributesExceptUser(request);
             } else {
@@ -47,11 +44,11 @@ public class LoginCommand implements ActionCommand {
                     request.getSession().setAttribute(entry.getKey(), entry.getValue());
                 }
                 request.getSession().setAttribute(SessionAttributeName.INCORRECT_LOGIN_PASSWORD, true);
-                page = NavigationPath.INDEX_LOGIN;
+                page = PagePath.INDEX_LOGIN;
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = NavigationPath.ERROR;
+            page = PagePath.ERROR;
         }
         return page;
     }

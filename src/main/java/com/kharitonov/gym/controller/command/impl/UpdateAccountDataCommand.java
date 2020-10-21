@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.NavigationPath;
-import com.kharitonov.gym.controller.command.RequestParameterName;
-import com.kharitonov.gym.controller.command.SessionAttributeName;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
@@ -36,10 +33,10 @@ public class UpdateAccountDataCommand implements ActionCommand {
             } else {
                 session.setAttribute(SessionAttributeName.INCORRECT_EMAIL_FORMAT, true);
             }
-            page = NavigationPath.PERSONAL_ACCOUNT_SERVLET;
+            page = ServletPath.PERSONAL_ACCOUNT;
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = NavigationPath.ERROR;
+            page = PagePath.ERROR;
         }
         return page;
     }

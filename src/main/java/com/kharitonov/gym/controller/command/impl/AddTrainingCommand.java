@@ -29,7 +29,7 @@ public class AddTrainingCommand implements ActionCommand {
         int boughtTrainings = client.getBoughtTrainings();
         if (boughtTrainings == 0) {
             LOGGER.error("You have 0 bought trainings!");
-            return NavigationPath.SCHEDULE;
+            return PagePath.SCHEDULE;
         }
         int userId = client.getAccount().getId();
         String stringDate = request.getParameter(RequestParameterName.TRAINING_DATE);
@@ -47,6 +47,6 @@ public class AddTrainingCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return NavigationPath.SCHEDULE;
+        return ServletPath.SCHEDULE;
     }
 }

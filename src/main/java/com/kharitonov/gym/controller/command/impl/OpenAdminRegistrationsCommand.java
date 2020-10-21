@@ -38,6 +38,6 @@ public class OpenAdminRegistrationsCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return NavigationPath.ADMIN_REGISTRATIONS;
+        return PagePath.ADMIN_REGISTRATIONS;
     }
 }
