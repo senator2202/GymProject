@@ -42,6 +42,8 @@
 </head>
 
 <body>
+    <jsp:include page="popup/add_training_error.jsp"/>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>

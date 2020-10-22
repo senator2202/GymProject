@@ -28,8 +28,8 @@ public class AddTrainingCommand implements ActionCommand {
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
         int boughtTrainings = client.getBoughtTrainings();
         if (boughtTrainings == 0) {
-            LOGGER.error("You have 0 bought trainings!");
-            return PagePath.SCHEDULE;
+            LOGGER.error("Client '{}' trying to add training when 0 trainings bought", client.getAccount().getId());
+            return ServletPath.SCHEDULE_ADD_ERROR;
         }
         int userId = client.getAccount().getId();
         String stringDate = request.getParameter(RequestParameterName.TRAINING_DATE);

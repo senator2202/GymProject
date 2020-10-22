@@ -21,6 +21,7 @@ public class PagePath {
     public static final String ABOUT = "/jsp/about.jsp";
     public static final String PORTFOLIO = "/jsp/portfolio.jsp";
     public static final String CONTACTS = "/jsp/contacts.jsp";
+    public static final String INDEX_ACCESS_ERROR = "/index.jsp#popupAccessError";
 
     private PagePath() {
     }

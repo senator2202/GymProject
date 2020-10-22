@@ -44,6 +44,7 @@
 <jsp:include page="part/header.jsp"/>
 <jsp:include page="popup/confirm_sent.jsp"/>
 <jsp:include page="popup/confirmed.jsp"/>
+<jsp:include page="popup/access_error.jsp"/>
 
 <c:if test="${confirmedAccount!=null}">
         <a href="#popupConfirmed" id="popRef"></a>

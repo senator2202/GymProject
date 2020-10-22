@@ -1,7 +1,23 @@
+<%--
+
+<form enctype="multipart/form-data" action="#" method="POST" class="avatar-upload">
+    <div class="avatar-edit">
+        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="avatar" class="{{ $errors->has('email') ? 'alert alert-danger' : '' }}" />
+        <label for="imageUpload"></label>
+    </div>
+    <div class="avatar-preview container2">
+        <div id="imagePreview" style="background-image: url(/assets/img/img-upload.jpg);">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+            <input type="submit" class="btn btn-danger">
+        </div>
+    </div>
+</form>
+
+<script src="/assets/js/img-upload.js"></script>--%>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="ci" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
                scope="session"/>
@@ -22,17 +38,19 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet" />
     <link href="../assets/css/slicknav.min.css" rel="stylesheet" />
+    <link href="../assets/css/img-upload.css" rel="stylesheet" />
 
     <script src="/assets/js/jquery-3.3.1.min.js"></script>
     <script src="/assets/js/jquery.magnific-popup.min.js"></script>
     <script src="/assets/js/jquery.slicknav.js"></script>
     <script src="/assets/js/owl.carousel.min.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/core/popper.min.js"></script>
 
 </head>
 
@@ -66,6 +84,10 @@
                                             </th>
                                             </thead>
                                             <tbody>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td>
                                                     <fmt:message key="personal_profile.firstNameHint"/>
@@ -141,6 +163,8 @@
         </div>
     </form>
 </div>
+
+<script src="/assets/js/img-upload.js"></script>
 
 </body>
 

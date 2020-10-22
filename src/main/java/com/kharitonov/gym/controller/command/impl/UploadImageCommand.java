@@ -51,7 +51,7 @@ public class UploadImageCommand implements ActionCommand {
         } catch (FileUploadException | ServiceException e) {
             LOGGER.error(e);
         }
-        return ServletPath.PERSONAL_PROFILE;
+        return ServletPath.PERSONAL_DATA;
     }
 
     private String defineUploadPath(HttpServletRequest request) {

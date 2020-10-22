@@ -95,13 +95,11 @@ public class RoleControlFilter implements Filter {
         if (!response.isCommitted()) {
             String command = request.getParameter(RequestParameterName.COMMAND);
             if (isValidCommand(command)) {
-                HttpSession session = request.getSession();
+                UserRole role = defineUserRole(request);
                 List<UserRole> roles = CONTROL_MAP.get(command);
-                User user = (User) session.getAttribute(SessionAttributeName.USER);
-                UserRole role = user == null ? UserRole.GUEST : user.getAccount().getRole();
                 if (!roles.contains(role)) {
                     LOGGER.warn("Filter interception: '{}' attempted to execute '{}' command ", role, command);
-                    response.sendRedirect(request.getContextPath() + PagePath.INDEX);
+                    response.sendRedirect(request.getContextPath() + PagePath.INDEX_ACCESS_ERROR);
                 } else {
                     String url = request.getRequestURI();
                     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
@@ -111,9 +109,25 @@ public class RoleControlFilter implements Filter {
                 LOGGER.warn("Filter interception: attemption to execute invalid command!");
                 RequestDispatcher dispatcher = request.getRequestDispatcher(ServletPath.INVALID);
                 dispatcher.forward(request, response);
+                chain.doFilter(request, response);
             }
-            chain.doFilter(request, response);
         }
+    }
+
+    private UserRole defineUserRole(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(SessionAttributeName.USER);
+        return (user == null || !user.getAccount().getIsActive())
+                ? UserRole.GUEST
+                : user.getAccount().getRole();
+    }
+
+    private boolean isAllowedCommand(HttpServletRequest request, String command) {
+        HttpSession session = request.getSession();
+        List<UserRole> roles = CONTROL_MAP.get(command);
+        User user = (User) session.getAttribute(SessionAttributeName.USER);
+        UserRole role = user == null ? UserRole.GUEST : user.getAccount().getRole();
+        return roles.contains(role);
     }
 
     private boolean isValidCommand(String command) {

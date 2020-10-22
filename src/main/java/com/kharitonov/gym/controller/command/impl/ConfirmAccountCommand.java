@@ -1,10 +1,8 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestAttributeName;
-import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
+import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,8 +24,10 @@ public class ConfirmAccountCommand implements ActionCommand {
             service.confirmAccount(id);
             optional = service.findEmailById(id);
             if (optional.isPresent()) {
+                User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
                 String email = optional.get();
-                request.setAttribute(RequestAttributeName.CONFIRMED_ACCOUNT, email);
+                request.setAttribute(RequestAttributeName.CONFIRMED_ACCOUNT, email  );
+                user.getAccount().setIsActive(true);
             }
             page = PagePath.INDEX;
         } catch (ServiceException e) {

@@ -7,8 +7,6 @@
 
 <a href="#x" class="overlay" id="popupDeposit"></a>
 <div class="popup ">
-
-
     <form class="credit-card" action="/mainController" method="post">
         <input type="hidden" name="command" value="make_deposit">
         <div class="form-header">

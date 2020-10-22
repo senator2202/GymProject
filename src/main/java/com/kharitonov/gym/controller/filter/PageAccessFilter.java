@@ -26,7 +26,6 @@ public class PageAccessFilter implements Filter {
             response.sendRedirect(request.getContextPath() + PagePath.INDEX);
             chain.doFilter(request, response);
         }
-
     }
 
     public void init(FilterConfig config) throws ServletException {

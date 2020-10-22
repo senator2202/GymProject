@@ -5,29 +5,29 @@
          version="4.0">
 
     <filter>
-        <filter-name>CharacterSetFilter</filter-name>
+        <filter-name>characterSetFilter</filter-name>
         <filter-class>com.kharitonov.gym.controller.filter.CharacterSetFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>CharacterSetFilter</filter-name>
+        <filter-name>characterSetFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <filter>
-        <filter-name>PageAccessFilter</filter-name>
+        <filter-name>pageAccessFilter</filter-name>
         <filter-class>com.kharitonov.gym.controller.filter.PageAccessFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>PageAccessFilter</filter-name>
+        <filter-name>pageAccessFilter</filter-name>
         <url-pattern>/jsp/*</url-pattern>
     </filter-mapping>
 
     <filter>
-        <filter-name>RoleControlFilter</filter-name>
+        <filter-name>roleControlFilter</filter-name>
         <filter-class>com.kharitonov.gym.controller.filter.RoleControlFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>RoleControlFilter</filter-name>
+        <filter-name>roleControlFilter</filter-name>
         <url-pattern>/mainController</url-pattern>
     </filter-mapping>
 
