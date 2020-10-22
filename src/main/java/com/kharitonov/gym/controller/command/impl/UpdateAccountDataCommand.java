@@ -36,7 +36,7 @@ public class UpdateAccountDataCommand implements ActionCommand {
             page = ServletPath.PERSONAL_ACCOUNT;
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_404;
         }
         return page;
     }

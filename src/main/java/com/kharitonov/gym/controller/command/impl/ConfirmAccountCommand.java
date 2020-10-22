@@ -26,13 +26,13 @@ public class ConfirmAccountCommand implements ActionCommand {
             if (optional.isPresent()) {
                 User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
                 String email = optional.get();
-                request.setAttribute(RequestAttributeName.CONFIRMED_ACCOUNT, email  );
+                request.setAttribute(RequestAttributeName.CONFIRMED_ACCOUNT, email);
                 user.getAccount().setIsActive(true);
             }
             page = PagePath.INDEX;
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_404;
         }
         return page;
     }

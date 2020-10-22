@@ -51,7 +51,7 @@ public class RegisterCommand implements ActionCommand {
             }
         } catch (ServiceException e) {
             LOGGER.error("Unable to register new user!", e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_404;
         }
         return page;
     }

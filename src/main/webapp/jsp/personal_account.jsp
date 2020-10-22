@@ -27,13 +27,7 @@
     <link href="../assets/css/style.css" rel="stylesheet" />
     <link href="../assets/css/slicknav.min.css" rel="stylesheet" />
     <link href="../assets/css/select-list.css" rel="stylesheet" />
-
-    <script src="/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="/assets/js/jquery.slicknav.js"></script>
-    <script src="/assets/js/owl.carousel.min.js"></script>
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/core/popper.min.js"></script>
+    <link href="../assets/css/img-upload.css" rel="stylesheet" />
 
 </head>
 
@@ -126,6 +120,14 @@
         </div>
     </form>
 </div>
+
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/img-upload.js"></script>
 
 </body>
 

@@ -1,8 +1,8 @@
-function submitOnchange() {
+/*function submitOnchange() {
     document.getElementById("imageUpload").onchange = function() {
         document.getElementById("uploadForm").submit();
     };
-}
+}*/
 
 function readURL(input) {
     if (input.files && input.files[0]) {

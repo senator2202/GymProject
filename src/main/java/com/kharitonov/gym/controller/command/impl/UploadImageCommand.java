@@ -22,7 +22,7 @@ import java.util.UUID;
 public class UploadImageCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UploadImageCommand.class);
     private static final String UPLOAD_DIR = "uploads";
-    private static final String SLASH = "\\";
+    private static final String SLASH = "/";
     private static final String BLANK = "";
     private static final String EXTENSION_SEPARATOR = ".";
     private static final int FILE_SIZE_THRESHOLD = 1024 * 1024;
@@ -56,7 +56,7 @@ public class UploadImageCommand implements ActionCommand {
 
     private String defineUploadPath(HttpServletRequest request) {
         String applicationDir = request.getServletContext().getRealPath(BLANK);
-        String uploadPath = applicationDir + File.separator + UPLOAD_DIR + File.separator;
+        String uploadPath = applicationDir + UPLOAD_DIR + File.separator;
         File fileSaveDir = new File(uploadPath);
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdirs();
@@ -73,7 +73,7 @@ public class UploadImageCommand implements ActionCommand {
             String itemName = fileItem.getName();
             fileItem.write(uploadedFile);
             LOGGER.info("File {} was successfully uploaded!", itemName);
-            contextPath = UPLOAD_DIR + SLASH + uploadName;
+            contextPath = SLASH + UPLOAD_DIR + SLASH + uploadName;
         } catch (Exception e) {
             LOGGER.info("Unable to save file!", e);
             contextPath = null;

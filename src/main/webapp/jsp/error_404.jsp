@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/assets/css/error.css" type="text/css"/>
+    <link rel="stylesheet" href="/assets/css/error-404.css" type="text/css"/>
 </head>
 <body>
 <div class="content">

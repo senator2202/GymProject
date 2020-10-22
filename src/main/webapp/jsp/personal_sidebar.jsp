@@ -7,7 +7,7 @@
 <div class="sidebar" data-color="purple" data-background-color="white">
     <div class="logo">
         <a class="simple-text logo-normal">
-            <fmt:message key="personal_profile.personalProfile"/>
+            ${user.firstName} ${user.lastName}
         </a>
 
     </div>
@@ -19,11 +19,11 @@
                     <div class="container">
                         <div class="avatar-upload">
                             <div class="avatar-edit">
-                                <input type='file' id="imageUpload" name="content" accept=".png, .jpg, .jpeg" onchange="submitOnchange()" />
+                                <input type='file' id="imageUpload" name="content" accept=".png, .jpg, .jpeg" onchange="document.getElementById('uploadForm').submit()" />
                                 <label for="imageUpload"></label>
                             </div>
                             <div class="avatar-preview">
-                                <div id="imagePreview" style="background-image: url(/assets/img/img-upload.jpg);">
+                                <div id="imagePreview" style="background-image: url('${user.imageName==null ? '/assets/img/img-upload.jpg' : user.imageName}');">
                                 </div>
                             </div>
                         </div>
@@ -56,15 +56,3 @@
         </ul>
     </div>
 </div>
-
-<%--
-<script>
-    var imgPreview = document.getElementById("imagePreview");
-    imgPreview.style.backgroundImage
-    var src = imgPreview.getAttribute('style-image')
-
-    for (var i = 0; i < list.length; i++) {
-        var src = list[i].getAttribute('data-image-src');
-        list[i].style.backgroundImage="url('" + src + "')";
-    }
-</script>--%>

@@ -33,9 +33,7 @@
 						</c:when>
 						<c:otherwise>
 							<li>
-								<a href="#popupLogin">
-									Log in
-								</a>
+								<button type="button" class="primary-btn" data-toggle="modal" data-target="#popupLogin">Login</button>
 							</li>
 						</c:otherwise>
 					</c:choose>

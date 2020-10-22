@@ -48,7 +48,7 @@ public class LoginCommand implements ActionCommand {
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = PagePath.ERROR;
+            page = PagePath.ERROR_404;
         }
         return page;
     }

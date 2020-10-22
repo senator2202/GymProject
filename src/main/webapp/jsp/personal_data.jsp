@@ -1,20 +1,3 @@
-<%--
-
-<form enctype="multipart/form-data" action="#" method="POST" class="avatar-upload">
-    <div class="avatar-edit">
-        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" name="avatar" class="{{ $errors->has('email') ? 'alert alert-danger' : '' }}" />
-        <label for="imageUpload"></label>
-    </div>
-    <div class="avatar-preview container2">
-        <div id="imagePreview" style="background-image: url(/assets/img/img-upload.jpg);">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-            <input type="submit" class="btn btn-danger">
-        </div>
-    </div>
-</form>
-
-<script src="/assets/js/img-upload.js"></script>--%>
-
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -44,13 +27,6 @@
     <link href="../assets/css/style.css" rel="stylesheet" />
     <link href="../assets/css/slicknav.min.css" rel="stylesheet" />
     <link href="../assets/css/img-upload.css" rel="stylesheet" />
-
-    <script src="/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="/assets/js/jquery.slicknav.js"></script>
-    <script src="/assets/js/owl.carousel.min.js"></script>
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/core/popper.min.js"></script>
 
 </head>
 
@@ -164,6 +140,12 @@
     </form>
 </div>
 
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/img-upload.js"></script>
 
 </body>

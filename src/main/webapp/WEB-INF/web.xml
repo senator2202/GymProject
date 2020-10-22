@@ -33,7 +33,12 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/jsp/error.jsp</location>
+        <location>/jsp/error_404.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/jsp/error_500.jsp</location>
     </error-page>
 
     <jsp-config>

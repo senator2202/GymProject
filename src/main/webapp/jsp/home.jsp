@@ -45,6 +45,7 @@
 <jsp:include page="popup/confirm_sent.jsp"/>
 <jsp:include page="popup/confirmed.jsp"/>
 <jsp:include page="popup/access_error.jsp"/>
+<jsp:include page="popup/login.jsp"/>
 
 <c:if test="${confirmedAccount!=null}">
         <a href="#popupConfirmed" id="popRef"></a>
@@ -59,7 +60,7 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="${(sessionScope.user!=null) ? '/mainController?command=open_page&page=personal_profile' : '#popupLogin'}" class="primary-btn">
+					<a href="${(sessionScope.user!=null) ? '/mainController?command=open_personal_data' : '#popupLogin'}" class="primary-btn">
 						${(sessionScope.user!=null) ? 'Personal Profile' : 'Join Us Now'}
 					</a>
 				</div>
@@ -70,7 +71,7 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="${(sessionScope.user!=null) ? '/mainController?command=open_page&page=personal_profile' : '#popupLogin'}" class="primary-btn">
+					<a href="${(sessionScope.user!=null) ? '/mainController?command=open_personal_data' : '#popupLogin'}" class="primary-btn">
 						${(sessionScope.user!=null) ? 'Personal Profile' : 'Join Us Now'}
 					</a>
 				</div>
@@ -81,7 +82,7 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="${(sessionScope.user!=null) ? '/mainController?command=open_page&page=personal_profile' : '#popupLogin'}" class="primary-btn">
+					<a href="${(sessionScope.user!=null) ? '/mainController?command=open_personal_data' : '#popupLogin'}" class="primary-btn">
 						${(sessionScope.user!=null) ? 'Personal Profile' : 'Join Us Now'}
 					</a>
 				</div>

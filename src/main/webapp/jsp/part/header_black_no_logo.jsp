@@ -7,40 +7,35 @@
 
 <!-- Header Section Begin -->
 <header class="header-section header-normal">
-    <div class="container">
-        <div class="nav-menu">
-            <nav class="mainmenu mobile-menu">
-                <ul>
-                    <li class="active"><a href="/mainController?command=open_home">Home</a></li>
-                    <li><a href="/mainController?command=open_about">About</a></li>
-                    <li><a href="/mainController?command=open_schedule">Schedule</a></li>
-                    <li><a href="/mainController?command=open_portfolio">Portfolio</a></li>
-                    <li><a href="/mainController?command=open_contacts">Contacts</a></li>
-                    <c:choose>
-                        <c:when test="${sessionScope.user!=null}">
-                            <li>
-                                <a href="/mainController?command=open_personal_data">Personal profile</a>
-                                <ul class="dropdown">
-                                    <li><a href="/mainController?command=logout">Log Out</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </c:when>
-                        <c:otherwise>
-                            <li>
-                                <a href="#popupLogin">
-                                    Log in
-                                </a>
-                            </li>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
-            </nav>
-            <div class="nav-right search-switch">
-                <i class="ti-search"></i>
-            </div>
+    <div class="nav-menu">
+        <nav class="mainmenu mobile-menu">
+            <ul>
+                <li class="active"><a href="/mainController?command=open_home">Home</a></li>
+                <li><a href="/mainController?command=open_about">About</a></li>
+                <li><a href="/mainController?command=open_schedule">Schedule</a></li>
+                <li><a href="/mainController?command=open_portfolio">Portfolio</a></li>
+                <li><a href="/mainController?command=open_contacts">Contacts</a></li>
+                <c:choose>
+                    <c:when test="${sessionScope.user!=null}">
+                        <li>
+                            <a href="/mainController?command=open_personal_data">Personal profile</a>
+                            <ul class="dropdown">
+                                <li><a href="/mainController?command=logout">Log Out</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li>
+                            <button type="button" class="primary-btn" data-toggle="modal" data-target="#popupLogin">Login</button>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
+        </nav>
+        <div class="nav-right search-switch">
+            <i class="ti-search"></i>
         </div>
-        <div id="mobile-menu-wrap"></div>
     </div>
 </header>
 <!-- Header End -->
