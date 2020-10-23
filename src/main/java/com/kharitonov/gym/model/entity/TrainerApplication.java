@@ -3,6 +3,7 @@ package com.kharitonov.gym.model.entity;
 import java.sql.Date;
 
 public class TrainerApplication {
+    private User user;
     private int userId;
     private String firstName;
     private String lastName;
@@ -11,7 +12,16 @@ public class TrainerApplication {
     private String instagramLink;
     private Date applicationDate;
 
+
     private TrainerApplication() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getUserId() {
@@ -71,7 +81,8 @@ public class TrainerApplication {
     }
 
     public static final class TrainerApplicationBuilder {
-        private int id;
+        private User user;
+        private int userId;
         private String firstName;
         private String lastName;
         private String institution;
@@ -86,8 +97,13 @@ public class TrainerApplication {
             return new TrainerApplicationBuilder();
         }
 
-        public TrainerApplicationBuilder withId(int id) {
-            this.id = id;
+        public TrainerApplicationBuilder withUser(User user) {
+            this.user = user;
+            return this;
+        }
+
+        public TrainerApplicationBuilder withUserId(int userId) {
+            this.userId = userId;
             return this;
         }
 
@@ -123,7 +139,8 @@ public class TrainerApplication {
 
         public TrainerApplication build() {
             TrainerApplication trainerApplication = new TrainerApplication();
-            trainerApplication.setUserId(id);
+            trainerApplication.setUser(user);
+            trainerApplication.setUserId(userId);
             trainerApplication.setFirstName(firstName);
             trainerApplication.setLastName(lastName);
             trainerApplication.setInstitution(institution);

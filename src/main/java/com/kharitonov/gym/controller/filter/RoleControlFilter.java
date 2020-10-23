@@ -20,73 +20,73 @@ import java.util.Map;
 @WebFilter(urlPatterns = {"/mainController"})
 public class RoleControlFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(RoleControlFilter.class);
-    private static final Map<String, List<UserRole>> CONTROL_MAP;
+    private static final Map<String, List<UserRole>> ROLE_MAP;
 
     static {
-        CONTROL_MAP = new HashMap<>();
-        CONTROL_MAP.put(CommandType.ADD_FEEDBACK.toString().toLowerCase(),
+        ROLE_MAP = new HashMap<>();
+        ROLE_MAP.put(CommandType.ADD_FEEDBACK.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST));
-        CONTROL_MAP.put(CommandType.ADD_TRAINING.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.ADD_TRAINING.toString().toLowerCase(),
                 Arrays.asList(UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.APPROVE_TRAINER_APPLICATION.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.APPROVE_TRAINER_APPLICATION.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.BLOCK_USER.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.BLOCK_USER.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.BUY_TRAININGS.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.BUY_TRAININGS.toString().toLowerCase(),
                 Arrays.asList(UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.CANCEL_TRAINING.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.CANCEL_TRAINING.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.CHANGE_ADMIN_LOCALE.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.CHANGE_ADMIN_LOCALE.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.CONFIRM_ACCOUNT.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.CONFIRM_ACCOUNT.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.INVALID.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.INVALID.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.LOGIN.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.LOGIN.toString().toLowerCase(),
                 Arrays.asList(UserRole.GUEST));
-        CONTROL_MAP.put(CommandType.LOGOUT.toString().toLowerCase(),
-                Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.MAKE_DEPOSIT.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.LOGOUT.toString().toLowerCase(),
+                Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.ADMIN, UserRole.GUEST));
+        ROLE_MAP.put(CommandType.MAKE_DEPOSIT.toString().toLowerCase(),
                 Arrays.asList(UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.OPEN_ABOUT.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_ABOUT.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.OPEN_PERSONAL_ACCOUNT.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_PERSONAL_ACCOUNT.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.OPEN_ADMIN_FEEDBACKS.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_ADMIN_FEEDBACKS.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.OPEN_ADMIN_MAIN.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_ADMIN_MAIN.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.OPEN_ADMIN_REGISTRATIONS.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_ADMIN_REGISTRATIONS.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.OPEN_CONTACTS.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_CONTACTS.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.OPEN_HOME.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_HOME.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.ADD_FEEDBACK.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.ADD_FEEDBACK.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST));
-        CONTROL_MAP.put(CommandType.OPEN_PERSONAL_DATA.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_PERSONAL_DATA.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.OPEN_PERSONAL_FINANCE.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_PERSONAL_FINANCE.toString().toLowerCase(),
                 Arrays.asList(UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.OPEN_PORTFOLIO.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_PORTFOLIO.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.OPEN_SCHEDULE.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.OPEN_SCHEDULE.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.REFUSE_TRAINER_APPLICATION.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.REFUSE_TRAINER_APPLICATION.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.REGISTER.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.REGISTER.toString().toLowerCase(),
                 Arrays.asList(UserRole.GUEST));
-        CONTROL_MAP.put(CommandType.SEND_TRAINER_APPLICATION.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.SEND_TRAINER_APPLICATION.toString().toLowerCase(),
                 Arrays.asList(UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.UNBLOCK_USER.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.UNBLOCK_USER.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
-        CONTROL_MAP.put(CommandType.UPDATE_ACCOUNT_DATA.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.UPDATE_ACCOUNT_DATA.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.UPDATE_PERSONAL_DATA.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.UPDATE_PERSONAL_DATA.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
-        CONTROL_MAP.put(CommandType.UPDATE_TRAINING_DESCRIPTION.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.UPDATE_TRAINING_DESCRIPTION.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER));
-        CONTROL_MAP.put(CommandType.UPLOAD_IMAGE.toString().toLowerCase(),
+        ROLE_MAP.put(CommandType.UPLOAD_IMAGE.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
     }
 
@@ -100,7 +100,7 @@ public class RoleControlFilter implements Filter {
             String command = request.getParameter(RequestParameterName.COMMAND);
             if (isValidCommand(command)) {
                 UserRole role = defineUserRole(request);
-                List<UserRole> roles = CONTROL_MAP.get(command);
+                List<UserRole> roles = ROLE_MAP.get(command);
                 if (!roles.contains(role)) {
                     LOGGER.warn("Filter interception: '{}' attempted to execute '{}' command ", role, command);
                     response.sendRedirect(request.getContextPath() + PagePath.INDEX_ACCESS_ERROR);
@@ -128,14 +128,14 @@ public class RoleControlFilter implements Filter {
 
     private boolean isAllowedCommand(HttpServletRequest request, String command) {
         HttpSession session = request.getSession();
-        List<UserRole> roles = CONTROL_MAP.get(command);
+        List<UserRole> roles = ROLE_MAP.get(command);
         User user = (User) session.getAttribute(SessionAttributeName.USER);
         UserRole role = user == null ? UserRole.GUEST : user.getAccount().getRole();
         return roles.contains(role);
     }
 
     private boolean isValidCommand(String command) {
-        return command != null && CONTROL_MAP.containsKey(command);
+        return command != null && ROLE_MAP.containsKey(command);
     }
 
     public void init(FilterConfig config) throws ServletException {

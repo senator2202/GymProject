@@ -17,4 +17,23 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>profile-button</name>
+        <tag-class>com.kharitonov.gym.controller.tag.ProfileButtonTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>user</name>
+            <required>true</required>
+            <type>com.kharitonov.gym.model.entity.User</type>
+        </attribute>
+
+        <attribute>
+            <name>tooltip</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
 </taglib>

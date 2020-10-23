@@ -63,7 +63,9 @@
 										<th>
 											<fmt:message key="admin_feedbacks.feedbackMessage"/>
 										</th>
+										<th>
 
+										</th>
 										</thead>
 										<tbody>
 										<c:forEach items="${feedbacks}" var="feedback">
@@ -85,6 +87,12 @@
 												</td>
 												<td>
 														${feedback.message}
+												</td>
+												<td class="td-actions text-right">
+													<button type="button" class="btn btn-info btn-round"
+													        data-toggle="modal" data-target="#">
+														<i class="material-icons">person</i>
+													</button>
 												</td>
 											</tr>
 										</c:forEach>
