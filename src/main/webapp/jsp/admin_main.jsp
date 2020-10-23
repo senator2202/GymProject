@@ -22,13 +22,18 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link href="../assets/css/img-upload.css" rel="stylesheet" />
 
-  <script src="<c:url value="/assets/js/jquery-3.3.1.min.js"/>"></script>
+  <script src="/assets/js/jquery-3.3.1.min.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
   <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
+  <script src="/assets/js/img-upload.js"></script>
 
 </head>
 
 <body>
+<jsp:include page="popup/user_profile.jsp"/>
+
   <div class="wrapper ">
     <jsp:include page="/jsp/admin_sidebar.jsp"/>
 
@@ -80,7 +85,7 @@
                       <c:forEach items="${applications}" var="application">
                         <tr>
                           <td>
-                              ${application.id}
+                              ${application.userId}
                           </td>
                           <td>
                               ${application.firstName}
@@ -101,31 +106,29 @@
                               ${application.applicationDate}
                           </td>
                           <td class="td-actions text-right">
-                            <a href="#" style="alignment: center;">
-                              <button type="button" rel="tooltip" class="btn btn-info btn-round" data-toggle="tooltip" title="ABRACADABRA">
+                              <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#">
                                 <i class="material-icons">person</i>
                               </button>
-                            </a>
                           </td>
                           <td class="td-actions text-right">
-                          <form action="/mainController" method="post">
-                              <input type="hidden" name="command" value="approve_trainer_application"/>
-                              <input type="hidden" name="appId" value="${application.id}"/>
-                              <input type="hidden" name="appInstitution" value="${application.institution}"/>
-                              <input type="hidden" name="appGraduation" value="${application.graduationYear}"/>
-                              <input type="hidden" name="appInstagram" value="${application.instagramLink}"/>
-                              <button type="submit" rel="tooltip" class="btn btn-success btn-round">
-                                <i class="material-icons">done</i>
-                              </button>
-                            </form>
+                            <form action="/mainController" method="post">
+                                <input type="hidden" name="command" value="approve_trainer_application"/>
+                                <input type="hidden" name="appId" value="${application.userId}"/>
+                                <input type="hidden" name="appInstitution" value="${application.institution}"/>
+                                <input type="hidden" name="appGraduation" value="${application.graduationYear}"/>
+                                <input type="hidden" name="appInstagram" value="${application.instagramLink}"/>
+                                <button type="submit" rel="tooltip" class="btn btn-success btn-round">
+                                  <i class="material-icons">done</i>
+                                </button>
+                              </form>
                           </td>
                           <td class="td-actions text-right">
-                          <form action="/mainController" method="post">
-                              <input type="hidden" name="command" value="refuse_trainer_application"/>
-                              <input type="hidden" name="appId" value="${application.id}"/>
-                              <button type="submit" rel="tooltip" class="btn btn-danger btn-round">
-                                <i class="material-icons">close</i>
-                              </button>
+                            <form action="/mainController" method="post">
+                                <input type="hidden" name="command" value="refuse_trainer_application"/>
+                                <input type="hidden" name="appId" value="${application.userId}"/>
+                                <button type="submit" rel="tooltip" class="btn btn-danger btn-round">
+                                  <i class="material-icons">close</i>
+                                </button>
                             </form>
                           </td>
                         </tr>

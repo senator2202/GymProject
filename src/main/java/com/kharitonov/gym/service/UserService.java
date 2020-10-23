@@ -41,4 +41,8 @@ public interface UserService {
     boolean addToBalance(int clientId, String amount) throws ServiceException;
 
     Optional<String> findEmailById(int userId) throws ServiceException;
+
+    void blockUser(int userId) throws ServiceException;
+
+    void unblockUser(int userId) throws ServiceException;
 }

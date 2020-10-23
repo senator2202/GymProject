@@ -44,8 +44,11 @@ class UserStatementCreator {
     private static final String SQL_UPDATE_TRAINER =
             "UPDATE users SET institution=?, graduation=?, instagram=? WHERE  user_id=?;";
     private static final String SQL_SELECT_RECENT =
-            "SELECT users.user_id, first_name, last_name, phone, email, registration_date\n" +
-                    "FROM users JOIN accounts ON users.user_id=accounts.account_id\n" +
+            "SELECT account_id, login, email, role, registration_date, locale, " +
+                    "active, first_name, last_name, phone, discount, " +
+                    "rating, diet_id_fk, image_name, money_balance, bought_trainings, " +
+                    "institution, graduation, instagram " +
+                    "FROM accounts JOIN users ON account_id=user_id " +
                     "WHERE date(registration_date) >= CURDATE() - INTERVAL ? DAY ";
     private static final String SQL_UPDATE_IMAGE =
             "UPDATE users SET image_name=? WHERE user_id=?";
@@ -61,6 +64,10 @@ class UserStatementCreator {
             "SELECT user_id FROM users WHERE first_name=? AND last_name=?";
     private static final String SQL_UPDATE_BALANCE =
             "UPDATE users SET money_balance=money_balance+? WHERE user_id=?";
+    private static final String SQL_BLOCK_USER =
+            "UPDATE accounts SET active=false WHERE account_id=?";
+    private static final String SQL_UNBLOCK_USER =
+            "UPDATE accounts SET active=true WHERE account_id=?";
 
     private UserStatementCreator() {
     }
@@ -260,6 +267,18 @@ class UserStatementCreator {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_BALANCE);
         statement.setInt(1, amount);
         statement.setInt(2, userId);
+        return statement;
+    }
+
+    static PreparedStatement statementBlockUser(Connection connection, int userId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_BLOCK_USER);
+        statement.setInt(1, userId);
+        return statement;
+    }
+
+    static PreparedStatement statementUnblockUser(Connection connection, int userId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UNBLOCK_USER);
+        statement.setInt(1, userId);
         return statement;
     }
 }

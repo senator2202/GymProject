@@ -235,8 +235,8 @@ public class UserDaoImpl implements UserDao {
              ResultSet resultSet = statement.executeQuery()) {
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
-                User user = new Client();
-                int id = resultSet.getInt(TableColumnName.USER_ID);
+                User user = create(resultSet);
+                /*int id = resultSet.getInt(TableColumnName.USER_ID);
                 String firstName = resultSet.getString(TableColumnName.USER_FIRST_NAME);
                 String lastName = resultSet.getString(TableColumnName.USER_LAST_NAME);
                 String email = resultSet.getString(TableColumnName.ACCOUNT_EMAIL);
@@ -245,7 +245,7 @@ public class UserDaoImpl implements UserDao {
                 user.getAccount().setEmail(email);
                 user.getAccount().setRegistrationDate(date);
                 user.setFirstName(firstName);
-                user.setLastName(lastName);
+                user.setLastName(lastName);*/
                 users.add(user);
             }
             return users;
@@ -342,6 +342,26 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    @Override
+    public void blockUser(int userId) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementBlockUser(connection, userId)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void unblockUser(int userId) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementUnblockUser(connection, userId)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     private User create(ResultSet resultSet) throws SQLException {

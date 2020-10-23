@@ -230,4 +230,24 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void blockUser(int userId) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            dao.blockUser(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void unblockUser(int userId) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            dao.unblockUser(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

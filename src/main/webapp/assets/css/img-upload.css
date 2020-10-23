@@ -1,23 +1,8 @@
-/*.container {
-  max-width: 960px;
-  margin: 30px auto;
-  padding: 20px;
-}
-h1 {
-  font-size: 20px;
-  text-align: center;
-  margin: 20px 0 20px;
-}
-h1 small {
-  display: block;
-  font-size: 15px;
-  padding-top: 8px;
-  color: gray;
-}*/
+
 .avatar-upload {
   position: relative;
   max-width: 205px;
-  margin: 50px auto;
+  margin: 10px auto;
 }
 .avatar-upload .avatar-edit {
   position: absolute;

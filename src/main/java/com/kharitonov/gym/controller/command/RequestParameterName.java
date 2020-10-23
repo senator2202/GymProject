@@ -7,6 +7,7 @@ public class RequestParameterName {
     public static final String REGISTRATION_PASSWORD = "regPassword";
     public static final String REPEAT_PASSWORD = "repeatPassword";
     public static final String REGISTRATION_EMAIL = "regEmail";
+    public static final String USER_ID = "userId";
     public static final String COMMAND = "command";
     public static final String EMAIL = "email";
     public static final String PAGE = "page";

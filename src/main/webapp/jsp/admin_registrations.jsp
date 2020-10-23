@@ -23,11 +23,16 @@
     <!-- CSS Files -->
     <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/select-list.css"/>
+    <link href="../assets/css/img-upload.css" rel="stylesheet" />
 
     <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="/assets/js/img-upload.js"></script>
 </head>
 <body>
+<jsp:include page="popup/user_profile.jsp"/>
+
 <div class="wrapper ">
     <jsp:include page="/jsp/admin_sidebar.jsp"/>
 
@@ -76,16 +81,34 @@
                                             <fmt:message key="admin_registrations.id"/>
                                         </th>
                                         <th>
+                                            <fmt:message key="admin_registrations.login"/>
+                                        </th>
+                                        <th>
                                             <fmt:message key="admin_registrations.firstName"/>
                                         </th>
                                         <th>
                                             <fmt:message key="admin_registrations.lastName"/>
                                         </th>
-                                        <th>
+                                        <th data-visible="false">
+
+                                        </th>
+                                        <th data-visible="false">
                                             <fmt:message key="admin_registrations.email"/>
+                                        </th>
+                                        <th data-visible="false">
+                                            <fmt:message key="admin_registrations.phone"/>
                                         </th>
                                         <th>
                                             <fmt:message key="admin_registrations.registrationDate"/>
+                                        </th>
+                                        <th>
+                                            <fmt:message key="admin_registrations.status"/>
+                                        </th>
+                                        <th>
+
+                                        </th>
+                                        <th>
+
                                         </th>
                                         </thead>
                                         <tbody>
@@ -95,16 +118,64 @@
                                                         ${user.account.id}
                                                 </td>
                                                 <td>
+                                                        ${user.account.name}
+                                                </td>
+                                                <td>
                                                         ${user.firstName}
                                                 </td>
                                                 <td>
                                                         ${user.lastName}
                                                 </td>
                                                 <td>
+                                                        ${user.account.role}
+                                                </td>
+                                                <td>
                                                         ${user.account.email}
                                                 </td>
                                                 <td>
+                                                        ${user.phoneNumber}
+                                                </td>
+                                                <td>
                                                         ${user.account.registrationDate}
+                                                </td>
+                                                <td>
+                                                    <c:if test="${user.account.isActive==true}">
+                                                        <fmt:message key="admin_registrations.active"/>
+                                                    </c:if>
+                                                    <c:if test="${user.account.isActive==false}">
+                                                        <fmt:message key="admin_registrations.blocked"/>
+                                                    </c:if>
+                                                </td>
+                                                <td class="td-actions text-right">
+                                                    <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#popupUserProfile"
+                                                            data-lastname="${user.lastName}"
+                                                            data-firstname="${user.firstName}"
+                                                            data-imagename="${user.imageName}"
+                                                            data-email="${user.account.email}"
+                                                            data-phone="${user.phoneNumber}"
+                                                            data-role="${user.account.role}">
+                                                        <i class="material-icons">person</i>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <c:if test="${user.account.isActive==true}">
+                                                        <form action="/mainController" method="post">
+                                                            <input type="hidden" name="command" value="block_user"/>
+                                                            <input type="hidden" name="userId" value="${user.account.id}"/>
+                                                            <button type="submit" rel="tooltip" class="btn btn-danger btn-round">
+                                                                <i class="material-icons">delete</i>
+                                                            </button>
+                                                        </form>
+                                                    </c:if>
+                                                    <c:if test="${user.account.isActive==false}">
+                                                        <form action="/mainController" method="post">
+                                                            <input type="hidden" name="command" value="unblock_user"/>
+                                                            <input type="hidden" name="userId" value="${user.account.id}"/>
+                                                            <button type="submit" rel="tooltip" class="btn btn-success btn-round">
+                                                                <i class="material-icons">add</i>
+                                                            </button>
+                                                        </form>
+                                                    </c:if>
                                                 </td>
                                             </tr>
                                         </c:forEach>

@@ -30,6 +30,8 @@ public class RoleControlFilter implements Filter {
                 Arrays.asList(UserRole.CLIENT));
         CONTROL_MAP.put(CommandType.APPROVE_TRAINER_APPLICATION.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
+        CONTROL_MAP.put(CommandType.BLOCK_USER.toString().toLowerCase(),
+                Arrays.asList(UserRole.ADMIN));
         CONTROL_MAP.put(CommandType.BUY_TRAININGS.toString().toLowerCase(),
                 Arrays.asList(UserRole.CLIENT));
         CONTROL_MAP.put(CommandType.CANCEL_TRAINING.toString().toLowerCase(),
@@ -76,6 +78,8 @@ public class RoleControlFilter implements Filter {
                 Arrays.asList(UserRole.GUEST));
         CONTROL_MAP.put(CommandType.SEND_TRAINER_APPLICATION.toString().toLowerCase(),
                 Arrays.asList(UserRole.CLIENT));
+        CONTROL_MAP.put(CommandType.UNBLOCK_USER.toString().toLowerCase(),
+                Arrays.asList(UserRole.ADMIN));
         CONTROL_MAP.put(CommandType.UPDATE_ACCOUNT_DATA.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         CONTROL_MAP.put(CommandType.UPDATE_PERSONAL_DATA.toString().toLowerCase(),

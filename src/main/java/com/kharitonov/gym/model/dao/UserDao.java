@@ -49,4 +49,8 @@ public interface UserDao extends BaseDao {
     void addToBalance(int userId, int amount) throws DaoException;
 
     Optional<String> findEmailById(int userId) throws DaoException;
+
+    void blockUser(int userId) throws DaoException;
+
+    void unblockUser(int userId) throws DaoException;
 }

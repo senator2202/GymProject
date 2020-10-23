@@ -3,7 +3,7 @@ package com.kharitonov.gym.model.entity;
 import java.sql.Date;
 
 public class TrainerApplication {
-    private int id;
+    private int userId;
     private String firstName;
     private String lastName;
     private String institution;
@@ -14,12 +14,12 @@ public class TrainerApplication {
     private TrainerApplication() {
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -123,7 +123,7 @@ public class TrainerApplication {
 
         public TrainerApplication build() {
             TrainerApplication trainerApplication = new TrainerApplication();
-            trainerApplication.setId(id);
+            trainerApplication.setUserId(id);
             trainerApplication.setFirstName(firstName);
             trainerApplication.setLastName(lastName);
             trainerApplication.setInstitution(institution);
