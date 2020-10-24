@@ -84,4 +84,4 @@
 	</div>
 </div>
 
-<script src="/assets/js/user-profile.js"></script>
+<script src="/assets/js/modal-data.js"></script>

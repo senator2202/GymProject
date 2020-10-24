@@ -91,6 +91,26 @@ public class TrainingDaoImpl implements TrainingDao {
         }
     }
 
+    @Override
+    public void updateDateTime(int trainingId, Date trainingDate, Time trainingTime) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementUpdateDateTime(connection, trainingDate, trainingTime, trainingId)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void setTrainingDone(int trainingId) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementSetTrainingDone(connection, trainingId)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
     private Training createTraining(ResultSet resultSet) throws DaoException {
         Training training = new Training();
         try {

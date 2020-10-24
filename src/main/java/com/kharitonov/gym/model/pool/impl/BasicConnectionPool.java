@@ -1,6 +1,6 @@
 package com.kharitonov.gym.model.pool.impl;
 
-import com.kharitonov.gym.exception.PropertiesReaderException;
+import com.kharitonov.gym.exception.PropertyReaderException;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.PropertyName;
 import com.kharitonov.gym.util.PropertiesPath;
@@ -32,7 +32,7 @@ public class BasicConnectionPool implements ConnectionPool {
         Properties properties;
         try {
             properties = reader.readProperties(propertiesPath);
-        } catch (PropertiesReaderException e) {
+        } catch (PropertyReaderException e) {
             throw new RuntimeException("Unable to read DB properties!", e);
         }
         String url = properties.getProperty(PropertyName.DB_URL);

@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 
     <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
 </head>
 
@@ -62,7 +63,6 @@
 
     <jsp:include page="/jsp/part/footer.jsp"/>
 
-    <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/jquery.magnific-popup.min.js"></script>
     <script src="/assets/js/mixitup.min.js"></script>
     <script src="/assets/js/jquery.slicknav.js"></script>

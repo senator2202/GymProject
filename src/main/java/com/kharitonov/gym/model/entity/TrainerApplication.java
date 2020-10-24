@@ -4,14 +4,10 @@ import java.sql.Date;
 
 public class TrainerApplication {
     private User user;
-    private int userId;
-    private String firstName;
-    private String lastName;
     private String institution;
     private int graduationYear;
     private String instagramLink;
     private Date applicationDate;
-
 
     private TrainerApplication() {
     }
@@ -22,30 +18,6 @@ public class TrainerApplication {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getInstitution() {
@@ -80,11 +52,9 @@ public class TrainerApplication {
         this.applicationDate = applicationDate;
     }
 
+
     public static final class TrainerApplicationBuilder {
         private User user;
-        private int userId;
-        private String firstName;
-        private String lastName;
         private String institution;
         private int graduationYear;
         private String instagramLink;
@@ -99,21 +69,6 @@ public class TrainerApplication {
 
         public TrainerApplicationBuilder withUser(User user) {
             this.user = user;
-            return this;
-        }
-
-        public TrainerApplicationBuilder withUserId(int userId) {
-            this.userId = userId;
-            return this;
-        }
-
-        public TrainerApplicationBuilder withFirstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public TrainerApplicationBuilder withLastName(String lastName) {
-            this.lastName = lastName;
             return this;
         }
 
@@ -140,9 +95,6 @@ public class TrainerApplication {
         public TrainerApplication build() {
             TrainerApplication trainerApplication = new TrainerApplication();
             trainerApplication.setUser(user);
-            trainerApplication.setUserId(userId);
-            trainerApplication.setFirstName(firstName);
-            trainerApplication.setLastName(lastName);
             trainerApplication.setInstitution(institution);
             trainerApplication.setGraduationYear(graduationYear);
             trainerApplication.setInstagramLink(instagramLink);

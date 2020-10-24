@@ -10,8 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.kharitonov.gym.model.dao.impl.FeedbackStatementCreator.statementAddFeedback;
-import static com.kharitonov.gym.model.dao.impl.FeedbackStatementCreator.statementSelectAll;
+import static com.kharitonov.gym.model.dao.impl.FeedbackStatementCreator.*;
 
 public class FeedbackDaoImpl implements FeedbackDao {
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
@@ -42,6 +41,16 @@ public class FeedbackDaoImpl implements FeedbackDao {
         }
     }
 
+    @Override
+    public void addReplyMessage(int feedbackId, String message) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementUpdateReplyMessage(connection, feedbackId, message)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
     private Feedback create(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt(TableColumnName.FEEDBACK_ID);
         String name = resultSet.getString(TableColumnName.FEEDBACK_SENDER_NAME);
@@ -49,6 +58,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
         String subject = resultSet.getString(TableColumnName.FEEDBCAK_SUBJECT);
         String message = resultSet.getString(TableColumnName.FEEDBACK_MESSAGE);
         Date date = resultSet.getDate(TableColumnName.FEEDBACK_DATETIME);
+        String reply = resultSet.getString(TableColumnName.FEEDBACK_REPLY_MESSAGE);
         return Feedback.FeedbackBuilder.aFeedback()
                 .withId(id)
                 .withSenderName(name)
@@ -56,6 +66,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
                 .withSubject(subject)
                 .withMessage(message)
                 .withDate(date)
+                .withReply(reply)
                 .build();
     }
 }

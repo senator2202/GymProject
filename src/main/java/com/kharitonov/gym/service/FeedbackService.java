@@ -9,4 +9,6 @@ public interface FeedbackService {
     void addFeedback(String name, String email, String subject, String message) throws ServiceException;
 
     List<Feedback> findAllFeedbacks() throws ServiceException;
+
+    void sendReplyMessage(String feedbackId, String email, String subject, String replyMessage) throws ServiceException;
 }

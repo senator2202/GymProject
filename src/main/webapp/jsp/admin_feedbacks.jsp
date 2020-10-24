@@ -24,14 +24,15 @@
 	<link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
 
 	<script src="<c:url value="/assets/js/jquery-3.3.1.min.js"/>"></script>
+	<script src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
 	<script src="<c:url value="/assets/js/plugins/jquery.dataTables.min.js"/>"></script>
 
 </head>
 
 <body>
+<jsp:include page="/jsp/popup/feedback_reply.jsp"/>
 <div class="wrapper ">
 	<jsp:include page="/jsp/admin_sidebar.jsp"/>
-
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
@@ -48,7 +49,7 @@
 										<th>
 											<fmt:message key="admin_feedbacks.feedbackId"/>
 										</th>
-										<th>
+										<th width="100">
 											<fmt:message key="admin_feedbacks.feedbackDate"/>
 										</th>
 										<th>
@@ -62,6 +63,9 @@
 										</th>
 										<th>
 											<fmt:message key="admin_feedbacks.feedbackMessage"/>
+										</th>
+										<th>
+											<fmt:message key="admin_feedbacks.feedbackReply"/>
 										</th>
 										<th>
 
@@ -88,16 +92,25 @@
 												<td>
 														${feedback.message}
 												</td>
+												<td>
+														${feedback.reply}
+												</td>
 												<td class="td-actions text-right">
-													<button type="button" class="btn btn-info btn-round"
-													        data-toggle="modal" data-target="#">
-														<i class="material-icons">person</i>
-													</button>
+													<c:if test="${empty feedback.reply}">
+														<button type="button" class="btn btn-rose btn-round"
+														        data-toggle="modal" data-target="#modalFeedbackReply"
+														        data-feedbackid="${feedback.id}"
+														        data-replyemail="${feedback.senderEmail}"
+														        data-replysubject="${feedback.subject}">
+															<i class="material-icons">mail_outline</i>
+														</button>
+													</c:if>
+
 												</td>
 											</tr>
 										</c:forEach>
 										</tbody>
-										<ctg:pagination tableId="feedTable"/>
+										<ctg:table-utility tableId="feedTable"/>
 									</table>
 								</div>
 							</div>

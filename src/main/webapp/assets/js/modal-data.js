@@ -47,3 +47,25 @@ $('#modalTrainerProfile').on('show.bs.modal', function (e) {
         modal.find('#ratingText').text(rating);
     }
 });
+
+$('#modalFeedbackReply').on('show.bs.modal', function (e) {
+    var replyEmail = e.relatedTarget.dataset.replyemail;
+    var replySubject = e.relatedTarget.dataset.replysubject;
+    var feedbackId = e.relatedTarget.dataset.feedbackid;
+    var modal = $(this);
+    modal.find('#feedbackId').val(feedbackId);
+    modal.find('#replyEmail').val(replyEmail);
+    modal.find('#replySubject').val(replySubject);
+});
+
+$('#modalEditTraining').on('show.bs.modal', function (e) {
+    var trainingId = e.relatedTarget.dataset.trainingid;
+    var trainerName = e.relatedTarget.dataset.trainername;
+    var trainingDate = e.relatedTarget.dataset.trainingdate;
+    var trainingTime = e.relatedTarget.dataset.trainingtime;
+    var modal = $(this);
+    modal.find('#trainingId').val(trainingId);
+    modal.find('#trainerName').text(trainerName);
+    modal.find('#trainingDate').val(trainingDate);
+    modal.find('#trainingTime').val(trainingTime);
+});

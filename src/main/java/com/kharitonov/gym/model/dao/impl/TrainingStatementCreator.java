@@ -38,6 +38,10 @@ class TrainingStatementCreator {
             "UPDATE trainings SET description=? WHERE training_id=?";
     private static final String SQL_DELETE_TRAINING =
             "DELETE from trainings WHERE training_id=?";
+    private static final String SQL_UPDATE_DATE_TIME =
+            "UPDATE trainings SET training_date=?, training_time=? WHERE training_id=?";
+    private static final String SQL_SET_TRAINING_DONE =
+            "UPDATE trainings SET done=true WHERE training_id=?";
 
     private TrainingStatementCreator() {
 
@@ -87,6 +91,21 @@ class TrainingStatementCreator {
 
     static PreparedStatement statementDeleteTraining(Connection connection, int trainingId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_DELETE_TRAINING);
+        statement.setInt(1, trainingId);
+        return statement;
+    }
+
+    static PreparedStatement statementUpdateDateTime(Connection connection, Date date, Time time, int id)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_DATE_TIME);
+        statement.setDate(1, date);
+        statement.setTime(2, time);
+        statement.setInt(3, id);
+        return statement;
+    }
+
+    static PreparedStatement statementSetTrainingDone(Connection connection, int trainingId) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_SET_TRAINING_DONE);
         statement.setInt(1, trainingId);
         return statement;
     }

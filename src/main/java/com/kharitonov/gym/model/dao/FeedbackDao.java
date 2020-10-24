@@ -9,4 +9,6 @@ public interface FeedbackDao {
     void addFeedback(String name, String email, String subject, String message) throws DaoException;
 
     List<Feedback> findAllFeedbacks() throws DaoException;
+
+    void addReplyMessage(int feedbackId, String message) throws DaoException;
 }

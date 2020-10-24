@@ -36,6 +36,12 @@
 								<th>
 
 								</th>
+								<th>
+
+								</th>
+								<th>
+
+								</th>
 								</thead>
 								<tbody>
 								<c:forEach items="${trainings}" var="training">
@@ -50,20 +56,41 @@
 												${training.time}
 										</td>
 										<td>
-											<textarea class="form-control" readonly rows="2" placeholder="<fmt:message key="schedule_trainer.addDescription"/>">${training.description}</textarea>
+											<textarea class="form-control"
+											          placeholder="<fmt:message key="schedule_trainer.addDescription"/>"
+											          rows="2" readonly>${training.description}
+											</textarea>
 										</td>
-										<td>
+										<td class="td-actions text-right">
 											<fmt:message key="schedule_trainer.tooltipEdite" var="editTraining"/>
 											<a href="#popupDescription">
-												<button type="submit" rel="tooltip" class="btn btn-danger btn-round" data-toggle="tooltip" title="${editTraining}" onclick="updateDescriptionOnClick('${training.description}', '${training.trainingId}')">
+												<button type="submit" rel="tooltip"
+												        class="btn btn-outline-primary btn-round"
+												        data-toggle="tooltip" title="${editTraining}"
+												        onclick="updateDescriptionOnClick('${training.description}', '${training.trainingId}')">
 													<i class="material-icons">edit</i>
 												</button>
 											</a>
 										</td>
+										<td class="td-actions text-right">
+											<form action="/mainController" method="post">
+												<input type="hidden" name="command" value="set_training_done"/>
+												<input type="hidden" name="trainingId" value="${training.trainingId}"/>
+												<button type="submit" rel="tooltip" data-toggle="tooltip"
+												        title="<fmt:message key="scedule_trainer.complete"/> "
+												        class="btn btn-outline-success btn-round">
+													<i class="material-icons">done</i>
+												</button>
+											</form>
+										</td>
+										<td class="td-actions text-right">
+											<fmt:message key="schedule_trainer.cancel" var="cancel"/>
+											<ctg:cancel-button trainingId="${training.trainingId}" tooltip="${cancel}"/>
+										</td>
 									</tr>
 								</c:forEach>
 								</tbody>
-								<ctg:pagination tableId="trainerTrainings"/>
+								<ctg:table-utility tableId="trainerTrainings" order="1" direction="asc"/>
 							</table>
 						</div>
 					</div>

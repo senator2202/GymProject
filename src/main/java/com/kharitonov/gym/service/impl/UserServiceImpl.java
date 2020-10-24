@@ -2,6 +2,7 @@ package com.kharitonov.gym.service.impl;
 
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.exception.DaoException;
+import com.kharitonov.gym.exception.PropertyReaderException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
@@ -66,11 +67,16 @@ public class UserServiceImpl implements UserService {
                 return Optional.empty();
             }
             MailUtility service;
+            User user;
             dao.addUser(login, encryptedPassword, email);
-            User user = dao.findUser(login, encryptedPassword).get();
-            service = MailUtility.getInstance();
-            service.sendConfirmMessage(email, user.getAccount().getId());
-            LOGGER.info("User '{}' was successfully registered!", login);
+            user = dao.findUser(login, encryptedPassword).get();
+            service = new MailUtility();
+            try {
+                service.sendConfirmMessage(email, user.getAccount().getId());
+                LOGGER.info("User '{}' was successfully registered!", login);
+            } catch (PropertyReaderException e) {
+                LOGGER.error("Error occurred while sending confirmation link!", e);
+            }
             return Optional.of(user);
         } catch (DaoException e) {
             throw new ServiceException(e);

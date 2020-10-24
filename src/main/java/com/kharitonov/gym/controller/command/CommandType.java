@@ -28,10 +28,13 @@ public enum CommandType {
     OPEN_SCHEDULE(new OpenScheduleCommand()),
     REFUSE_TRAINER_APPLICATION(new RefuseTrainerApplicationCommand()),
     REGISTER(new RegisterCommand()),
+    SEND_FEEDBACK_REPLY(new SendFeedbackReplyCommand()),
     SEND_TRAINER_APPLICATION(new SendTrainerApplicationCommand()),
+    SET_TRAINING_DONE(new SetTrainingDoneCommand()),
     UNBLOCK_USER(new UnblockUserCommand()),
     UPDATE_ACCOUNT_DATA(new UpdateAccountDataCommand()),
     UPDATE_PERSONAL_DATA(new UpdatePersonalDataCommand()),
+    UPDATE_TRAINING_DATE_TIME(new UpdateTrainingDateTime()),
     UPLOAD_IMAGE(new UploadImageCommand()),
     UPDATE_TRAINING_DESCRIPTION(new UpdateTrainingDescriptionCommand());
 

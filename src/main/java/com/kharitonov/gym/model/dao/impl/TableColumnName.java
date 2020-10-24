@@ -42,6 +42,7 @@ class TableColumnName {
     static final String FEEDBCAK_SUBJECT = "feedback_subject";
     static final String FEEDBACK_MESSAGE = "feedback_message";
     static final String FEEDBACK_DATETIME = "feedback_datetime";
+    static final String FEEDBACK_REPLY_MESSAGE = "reply_message";
 
     private TableColumnName() {
     }

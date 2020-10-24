@@ -1,6 +1,6 @@
 package com.kharitonov.gym.util;
 
-import com.kharitonov.gym.exception.PropertiesReaderException;
+import com.kharitonov.gym.exception.PropertyReaderException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +13,7 @@ public class PropertiesReader {
             LogManager.getLogger(PropertiesReader.class);
 
     public Properties readProperties(String path)
-            throws PropertiesReaderException {
+            throws PropertyReaderException {
         ClassLoader classLoader =
                 Thread.currentThread().getContextClassLoader();
         InputStream inputStream =
@@ -24,7 +24,7 @@ public class PropertiesReader {
             LOGGER.info("Properties were successfully read form '{}'",
                     path);
         } catch (IOException e) {
-            throw new PropertiesReaderException("Impossible to read " +
+            throw new PropertyReaderException("Impossible to read " +
                     "properties!");
         } finally {
             try {

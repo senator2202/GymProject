@@ -72,6 +72,9 @@
 										<option value="/mainController?command=open_admin_registrations&days=180">
 											<fmt:message key="admin_registrations.day180"/>
 										</option>
+										<option value="/mainController?command=open_admin_registrations&days=99999">
+											<fmt:message key="admin_registrations.all"/>
+										</option>
 									</select>
 								</div>
 							</div>
@@ -213,7 +216,7 @@
 											</tr>
 										</c:forEach>
 										</tbody>
-										<ctg:pagination tableId="regTable"/>
+										<ctg:table-utility tableId="regTable"/>
 									</table>
 								</div>
 							</div>

@@ -34,6 +34,10 @@ public class RequestParameterName {
     public static final String FEEDBACK_SENDER_EMAIL = "senderEmail";
     public static final String FEEDBACK_SUBJECT = "feedbackSubject";
     public static final String FEEDBACK_MESSAGE = "feedbackMessage";
+    public static final String FEEDBACK_REPLY_MESSAGE = "replyMessage";
+    public static final String FEEDBACK_REPLY_EMAIL = "replyEmail";
+    public static final String FEEDBACK_REPLY_SUBJECT = "replySubject";
+    public static final String FEEDBACK_ID = "feedbackId";
     public static final String TABLE_OFFSET = "offset";
     public static final String TOTAL_RECENT_USERS = "totalUsers";
     public static final String AMOUNT = "amount";

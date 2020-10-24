@@ -76,13 +76,19 @@ public class RoleControlFilter implements Filter {
                 Arrays.asList(UserRole.ADMIN));
         ROLE_MAP.put(CommandType.REGISTER.toString().toLowerCase(),
                 Arrays.asList(UserRole.GUEST));
+        ROLE_MAP.put(CommandType.SEND_FEEDBACK_REPLY.toString().toLowerCase(),
+                Arrays.asList(UserRole.ADMIN));
         ROLE_MAP.put(CommandType.SEND_TRAINER_APPLICATION.toString().toLowerCase(),
                 Arrays.asList(UserRole.CLIENT));
+        ROLE_MAP.put(CommandType.SET_TRAINING_DONE.toString().toLowerCase(),
+                Arrays.asList(UserRole.TRAINER));
         ROLE_MAP.put(CommandType.UNBLOCK_USER.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
         ROLE_MAP.put(CommandType.UPDATE_ACCOUNT_DATA.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.UPDATE_PERSONAL_DATA.toString().toLowerCase(),
+                Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
+        ROLE_MAP.put(CommandType.UPDATE_TRAINING_DATE_TIME.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.UPDATE_TRAINING_DESCRIPTION.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER));

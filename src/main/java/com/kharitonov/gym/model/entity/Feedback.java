@@ -9,6 +9,7 @@ public class Feedback {
     private String subject;
     private String message;
     private Date date;
+    private String reply;
 
     private Feedback() {
     }
@@ -61,6 +62,14 @@ public class Feedback {
         this.date = date;
     }
 
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
     public static final class FeedbackBuilder {
         private int id;
         private String senderName;
@@ -68,6 +77,7 @@ public class Feedback {
         private String subject;
         private String message;
         private Date date;
+        private String reply;
 
         private FeedbackBuilder() {
         }
@@ -106,6 +116,11 @@ public class Feedback {
             return this;
         }
 
+        public FeedbackBuilder withReply(String reply) {
+            this.reply = reply;
+            return this;
+        }
+
         public Feedback build() {
             Feedback feedback = new Feedback();
             feedback.setId(id);
@@ -114,6 +129,7 @@ public class Feedback {
             feedback.setSubject(subject);
             feedback.setMessage(message);
             feedback.setDate(date);
+            feedback.setReply(reply);
             return feedback;
         }
     }

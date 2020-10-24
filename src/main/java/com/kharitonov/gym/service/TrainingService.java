@@ -17,4 +17,8 @@ public interface TrainingService {
     void updateDescription(int trainingId, String description) throws ServiceException;
 
     void deleteTraining(int trainingId, int userId) throws ServiceException;
+
+    void updateDateTime(String trainingId, String trainingDate, String trainingTime) throws ServiceException;
+
+    void setTrainingDone(String trainingId) throws ServiceException;
 }

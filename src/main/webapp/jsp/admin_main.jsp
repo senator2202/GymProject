@@ -130,7 +130,7 @@
 														<input type="hidden" name="command"
 														       value="refuse_trainer_application"/>
 														<input type="hidden" name="appId"
-														       value="${application.userId}"/>
+														       value="${application.user.account.id}"/>
 														<button type="submit" rel="tooltip"
 														        class="btn btn-danger btn-round">
 															<i class="material-icons">close</i>
@@ -140,7 +140,7 @@
 											</tr>
 										</c:forEach>
 										</tbody>
-										<ctg:pagination tableId="appTable"/>
+										<ctg:table-utility tableId="appTable"/>
 									</table>
 								</div>
 							</div>

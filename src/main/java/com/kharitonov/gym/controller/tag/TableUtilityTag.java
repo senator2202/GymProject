@@ -9,8 +9,10 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-public class PaginationTag extends SimpleTagSupport {
+public class TableUtilityTag extends SimpleTagSupport {
     private String tableId;
+    private int order = 0;
+    private String direction = "desc";
 
     @Override
     public void doTag() throws JspException, IOException {
@@ -21,13 +23,29 @@ public class PaginationTag extends SimpleTagSupport {
         String script = "<script>\n" +
                 "                           $(document).ready(function () {\n" +
                 "                           $('#" + tableId + "').DataTable({\n" +
-                "                            \"scrollX\": false,\n" +
+                "                            \"order\": [[ " + order + ", \"" + direction +"\" ]],\n" +
                 "                            \"language\": {\"url\": \"/assets/json/dataTables." + locale + ".json\"}\n" +
                 "                          });\n" +
                 "                          $('.dataTables_length').addClass('bs-select');\n" +
                 "                        });\n" +
                 "                      </script>";
         out.write(script);
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     public String getTableId() {

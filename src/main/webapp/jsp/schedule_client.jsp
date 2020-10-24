@@ -7,8 +7,9 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<jsp:include page="popup/buy_trainings.jsp"/>
-<jsp:include page="popup/add_training.jsp"/>
+<jsp:include page="/jsp/popup/buy_trainings.jsp"/>
+<jsp:include page="/jsp/popup/add_training.jsp"/>
+<jsp:include page="/jsp/popup/edit_training.jsp"/>
 
 <!-- Client Schedule Section Begin -->
 <section class="trainer-schedule class-timetable spad">
@@ -17,7 +18,7 @@
             <div class="col-lg-12">
                 <div class="section-title">
                     <a href="#popupBuy" style="alignment: center;">
-                        <button class="primary-btn">
+                        <button class="btn btn-outline-primary btn-round">
                             <fmt:message key="schedule_client.buyTrainings"/>
                         </button>
                     </a>
@@ -68,12 +69,15 @@
                                 <th>
 
                                 </th>
+                                <th>
+
+                                </th>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${trainings}" var="training">
                                     <tr>
                                         <td>
-                                                ${training.trainerFirstName}  ${training.trainerLastName}
+                                                ${training.trainerFirstName} ${training.trainerLastName}
                                         </td>
                                         <td>
                                                 ${training.date}
@@ -85,25 +89,35 @@
                                             <textarea class="form-control" placeholder="<fmt:message key="schedule_client.notReady"/>" rows="2" readonly>${training.description}</textarea>
                                         </td>
                                         <td class="td-actions text-right">
+                                            <button type="submit" rel="tooltip" class="btn btn-outline-primary btn-round"
+                                                    data-toggle="modal" data-target="#modalEditTraining" title="edit"
+                                                    data-trainingid="${training.trainingId}"
+                                                    data-trainername="${training.trainerFirstName} ${training.trainerLastName}"
+                                                    data-trainingdate="${training.date}"
+                                                    data-trainingtime="${training.time}">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                        </td>
+                                        <td class="td-actions text-right">
                                             <fmt:message key="schedule_client.tooltipCancel" var="cancel"/>
-                                            <form action="/mainController" method="post">
+                                            <ctg:cancel-button trainingId="${training.trainingId}" tooltip="${cancel}"/>
+                                            <%--<form action="/mainController" method="post">
                                                 <input type="hidden" name="command" value="cancel_training"/>
                                                 <input type="hidden" name="trainingId" value="${training.trainingId}"/>
-                                                <button type="submit" rel="tooltip" class="btn btn-danger btn-round" data-toggle="tooltip" title="${cancel}">
+                                                <button type="submit" rel="tooltip" class="btn btn-outline-danger btn-round" data-toggle="tooltip" title="${cancel}">
                                                     <i class="material-icons">close</i>
                                                 </button>
-                                            </form>
+                                            </form>--%>
                                         </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
-                                <ctg:pagination tableId="clientTrainings"/>
+                                <ctg:table-utility tableId="clientTrainings" order="1" direction="asc"/>
                             </table>
-                            <a href="#popupAdd" style="alignment: center;">
-                                <button class="primary-btn">
-                                    <fmt:message key="schedule_client.add"/>
-                                </button>
-                            </a>
+                            <button type="button" class="btn btn-outline-primary btn-round"
+                                    data-toggle="modal" data-target="#modalAddTraining">
+                                <fmt:message key="schedule_client.add"/>
+                            </button>
                         </div>
                     </div>
                 </div>

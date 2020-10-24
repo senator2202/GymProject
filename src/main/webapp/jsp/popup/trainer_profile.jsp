@@ -19,7 +19,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="card" style="margin-top: 0px; margin-bottom: 0px;">
-					<div class="card-header-image">
+					<div class="card-header-image ">
 						<div class="avatar-upload">
 							<div class="avatar-preview">
 								<div id="imagePreview"></div>
@@ -92,4 +92,4 @@
 	</div>
 </div>
 
-<script src="/assets/js/user-profile.js"></script>
+<script src="/assets/js/modal-data.js"></script>

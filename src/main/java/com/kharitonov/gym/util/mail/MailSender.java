@@ -14,6 +14,7 @@ import java.util.Properties;
 
 public class MailSender {
     private static final Logger LOGGER = LogManager.getLogger(MailSender.class);
+    private static final String ENCODING = "utf-8";
     private final String sendToEmail;
     private final String mailSubject;
     private final String mailText;
@@ -46,8 +47,7 @@ public class MailSender {
         mailSession.setDebug(true);
         message = new MimeMessage(mailSession);
         message.setSubject(mailSubject);
-        message.setContent(mailText, "text/html");
-        message.setRecipient(Message.RecipientType.TO,
-                new InternetAddress(sendToEmail));
+        message.setText(mailText, ENCODING);
+        message.setRecipient(Message.RecipientType.TO, new InternetAddress(sendToEmail));
     }
 }

@@ -12,6 +12,9 @@ import java.sql.Time;
 import java.util.List;
 
 public class TrainingServiceImpl implements TrainingService {
+    private static final String SECONDS_POSTFIX = ":00";
+    private static final int TIME_LENGTH = 8;
+    private static final String BLANK = "";
     private static final TrainingServiceImpl INSTANCE = new TrainingServiceImpl();
 
     private TrainingServiceImpl() {
@@ -66,6 +69,30 @@ public class TrainingServiceImpl implements TrainingService {
         TrainingDao dao = new TrainingDaoImpl();
         try {
             dao.deleteTraining(trainingId, userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void updateDateTime(String trainingId, String trainingDate, String trainingTime) throws ServiceException {
+        TrainingDao dao = new TrainingDaoImpl();
+        int id = Integer.parseInt(trainingId);
+        Date date = Date.valueOf(trainingDate);
+        Time time = Time.valueOf(trainingTime + (trainingTime.length() == TIME_LENGTH ? BLANK : SECONDS_POSTFIX));
+        try {
+            dao.updateDateTime(id, date, time);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void setTrainingDone(String trainingId) throws ServiceException {
+        TrainingDao dao = new TrainingDaoImpl();
+        int id = Integer.parseInt(trainingId);
+        try {
+            dao.setTrainingDone(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
