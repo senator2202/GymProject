@@ -151,19 +151,21 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   `feedback_subject` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `feedback_message` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `feedback_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `reply_message` mediumtext,
   PRIMARY KEY (`feedback_id`),
   UNIQUE KEY `report_id` (`feedback_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Дамп данных таблицы gym.feedbacks: ~6 rows (приблизительно)
 /*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
-REPLACE INTO `feedbacks` (`feedback_id`, `sender_name`, `sender_email`, `feedback_subject`, `feedback_message`, `feedback_datetime`) VALUES
-	(1, 'Alex', 'alex222@mail.ru', 'service', 'service is good', NULL),
-	(2, 'Serj', 'serg333@gmail.com', 'trainer', 'all trainers are so stupid', NULL),
-	(3, 'Анатолий', 'tolik@rambler.ru', NULL, 'дороговатые тренировки', NULL),
-	(4, 'Аноним', 'anonimous@gmail.com', 'Отзыв', 'Хороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\n', NULL),
-	(9, 'Admiral', 'buldog@tut.by', 'conditions', 'two hot in gym', NULL),
-	(15, 'alex', 'petrenko', 'good staff', 'all good, staff is good too!', '2020-10-21 12:56:51');
+REPLACE INTO `feedbacks` (`feedback_id`, `sender_name`, `sender_email`, `feedback_subject`, `feedback_message`, `feedback_datetime`, `reply_message`) VALUES
+	(1, 'Alex', 'alex222@mail.ru', 'service', 'service is good', '2020-10-16 12:56:51', 'thank you for your feedback'),
+	(2, 'Serj', 'serg333@gmail.com', 'trainer', 'all trainers are so stupid', '2020-10-17 12:56:51', NULL),
+	(3, 'Анатолий', 'tolik@rambler.ru', NULL, 'дороговатые тренировки', '2020-10-18 12:56:51', NULL),
+	(4, 'Аноним', 'anonimous@gmail.com', 'Отзыв', 'Хороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\n', '2020-10-19 12:56:51', NULL),
+	(9, 'Admiral', 'buldog@tut.by', 'conditions', 'two hot in gym', '2020-10-20 12:56:51', NULL),
+	(15, 'alex', 'petrenko', 'good staff', 'all good, staff is good too!', '2020-10-21 12:56:51', 'understand understand understand understand understand understand understand understand \r\nunderstand understand understand understand understand \r\nunderstand understand understand understand understand \r\nunderstand understand understand understand '),
+	(16, 'Федор Двинятин', 'senator220291@gmail.com', 'кондиционер в зале', 'Не работает кондиционер в зале и раздевалке!', '2020-10-24 17:27:47', 'Спасибо за сообщение, постараемся быстро это исправить!');
 /*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.marks
@@ -217,20 +219,20 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   KEY `FK_trainings_users_2` (`client_id`),
   CONSTRAINT `FK_trainings_users` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 -- Дамп данных таблицы gym.trainings: ~9 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`, `description`) VALUES
-	(9, 301, 284, '2020-10-15', '12:00:00', 0, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.'),
-	(10, 302, 284, '2020-10-16', '12:00:00', 0, NULL),
+	(9, 301, 284, '2020-10-29', '12:00:00', 0, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.'),
+	(10, 302, 284, '2020-10-29', '18:00:00', 0, NULL),
 	(12, 301, 288, '2020-10-23', '12:00:00', 0, 'Пресс, бицепс, трицепс'),
-	(13, 301, 284, '2020-10-24', '12:00:00', 0, 'Бег на дорожке 10 мин. Жим лежа 4 подхода на 10 повторений'),
+	(13, 301, 284, '2020-11-05', '17:00:00', 0, 'Бег на дорожке 10 мин. Жим лежа 4 подхода на 10 повторений'),
 	(14, 301, 303, '2020-10-25', '12:00:00', 0, 'Тест на ошибку\r\nСработает\r\nИли нет?'),
-	(16, 274, 284, '2020-10-21', '12:00:00', 0, NULL),
-	(17, 301, 288, '2020-10-21', '12:00:00', 0, NULL),
-	(22, 302, 284, '2020-10-26', '17:59:00', 0, NULL),
-	(23, 301, 343, '2020-10-24', '14:30:00', 0, NULL);
+	(16, 274, 284, '2020-10-29', '17:05:00', 0, NULL),
+	(17, 301, 288, '2020-10-21', '12:00:00', 1, NULL),
+	(23, 301, 343, '2020-10-24', '14:30:00', 0, NULL),
+	(24, 274, 284, '2020-11-01', '17:20:00', 0, NULL);
 /*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.training_exercises
