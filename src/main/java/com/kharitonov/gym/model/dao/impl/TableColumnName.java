@@ -32,6 +32,8 @@ class TableColumnName {
     static final String TRAINER_LAST_NAME = "trainer_last_name";
     static final String TRAINING_DATE = "training_date";
     static final String TRAINING_TIME = "training_time";
+    static final String TRAINING_IS_DONE = "done";
+    static final String TRAINING_RATING = "training_rating";
     static final String CLIENT_ID = "client_id";
     static final String CLIENT_FIRST_NAME = "client_first_name";
     static final String CLIENT_LAST_NAME = "client_last_name";
@@ -43,6 +45,7 @@ class TableColumnName {
     static final String FEEDBACK_MESSAGE = "feedback_message";
     static final String FEEDBACK_DATETIME = "feedback_datetime";
     static final String FEEDBACK_REPLY_MESSAGE = "reply_message";
+    static final String AVERAGE_TRAINER_RATING = "trainer_rating";
 
     private TableColumnName() {
     }

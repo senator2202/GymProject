@@ -26,6 +26,7 @@ public enum CommandType {
     OPEN_PERSONAL_FINANCE(new OpenPersonalFinanceCommand()),
     OPEN_PORTFOLIO(new OpenPortfolioCommand()),
     OPEN_SCHEDULE(new OpenScheduleCommand()),
+    RATE_TRAINING(new RateTrainingCommand()),
     REFUSE_TRAINER_APPLICATION(new RefuseTrainerApplicationCommand()),
     REGISTER(new RegisterCommand()),
     SEND_FEEDBACK_REPLY(new SendFeedbackReplyCommand()),

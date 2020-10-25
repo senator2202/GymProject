@@ -72,6 +72,8 @@ public class RoleControlFilter implements Filter {
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
         ROLE_MAP.put(CommandType.OPEN_SCHEDULE.toString().toLowerCase(),
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
+        ROLE_MAP.put(CommandType.RATE_TRAINING.toString().toLowerCase(),
+                Arrays.asList(UserRole.CLIENT));
         ROLE_MAP.put(CommandType.REFUSE_TRAINER_APPLICATION.toString().toLowerCase(),
                 Arrays.asList(UserRole.ADMIN));
         ROLE_MAP.put(CommandType.REGISTER.toString().toLowerCase(),

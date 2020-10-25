@@ -21,4 +21,8 @@ public interface TrainingService {
     void updateDateTime(String trainingId, String trainingDate, String trainingTime) throws ServiceException;
 
     void setTrainingDone(String trainingId) throws ServiceException;
+
+    void rateTraining(String trainingId, String rating) throws ServiceException;
+
+    double averageTrainerRating(String trainerId) throws ServiceException;
 }

@@ -45,4 +45,6 @@ public interface UserService {
     void blockUser(int userId) throws ServiceException;
 
     void unblockUser(int userId) throws ServiceException;
+
+    void updateRating(String trainerId, double rating) throws ServiceException;
 }

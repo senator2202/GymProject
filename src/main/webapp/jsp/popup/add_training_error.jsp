@@ -4,8 +4,15 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<a href="#x" class="overlay" id="popupAddError"></a>
-<div class="popup">
-    <label class="label" style="font-size: large"><fmt:message key="add_training_error.message"/></label>
-    <a class="close" title=<fmt:message key="trainer_popup.close"/> href="#"></a>
+<div class="modal fade" id="modalAddError" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center">
+                    <fmt:message key="add_training_error.message"/>
+                </h5>
+            </div>
+        </div>
+    </div>
 </div>

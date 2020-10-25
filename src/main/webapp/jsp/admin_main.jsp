@@ -112,7 +112,7 @@
 														<input type="hidden" name="command"
 														       value="approve_trainer_application"/>
 														<input type="hidden" name="appId"
-														       value="${application.userId}"/>
+														       value="${application.user.account.id}"/>
 														<input type="hidden" name="appInstitution"
 														       value="${application.institution}"/>
 														<input type="hidden" name="appGraduation"

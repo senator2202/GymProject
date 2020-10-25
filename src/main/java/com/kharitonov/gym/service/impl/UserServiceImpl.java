@@ -256,4 +256,15 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void updateRating(String trainerId, double rating) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        int id = Integer.parseInt(trainerId);
+        try {
+            dao.updateRating(id, rating);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

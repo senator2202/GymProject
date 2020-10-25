@@ -15,7 +15,9 @@ class TrainingStatementCreator {
                     "(SELECT last_name FROM users WHERE user_id=trainings.client_id) AS client_last_name, \n" +
                     "training_date, \n" +
                     "training_time, \n" +
-                    "description \n" +
+                    "description, \n" +
+                    "done, \n" +
+                    "training_rating \n" +
                     "FROM trainings WHERE client_id=?";
     private static final String SQL_DECREMENT_TRAININGS =
             "UPDATE users SET bought_trainings=bought_trainings-1 WHERE user_id=?";
@@ -31,9 +33,10 @@ class TrainingStatementCreator {
                     "(SELECT last_name FROM users WHERE user_id=trainings.client_id) AS client_last_name, \n" +
                     "training_date, \n" +
                     "training_time, \n" +
-                    "description \n" +
+                    "description, \n" +
+                    "done, \n" +
+                    "training_rating \n" +
                     "FROM trainings WHERE trainer_id=?";
-
     private static final String SQL_UPDATE_DESCRIPTION =
             "UPDATE trainings SET description=? WHERE training_id=?";
     private static final String SQL_DELETE_TRAINING =
@@ -42,6 +45,12 @@ class TrainingStatementCreator {
             "UPDATE trainings SET training_date=?, training_time=? WHERE training_id=?";
     private static final String SQL_SET_TRAINING_DONE =
             "UPDATE trainings SET done=true WHERE training_id=?";
+    private static final String SQL_UPDATE_RATING =
+            "UPDATE trainings SET training_rating=? WHERE training_id=?";
+    private static final String SQL_AVERAGE_RATING =
+            "SELECT AVG(training_rating) AS trainer_rating " +
+                    "FROM (SELECT training_rating FROM trainings WHERE trainer_id=?) AS temp " +
+                    "WHERE training_rating!=0";
 
     private TrainingStatementCreator() {
 
@@ -107,6 +116,21 @@ class TrainingStatementCreator {
     static PreparedStatement statementSetTrainingDone(Connection connection, int trainingId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SET_TRAINING_DONE);
         statement.setInt(1, trainingId);
+        return statement;
+    }
+
+    static PreparedStatement statementUpdateRating(Connection connection, int trainingId, int rating)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_RATING);
+        statement.setInt(1, rating);
+        statement.setInt(2, trainingId);
+        return statement;
+    }
+
+    static PreparedStatement statementAverageRaiting(Connection connection, int trainerId)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_AVERAGE_RATING);
+        statement.setInt(1, trainerId);
         return statement;
     }
 }

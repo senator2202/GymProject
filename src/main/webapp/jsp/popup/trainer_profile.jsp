@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
                scope="session"/>
@@ -81,7 +82,7 @@
 									<fmt:message key="trainer_profile.rating"/>
 								</div>
 								<div class="col-lg-6">
-									<label id=ratingText" style="color: #0b0b0b"></label>
+									<label name="ratingText" id="ratingText"  style="color: #0b0b0b"></label>
 								</div>
 							</div>
 						</div>

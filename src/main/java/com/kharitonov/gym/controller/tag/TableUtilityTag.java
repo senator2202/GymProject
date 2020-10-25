@@ -20,15 +20,16 @@ public class TableUtilityTag extends SimpleTagSupport {
         JspWriter out = context.getOut();
         User user = (User) context.findAttribute(SessionAttributeName.USER);
         String locale = user.getAccount().getLocale().getPostfix();
-        String script = "<script>\n" +
-                "                           $(document).ready(function () {\n" +
-                "                           $('#" + tableId + "').DataTable({\n" +
-                "                            \"order\": [[ " + order + ", \"" + direction +"\" ]],\n" +
-                "                            \"language\": {\"url\": \"/assets/json/dataTables." + locale + ".json\"}\n" +
-                "                          });\n" +
-                "                          $('.dataTables_length').addClass('bs-select');\n" +
-                "                        });\n" +
-                "                      </script>";
+        String script =
+                "<script>\n" +
+                "   $(document).ready(function () {\n" +
+                "       $('#" + tableId + "').DataTable({\n" +
+                "       \"order\": [[ " + order + ", \"" + direction +"\" ]],\n" +
+                "       \"language\": {\"url\": \"/assets/json/dataTables." + locale + ".json\"}\n" +
+                "       });\n" +
+                "       $('.dataTables_length').addClass('bs-select');\n" +
+                "   });\n" +
+                "</script>";
         out.write(script);
     }
 

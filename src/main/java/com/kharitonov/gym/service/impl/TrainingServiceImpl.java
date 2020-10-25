@@ -97,4 +97,27 @@ public class TrainingServiceImpl implements TrainingService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void rateTraining(String sTrainingId, String trainingRating) throws ServiceException {
+        TrainingDao dao = new TrainingDaoImpl();
+        int trainingId = Integer.parseInt(sTrainingId);
+        int rating = Integer.parseInt(trainingRating);
+        try {
+            dao.updateRating(trainingId, rating);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public double averageTrainerRating(String trainerId) throws ServiceException {
+        TrainingDao dao = new TrainingDaoImpl();
+        int id = Integer.parseInt(trainerId);
+        try {
+            return dao.averageTrainerRating(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

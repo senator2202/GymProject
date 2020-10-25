@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.tag;
 
-import com.kharitonov.gym.model.entity.Client;
-import com.kharitonov.gym.model.entity.Trainer;
-import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.entity.*;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -32,25 +29,11 @@ public class ProfileButtonTag extends SimpleTagSupport {
                 childAttr = trainerAttributes();
             }
             String footer = "<i class=\"material-icons\">person</i>\n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t</button>";
+                    "</button>";
             String html = header + userAttr + childAttr + footer;
             out.write(html);
         }
     }
-
-    /*<button type="button" class="btn btn-info btn-round" title="${openProfile}"
-                                                                data-toggle="modal" data-target="#modalClientProfile"
-                                                                data-lastname="${user.lastName}"
-                                                                data-firstname="${user.firstName}"
-                                                                data-imagename="${user.imageName}"
-                                                                data-email="${user.account.email}"
-                                                                data-phone="${user.phoneNumber}"
-                                                                data-role="${user.account.role}"
-                                                                data-moneybalance="${user.moneyBalance}"
-                                                                data-personaldiscount="${user.personalDiscount}"
-                                                                data-boughttrainings="${user.boughtTrainings}">
-                                                            <i class="material-icons">person</i>
-                                                        </button>*/
 
     private String clientHeader() {
         return " <button type=\"button\" class=\"btn btn-info btn-round\" title=\"" + tooltip + "\" " +
@@ -63,28 +46,25 @@ public class ProfileButtonTag extends SimpleTagSupport {
     }
 
     private String userAttributes() {
-        String html = "data-lastname=\"" + user.getLastName() + "\"\n" +
-                "                                                                data-firstname=\"" + user.getFirstName() + "\"\n" +
-                "                                                                data-imagename=\"" + user.getImageName() + "\"\n" +
-                "                                                                data-email=\"" + user.getAccount().getEmail() + "\"\n" +
-                "                                                                data-phone=\"" + user.getPhoneNumber() + "\"\n" +
-                "                                                                data-role=\"" + user.getAccount().getRole() + "\"\n";
-        return html;
+        return "data-lastname=\"" + user.getLastName() + "\"\n" +
+                "data-firstname=\"" + user.getFirstName() + "\"\n" +
+                "data-imagename=\"" + user.getImageName() + "\"\n" +
+                "data-email=\"" + user.getAccount().getEmail() + "\"\n" +
+                "data-phone=\"" + user.getPhoneNumber() + "\"\n" +
+                "data-role=\"" + user.getAccount().getRole() + "\"\n";
     }
 
     private String clientAttributes() {
-        String html = "data-moneybalance=\"" + ((Client) user).getMoneyBalance() + "\"\n" +
-                "                                                                data-personaldiscount=\"" + ((Client) user).getPersonalDiscount() + "\"\n" +
-                "                                                                data-boughttrainings=\"" + ((Client) user).getBoughtTrainings() + "\">\n";
-        return html;
+        return "data-moneybalance=\"" + ((Client) user).getMoneyBalance() + "\"\n" +
+                "data-personaldiscount=\"" + ((Client) user).getPersonalDiscount() + "\"\n" +
+                "data-boughttrainings=\"" + ((Client) user).getBoughtTrainings() + "\">\n";
     }
 
     private String trainerAttributes() {
-        String html = "data-institution=\"" + ((Trainer) user).getInstitution() + "\"\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t        data-graduationyear=\"" + ((Trainer) user).getGraduationYear() + "\"\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t        data-instagramLink=\"" + ((Trainer) user).getInstagramLink() + "\"\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t        data-rating=\"" + ((Trainer) user).getRating() + "\">\n";
-        return html;
+        return "data-institution=\"" + ((Trainer) user).getInstitution() + "\"\n" +
+                "data-graduationyear=\"" + ((Trainer) user).getGraduationYear() + "\"\n" +
+                "data-instagramLink=\"" + ((Trainer) user).getInstagramLink() + "\"\n" +
+                "data-rating=\"" + ((Trainer) user).getRating() + "\">\n";
     }
 
     public User getUser() {

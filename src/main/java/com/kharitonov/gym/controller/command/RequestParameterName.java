@@ -30,6 +30,8 @@ public class RequestParameterName {
     public static final String TRAINING_TIME = "trainingTime";
     public static final String TRAINING_ID = "trainingId";
     public static final String TRAINING_DESCRIPTION = "trainingDescription";
+    public static final String TRAINING_RAITING = "trainingRating";
+    public static final String TRAINER_ID = "trainerId";
     public static final String FEEDBACK_SENDER_NAME = "senderName";
     public static final String FEEDBACK_SENDER_EMAIL = "senderEmail";
     public static final String FEEDBACK_SUBJECT = "feedbackSubject";

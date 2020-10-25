@@ -111,22 +111,46 @@ public class TrainingDaoImpl implements TrainingDao {
         }
     }
 
+    @Override
+    public void updateRating(int trainingId, int rating) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementUpdateRating(connection, trainingId, rating)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public double averageTrainerRating(int trainerId) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementAverageRaiting(connection, trainerId);
+             ResultSet resultSet = statement.executeQuery()) {
+            resultSet.next();
+            return resultSet.getDouble(TableColumnName.AVERAGE_TRAINER_RATING);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
     private Training createTraining(ResultSet resultSet) throws DaoException {
-        Training training = new Training();
         try {
-            training.setTrainingId(resultSet.getInt(TableColumnName.TRAINING_ID));
-            training.setTrainerId(resultSet.getInt(TableColumnName.TRAINER_ID));
-            training.setTrainerFirstName(resultSet.getString(TableColumnName.TRAINER_FIRST_NAME));
-            training.setTrainerLastName(resultSet.getString(TableColumnName.TRAINER_LAST_NAME));
-            training.setClientId(resultSet.getInt(TableColumnName.CLIENT_ID));
-            training.setClientFirstName(resultSet.getString(TableColumnName.CLIENT_FIRST_NAME));
-            training.setClientLastName(resultSet.getString(TableColumnName.CLIENT_LAST_NAME));
-            training.setDate(resultSet.getDate(TableColumnName.TRAINING_DATE));
-            training.setTime(resultSet.getTime(TableColumnName.TRAINING_TIME));
-            training.setDescription(resultSet.getString(TableColumnName.TRAINING_DESCRIPTION));
+            return Training.TrainingBuilder.aTraining()
+                    .withTrainingId(resultSet.getInt(TableColumnName.TRAINING_ID))
+                    .withTrainerId(resultSet.getInt(TableColumnName.TRAINER_ID))
+                    .withTrainerFirstName(resultSet.getString(TableColumnName.TRAINER_FIRST_NAME))
+                    .withTrainerLastName(resultSet.getString(TableColumnName.TRAINER_LAST_NAME))
+                    .withClientId(resultSet.getInt(TableColumnName.CLIENT_ID))
+                    .withClientFirstName(resultSet.getString(TableColumnName.CLIENT_FIRST_NAME))
+                    .withClientLastName(resultSet.getString(TableColumnName.CLIENT_LAST_NAME))
+                    .withDate(resultSet.getDate(TableColumnName.TRAINING_DATE))
+                    .withTime(resultSet.getTime(TableColumnName.TRAINING_TIME))
+                    .withDescription(resultSet.getString(TableColumnName.TRAINING_DESCRIPTION))
+                    .withIsDone(resultSet.getBoolean(TableColumnName.TRAINING_IS_DONE))
+                    .withRating(resultSet.getInt(TableColumnName.TRAINING_RATING))
+                    .build();
         } catch (SQLException e) {
             throw new DaoException("Training creation error!", e);
         }
-        return training;
     }
 }

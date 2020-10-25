@@ -14,13 +14,14 @@ public class CancelButtonTag extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
         JspContext context = getJspContext();
         JspWriter out = context.getOut();
-        String html = "<form action=\"/mainController\" method=\"post\">\n" +
-                "                                                <input type=\"hidden\" name=\"command\" value=\"cancel_training\"/>\n" +
-                "                                                <input type=\"hidden\" name=\"trainingId\" value=\"" + trainingId + "\"/>\n" +
-                "                                                <button type=\"submit\" rel=\"tooltip\" class=\"btn btn-outline-danger btn-round\" data-toggle=\"tooltip\" title=\"" + tooltip + "\">\n" +
-                "                                                    <i class=\"material-icons\">close</i>\n" +
-                "                                                </button>\n" +
-                "                                            </form>";
+        String html =
+                "<form action=\"/mainController\" method=\"post\">\n" +
+                "   <input type=\"hidden\" name=\"command\" value=\"cancel_training\"/>\n" +
+                "   <input type=\"hidden\" name=\"trainingId\" value=\"" + trainingId + "\"/>\n" +
+                "   <button type=\"submit\" rel=\"tooltip\" class=\"btn btn-outline-danger btn-round\" data-toggle=\"tooltip\" title=\"" + tooltip + "\">\n" +
+                "       <i class=\"material-icons\">close</i>\n" +
+                "   </button>\n" +
+                "</form>";
         out.write(html);
     }
 

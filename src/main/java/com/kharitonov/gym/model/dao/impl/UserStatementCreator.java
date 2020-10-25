@@ -68,6 +68,8 @@ class UserStatementCreator {
             "UPDATE accounts SET active=false WHERE account_id=?";
     private static final String SQL_UNBLOCK_USER =
             "UPDATE accounts SET active=true WHERE account_id=?";
+    private static final String SQL_UPDATE_RATING =
+            "UPDATE users SET rating=? WHERE user_id=?";
 
     private UserStatementCreator() {
     }
@@ -279,6 +281,13 @@ class UserStatementCreator {
     static PreparedStatement statementUnblockUser(Connection connection, int userId) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UNBLOCK_USER);
         statement.setInt(1, userId);
+        return statement;
+    }
+
+    static PreparedStatement statementUpdateRating(Connection connection, int id, double rating) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_RATING);
+        statement.setDouble(1, rating);
+        statement.setInt(2, id);
         return statement;
     }
 }

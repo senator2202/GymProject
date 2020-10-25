@@ -21,4 +21,8 @@ public interface TrainingDao extends BaseDao {
     void updateDateTime(int trainingId, Date trainingDate, Time trainingTime) throws DaoException;
 
     void setTrainingDone(int trainingId) throws DaoException;
+
+    void updateRating(int trainingId, int rating) throws DaoException;
+
+    double averageTrainerRating(int trainerId) throws DaoException;
 }

@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OpenScheduleCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(OpenScheduleCommand.class);
@@ -45,13 +46,19 @@ public class OpenScheduleCommand implements ActionCommand {
         int userId = user.getAccount().getId();
         List<User> trainers = userService.findAllTrainers();
         List<Training> trainings = trainingService.findClientTrainings(userId);
+        List<Training> planned = trainings.stream().filter(t->!t.isDone()).collect(Collectors.toList());
+        List<Training> previous = trainings.stream().filter(t->t.isDone()).collect(Collectors.toList());
+        request.setAttribute(RequestAttributeName.PLANNED_TRAININGS, planned);
+        request.setAttribute(RequestAttributeName.PREVIOUS_TRAININGS, previous);
         request.setAttribute(RequestAttributeName.TRAINERS, trainers);
-        request.setAttribute(RequestAttributeName.TRAININGS, trainings);
     }
 
     private void doTrainerScenario(HttpServletRequest request, User user) throws ServiceException {
         int userId = user.getAccount().getId();
         List<Training> trainings = trainingService.findTrainerTrainings(userId);
-        request.setAttribute(RequestAttributeName.TRAININGS, trainings);
+        List<Training> planned = trainings.stream().filter(t->!t.isDone()).collect(Collectors.toList());
+        List<Training> previous = trainings.stream().filter(t->t.isDone()).collect(Collectors.toList());
+        request.setAttribute(RequestAttributeName.PLANNED_TRAININGS, planned);
+        request.setAttribute(RequestAttributeName.PREVIOUS_TRAININGS, previous);
     }
 }

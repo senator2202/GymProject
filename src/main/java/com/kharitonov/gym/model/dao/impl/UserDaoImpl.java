@@ -414,4 +414,14 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(e);
         }
     }
+
+    @Override
+    public void updateRating(int trainerId, double rating) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementUpdateRating(connection, trainerId, rating)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
 }
