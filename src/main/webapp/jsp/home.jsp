@@ -60,9 +60,16 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="${(sessionScope.user!=null) ? '/mainController?command=open_personal_data' : '#popupLogin'}" class="primary-btn">
-						${(sessionScope.user!=null) ? 'Personal Profile' : 'Join Us Now'}
-					</a>
+					<c:choose>
+						<c:when test="${user==null}">
+							<button type="button" class="btn primary-btn" data-toggle="modal" data-target="#modalLogin">Join Us Now</button>
+						</c:when>
+						<c:otherwise>
+							<a href="/mainController?command=open_personal_data">
+								<button type="button" class="btn primary-btn">Personal Profile</button>
+							</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
@@ -71,9 +78,16 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="${(sessionScope.user!=null) ? '/mainController?command=open_personal_data' : '#popupLogin'}" class="primary-btn">
-						${(sessionScope.user!=null) ? 'Personal Profile' : 'Join Us Now'}
-					</a>
+					<c:choose>
+						<c:when test="${user==null}">
+							<button type="button" class="btn primary-btn" data-toggle="modal" data-target="#modalLogin">Join Us Now</button>
+						</c:when>
+						<c:otherwise>
+							<a href="/mainController?command=open_personal_data">
+								<button type="button" class="btn primary-btn">Personal Profile</button>
+							</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
@@ -82,9 +96,16 @@
 				<div class="hero-text">
 					<h4>Elite Personal Training Services</h4>
 					<h1>Make it <span>Shape</span></h1>
-					<a href="${(sessionScope.user!=null) ? '/mainController?command=open_personal_data' : '#popupLogin'}" class="primary-btn">
-						${(sessionScope.user!=null) ? 'Personal Profile' : 'Join Us Now'}
-					</a>
+					<c:choose>
+						<c:when test="${user==null}">
+							<button type="button" class="btn primary-btn" data-toggle="modal" data-target="#modalLogin">Join Us Now</button>
+						</c:when>
+						<c:otherwise>
+							<a href="/mainController?command=open_personal_data">
+								<button type="button" class="btn primary-btn">Personal Profile</button>
+							</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>

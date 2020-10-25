@@ -5,7 +5,7 @@
 
 <script src="/assets/js/login.js"></script>
 
-<div class="modal fade" id="popupLogin" role="dialog">
+<div class="modal fade" id="modalLogin" role="dialog">
 	<div class="modal-dialog modal-dialog-centered">
 		<!-- Modal content-->
 		<div class="modal-content">

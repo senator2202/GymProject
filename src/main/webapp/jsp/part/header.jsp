@@ -32,7 +32,7 @@
 						</c:when>
 						<c:otherwise>
 							<li>
-								<button type="button" class="btn primary-btn" data-toggle="modal" data-target="#popupLogin">Login</button>
+								<button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modalLogin">Login</button>
 							</li>
 						</c:otherwise>
 					</c:choose>

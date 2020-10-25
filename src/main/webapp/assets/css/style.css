@@ -2350,7 +2350,8 @@ label span input {
   padding:0;
 }
 
-/* формируем кнопку закрытия */
+/*
+!* формируем кнопку закрытия *!
 .close {
   top: -10px;
   right: -10px;
@@ -2392,5 +2393,6 @@ label span input {
   -o-transform: rotate(360deg);
   transform: rotate(360deg);
 }
+*/
 
 /*# sourceMappingURL=style.css.map */

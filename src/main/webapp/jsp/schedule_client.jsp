@@ -17,11 +17,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <a href="#popupBuy" style="alignment: center;">
-                        <button class="btn btn-outline-primary btn-round">
-                            <fmt:message key="schedule_client.buyTrainings"/>
-                        </button>
-                    </a>
+                    <button type="button" class="btn btn-outline-primary btn-round"
+                            data-toggle="modal" data-target="#modalBuyTrainings">
+                        <fmt:message key="schedule_client.buyTrainings"/>
+                    </button>
                 </div>
             </div>
         </div>

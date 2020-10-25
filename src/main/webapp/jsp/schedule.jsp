@@ -24,14 +24,12 @@
     <!-- Css Styles -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="/assets/css/login.css"/>
     <link rel="stylesheet" href="/assets/css/magnific-popup.css"/>
     <link rel="stylesheet" href="/assets/css/owl.carousel.min.css"/>
     <link rel="stylesheet" href="/assets/css/slicknav.min.css"/>
     <link rel="stylesheet" href="/assets/css/style.css"/>
     <link rel="stylesheet" href="/assets/css/themify-icons.css"/>
     <link rel="stylesheet" href="/assets/css/select-list.css"/>
-    <link rel="stylesheet" href="/assets/css/popup.css"/>
     <link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
