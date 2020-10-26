@@ -19,14 +19,13 @@
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<!--     Fonts and icons     -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 	<!-- CSS Files -->
-	<link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+	<link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
 
-	<script src="<c:url value="/assets/js/jquery-3.3.1.min.js"/>"></script>
-	<script src="<c:url value="/assets/js/bootstrap.min.js"/>"></script>
-	<script src="<c:url value="/assets/js/plugins/jquery.dataTables.min.js"/>"></script>
-
+	<script src="/assets/js/jquery-3.3.1.min.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>
+	<script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -44,12 +43,12 @@
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
-									<table id="feedTable" class="table">
+									<table id="feedTable" class="table" style="font-size: small">
 										<thead class=" text-primary">
 										<th>
 											<fmt:message key="admin_feedbacks.feedbackId"/>
 										</th>
-										<th width="100">
+										<th width="80">
 											<fmt:message key="admin_feedbacks.feedbackDate"/>
 										</th>
 										<th>
@@ -90,10 +89,10 @@
 														${feedback.subject}
 												</td>
 												<td>
-														${feedback.message}
+													<textarea class="form-control" rows="3" cols="50" style="background-color: #fff;" readonly>${feedback.message}</textarea>
 												</td>
 												<td>
-														${feedback.reply}
+													<textarea class="form-control" rows="3" cols="50" style="background-color: #fff;" readonly>${feedback.reply}</textarea>
 												</td>
 												<td class="td-actions text-right">
 													<c:if test="${empty feedback.reply}">
@@ -105,7 +104,6 @@
 															<i class="material-icons">mail_outline</i>
 														</button>
 													</c:if>
-
 												</td>
 											</tr>
 										</c:forEach>
@@ -121,6 +119,9 @@
 		</div>
 	</div>
 </div>
+
+<script src="/assets/js/modal-data.js"></script>
+
 </body>
 
 </html>

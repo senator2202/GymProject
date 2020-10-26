@@ -28,10 +28,10 @@ public class UpdatePersonalDataCommand implements ActionCommand {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setPhoneNumber(phone);
-            page = ServletPath.PERSONAL_DATA;
+            page = ProjectPage.PERSONAL_DATA.getServletCommand();
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = PagePath.ERROR_404;
+            page = ProjectPage.ERROR_404.getDirectUrl();
         }
         return page;
     }

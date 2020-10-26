@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestParameterName;
-import com.kharitonov.gym.controller.command.ServletPath;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.service.TrainingService;
 import com.kharitonov.gym.service.impl.TrainingServiceImpl;
@@ -25,6 +22,6 @@ public class UpdateTrainingDescriptionCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return ServletPath.SCHEDULE;
+        return ProjectPage.SCHEDULE.getServletCommand();
     }
 }

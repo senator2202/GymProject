@@ -5,8 +5,14 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<a href="#x" class="overlay" id="popupConfirmed"></a>
-<div class="popup">
-	<label class="label" style="font-size: large">${confirmedAccount}: <fmt:message key="confirmed.message"/></label>
-	<a class="close" title=<fmt:message key="trainer_popup.close"/> href="#close"></a>
+<div class="modal fade" id="modalConfirmed" role="dialog">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title w-100 text-center">
+					<label class="label" style="font-size: large">${confirmedAccount}: <fmt:message key="confirmed.message"/></label>
+				</h5>
+			</div>
+		</div>
+	</div>
 </div>

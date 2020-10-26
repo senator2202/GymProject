@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.RequestParameterName;
-import com.kharitonov.gym.controller.command.ServletPath;
-import com.kharitonov.gym.controller.command.SessionAttributeName;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.service.UserService;
@@ -31,6 +28,6 @@ public class MakeDepositCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return ServletPath.PERSONAL_FINANCE;
+        return ProjectPage.PERSONAL_FINANCE.getServletCommand();
     }
 }

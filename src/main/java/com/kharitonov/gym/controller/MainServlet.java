@@ -17,6 +17,7 @@ import java.util.Iterator;
 
 @WebServlet(urlPatterns = "/mainController")
 public class MainServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

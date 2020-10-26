@@ -1,6 +1,7 @@
 package com.kharitonov.gym.controller.filter;
 
 import com.kharitonov.gym.controller.command.PagePath;
+import com.kharitonov.gym.controller.command.ProjectPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,13 +20,13 @@ public class PageAccessFilter implements Filter {
 
     static {
         RESTRICTED_PAGES = new HashSet<>();
-        RESTRICTED_PAGES.add(PagePath.SCHEDULE);
-        RESTRICTED_PAGES.add(PagePath.PERSONAL_FINANCE);
-        RESTRICTED_PAGES.add(PagePath.PERSONAL_ACCOUNT);
-        RESTRICTED_PAGES.add(PagePath.PERSONAL_DATA);
-        RESTRICTED_PAGES.add(PagePath.ADMIN_FEEDBACKS);
-        RESTRICTED_PAGES.add(PagePath.ADMIN_MAIN);
-        RESTRICTED_PAGES.add(PagePath.ADMIN_REGISTRATIONS);
+        RESTRICTED_PAGES.add(ProjectPage.SCHEDULE.getDirectUrl());
+        RESTRICTED_PAGES.add(ProjectPage.PERSONAL_FINANCE.getDirectUrl());
+        RESTRICTED_PAGES.add(ProjectPage.PERSONAL_ACCOUNT.getDirectUrl());
+        RESTRICTED_PAGES.add(ProjectPage.PERSONAL_DATA.getDirectUrl());
+        RESTRICTED_PAGES.add(ProjectPage.ADMIN_FEEDBACKS.getDirectUrl());
+        RESTRICTED_PAGES.add(ProjectPage.ADMIN_MAIN.getDirectUrl());
+        RESTRICTED_PAGES.add(ProjectPage.ADMIN_REGISTRATIONS.getDirectUrl());
     }
 
     public void destroy() {
@@ -39,7 +40,7 @@ public class PageAccessFilter implements Filter {
             String page = request.getRequestURI();
             if (RESTRICTED_PAGES.contains(page)) {
                 LOGGER.warn("Filter interception: attemption of direct access to page '{}'", request.getRequestURI());
-                response.sendRedirect(request.getContextPath() + PagePath.INDEX);
+                response.sendRedirect(request.getContextPath() + ProjectPage.INDEX.getDirectUrl());
             } else {
                 RequestDispatcher dispatcher = request.getRequestDispatcher(page);
                 dispatcher.forward(request, response);

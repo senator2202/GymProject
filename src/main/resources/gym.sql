@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `id` (`account_id`) USING BTREE,
   UNIQUE KEY `name` (`login`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=346 DEFAULT CHARSET=latin1;
 
 -- Дамп данных таблицы gym.accounts: ~61 rows (приблизительно)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
@@ -97,7 +97,9 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(340, 'badnitos', '9Vrgph\\g', 'vtj36183@cuoly.com', 'CLIENT', '2020-10-21 00:47:59', 'RUSSIAN', 1),
 	(341, 'tarantul322', '9Vrgph\\g', 'wdj72065@cuoly.com', 'CLIENT', '2020-10-21 00:54:32', 'RUSSIAN', 1),
 	(342, 'badumba', '9Vrgph\\g', 'viq89486@bcaoo.com', 'CLIENT', '2020-10-22 11:13:36', 'RUSSIAN', 1),
-	(343, 'tomat', '9Vrgph\\g', 'quj16414@bcaoo.com', 'CLIENT', '2020-10-22 11:21:43', 'ENGLISH', 1);
+	(343, 'tomat', '9Vrgph\\g', 'quj16414@bcaoo.com', 'CLIENT', '2020-10-22 11:21:43', 'ENGLISH', 1),
+	(344, 'bomba_pushka', '9Vrgph\\g', 'bomba@pushka.ru', 'CLIENT', '2020-10-26 15:34:12', 'RUSSIAN', 0),
+	(345, 'gradusnik', '9Vrgph\\g', 'temperature@tut.by', 'CLIENT', '2020-10-26 15:36:44', 'RUSSIAN', 0);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.diets
@@ -154,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   `reply_message` mediumtext,
   PRIMARY KEY (`feedback_id`),
   UNIQUE KEY `report_id` (`feedback_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Дамп данных таблицы gym.feedbacks: ~7 rows (приблизительно)
 /*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
@@ -165,25 +167,12 @@ REPLACE INTO `feedbacks` (`feedback_id`, `sender_name`, `sender_email`, `feedbac
 	(4, 'Аноним', 'anonimous@gmail.com', 'Отзыв', 'Хороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\nХороший сервис, приятные тренера, адекватные цены.\r\n', '2020-10-19 12:56:51', NULL),
 	(9, 'Admiral', 'buldog@tut.by', 'conditions', 'two hot in gym', '2020-10-20 12:56:51', NULL),
 	(15, 'alex', 'petrenko', 'good staff', 'all good, staff is good too!', '2020-10-21 12:56:51', 'understand understand understand understand understand understand understand understand \r\nunderstand understand understand understand understand \r\nunderstand understand understand understand understand \r\nunderstand understand understand understand '),
-	(16, 'Федор Двинятин', 'senator220291@gmail.com', 'кондиционер в зале', 'Не работает кондиционер в зале и раздевалке!', '2020-10-24 17:27:47', 'Спасибо за сообщение, постараемся быстро это исправить!');
+	(16, 'Федор Двинятин', 'senator220291@gmail.com', 'кондиционер в зале', 'Не работает кондиционер в зале и раздевалке!', '2020-10-24 17:27:47', 'Спасибо за сообщение, постараемся быстро это исправить!'),
+	(17, 'Дмитрий', 'mail222@tut.by', 'Вода', 'Поставьте питьевую воду в зале, спасибо!', '2020-10-26 10:26:42', NULL),
+	(19, 'Алексей', 'tratata@mail.ru', 'Предъява', 'не, ну вы нормальные?', '2020-10-26 10:33:09', NULL),
+	(20, 'Федор', 'azaza@tut.by', '', 'дайте скидку постоянному клиенту', '2020-10-26 10:41:00', NULL),
+	(21, 'Goodwin', 'goodwin@tut.by', 'brain', 'need some brain, could u help me?', '2020-10-26 10:43:09', NULL);
 /*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
-
--- Дамп структуры для таблица gym.marks
-DROP TABLE IF EXISTS `marks`;
-CREATE TABLE IF NOT EXISTS `marks` (
-  `client_id` int NOT NULL,
-  `trainer_id` int NOT NULL,
-  `mark` int NOT NULL DEFAULT '0',
-  `mark_date` datetime NOT NULL,
-  KEY `FK__users` (`client_id`),
-  KEY `FK__users_2` (`trainer_id`),
-  CONSTRAINT `FK__users` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `FK__users_2` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Дамп данных таблицы gym.marks: ~0 rows (приблизительно)
-/*!40000 ALTER TABLE `marks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `marks` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.trainer_applications
 DROP TABLE IF EXISTS `trainer_applications`;
@@ -200,7 +189,8 @@ CREATE TABLE IF NOT EXISTS `trainer_applications` (
 -- Дамп данных таблицы gym.trainer_applications: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `trainer_applications` DISABLE KEYS */;
 REPLACE INTO `trainer_applications` (`user_id`, `app_institution`, `app_graduation`, `app_instagram`, `application_date`) VALUES
-	(288, 'MGU', 2015, 'instagram.com/xzibit', '2020-09-29 11:10:54');
+	(288, 'MGU', 2015, 'instagram.com/xzibit', '2020-09-29 11:10:54'),
+	(284, 'BSUIR', 2013, 'instagram.com/senator2202', '2020-10-26 16:02:20');
 /*!40000 ALTER TABLE `trainer_applications` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.trainings
@@ -225,31 +215,17 @@ CREATE TABLE IF NOT EXISTS `trainings` (
 -- Дамп данных таблицы gym.trainings: ~10 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`, `description`, `training_rating`) VALUES
-	(9, 301, 284, '2020-10-29', '12:00:00', 0, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.', 0),
+	(9, 301, 284, '2020-10-25', '17:00:00', 1, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.', 4),
 	(10, 302, 284, '2020-10-29', '18:00:00', 0, NULL, 0),
-	(12, 301, 284, '2020-10-23', '12:00:00', 1, 'Пресс, бицепс, трицепс', 4),
+	(12, 301, 284, '2020-10-23', '12:00:00', 1, 'Пресс, бицепс, трицепс', 3),
 	(13, 301, 284, '2020-11-05', '17:00:00', 0, 'Бег на дорожке 10 мин. Жим лежа 4 подхода на 10 повторений', 0),
 	(14, 301, 303, '2020-10-25', '12:00:00', 0, 'Тест на ошибку\r\nСработает\r\nИли нет?', 0),
 	(16, 274, 284, '2020-10-29', '17:05:00', 0, NULL, 0),
 	(17, 301, 288, '2020-10-21', '12:00:00', 1, 'Кардио тренировка: бег на дорожке 20 мин, велотренажер 20 мин, степ тренажер 20 мин', 3),
 	(23, 301, 343, '2020-10-24', '14:30:00', 1, NULL, 3),
 	(24, 274, 284, '2020-11-01', '17:20:00', 0, NULL, 0),
-	(27, 301, 284, '2020-10-31', '15:00:00', 0, NULL, 0);
+	(27, 301, 284, '2020-10-31', '15:00:00', 0, 'Отжимания на брусьях, 5х15, разводка гантелей 4x10,\r\nподъем гантелей на бицепс, 4х10, пресс 2х20', 0);
 /*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
-
--- Дамп структуры для таблица gym.training_exercises
-DROP TABLE IF EXISTS `training_exercises`;
-CREATE TABLE IF NOT EXISTS `training_exercises` (
-  `training_id_fk` int NOT NULL,
-  `type` enum('BENCH_PRESS','DEADLIFT','SQUATS') NOT NULL,
-  `weight` double DEFAULT NULL,
-  KEY `FK_exercises_trainings` (`training_id_fk`),
-  CONSTRAINT `FK_exercises_trainings` FOREIGN KEY (`training_id_fk`) REFERENCES `trainings` (`training_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Дамп данных таблицы gym.training_exercises: ~0 rows (приблизительно)
-/*!40000 ALTER TABLE `training_exercises` DISABLE KEYS */;
-/*!40000 ALTER TABLE `training_exercises` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.users
 DROP TABLE IF EXISTS `users`;
@@ -308,12 +284,12 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100, 0),
 	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100, 0),
 	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, 100, 0),
-	(284, 'Александр', 'Шмюгельсон', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, '/uploads/1d1f0bc4-00a6-4e04-b468-1e66c1a3ebd0.jpg', 550, 5),
+	(284, 'Александр', 'Шмюгельсон', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, '/uploads/8555d408-b647-4424-853b-78a5ebdc8f45.jpg', 550, 5),
 	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
 	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
 	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2, '/uploads/86a6627b-4a7c-4834-b3d5-983058734a6c.jpg', 100, 0),
 	(289, '', '', '', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
-	(301, 'Anastacia', 'Lipinskaya', '+375441234598', 3, 'MSLU', 2012, 'instagram.com/mslu', 0, NULL, '/uploads/f7111fd7-d7aa-446c-973d-45dacc50a03e.jpg', 100, 0),
+	(301, 'Anastacia', 'Lipinskaya', '+375441234598', 3, 'MSLU', 2012, 'instagram.com/mslu', 0, NULL, '/uploads/b051928f-4703-48ad-a6ba-47c407005a80.jpg', 100, 0),
 	(302, 'Pipko', 'Dmitrii', '80296558891', 0, 'BSUIR', 2008, 'instagram.com/pipko', 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
 	(303, 'Bill', 'Perkins', '80291111111', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
 	(304, 'Perr', 'Billkins', '80292222222', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
@@ -337,7 +313,9 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(340, '', '', '', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
 	(341, '', '', '', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
 	(342, '', '', '', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
-	(343, 'Абдурахман', 'Петрович', '80172306303', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 173, 9);
+	(343, 'Абдурахман', 'Петрович', '80172306303', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 173, 9),
+	(344, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
+	(345, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

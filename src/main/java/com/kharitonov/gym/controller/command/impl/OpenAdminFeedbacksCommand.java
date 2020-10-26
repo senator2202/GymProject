@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestAttributeName;
-import com.kharitonov.gym.controller.command.RequestAttributeValue;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Feedback;
 import com.kharitonov.gym.service.FeedbackService;
@@ -28,6 +25,6 @@ public class OpenAdminFeedbacksCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return PagePath.ADMIN_FEEDBACKS;
+        return ProjectPage.ADMIN_FEEDBACKS.getDirectUrl();
     }
 }

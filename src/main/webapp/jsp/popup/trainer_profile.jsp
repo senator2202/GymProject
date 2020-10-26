@@ -82,7 +82,7 @@
 									<fmt:message key="trainer_profile.rating"/>
 								</div>
 								<div class="col-lg-6">
-									<label name="ratingText" id="ratingText"  style="color: #0b0b0b"></label>
+									<div id="ratingTrainerProfile"></div>
 								</div>
 							</div>
 						</div>

@@ -33,6 +33,9 @@
 	<link rel="stylesheet" href="/assets/css/style.css" type="text/css"/>
 	<link rel="stylesheet" href="/assets/css/popup.css" type="text/css"/>
 	<link rel="stylesheet" href="/assets/css/login.css" type="text/css">
+
+	<script src="/assets/js/jquery-3.3.1.min.js"></script>
+	<script src="/assets/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -47,9 +50,29 @@
 <jsp:include page="popup/access_error.jsp"/>
 <jsp:include page="popup/login.jsp"/>
 
-<c:if test="${confirmedAccount!=null}">
-        <a href="#popupConfirmed" id="popRef"></a>
-		<script>document.getElementById("popRef").click();</script>
+<c:if test="${incorrectLoginPassword==true}">
+	<script>$('#modalLogin').modal('show');</script>
+	<c:set scope="session" var="incorrectLoginPassword" value="${null}"/>
+</c:if>
+
+<c:if test="${confirmedAccount==true}">
+	<script>$('#modalConfirmed').modal('show');</script>
+	<c:set scope="session" var="confirmedAccount" value="${null}"/>
+</c:if>
+
+<c:if test="${confirmationSent==true}">
+	<script>$('#modalConfirmationSent').modal('show');</script>
+	<c:set scope="session" var="confirmationSent" value="${null}"/>
+</c:if>
+
+<c:if test="${loginEmailExists==true}">
+	<script>$('#modalLogin').modal('show'); $('#tab-2').click();</script>
+	<c:set scope="session" var="loginEmailExists" value="${null}"/>
+</c:if>
+
+<c:if test="${accessError==true}">
+	<script>$('#modalAccessError').modal('show');</script>
+	<c:set scope="session" var="accessError" value="${null}"/>
 </c:if>
 
 <!-- Hero Section Begin -->
@@ -919,8 +942,6 @@
 <!-- Search model end -->
 
 <!-- Js Plugins -->
-<script src="/assets/js/jquery-3.3.1.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/jquery.magnific-popup.min.js"></script>
 <script src="/assets/js/mixitup.min.js"></script>
 <script src="/assets/js/jquery.slicknav.js"></script>

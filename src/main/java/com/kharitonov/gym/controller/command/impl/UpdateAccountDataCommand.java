@@ -33,10 +33,10 @@ public class UpdateAccountDataCommand implements ActionCommand {
             } else {
                 session.setAttribute(SessionAttributeName.INCORRECT_EMAIL_FORMAT, true);
             }
-            page = ServletPath.PERSONAL_ACCOUNT;
+            page = ProjectPage.PERSONAL_ACCOUNT.getServletCommand();
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = PagePath.ERROR_404;
+            page = ProjectPage.ERROR_404.getDirectUrl();
         }
         return page;
     }

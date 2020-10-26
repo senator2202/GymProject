@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.PagePath;
-import com.kharitonov.gym.controller.command.RequestAttributeName;
-import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.service.TrainerApplicationService;
@@ -36,6 +33,6 @@ public class ApproveTrainerApplicationCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return PagePath.ADMIN_MAIN;
+        return ProjectPage.ADMIN_MAIN.getServletCommand();
     }
 }

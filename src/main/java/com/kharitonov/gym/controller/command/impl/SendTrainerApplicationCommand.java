@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 
 public class SendTrainerApplicationCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(SendTrainerApplicationCommand.class);
@@ -34,6 +35,9 @@ public class SendTrainerApplicationCommand implements ActionCommand {
             LOGGER.error(e);
             request.setAttribute(RequestAttributeName.APPLICATION_RESULT, false);
         }
-        return PagePath.PERSONAL_PROFILE;
+        String prevPage = getPreviousPage(request);
+        ProjectPage page = Arrays.stream(ProjectPage.values())
+                .filter(p->p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.PERSONAL_ACCOUNT);
+        return page.getServletCommand();
     }
 }

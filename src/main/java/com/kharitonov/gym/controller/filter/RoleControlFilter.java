@@ -111,7 +111,8 @@ public class RoleControlFilter implements Filter {
                 List<UserRole> roles = ROLE_MAP.get(command);
                 if (!roles.contains(role)) {
                     LOGGER.warn("Filter interception: '{}' attempted to execute '{}' command ", role, command);
-                    response.sendRedirect(request.getContextPath() + PagePath.INDEX_ACCESS_ERROR);
+                    request.getSession().setAttribute(SessionAttributeName.ACCESS_ERROR, true);
+                    response.sendRedirect(ProjectPage.INDEX.getDirectUrl());
                 } else {
                     String url = request.getRequestURI();
                     RequestDispatcher dispatcher = request.getRequestDispatcher(url);
@@ -119,7 +120,7 @@ public class RoleControlFilter implements Filter {
                 }
             } else {
                 LOGGER.warn("Filter interception: attemption to execute invalid command!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher(ServletPath.INVALID);
+                RequestDispatcher dispatcher = request.getRequestDispatcher(ProjectPage.ERROR_404.getDirectUrl());
                 dispatcher.forward(request, response);
                 chain.doFilter(request, response);
             }

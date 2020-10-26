@@ -25,13 +25,14 @@
 	<link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
 	<link rel="stylesheet" href="/assets/css/select-list.css"/>
 	<link href="../assets/css/img-upload.css" rel="stylesheet"/>
-	<link href="../assets/css/simple-rating.css" rel="stylesheet"/>
+	<link href="../assets/css/rating.css" rel="stylesheet"/>
 
 	<script src="/assets/js/jquery-3.3.1.min.js"></script>
 	<script src="/assets/js/bootstrap.min.js"></script>
 	<script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
 	<script src="/assets/js/img-upload.js"></script>
-	<script src="/assets/js/simple-rating.js"></script>
+	<script src="/assets/js/rating.js"></script>
+	<script src="/assets/js/modal-data.js"></script>
 </head>
 <body>
 <jsp:include page="popup/client_profile.jsp"/>
@@ -112,10 +113,10 @@
 										<th>
 											<fmt:message key="admin_registrations.status"/>
 										</th>
-										<th>
+										<th width="20">
 
 										</th>
-										<th>
+										<th width="20">
 
 										</th>
 										</thead>
@@ -157,37 +158,6 @@
 												<td class="td-actions text-right">
                                                     <fmt:message key="admin_feedbacks.openProfile" var="openProfile"/>
 													<ctg:profile-button user="${user}" tooltip="${openProfile}"/>
-                                                    <%--<c:if test="${user.account.role=='CLIENT'}">
-                                                        <button type="button" class="btn btn-info btn-round" title="${openProfile}"
-                                                                data-toggle="modal" data-target="#modalClientProfile"
-                                                                data-lastname="${user.lastName}"
-                                                                data-firstname="${user.firstName}"
-                                                                data-imagename="${user.imageName}"
-                                                                data-email="${user.account.email}"
-                                                                data-phone="${user.phoneNumber}"
-                                                                data-role="${user.account.role}"
-                                                                data-moneybalance="${user.moneyBalance}"
-                                                                data-personaldiscount="${user.personalDiscount}"
-                                                                data-boughttrainings="${user.boughtTrainings}">
-                                                            <i class="material-icons">person</i>
-                                                        </button>
-                                                    </c:if>
-													<c:if test="${user.account.role=='TRAINER'}">
-														<button type="button" class="btn btn-info btn-round" title="${openProfile}"
-														        data-toggle="modal" data-target="#modalTrainerProfile"
-														        data-lastname="${user.lastName}"
-														        data-firstname="${user.firstName}"
-														        data-imagename="${user.imageName}"
-														        data-email="${user.account.email}"
-														        data-phone="${user.phoneNumber}"
-														        data-role="${user.account.role}"
-														        data-institution="${user.institution}"
-														        data-graduationyear="${user.graduationYear}"
-														        data-instagramLink="${user.instagramLink}"
-														        data-rating="${user.rating}">
-															<i class="material-icons">person</i>
-														</button>
-													</c:if>--%>
 												</td>
 												<td class="td-actions text-right">
 													<c:if test="${user.account.isActive==true && user.account.role!='ADMIN'}">

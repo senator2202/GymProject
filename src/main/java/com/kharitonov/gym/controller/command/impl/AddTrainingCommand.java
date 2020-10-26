@@ -27,10 +27,6 @@ public class AddTrainingCommand implements ActionCommand {
         String name = request.getParameter(RequestParameterName.TRAINER);
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
         int boughtTrainings = client.getBoughtTrainings();
-        if (boughtTrainings == 0) {
-            LOGGER.error("Client '{}' trying to add training when 0 trainings bought", client.getAccount().getId());
-            return ServletPath.SCHEDULE_ADD_ERROR;
-        }
         int userId = client.getAccount().getId();
         String stringDate = request.getParameter(RequestParameterName.TRAINING_DATE);
         Date date = Date.valueOf(stringDate);
@@ -47,6 +43,6 @@ public class AddTrainingCommand implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return ServletPath.SCHEDULE;
+        return ProjectPage.SCHEDULE.getServletCommand();
     }
 }

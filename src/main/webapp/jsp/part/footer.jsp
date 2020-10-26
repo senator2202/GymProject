@@ -46,12 +46,12 @@
 										<input type="text" placeholder="Name" name="senderName" id="senderName">
 									</div>
 									<div class="col-lg-6">
-										<input type="text" placeholder="Email" name="senderEmail" id="senderEmail">
+										<input type="email" placeholder="Email" name="senderEmail" id="senderEmail" required>
 									</div>
 									<div class="col-lg-12">
 										<input type="text" name="feedbackSubject"
 										       placeholder="Subject" id="feedbackSubject">
-										<textarea name="feedbackMessage" id="feedbackMessage"
+										<textarea name="feedbackMessage" id="feedbackMessage" required
 												placeholder="Message"></textarea>
 										<button type="submit" onclick="clearForm()">Submit <i
 												class="ti-angle-double-right"></i>

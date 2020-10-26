@@ -6,8 +6,6 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
-
 <div class="modal fade" id="modalFeedbackReply" role="dialog">
 	<div class="modal-dialog modal-dialog-centered">
 		<!-- Modal content-->
@@ -25,11 +23,11 @@
 							<input type="hidden" name="feedbackId" id="feedbackId">
 							<div class="form-group">
 								<label for="replyEmail"><fmt:message key="feedback_reply.replyTo"/></label>
-								<input type="email" class="form-control" id="replyEmail" name="replyEmail"  style="background-color: #fff;" readonly>
+								<input type="email" class="form-control" id="replyEmail" name="replyEmail" style="background-color: #fff;" readonly>
 							</div>
 							<div class="form-group">
 								<label for="replyEmail"><fmt:message key="feedback_reply.subject"/></label>
-								<input type="text" class="form-control" id="replySubject" name="replySubject"  style="background-color: #fff;" readonly>
+								<input type="text" class="form-control" id="replySubject" name="replySubject" style="background-color: #fff;" readonly>
 							</div>
 							<div class="form-group">
 								<label for="replyMessage"><fmt:message key="feedback_reply.message"/></label>
@@ -43,5 +41,3 @@
 		</div>
 	</div>
 </div>
-
-<script src="/assets/js/modal-data.js"></script>

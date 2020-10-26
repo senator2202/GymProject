@@ -43,13 +43,7 @@
 										<th>
 											<fmt:message key="schedule_trainer.description"/>
 										</th>
-										<th width="20">
-
-										</th>
-										<th width="20">
-
-										</th>
-										<th width="20">
+										<th width="100">
 
 										</th>
 										</thead>
@@ -71,7 +65,7 @@
 													          rows="2" readonly>${training.description}
 													</textarea>
 												</td>
-												<td>
+												<td class="td-actions justify-content-between">
 													<fmt:message key="schedule_trainer.tooltipEdite" var="editTraining"/>
 													<button type="submit" rel="tooltip" class="btn btn-outline-primary btn-round"
 													        data-toggle="modal" data-target="#modalDescription" title="<fmt:message key='schedule_client.tooltipEdit'/>"
@@ -79,19 +73,15 @@
 													        data-trainingdescription="${training.description}">
 														<i class="material-icons">edit</i>
 													</button>
-												</td>
-												<td>
 													<form action="/mainController" method="post">
 														<input type="hidden" name="command" value="set_training_done"/>
 														<input type="hidden" name="trainingId" value="${training.trainingId}"/>
 														<button type="submit" rel="tooltip" data-toggle="tooltip"
-														        title="<fmt:message key="schedule_trainer.complete"/>"
-														        class="btn btn-outline-success btn-round">
+																title="<fmt:message key="schedule_trainer.complete"/>"
+																class="btn btn-outline-success btn-round">
 															<i class="material-icons">done</i>
 														</button>
 													</form>
-												</td>
-												<td>
 													<fmt:message key="schedule_trainer.cancel" var="cancel"/>
 													<ctg:cancel-button trainingId="${training.trainingId}" tooltip="${cancel}"/>
 												</td>
@@ -137,8 +127,8 @@
 												<td>
 													<textarea class="form-control" placeholder="<fmt:message key="schedule_client.notReady"/>" rows="2" readonly>${training.description}</textarea>
 												</td>
-												<td>
-													<ctg:rating value="${training.rating}"/>
+												<td class="td-actions" style="display: table-cell">
+													<div class="ratingView" data-score="${training.rating}"></div>
 												</td>
 											</tr>
 										</c:forEach>

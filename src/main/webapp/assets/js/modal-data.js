@@ -41,7 +41,11 @@ $('#modalTrainerProfile').on('show.bs.modal', function (e) {
     modal.find('#institutionText').text(institution);
     modal.find('#graduationText').text(graduationYear);
     modal.find('#instagramText').text(instagramLink);
-    modal.find('#ratingText').text(rating);
+    $('#ratingTrainerProfile').raty({
+        readOnly: true,
+        score: rating,
+        half: true
+    });
 });
 
 $('#modalFeedbackReply').on('show.bs.modal', function (e) {
@@ -81,21 +85,3 @@ $('#modalDescription').on('show.bs.modal', function (e) {
     modal.find('#trainingId').val(trainingId);
     modal.find('#trainingDescription').val(trainingDescription);
 });
-
-$(document).ready(function(){
-    $('.rating').rating();
-});
-
-function setStars(rating) {
-    var stars=$('#ratingInput').next().children();
-    for(var i=0;i<5;i++){
-        var starObj=$('#ratingInput').next().children()[i];
-        if(i<rating){
-            $(starObj).removeClass('fa-star-o');
-            $(starObj).addClass('fa-star');
-        }else{
-            $(starObj).addClass('fa-star-o');
-            $(starObj).removeClass('fa-star');
-        }
-    }
-}

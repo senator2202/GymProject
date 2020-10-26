@@ -75,10 +75,7 @@
                                         <th>
                                             <fmt:message key="schedule_client.description"/>
                                         </th>
-                                        <th>
-
-                                        </th>
-                                        <th>
+                                        <th width="50">
 
                                         </th>
                                         </thead>
@@ -97,7 +94,7 @@
                                                 <td>
                                                     <textarea class="form-control" placeholder="<fmt:message key="schedule_client.notReady"/>" rows="2" readonly>${training.description}</textarea>
                                                 </td>
-                                                <td class="td-actions text-right">
+                                                <td class="td-actions justify-content-between align-middle">
                                                     <button type="submit" rel="tooltip" class="btn btn-outline-primary btn-round"
                                                             data-toggle="modal" data-target="#modalEditTraining" title="<fmt:message key='schedule_client.tooltipEdit'/>"
                                                             data-trainingid="${training.trainingId}"
@@ -106,8 +103,6 @@
                                                             data-trainingtime="${training.time}">
                                                         <i class="material-icons">edit</i>
                                                     </button>
-                                                </td>
-                                                <td class="td-actions text-right">
                                                     <fmt:message key="schedule_client.tooltipCancel" var="cancel"/>
                                                     <ctg:cancel-button trainingId="${training.trainingId}" tooltip="${cancel}"/>
                                                 </td>
@@ -162,7 +157,8 @@
                                                     <textarea class="form-control" placeholder="<fmt:message key="schedule_client.notReady"/>" rows="2" readonly>${training.description}</textarea>
                                                 </td>
                                                 <td>
-                                                    <ctg:rating value="${training.rating}"/>
+                                                    <div class="ratingView" data-score="${training.rating}"></div>
+                                                    <%--<ctg:rating value="${training.rating}"/>--%>
                                                 </td>
                                                 <td class="td-actions text-right">
                                                     <button type="submit" rel="tooltip" class="btn btn-outline-primary btn-round"

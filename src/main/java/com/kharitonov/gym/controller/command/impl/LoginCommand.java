@@ -33,9 +33,9 @@ public class LoginCommand implements ActionCommand {
                 HttpSession session = request.getSession();
                 session.setAttribute(SessionAttributeName.USER, user);
                 if (user.getAccount().getRole() != UserRole.ADMIN) {
-                    page = PagePath.INDEX;
+                    page = ProjectPage.INDEX.getDirectUrl();
                 } else {
-                    page = ServletPath.ADMIN_MAIN;
+                    page = ProjectPage.ADMIN_MAIN.getServletCommand();
                 }
                 clearSessionAttributesExceptUser(request);
             } else {
@@ -44,11 +44,11 @@ public class LoginCommand implements ActionCommand {
                     request.getSession().setAttribute(entry.getKey(), entry.getValue());
                 }
                 request.getSession().setAttribute(SessionAttributeName.INCORRECT_LOGIN_PASSWORD, true);
-                page = PagePath.INDEX_LOGIN;
+                page = ProjectPage.INDEX.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = PagePath.ERROR_404;
+            page = ProjectPage.ERROR_404.getDirectUrl();
         }
         return page;
     }

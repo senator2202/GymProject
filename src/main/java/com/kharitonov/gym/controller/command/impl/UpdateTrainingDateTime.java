@@ -1,6 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.ServletPath;
 import com.kharitonov.gym.exception.ServiceException;
@@ -25,6 +26,6 @@ public class UpdateTrainingDateTime implements ActionCommand {
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
-        return ServletPath.SCHEDULE;
+        return ProjectPage.SCHEDULE.getServletCommand();
     }
 }

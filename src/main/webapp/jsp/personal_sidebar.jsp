@@ -4,12 +4,13 @@
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
+<jsp:include page="/jsp/popup/trainer_application.jsp"/>
+
 <div class="sidebar" data-color="purple" data-background-color="white">
     <div class="logo">
         <a class="simple-text logo-normal">
             ${user.firstName} ${user.lastName}
         </a>
-
     </div>
 
     <div class="sidebar-wrapper">
@@ -30,29 +31,44 @@
                     </div>
                 </form>
             </li>
-            <li class="${activeTab == 'personalDataTab' ? 'nav-item active' : 'nav-item'}">
-                <a class="nav-link" href="/mainController?command=open_personal_data" >
-                    <p><fmt:message key="personal_profile.personalData"/></p>
-                </a>
+            <li class="nav-item">
+                <form action="/mainController">
+                    <input type="hidden" name="command" value="open_personal_data">
+                    <button type="submit"
+                            class="${activeTab=='personalDataTab' ? 'btn btn-primary btn-round' : 'btn btn-outline-primary btn-round'}"
+                            style="width: 220px">
+                        <fmt:message key="personal_profile.personalData"/>
+                    </button>
+                </form>
             </li>
             <li class="nav-item">
-            <li class="${activeTab == 'personalAccountTab' ? 'nav-item active' : 'nav-item'}">
-                <a class="nav-link" href="/mainController?command=open_personal_account">
-                    <p><fmt:message key="personal_profile.accountData"/></p>
-                </a>
+                <form action="/mainController">
+                    <input type="hidden" name="command" value="open_personal_account">
+                    <button type="submit"
+                            class="${activeTab=='personalAccountTab' ? 'btn btn-primary btn-round' : 'btn btn-outline-primary btn-round'}"
+                            style="width: 220px">
+                        <fmt:message key="personal_profile.accountData"/>
+                    </button>
+                </form>
             </li>
             <c:if test="${sessionScope.user.account.role=='CLIENT'}">
-                <li class="${activeTab == 'personalFinanceTab' ? 'nav-item active' : 'nav-item'}">
-                    <a class="nav-link" href="/mainController?command=open_personal_finance">
-                        <p><fmt:message key="personal_profile.finance"/></p>
-                    </a>
+                <li class="nav-item">
+                    <form action="/mainController">
+                        <input type="hidden" name="command" value="open_personal_finance">
+                        <button type="submit"
+                                class="${activeTab=='personalFinanceTab' ? 'btn btn-primary btn-round' : 'btn btn-outline-primary btn-round'}"
+                                style="width: 220px">
+                            <fmt:message key="personal_profile.finance"/>
+                        </button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-outline-primary btn-round"
+                            data-toggle="modal" data-target="#modalTrainerApplication">
+                            BECOME TRAINER
+                    </button>
                 </li>
             </c:if>
-            <li class="${activeTab == 'personalPhotoGalleryTab' ? 'nav-item active' : 'nav-item'}">
-                <a class="nav-link" href="#">
-                    <p><fmt:message key="personal_profile.photoGallery"/></p>
-                </a>
-            </li>
         </ul>
     </div>
 </div>
