@@ -7,9 +7,8 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<jsp:include page="popup/edit_description.jsp"/>
+<jsp:include page="/jsp/popup/edit_description.jsp"/>
 
-<!-- Client Schedule Section Begin -->
 <section class="trainer-schedule class-timetable spad">
 	<div class="container-fluid">
 		<div class="row">
@@ -144,10 +143,3 @@
 		</div>
 	</div>
 </section>
-
-<script>
-    function updateDescriptionOnClick(descr, trId) {
-        document.getElementById('trainingDescription').innerText = descr;
-        document.getElementById('trainingId').setAttribute('value', trId);
-    }
-</script>

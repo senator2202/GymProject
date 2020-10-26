@@ -119,9 +119,6 @@
 		</div>
 	</div>
 </div>
-
 <script src="/assets/js/modal-data.js"></script>
-
 </body>
-
 </html>

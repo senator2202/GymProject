@@ -14,13 +14,13 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/themify-icons.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
         <div class="loader"></div>
     </div>
 
-    <jsp:include page="part/header_black.jsp"/>
+    <jsp:include page="/jsp/part/header_black.jsp"/>
 
     <!-- Site Breadcrumb Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="../assets/img/about-breadcrumb-bg.jpg">

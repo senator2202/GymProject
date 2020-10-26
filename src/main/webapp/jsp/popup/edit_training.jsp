@@ -7,7 +7,6 @@
 
 <div class="modal fade" id="modalEditTraining" role="dialog">
 	<div class="modal-dialog modal-dialog-centered">
-		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title w-100 text-center">
@@ -33,7 +32,8 @@
 							<div class="form-group">
 								<input type="time" name="trainingTime" id="trainingTime"/>
 							</div>
-							<button type="submit" class="btn btn-primary mb-2"><fmt:message key="edit_training.edit"/></button>
+							<button type="submit" class="btn btn-primary mb-2"><fmt:message
+									key="edit_training.edit"/></button>
 						</form>
 					</div>
 				</div>

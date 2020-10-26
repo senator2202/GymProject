@@ -44,11 +44,11 @@
 	<div class="loader"></div>
 </div>
 
-<jsp:include page="part/header.jsp"/>
-<jsp:include page="popup/confirm_sent.jsp"/>
-<jsp:include page="popup/confirmed.jsp"/>
-<jsp:include page="popup/access_error.jsp"/>
-<jsp:include page="popup/login.jsp"/>
+<jsp:include page="/jsp/part/header.jsp"/>
+<jsp:include page="/jsp/popup/confirm_sent.jsp"/>
+<jsp:include page="/jsp/popup/confirmed.jsp"/>
+<jsp:include page="/jsp/popup/access_error.jsp"/>
+<jsp:include page="/jsp/popup/login.jsp"/>
 
 <c:if test="${incorrectLoginPassword==true}">
 	<script>$('#modalLogin').modal('show');</script>
@@ -75,7 +75,6 @@
 	<c:set scope="session" var="accessError" value="${null}"/>
 </c:if>
 
-<!-- Hero Section Begin -->
 <section class="hero-section">
 	<div class="hero-items owl-carousel">
 		<div class="single-hero-item set-bg" data-setbg="assets/img/slider-bg-1.jpg">

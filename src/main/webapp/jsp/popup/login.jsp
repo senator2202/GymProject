@@ -7,7 +7,6 @@
 
 <div class="modal fade" id="modalLogin" role="dialog">
 	<div class="modal-dialog modal-dialog-centered">
-		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-body">
 				<div class="login-wrap">
@@ -53,7 +52,6 @@
 									<div class="hr"></div>
 								</div>
 							</form>
-
 							<form action="/mainController" method="post" class="needs-validation" novalidate
 							      id="regForm">
 								<div class="sign-up-htm">

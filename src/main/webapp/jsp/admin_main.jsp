@@ -28,12 +28,11 @@
 	<script src="/assets/js/jquery-3.3.1.min.js"></script>
 	<script src="/assets/js/bootstrap.min.js"></script>
 	<script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
-	<script src="/assets/js/img-upload.js"></script>
 
 </head>
 
 <body>
-<jsp:include page="popup/client_profile.jsp"/>
+<jsp:include page="/jsp/popup/client_profile.jsp"/>
 <div class="wrapper ">
 	<jsp:include page="/jsp/admin_sidebar.jsp"/>
 	<div class="main-panel">
@@ -151,6 +150,8 @@
 		</div>
 	</div>
 </div>
+<script src="/assets/js/img-upload.js"></script>
+<script src="/assets/js/rating.js"></script>
+<script src="/assets/js/modal-data.js"></script>
 </body>
-
 </html>

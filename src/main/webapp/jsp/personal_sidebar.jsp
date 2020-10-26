@@ -12,7 +12,6 @@
             ${user.firstName} ${user.lastName}
         </a>
     </div>
-
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li class="nav-item">
@@ -65,7 +64,7 @@
                 <li class="nav-item">
                     <button type="button" class="btn btn-outline-primary btn-round"
                             data-toggle="modal" data-target="#modalTrainerApplication">
-                            BECOME TRAINER
+                           <fmt:message key="personal_profile.becomeTrainer"/>
                     </button>
                 </li>
             </c:if>

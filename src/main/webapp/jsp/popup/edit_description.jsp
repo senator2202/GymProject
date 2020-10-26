@@ -11,7 +11,6 @@
 
 <div class="modal fade" id="modalDescription" role="dialog">
 	<div class="modal-dialog modal-dialog-centered">
-		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title w-100 text-center">
@@ -29,7 +28,8 @@
 								          name="trainingDescription">
 								</textarea>
 							</div>
-							<button type="submit" class="btn btn-primary mb-2"><fmt:message key="edit_description.save"/></button>
+							<button type="submit" class="btn btn-primary mb-2"><fmt:message
+									key="edit_description.save"/></button>
 						</form>
 					</div>
 				</div>

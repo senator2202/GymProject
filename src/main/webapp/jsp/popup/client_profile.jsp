@@ -6,11 +6,8 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
-
 <div class="modal fade" id="modalClientProfile" role="dialog">
 	<div class="modal-dialog modal-dialog-centered">
-		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title w-100 text-center">
@@ -83,5 +80,3 @@
 		</div>
 	</div>
 </div>
-
-<script src="/assets/js/modal-data.js"></script>

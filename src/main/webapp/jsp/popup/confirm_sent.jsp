@@ -10,7 +10,8 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title w-100 text-center">
-					<label class="label" style="font-size: large"><fmt:message key="confirm_sent.message"/> ${user.account.email}</label>
+					<label class="label" style="font-size: large"><fmt:message
+							key="confirm_sent.message"/> ${user.account.email}</label>
 				</h5>
 			</div>
 		</div>

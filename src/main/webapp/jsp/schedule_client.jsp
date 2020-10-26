@@ -158,7 +158,6 @@
                                                 </td>
                                                 <td>
                                                     <div class="ratingView" data-score="${training.rating}"></div>
-                                                    <%--<ctg:rating value="${training.rating}"/>--%>
                                                 </td>
                                                 <td class="td-actions text-right">
                                                     <button type="submit" rel="tooltip" class="btn btn-outline-primary btn-round"

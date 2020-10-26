@@ -8,7 +8,6 @@
 
 <div class="modal fade" id="modalFeedbackReply" role="dialog">
 	<div class="modal-dialog modal-dialog-centered">
-		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title w-100 text-center">
@@ -23,17 +22,21 @@
 							<input type="hidden" name="feedbackId" id="feedbackId">
 							<div class="form-group">
 								<label for="replyEmail"><fmt:message key="feedback_reply.replyTo"/></label>
-								<input type="email" class="form-control" id="replyEmail" name="replyEmail" style="background-color: #fff;" readonly>
+								<input type="email" class="form-control" id="replyEmail" name="replyEmail"
+								       style="background-color: #fff;" readonly>
 							</div>
 							<div class="form-group">
 								<label for="replyEmail"><fmt:message key="feedback_reply.subject"/></label>
-								<input type="text" class="form-control" id="replySubject" name="replySubject" style="background-color: #fff;" readonly>
+								<input type="text" class="form-control" id="replySubject" name="replySubject"
+								       style="background-color: #fff;" readonly>
 							</div>
 							<div class="form-group">
 								<label for="replyMessage"><fmt:message key="feedback_reply.message"/></label>
-								<textarea class="form-control" id="replyMessage" name="replyMessage" rows="3"></textarea>
+								<textarea class="form-control" id="replyMessage" name="replyMessage"
+								          rows="3"></textarea>
 							</div>
-							<button type="submit" class="btn btn-primary mb-2"><fmt:message key="feedback_reply.send"/></button>
+							<button type="submit" class="btn btn-primary mb-2"><fmt:message
+									key="feedback_reply.send"/></button>
 						</form>
 					</div>
 				</div>

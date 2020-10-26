@@ -29,7 +29,7 @@
         <div class="loader"></div>
     </div>
 
-    <jsp:include page="part/header_black.jsp"/>
+    <jsp:include page="/jsp/part/header_black.jsp"/>
 
     <!-- Site Breadcrumb Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="../assets/img/about-breadcrumb-bg.jpg">

@@ -5,14 +5,13 @@
 <fmt:setBundle basename="property/pagecontent"/>
 
 <div class="modal fade" id="modalAddError" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center">
-                    <fmt:message key="add_training_error.message"/>
-                </h5>
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title w-100 text-center">
+					<fmt:message key="add_training_error.message"/>
+				</h5>
+			</div>
+		</div>
+	</div>
 </div>

@@ -23,17 +23,17 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-    <link href="../assets/css/style.css" rel="stylesheet" />
-    <link href="../assets/css/slicknav.min.css" rel="stylesheet" />
-    <link href="../assets/css/select-list.css" rel="stylesheet" />
-    <link href="../assets/css/img-upload.css" rel="stylesheet" />
+    <link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/slicknav.min.css" rel="stylesheet" />
+    <link href="/assets/css/select-list.css" rel="stylesheet" />
+    <link href="/assets/css/img-upload.css" rel="stylesheet" />
 
 </head>
 
 <body>
 
-<jsp:include page="part/header_black_no_logo.jsp"/>
+<jsp:include page="/jsp/part/header_black_no_logo.jsp"/>
 
 <div class="wrapper">
     <jsp:include page="/jsp/personal_sidebar.jsp"/>
