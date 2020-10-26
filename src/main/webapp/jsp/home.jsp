@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
                scope="session"/>
@@ -50,30 +51,7 @@
 <jsp:include page="/jsp/popup/access_error.jsp"/>
 <jsp:include page="/jsp/popup/login.jsp"/>
 
-<c:if test="${incorrectLoginPassword==true}">
-	<script>$('#modalLogin').modal('show');</script>
-	<c:set scope="session" var="incorrectLoginPassword" value="${null}"/>
-</c:if>
-
-<c:if test="${confirmedAccount==true}">
-	<script>$('#modalConfirmed').modal('show');</script>
-	<c:set scope="session" var="confirmedAccount" value="${null}"/>
-</c:if>
-
-<c:if test="${confirmationSent==true}">
-	<script>$('#modalConfirmationSent').modal('show');</script>
-	<c:set scope="session" var="confirmationSent" value="${null}"/>
-</c:if>
-
-<c:if test="${loginEmailExists==true}">
-	<script>$('#modalLogin').modal('show'); $('#tab-2').click();</script>
-	<c:set scope="session" var="loginEmailExists" value="${null}"/>
-</c:if>
-
-<c:if test="${accessError==true}">
-	<script>$('#modalAccessError').modal('show');</script>
-	<c:set scope="session" var="accessError" value="${null}"/>
-</c:if>
+<ctg:message/>
 
 <section class="hero-section">
 	<div class="hero-items owl-carousel">

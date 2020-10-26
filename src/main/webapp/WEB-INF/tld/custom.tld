@@ -66,4 +66,10 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>message</name>
+        <tag-class>com.kharitonov.gym.controller.tag.MessageTag</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+
 </taglib>
