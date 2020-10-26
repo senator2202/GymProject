@@ -37,7 +37,7 @@ public class SendTrainerApplicationCommand implements ActionCommand {
         }
         String prevPage = getPreviousPage(request);
         ProjectPage page = Arrays.stream(ProjectPage.values())
-                .filter(p->p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.PERSONAL_ACCOUNT);
+                .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.PERSONAL_ACCOUNT);
         return page.getServletCommand();
     }
 }

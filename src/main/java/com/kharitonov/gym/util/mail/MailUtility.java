@@ -1,7 +1,6 @@
 package com.kharitonov.gym.util.mail;
 
 import com.kharitonov.gym.exception.PropertyReaderException;
-import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.util.PropertiesPath;
 import com.kharitonov.gym.util.PropertiesReader;
 import org.apache.logging.log4j.LogManager;

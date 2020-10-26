@@ -22,7 +22,7 @@ public class ChangeAdminLocaleCommand implements ActionCommand {
         user.getAccount().setLocale(Account.AccountLocale.localeByPostfix(newLocale));
         String prevPage = getPreviousPage(request);
         ProjectPage page = Arrays.stream(ProjectPage.values())
-                .filter(p->p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.ADMIN_MAIN);
+                .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.ADMIN_MAIN);
         return page.getServletCommand();
     }
 }

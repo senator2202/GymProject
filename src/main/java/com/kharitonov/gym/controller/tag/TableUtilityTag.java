@@ -22,14 +22,14 @@ public class TableUtilityTag extends SimpleTagSupport {
         String locale = user.getAccount().getLocale().getPostfix();
         String script =
                 "<script>\n" +
-                "   $(document).ready(function () {\n" +
-                "       $('#" + tableId + "').DataTable({\n" +
-                "       \"order\": [[ " + order + ", \"" + direction +"\" ]],\n" +
-                "       \"language\": {\"url\": \"/assets/json/dataTables." + locale + ".json\"}\n" +
-                "       });\n" +
-                "       $('.dataTables_length').addClass('bs-select');\n" +
-                "   });\n" +
-                "</script>";
+                        "   $(document).ready(function () {\n" +
+                        "       $('#" + tableId + "').DataTable({\n" +
+                        "       \"order\": [[ " + order + ", \"" + direction + "\" ]],\n" +
+                        "       \"language\": {\"url\": \"/assets/json/dataTables." + locale + ".json\"}\n" +
+                        "       });\n" +
+                        "       $('.dataTables_length').addClass('bs-select');\n" +
+                        "   });\n" +
+                        "</script>";
         out.write(script);
     }
 

@@ -13,8 +13,7 @@ public enum ProjectPage {
     PERSONAL_ACCOUNT("/jsp/personal_account.jsp", "/mainController?command=open_personal_account"),
     PERSONAL_DATA("/jsp/personal_data.jsp", "/mainController?command=open_personal_data"),
     PERSONAL_FINANCE("/jsp/personal_finance.jsp", "/mainController?command=open_personal_finance"),
-    SCHEDULE("/jsp/schedule.jsp", "/mainController?command=open_schedule")
-    ;
+    SCHEDULE("/jsp/schedule.jsp", "/mainController?command=open_schedule");
 
     private String directUrl;
     private String servletCommand;

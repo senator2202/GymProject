@@ -1,6 +1,9 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.*;
+import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.RequestAttributeName;
+import com.kharitonov.gym.controller.command.RequestAttributeValue;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.service.TrainerApplicationService;

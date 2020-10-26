@@ -1,6 +1,9 @@
 package com.kharitonov.gym.controller.tag;
 
-import com.kharitonov.gym.model.entity.*;
+import com.kharitonov.gym.model.entity.Client;
+import com.kharitonov.gym.model.entity.Trainer;
+import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.model.entity.UserRole;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;

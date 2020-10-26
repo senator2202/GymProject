@@ -2,7 +2,6 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
-import com.kharitonov.gym.controller.command.ServletPath;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;

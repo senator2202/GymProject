@@ -14,6 +14,7 @@ import java.util.List;
 public class FeedbackServiceImpl implements FeedbackService {
     private static final FeedbackServiceImpl INSTANCE = new FeedbackServiceImpl();
     private static final String BLANK = "";
+
     public static FeedbackServiceImpl getInstance() {
         return INSTANCE;
     }

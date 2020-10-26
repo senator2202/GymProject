@@ -27,7 +27,7 @@ public class ConfirmAccountCommand implements ActionCommand {
                 User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
                 String email = optional.get();
                 request.setAttribute(RequestAttributeName.CONFIRMED_ACCOUNT, email);
-                if (user!=null) {
+                if (user != null) {
                     user.getAccount().setIsActive(true);
                 }
             }

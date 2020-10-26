@@ -1,6 +1,5 @@
 package com.kharitonov.gym.controller.filter;
 
-import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

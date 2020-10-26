@@ -1,6 +1,9 @@
 package com.kharitonov.gym.controller.filter;
 
-import com.kharitonov.gym.controller.command.*;
+import com.kharitonov.gym.controller.command.CommandType;
+import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import org.apache.logging.log4j.LogManager;
