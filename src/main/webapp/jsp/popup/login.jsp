@@ -49,6 +49,9 @@
 										<label style="color: red; font-size: medium"><fmt:message
 												key="login.incorrectLoginPassword"/></label>
 									</c:if>
+									<label style="color: red; font-size: medium; display: none" id="needLogin">
+										You need login first!
+									</label>
 									<div class="hr"></div>
 								</div>
 							</form>
