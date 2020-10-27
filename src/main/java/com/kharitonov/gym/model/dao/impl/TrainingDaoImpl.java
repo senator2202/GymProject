@@ -92,9 +92,11 @@ public class TrainingDaoImpl implements TrainingDao {
     }
 
     @Override
-    public void updateDateTime(int trainingId, Date trainingDate, Time trainingTime) throws DaoException {
+    public void updateTraining(int trainingId, Date trainingDate, Time trainingTime, String description)
+            throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = statementUpdateDateTime(connection, trainingDate, trainingTime, trainingId)) {
+             PreparedStatement statement =
+                     statementUpdateTraining(connection, trainingDate, trainingTime, description, trainingId)) {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

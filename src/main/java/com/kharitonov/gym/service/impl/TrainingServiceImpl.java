@@ -75,13 +75,13 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void updateDateTime(String trainingId, String trainingDate, String trainingTime) throws ServiceException {
+    public void updateTraining(String trainingId, String trainingDate, String trainingTime, String description) throws ServiceException {
         TrainingDao dao = new TrainingDaoImpl();
         int id = Integer.parseInt(trainingId);
         Date date = Date.valueOf(trainingDate);
         Time time = Time.valueOf(trainingTime + (trainingTime.length() == TIME_LENGTH ? BLANK : SECONDS_POSTFIX));
         try {
-            dao.updateDateTime(id, date, time);
+            dao.updateTraining(id, date, time, description);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

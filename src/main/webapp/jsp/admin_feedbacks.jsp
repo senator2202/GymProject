@@ -45,10 +45,7 @@
 								<div class="table-responsive">
 									<table id="feedTable" class="table" style="font-size: small">
 										<thead class=" text-primary">
-										<th>
-											<fmt:message key="admin_feedbacks.feedbackId"/>
-										</th>
-										<th width="80">
+										<th width="100">
 											<fmt:message key="admin_feedbacks.feedbackDate"/>
 										</th>
 										<th>
@@ -73,9 +70,6 @@
 										<tbody>
 										<c:forEach items="${feedbacks}" var="feedback">
 											<tr>
-												<td>
-														${feedback.id}
-												</td>
 												<td>
 														${feedback.date}
 												</td>

@@ -51,6 +51,7 @@ public class ProfileButtonTag extends SimpleTagSupport {
     private String userAttributes() {
         return "data-lastname=\"" + user.getLastName() + "\"\n" +
                 "data-firstname=\"" + user.getFirstName() + "\"\n" +
+                "data-userid=\"" + user.getAccount().getId() + "\"\n" +
                 "data-imagename=\"" + user.getImageName() + "\"\n" +
                 "data-email=\"" + user.getAccount().getEmail() + "\"\n" +
                 "data-phone=\"" + user.getPhoneNumber() + "\"\n" +

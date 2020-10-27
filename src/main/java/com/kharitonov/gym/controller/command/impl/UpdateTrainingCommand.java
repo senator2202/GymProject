@@ -11,8 +11,8 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class UpdateTrainingDateTime implements ActionCommand {
-    private static final Logger LOGGER = LogManager.getLogger(UpdateTrainingDateTime.class);
+public class UpdateTrainingCommand implements ActionCommand {
+    private static final Logger LOGGER = LogManager.getLogger(UpdateTrainingCommand.class);
     private final TrainingService service = TrainingServiceImpl.getInstance();
 
     @Override
@@ -20,8 +20,9 @@ public class UpdateTrainingDateTime implements ActionCommand {
         String id = request.getParameter(RequestParameterName.TRAINING_ID);
         String date = request.getParameter(RequestParameterName.TRAINING_DATE);
         String time = request.getParameter(RequestParameterName.TRAINING_TIME);
+        String description = request.getParameter(RequestParameterName.TRAINING_DESCRIPTION);
         try {
-            service.updateDateTime(id, date, time);
+            service.updateTraining(id, date, time, description);
         } catch (ServiceException e) {
             LOGGER.error(e);
         }

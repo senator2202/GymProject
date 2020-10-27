@@ -20,57 +20,6 @@ public class UserDaoImpl implements UserDao {
     private static final String BLANK = "";
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
-    static User create(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt(TableColumnName.ACCOUNT_ID);
-        String login = resultSet.getString(TableColumnName.ACCOUNT_LOGIN);
-        String email = resultSet.getString(TableColumnName.ACCOUNT_EMAIL);
-        String role = resultSet.getString(TableColumnName.ACCOUNT_ROLE);
-        UserRole userRole = UserRole.valueOf(role);
-        Date date = resultSet.getDate(TableColumnName.ACCOUNT_REGISTRATION_DATE);
-        String locale = resultSet.getString(TableColumnName.ACCOUNT_LOCALE);
-        Account.AccountLocale accountLocale = Account.AccountLocale.valueOf(locale);
-        boolean isActive = resultSet.getBoolean(TableColumnName.ACCOUNT_IS_ACTIVE);
-        String firstName = resultSet.getString(TableColumnName.USER_FIRST_NAME);
-        String lastName = resultSet.getString(TableColumnName.USER_LAST_NAME);
-        String phone = resultSet.getString(TableColumnName.USER_PHONE);
-        double discount = resultSet.getDouble(TableColumnName.USER_DISCOUNT);
-        int dietId = resultSet.getInt(TableColumnName.USER_DIET_ID);
-        String imageName = resultSet.getString(TableColumnName.USER_IMAGE);
-        double moneyBalance = resultSet.getDouble(TableColumnName.USER_MONEY_BALANCE);
-        int boughtTrainings = resultSet.getInt(TableColumnName.USER_BOUGHT_TRAININGS);
-        Account account = Account.AccountBuilder.anAccount()
-                .withId(id)
-                .withName(login)
-                .withEmail(email)
-                .withRole(userRole)
-                .withRegistrationDate(date)
-                .withLocale(accountLocale)
-                .withIsActive(isActive)
-                .build();
-        User user = null;
-        if (userRole == UserRole.CLIENT) {
-            user = new Client(account, firstName, lastName, phone);
-            ((Client) user).setPersonalDiscount(discount);
-            ((Client) user).setDietId(dietId);
-            ((Client) user).setMoneyBalance(moneyBalance);
-            ((Client) user).setBoughtTrainings(boughtTrainings);
-        } else if (userRole == UserRole.TRAINER) {
-            double rating = resultSet.getDouble(TableColumnName.USER_RATING);
-            String institution = resultSet.getString(TableColumnName.USER_INSTITUTION);
-            int graduation = resultSet.getInt(TableColumnName.USER_GRADUATION);
-            String instagram = resultSet.getString(TableColumnName.USER_INSTAGRAM);
-            user = new Trainer(account, firstName, lastName, phone);
-            ((Trainer) user).setRating(rating);
-            ((Trainer) user).setInstitution(institution);
-            ((Trainer) user).setInstagramLink(instagram);
-            ((Trainer) user).setGraduationYear(graduation);
-        } else if (userRole == UserRole.ADMIN) {
-            user = new User(account);
-        }
-        user.setImageName(imageName);
-        return user;
-    }
-
     @Override
     public void addUser(String login, String password, String email) throws DaoException {
         Connection connection = pool.getConnection();
@@ -423,5 +372,66 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
+    }
+
+    @Override
+    public void updateDiscount(int clientId, double discount) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementUpdateDiscount(connection, clientId, discount)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    static User create(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt(TableColumnName.ACCOUNT_ID);
+        String login = resultSet.getString(TableColumnName.ACCOUNT_LOGIN);
+        String email = resultSet.getString(TableColumnName.ACCOUNT_EMAIL);
+        String role = resultSet.getString(TableColumnName.ACCOUNT_ROLE);
+        UserRole userRole = UserRole.valueOf(role);
+        Date date = resultSet.getDate(TableColumnName.ACCOUNT_REGISTRATION_DATE);
+        String locale = resultSet.getString(TableColumnName.ACCOUNT_LOCALE);
+        Account.AccountLocale accountLocale = Account.AccountLocale.valueOf(locale);
+        boolean isActive = resultSet.getBoolean(TableColumnName.ACCOUNT_IS_ACTIVE);
+        String firstName = resultSet.getString(TableColumnName.USER_FIRST_NAME);
+        String lastName = resultSet.getString(TableColumnName.USER_LAST_NAME);
+        String phone = resultSet.getString(TableColumnName.USER_PHONE);
+        double discount = resultSet.getDouble(TableColumnName.USER_DISCOUNT);
+        int dietId = resultSet.getInt(TableColumnName.USER_DIET_ID);
+        String imageName = resultSet.getString(TableColumnName.USER_IMAGE);
+        double moneyBalance = resultSet.getDouble(TableColumnName.USER_MONEY_BALANCE);
+        int boughtTrainings = resultSet.getInt(TableColumnName.USER_BOUGHT_TRAININGS);
+        Account account = Account.AccountBuilder.anAccount()
+                .withId(id)
+                .withName(login)
+                .withEmail(email)
+                .withRole(userRole)
+                .withRegistrationDate(date)
+                .withLocale(accountLocale)
+                .withIsActive(isActive)
+                .build();
+        User user = null;
+        if (userRole == UserRole.CLIENT) {
+            user = new Client(account, firstName, lastName, phone);
+            ((Client) user).setPersonalDiscount(discount);
+            ((Client) user).setDietId(dietId);
+            ((Client) user).setMoneyBalance(moneyBalance);
+            ((Client) user).setBoughtTrainings(boughtTrainings);
+        } else if (userRole == UserRole.TRAINER) {
+            double rating = resultSet.getDouble(TableColumnName.USER_RATING);
+            String institution = resultSet.getString(TableColumnName.USER_INSTITUTION);
+            int graduation = resultSet.getInt(TableColumnName.USER_GRADUATION);
+            String instagram = resultSet.getString(TableColumnName.USER_INSTAGRAM);
+            user = new Trainer(account, firstName, lastName, phone);
+            ((Trainer) user).setRating(rating);
+            ((Trainer) user).setInstitution(institution);
+            ((Trainer) user).setInstagramLink(instagram);
+            ((Trainer) user).setGraduationYear(graduation);
+        } else if (userRole == UserRole.ADMIN) {
+            user = new User(account);
+        }
+        user.setImageName(imageName);
+        return user;
     }
 }

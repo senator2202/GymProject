@@ -267,4 +267,16 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void updateDiscount(String clientId, String personalDiscount) throws ServiceException {
+        UserDao dao = new UserDaoImpl();
+        try {
+            int id = Integer.parseInt(clientId);
+            double discount = Double.parseDouble(personalDiscount);
+            dao.updateDiscount(id, discount);
+        } catch (NumberFormatException | DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

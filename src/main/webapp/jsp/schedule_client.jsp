@@ -28,14 +28,16 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="site-text">
-                    <fmt:message key="schedule_client.yourBalance"/> ${user.moneyBalance} <fmt:message key="schedule_client.br"/>
+                    <fmt:message key="schedule_client.yourBalance"/> ${user.moneyBalance} <fmt:message
+                        key="schedule_client.br"/>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="site-text">
-                    <fmt:message key="schedule_client.youHave"/> ${user.boughtTrainings} <fmt:message key="schedule_client.boughtTrainings"/>
+                    <fmt:message key="schedule_client.youHave"/> ${user.boughtTrainings} <fmt:message
+                        key="schedule_client.boughtTrainings"/>
                 </div>
             </div>
         </div>
@@ -49,10 +51,12 @@
                         <h4 class="card-title text-center"><fmt:message key="schedule_client.tableTitle"/></h4>
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#plannedTab"><fmt:message key="schedule_client.planned"/></a>
+                                <a class="nav-link active" data-toggle="tab" href="#plannedTab"><fmt:message
+                                        key="schedule_client.planned"/></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#previousTab"><fmt:message key="schedule_client.previous"/></a>
+                                <a class="nav-link" data-toggle="tab" href="#previousTab"><fmt:message
+                                        key="schedule_client.previous"/></a>
                             </li>
                         </ul>
                     </div>
@@ -92,19 +96,25 @@
                                                         ${training.time}
                                                 </td>
                                                 <td>
-                                                    <textarea class="form-control" placeholder="<fmt:message key="schedule_client.notReady"/>" rows="2" readonly>${training.description}</textarea>
+                                                    <textarea class="form-control" style="background-color: white"
+                                                              placeholder="<fmt:message key="schedule_client.notReady"/>"
+                                                              rows="2" readonly>${training.description}</textarea>
                                                 </td>
                                                 <td class="td-actions justify-content-between align-middle">
-                                                    <button type="submit" rel="tooltip" class="btn btn-outline-primary btn-round"
-                                                            data-toggle="modal" data-target="#modalEditTraining" title="<fmt:message key='schedule_client.tooltipEdit'/>"
+                                                    <button type="submit" rel="tooltip"
+                                                            class="btn btn-outline-primary btn-round"
+                                                            data-toggle="modal" data-target="#modalEditTraining"
+                                                            title="<fmt:message key='schedule_client.tooltipEdit'/>"
                                                             data-trainingid="${training.trainingId}"
                                                             data-trainername="${training.trainerFirstName} ${training.trainerLastName}"
                                                             data-trainingdate="${training.date}"
-                                                            data-trainingtime="${training.time}">
+                                                            data-trainingtime="${training.time}"
+                                                            data-trainingdescription="${training.description}">
                                                         <i class="material-icons">edit</i>
                                                     </button>
                                                     <fmt:message key="schedule_client.tooltipCancel" var="cancel"/>
-                                                    <ctg:cancel-button trainingId="${training.trainingId}" tooltip="${cancel}"/>
+                                                    <ctg:cancel-button trainingId="${training.trainingId}"
+                                                                       tooltip="${cancel}"/>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -154,14 +164,18 @@
                                                         ${training.time}
                                                 </td>
                                                 <td>
-                                                    <textarea class="form-control" placeholder="<fmt:message key="schedule_client.notReady"/>" rows="2" readonly>${training.description}</textarea>
+                                                    <textarea class="form-control"
+                                                              placeholder="<fmt:message key="schedule_client.notReady"/>"
+                                                              rows="2" readonly>${training.description}</textarea>
                                                 </td>
                                                 <td>
                                                     <div class="ratingView" data-score="${training.rating}"></div>
                                                 </td>
                                                 <td class="td-actions text-right">
-                                                    <button type="submit" rel="tooltip" class="btn btn-outline-primary btn-round"
-                                                            data-toggle="modal" data-target="#modalRating" title="rate".
+                                                    <button type="submit" rel="tooltip"
+                                                            class="btn btn-outline-primary btn-round"
+                                                            data-toggle="modal" data-target="#modalRating" title="rate"
+                                                            .
                                                             data-trainingid="${training.trainingId}"
                                                             data-trainerid="${training.trainerId}">
                                                         <i class="material-icons">star_rate</i>

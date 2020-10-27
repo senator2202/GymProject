@@ -5,6 +5,7 @@ $('#modalClientProfile').on('show.bs.modal', function (e) {
     var phone = e.relatedTarget.dataset.phone;
     var role = e.relatedTarget.dataset.role;
     var email = e.relatedTarget.dataset.email;
+    var userId = e.relatedTarget.dataset.userid;
     var modal = $(this);
     modal.find('#roleInput').text(role);
     modal.find('#imagePreview').css("background-image", "url('" + imageName + "')");
@@ -12,11 +13,12 @@ $('#modalClientProfile').on('show.bs.modal', function (e) {
     modal.find('#emailText').text(email);
     modal.find('#phoneText').text(phone);
     modal.find('#roleText').text(role);
+    modal.find('#clientId').val(userId);
     var moneyBalance = e.relatedTarget.dataset.moneybalance;
     var personalDiscount = e.relatedTarget.dataset.personaldiscount;
     var boughtTrainings = e.relatedTarget.dataset.boughttrainings;
     modal.find('#moneyText').text(moneyBalance);
-    modal.find('#discountText').text(personalDiscount);
+    modal.find('#discountInput').val(personalDiscount);
     modal.find('#boughtText').text(boughtTrainings);
 });
 
@@ -63,11 +65,13 @@ $('#modalEditTraining').on('show.bs.modal', function (e) {
     var trainerName = e.relatedTarget.dataset.trainername;
     var trainingDate = e.relatedTarget.dataset.trainingdate;
     var trainingTime = e.relatedTarget.dataset.trainingtime;
+    var trainingDescription = e.relatedTarget.dataset.trainingdescription;
     var modal = $(this);
     modal.find('#trainingId').val(trainingId);
     modal.find('#trainerName').text(trainerName);
     modal.find('#trainingDate').val(trainingDate);
     modal.find('#trainingTime').val(trainingTime);
+    modal.find('#trainingDescription').val(trainingDescription);
 });
 
 $('#modalRating').on('show.bs.modal', function (e) {

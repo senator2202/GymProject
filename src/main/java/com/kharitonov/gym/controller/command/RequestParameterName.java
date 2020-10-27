@@ -43,6 +43,8 @@ public class RequestParameterName {
     public static final String TABLE_OFFSET = "offset";
     public static final String TOTAL_RECENT_USERS = "totalUsers";
     public static final String AMOUNT = "amount";
+    public static final String PERSONAL_DISCOUNT = "peronalDiscount";
+    public static final String CLIENT_ID = "clientId";
 
     private RequestParameterName() {
     }

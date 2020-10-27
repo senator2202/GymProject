@@ -6,6 +6,8 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
+<link href="/assets/css/quantity.css" rel="stylesheet" />
+
 <div class="modal fade" id="modalClientProfile" role="dialog">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -23,60 +25,71 @@
 							</div>
 						</div>
 					</div>
-					<div class="card-body">
-						<div class="container">
-							<div class="row">
-								<div class="col-lg-6">
-									<fmt:message key="client_profile.userType"/>
+					<form action="/mainController" method="post">
+						<input type="hidden" name="command" value="update_discount">
+						<input type="hidden" name="clientId" id="clientId">
+						<div class="card-body">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-6">
+										<fmt:message key="client_profile.userType"/>
+									</div>
+									<div class="col-lg-6">
+										<label id="roleText" style="color: #0b0b0b"></label>
+									</div>
 								</div>
-								<div class="col-lg-6">
-									<label id="roleText" style="color: #0b0b0b"></label>
+								<div class="row">
+									<div class="col-lg-6">
+										<fmt:message key="client_profile.email"/>
+									</div>
+									<div class="col-lg-6">
+										<label id="emailText" style="color: #0b0b0b"></label>
+									</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<fmt:message key="client_profile.email"/>
+								<div class="row">
+									<div class="col-lg-6">
+										<fmt:message key="client_profile.phone"/>
+									</div>
+									<div class="col-lg-6">
+										<label id="phoneText" style="color: #0b0b0b"></label>
+									</div>
 								</div>
-								<div class="col-lg-6">
-									<label id="emailText" style="color: #0b0b0b"></label>
+								<div class="row">
+									<div class="col-lg-6">
+										<fmt:message key="client_profile.balance"/> Br
+									</div>
+									<div class="col-lg-6">
+										<label id="moneyText" style="color: #0b0b0b"></label>
+									</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<fmt:message key="client_profile.phone"/>
+								<div class="row">
+									<div class="col-lg-6">
+										<fmt:message key="client_profile.trainings"/>
+									</div>
+									<div class="col-lg-6">
+										<label id="boughtText" style="color: #0b0b0b"></label>
+									</div>
 								</div>
-								<div class="col-lg-6">
-									<label id="phoneText" style="color: #0b0b0b"></label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<fmt:message key="client_profile.balance"/> Br
-								</div>
-								<div class="col-lg-6">
-									<label id="moneyText" style="color: #0b0b0b"></label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<fmt:message key="client_profile.discount"/>
-								</div>
-								<div class="col-lg-6">
-									<label id="discountText" style="color: #0b0b0b"></label> %
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<fmt:message key="client_profile.trainings"/>
-								</div>
-								<div class="col-lg-6">
-									<label id="boughtText" style="color: #0b0b0b"></label>
+								<div class="row">
+									<div class="col-lg-6">
+										<fmt:message key="client_profile.discount"/>
+									</div>
+									<div class="col-lg-6">
+										<div class="quantity">
+											<input name="peronalDiscount" id="discountInput" type="number" min="0" max="100" step="1"> %
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary mb-2">Сделать скидку</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script src="/assets/js/quantity.js"></script>

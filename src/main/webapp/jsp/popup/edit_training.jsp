@@ -17,7 +17,7 @@
 				<div class="card" style="margin-top: 0px; margin-bottom: 0px;">
 					<div class="card-body">
 						<form action="/mainController" method="post">
-							<input type="hidden" name="command" value="update_training_date_time">
+							<input type="hidden" name="command" value="update_training">
 							<input type="hidden" name="trainingId" id="trainingId">
 							<div class="form-group">
 								<div class="select">
@@ -31,6 +31,11 @@
 							</div>
 							<div class="form-group">
 								<input type="time" name="trainingTime" id="trainingTime"/>
+							</div>
+							<div class="form-group">
+								<textarea class="form-control" rows="4" id="trainingDescription"
+										  name="trainingDescription">
+								</textarea>
 							</div>
 							<button type="submit" class="btn btn-primary mb-2"><fmt:message
 									key="edit_training.edit"/></button>

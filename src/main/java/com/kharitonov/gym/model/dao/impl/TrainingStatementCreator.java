@@ -41,8 +41,8 @@ class TrainingStatementCreator {
             "UPDATE trainings SET description=? WHERE training_id=?";
     private static final String SQL_DELETE_TRAINING =
             "DELETE from trainings WHERE training_id=?";
-    private static final String SQL_UPDATE_DATE_TIME =
-            "UPDATE trainings SET training_date=?, training_time=? WHERE training_id=?";
+    private static final String SQL_UPDATE_TRAINING =
+            "UPDATE trainings SET training_date=?, training_time=?, description=? WHERE training_id=?";
     private static final String SQL_SET_TRAINING_DONE =
             "UPDATE trainings SET done=true WHERE training_id=?";
     private static final String SQL_UPDATE_RATING =
@@ -104,12 +104,14 @@ class TrainingStatementCreator {
         return statement;
     }
 
-    static PreparedStatement statementUpdateDateTime(Connection connection, Date date, Time time, int id)
+    static PreparedStatement statementUpdateTraining(Connection connection, Date date, Time time,
+                                                     String descripition, int id)
             throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_DATE_TIME);
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_TRAINING);
         statement.setDate(1, date);
         statement.setTime(2, time);
-        statement.setInt(3, id);
+        statement.setString(3, descripition);
+        statement.setInt(4, id);
         return statement;
     }
 

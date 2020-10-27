@@ -34,8 +34,9 @@ public enum CommandType {
     SET_TRAINING_DONE(new SetTrainingDoneCommand()),
     UNBLOCK_USER(new UnblockUserCommand()),
     UPDATE_ACCOUNT_DATA(new UpdateAccountDataCommand()),
+    UPDATE_DISCOUNT(new UpdateDiscountCommand()),
     UPDATE_PERSONAL_DATA(new UpdatePersonalDataCommand()),
-    UPDATE_TRAINING_DATE_TIME(new UpdateTrainingDateTime()),
+    UPDATE_TRAINING(new UpdateTrainingCommand()),
     UPLOAD_IMAGE(new UploadImageCommand()),
     UPDATE_TRAINING_DESCRIPTION(new UpdateTrainingDescriptionCommand());
 
