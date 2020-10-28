@@ -16,10 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @WebFilter(urlPatterns = {"/mainController"})
 public class RoleControlFilter implements Filter {
@@ -33,27 +29,22 @@ public class RoleControlFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        if (!response.isCommitted()) {
-            String command = request.getParameter(RequestParameterName.COMMAND);
-            if (command != null) {
-                CommandType type = CommandProvider.defineCommandType(command);
-                UserRole role = defineUserRole(request);
-                if (MAP.containsRole(type, role)) {
-                    String url = request.getRequestURI();
-                    RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-                    dispatcher.forward(request, response);
-                } else {
-                    LOGGER.warn("Filter interception: '{}' attempted to execute '{}' command ", role, command);
-                    request.getSession().setAttribute(SessionAttributeName.ACCESS_ERROR, true);
-                    response.sendRedirect(ProjectPage.INDEX.getDirectUrl());
-                }
-            } else {
-                LOGGER.warn("Filter interception: no command to execute!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher(ProjectPage.ERROR_404.getDirectUrl());
-                dispatcher.forward(request, response);
-                chain.doFilter(request, response);
+        String command = request.getParameter(RequestParameterName.COMMAND);
+        if (command != null) {
+            CommandType type = CommandProvider.defineCommandType(command);
+            UserRole role = defineUserRole(request);
+            if (!MAP.containsRole(type, role)) {
+                LOGGER.warn("Filter interception: '{}' attempted to execute '{}' command ", role, command);
+                request.getSession().setAttribute(SessionAttributeName.ACCESS_ERROR, true);
+                response.sendRedirect(ProjectPage.INDEX.getDirectUrl());
+                return;
             }
+        } else {
+            LOGGER.warn("Filter interception: no command to execute!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher(ProjectPage.ERROR_404.getDirectUrl());
+            dispatcher.forward(request, response);
         }
+        chain.doFilter(request, response);
     }
 
     private UserRole defineUserRole(HttpServletRequest request) {

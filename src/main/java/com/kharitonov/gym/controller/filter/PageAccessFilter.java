@@ -36,17 +36,13 @@ public class PageAccessFilter implements Filter {
             throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        if (!response.isCommitted()) {
-            String page = request.getRequestURI();
-            if (RESTRICTED_PAGES.contains(page)) {
-                LOGGER.warn("Filter interception: attemption of direct access to page '{}'", request.getRequestURI());
-                response.sendRedirect(request.getContextPath() + ProjectPage.INDEX.getDirectUrl());
-            } else {
-                RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-                dispatcher.forward(request, response);
-            }
-            chain.doFilter(request, response);
+        String page = request.getRequestURI();
+        if (RESTRICTED_PAGES.contains(page)) {
+            LOGGER.warn("Filter interception: attemption of direct access to page '{}'", request.getRequestURI());
+            response.sendRedirect(request.getContextPath() + ProjectPage.INDEX.getDirectUrl());
+            return;
         }
+        chain.doFilter(request, response);
     }
 
     public void init(FilterConfig config) throws ServletException {
