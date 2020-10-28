@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.Optional;
 
 public class AddTrainingCommand implements ActionCommand {
     private static final String SECONDS_POSTFIX = ":00";
@@ -24,25 +25,24 @@ public class AddTrainingCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String name = request.getParameter(RequestParameterName.TRAINER);
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
-        int boughtTrainings = client.getBoughtTrainings();
-        int userId = client.getAccount().getId();
-        String stringDate = request.getParameter(RequestParameterName.TRAINING_DATE);
-        Date date = Date.valueOf(stringDate);
-        String stringTime = request.getParameter(RequestParameterName.TRAINING_TIME) + SECONDS_POSTFIX;
-        Time time = Time.valueOf(stringTime);
+        int clientId = client.getAccount().getId();
+        String trainerId = request.getParameter(RequestParameterName.SELECTED_TRAINER_ID);
+        String date = request.getParameter(RequestParameterName.TRAINING_DATE);
+        String time = request.getParameter(RequestParameterName.TRAINING_TIME) + SECONDS_POSTFIX;
+        String page;
         try {
-            List<Training> trainings;
-            int trainerId = userService.findId(name);
-            trainingService.addTraining(trainerId, userId, date, time);
-            client.setBoughtTrainings(boughtTrainings - 1);
+            int trainingId = trainingService.addTraining(trainerId, clientId, date, time);
+            Training training = trainingService.findTrainingById(trainingId).get();
             restoreRequestAttributes(request);
-            trainings = trainingService.findClientTrainings(userId);
-            request.setAttribute(RequestAttributeName.TRAININGS, trainings);
+            List<Training> planned = (List<Training>) request.getAttribute(RequestAttributeName.PLANNED_TRAININGS);
+            planned.add(training);
+            client.setBoughtTrainings(client.getBoughtTrainings() - 1);
+            page = ProjectPage.SCHEDULE.getServletCommand();
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.SCHEDULE.getServletCommand();
+        return page;
     }
 }

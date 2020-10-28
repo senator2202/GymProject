@@ -10,6 +10,7 @@ public class SessionAttributeName {
     public static final String INCORRECT_EMAIL_FORMAT = "incorrectEmailFormat";
     public static final String LOGIN_EMAIL_EXISTS = "loginEmailExists";
     public static final String ACCESS_ERROR = "accessError";
+    public static final String LOW_BALANCE = "lowbalance";
 
     private SessionAttributeName() {
     }

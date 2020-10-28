@@ -6,9 +6,10 @@ import com.kharitonov.gym.model.entity.Training;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.Optional;
 
 public interface TrainingDao extends BaseDao {
-    void addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException;
+    int addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException;
 
     List<Training> findClientTrainings(int clientId) throws DaoException;
 
@@ -25,4 +26,6 @@ public interface TrainingDao extends BaseDao {
     void updateRating(int trainingId, int rating) throws DaoException;
 
     double averageTrainerRating(int trainerId) throws DaoException;
+
+    Optional<Training> findTrainingById(int trainingId) throws DaoException;
 }

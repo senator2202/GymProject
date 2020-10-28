@@ -19,14 +19,18 @@ public class BuyTrainingsCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String parameter = request.getParameter(RequestParameterName.TRAININGS_NUMBER);
-        int trainingsNumber = Integer.parseInt(parameter);
+        String trainingsNumber = request.getParameter(RequestParameterName.TRAININGS_NUMBER);
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
+        String page;
         try {
-            userService.buyTrainings(client, trainingsNumber, DEFAULT_TRAINING_COST);
+            if (!userService.buyTrainings(client, trainingsNumber, DEFAULT_TRAINING_COST)) {
+                request.getSession().setAttribute(SessionAttributeName.LOW_BALANCE, true);
+            }
+            page = ProjectPage.SCHEDULE.getServletCommand();
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.SCHEDULE.getServletCommand();
+        return page;
     }
 }

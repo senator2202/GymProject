@@ -16,12 +16,15 @@ public class BlockUserCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter(RequestParameterName.USER_ID));
+        String id = request.getParameter(RequestParameterName.USER_ID);
+        String page;
         try {
             service.blockUser(id);
+            page = ProjectPage.ADMIN_REGISTRATIONS.getServletCommand();
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.ADMIN_REGISTRATIONS.getServletCommand();
+        return page;
     }
 }

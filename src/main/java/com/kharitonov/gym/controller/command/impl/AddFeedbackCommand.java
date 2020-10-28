@@ -21,12 +21,14 @@ public class AddFeedbackCommand implements ActionCommand {
         String email = request.getParameter(RequestParameterName.FEEDBACK_SENDER_EMAIL);
         String subject = request.getParameter(RequestParameterName.FEEDBACK_SUBJECT);
         String message = request.getParameter(RequestParameterName.FEEDBACK_MESSAGE);
+        String page;
         try {
             service.addFeedback(name, email, subject, message);
+            page = ProjectPage.INDEX.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        String page = getPreviousPage(request);
-        return ProjectPage.INDEX.getDirectUrl();
+        return page;
     }
 }

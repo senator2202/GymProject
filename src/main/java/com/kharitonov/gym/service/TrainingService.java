@@ -3,12 +3,11 @@ package com.kharitonov.gym.service;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Training;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
+import java.util.Optional;
 
 public interface TrainingService {
-    void addTraining(int trainerId, int clientId, Date trainingDate, Time time) throws ServiceException;
+    int addTraining(String trainerId, int clientId, String trainingDate, String trainingTime) throws ServiceException;
 
     List<Training> findClientTrainings(int clientId) throws ServiceException;
 
@@ -16,7 +15,7 @@ public interface TrainingService {
 
     void updateDescription(int trainingId, String description) throws ServiceException;
 
-    void deleteTraining(int trainingId, int userId) throws ServiceException;
+    void deleteTraining(String trainingId, int userId) throws ServiceException;
 
     void updateTraining(String trainingId, String trainingDate, String trainingTime, String description)
             throws ServiceException;
@@ -26,4 +25,6 @@ public interface TrainingService {
     void rateTraining(String trainingId, String rating) throws ServiceException;
 
     double averageTrainerRating(String trainerId) throws ServiceException;
+
+    Optional<Training> findTrainingById(int trainingId) throws ServiceException;
 }

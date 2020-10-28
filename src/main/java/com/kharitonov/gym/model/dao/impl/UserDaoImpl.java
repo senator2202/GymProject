@@ -304,18 +304,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int findId(String firstName, String lastName) throws DaoException {
-        try (Connection connection = pool.getConnection();
-             PreparedStatement select = statementSelectUserId(connection, firstName, lastName);
-             ResultSet resultSet = select.executeQuery()) {
-            resultSet.next();
-            return resultSet.getInt(TableColumnName.USER_ID);
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
-    @Override
     public void addToBalance(int userId, int amount) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateBalance(connection, userId, amount)) {

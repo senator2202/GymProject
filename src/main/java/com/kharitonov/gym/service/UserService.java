@@ -25,24 +25,22 @@ public interface UserService {
     void updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws ServiceException;
 
-    void appointTrainer(int userId, String institution,
-                        int graduationYear, String instagramLink) throws ServiceException;
+    void appointTrainer(String userId, String institution,
+                        String graduationYear, String instagramLink) throws ServiceException;
 
     List<User> findRecentUsers(int days) throws ServiceException;
 
     void updateUserImage(int userId, String imageName) throws ServiceException;
 
-    void buyTrainings(Client client, int trainingsNumber, double trainingCost) throws ServiceException;
+    boolean buyTrainings(Client client, String trainingsNumber, double trainingCost) throws ServiceException;
 
     List<User> findAllTrainers() throws ServiceException;
-
-    int findId(String name) throws ServiceException;
 
     boolean addToBalance(int clientId, String amount) throws ServiceException;
 
     Optional<String> findEmailById(int userId) throws ServiceException;
 
-    void blockUser(int userId) throws ServiceException;
+    void blockUser(String userId) throws ServiceException;
 
     void unblockUser(int userId) throws ServiceException;
 

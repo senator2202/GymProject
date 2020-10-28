@@ -23,19 +23,20 @@ public class ApproveTrainerApplicationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String institution = request.getParameter(RequestParameterName.APPLICATION_INSTITUTION);
-        String stringId = request.getParameter(RequestParameterName.APPLICATION_ID);
-        int id = Integer.parseInt(stringId);
-        String stringGraduation = request.getParameter(RequestParameterName.APPLICATION_GRADUATION);
-        int graduation = Integer.parseInt(stringGraduation);
+        String id = request.getParameter(RequestParameterName.APPLICATION_ID);
+        String graduation = request.getParameter(RequestParameterName.APPLICATION_GRADUATION);
         String instagram = request.getParameter(RequestParameterName.APPLICATION_INSTAGRAM);
+        String page;
         try {
             List<TrainerApplication> applications;
             userService.appointTrainer(id, institution, graduation, instagram);
             applications = appService.deleteApplication(id);
             request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
+            page = ProjectPage.ADMIN_MAIN.getServletCommand();
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.ADMIN_MAIN.getServletCommand();
+        return page;
     }
 }

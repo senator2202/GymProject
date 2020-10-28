@@ -20,8 +20,7 @@ public class RefuseTrainerApplicationCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String stringId = request.getParameter(RequestParameterName.APPLICATION_ID);
-        int id = Integer.parseInt(stringId);
+        String id = request.getParameter(RequestParameterName.APPLICATION_ID);
         try {
             List<TrainerApplication> applications = service.deleteApplication(id);
             request.setAttribute(RequestAttributeName.APPLICATIONS, applications);

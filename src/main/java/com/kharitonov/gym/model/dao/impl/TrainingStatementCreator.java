@@ -1,5 +1,7 @@
 package com.kharitonov.gym.model.dao.impl;
 
+import com.kharitonov.gym.model.entity.Training;
+
 import java.sql.*;
 
 class TrainingStatementCreator {
@@ -51,6 +53,20 @@ class TrainingStatementCreator {
             "SELECT AVG(training_rating) AS trainer_rating " +
                     "FROM (SELECT training_rating FROM trainings WHERE trainer_id=?) AS temp " +
                     "WHERE training_rating!=0";
+    private static final String SQL_SELECT_TRAINING_BY_ID =
+            "SELECT training_id, \n" +
+                    "trainer_id, \n" +
+                    "(SELECT first_name FROM users WHERE user_id=trainings.trainer_id) AS trainer_first_name, \n" +
+                    "(SELECT last_name FROM users WHERE user_id=trainings.trainer_id) AS trainer_last_name, \n" +
+                    "client_id, \n" +
+                    "(SELECT first_name FROM users WHERE user_id=trainings.client_id) AS client_first_name, \n" +
+                    "(SELECT last_name FROM users WHERE user_id=trainings.client_id) AS client_last_name, \n" +
+                    "training_date, \n" +
+                    "training_time, \n" +
+                    "description, \n" +
+                    "done, \n" +
+                    "training_rating \n" +
+                    "FROM trainings WHERE training_id=?";
 
     private TrainingStatementCreator() {
 
@@ -58,7 +74,7 @@ class TrainingStatementCreator {
 
     static PreparedStatement statementInsertTraining(Connection connection, int trainerId, int clientId,
                                                      Date trainingDate, Time trainingTime) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SQL_INSERT_TRAINING);
+        PreparedStatement statement = connection.prepareStatement(SQL_INSERT_TRAINING, Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, trainerId);
         statement.setInt(2, clientId);
         statement.setDate(3, trainingDate);
@@ -133,6 +149,12 @@ class TrainingStatementCreator {
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_AVERAGE_RATING);
         statement.setInt(1, trainerId);
+        return statement;
+    }
+
+    static PreparedStatement statementSelectTrainingById(Connection connection, int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_TRAINING_BY_ID);
+        statement.setInt(1, id);
         return statement;
     }
 }

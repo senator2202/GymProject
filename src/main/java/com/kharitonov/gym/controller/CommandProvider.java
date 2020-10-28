@@ -4,11 +4,11 @@ import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.CommandType;
 import com.kharitonov.gym.controller.command.impl.InvalidCommand;
 
-class CommandProvider {
+public class CommandProvider {
     private CommandProvider() {
     }
 
-    static ActionCommand defineCommand(String command) {
+    public static ActionCommand defineCommand(String command) {
         ActionCommand actionCommand;
         try {
             actionCommand = CommandType.valueOf(command.toUpperCase()).getCommand();
@@ -16,5 +16,15 @@ class CommandProvider {
             actionCommand = new InvalidCommand();
         }
         return actionCommand;
+    }
+
+    public static CommandType defineCommandType(String command) {
+        CommandType type;
+        try {
+            type = CommandType.valueOf(command.toUpperCase());
+        } catch (IllegalArgumentException e) {
+           type = CommandType.INVALID;
+        }
+        return type;
     }
 }

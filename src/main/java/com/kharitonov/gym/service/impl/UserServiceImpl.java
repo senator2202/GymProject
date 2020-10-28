@@ -11,7 +11,7 @@ import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.UserService;
 import com.kharitonov.gym.util.CryptoUtility;
 import com.kharitonov.gym.util.mail.MailUtility;
-import com.kharitonov.gym.util.validator.FormValidator;
+import com.kharitonov.gym.validator.FormValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +21,6 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private static final UserServiceImpl INSTANCE = new UserServiceImpl();
-    private static final String SPACE = " ";
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
 
@@ -136,11 +135,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void appointTrainer(int userId, String institution,
-                               int graduationYear, String instagramLink) throws ServiceException {
+    public void appointTrainer(String userId, String institution,
+                               String graduationYear, String instagramLink) throws ServiceException {
         UserDao dao = new UserDaoImpl();
+        int id = Integer.parseInt(userId);
+        int year = Integer.parseInt(graduationYear);
         try {
-            dao.changeRoleToTrainer(userId, institution, graduationYear, instagramLink);
+            dao.changeRoleToTrainer(id, institution, year, instagramLink);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -167,21 +168,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void buyTrainings(Client client, int trainingsNumber, double trainingCost) throws ServiceException {
+    public boolean buyTrainings(Client client, String trainingsNumber, double trainingCost) throws ServiceException {
+        int number = Integer.parseInt(trainingsNumber);
         double discount = client.getPersonalDiscount();
         double balance = client.getMoneyBalance();
-        double sum = trainingsNumber * trainingCost;
+        double sum = number * trainingCost;
         double absoluteDiscount = sum * discount / 100;
         sum -= absoluteDiscount;
         if (balance < sum) {
-            throw new ServiceException("Money balance is too low!");
+            return false;
         }
         int id = client.getAccount().getId();
         UserDao dao = new UserDaoImpl();
         try {
-            dao.updateBalanceAndBoughtTrainings(id, sum, trainingsNumber);
-            client.setBoughtTrainings(client.getBoughtTrainings() + trainingsNumber);
+            dao.updateBalanceAndBoughtTrainings(id, sum, number);
+            client.setBoughtTrainings(client.getBoughtTrainings() + number);
             client.setMoneyBalance(client.getMoneyBalance() - sum);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -192,19 +195,6 @@ public class UserServiceImpl implements UserService {
         UserDao dao = new UserDaoImpl();
         try {
             return dao.findAllTrainers();
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public int findId(String name) throws ServiceException {
-        UserDao dao = new UserDaoImpl();
-        String[] temp = name.split(SPACE);
-        String firstName = temp[0];
-        String lastName = temp[1];
-        try {
-            return dao.findId(firstName, lastName);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -238,10 +228,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void blockUser(int userId) throws ServiceException {
+    public void blockUser(String userId) throws ServiceException {
         UserDao dao = new UserDaoImpl();
+        int id = Integer.parseInt(userId);
         try {
-            dao.blockUser(userId);
+            dao.blockUser(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -20,7 +20,7 @@ public class CancelTrainingCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
         int clientId = client.getAccount().getId();
-        int trainingId = Integer.parseInt(request.getParameter(RequestParameterName.TRAINING_ID));
+        String trainingId = request.getParameter(RequestParameterName.TRAINING_ID);
         try {
             List<Training> trainings;
             service.deleteTraining(trainingId, clientId);

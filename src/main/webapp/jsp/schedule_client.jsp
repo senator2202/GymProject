@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
                scope="session"/>
@@ -11,6 +11,9 @@
 <jsp:include page="/jsp/popup/add_training.jsp"/>
 <jsp:include page="/jsp/popup/edit_training.jsp"/>
 <jsp:include page="/jsp/popup/rating.jsp"/>
+<jsp:include page="/jsp/popup/low_balance.jsp"/>
+
+<ctg:message/>
 
 <!-- Client Schedule Section Begin -->
 <section class="trainer-schedule class-timetable spad">

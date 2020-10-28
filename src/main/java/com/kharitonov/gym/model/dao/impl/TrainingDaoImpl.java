@@ -9,6 +9,7 @@ import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.kharitonov.gym.model.dao.impl.TrainingStatementCreator.*;
 
@@ -16,13 +17,16 @@ public class TrainingDaoImpl implements TrainingDao {
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
-    public void addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException {
+    public int addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException {
         Connection connection = pool.getConnection();
         try (PreparedStatement statementAdd = statementInsertTraining(connection, trainerId, clientId, trainingDate, trainingTime);
              PreparedStatement statementDecrement = statementDecrementTrainings(connection, clientId)) {
             connection.setAutoCommit(false);
             statementAdd.execute();
             statementDecrement.executeUpdate();
+            ResultSet resultSet = statementAdd.getGeneratedKeys();
+            resultSet.next();
+            return resultSet.getInt(1);
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);
@@ -134,6 +138,24 @@ public class TrainingDaoImpl implements TrainingDao {
             throw new DaoException(e);
         }
     }
+
+    @Override
+    public Optional<Training> findTrainingById(int trainingId) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementSelectTrainingById(connection, trainingId);
+             ResultSet resultSet = statement.executeQuery()) {
+            Optional<Training> optional;
+            if (resultSet.next()) {
+                optional = Optional.of(createTraining(resultSet));
+            } else {
+                optional = Optional.empty();
+            }
+            return optional;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
 
     private Training createTraining(ResultSet resultSet) throws DaoException {
         try {

@@ -9,7 +9,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title w-100 text-center">
-					Buy Trainings
+					<fmt:message key="schedule_client.buyTrainings"/>
 				</h5>
 			</div>
 			<div class="modal-body">

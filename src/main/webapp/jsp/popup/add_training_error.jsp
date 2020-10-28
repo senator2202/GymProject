@@ -8,7 +8,7 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title w-100 text-center">
+				<h5 class="modal-title w-100 text-center" style="font-size: large; color: black">
 					<fmt:message key="add_training_error.message"/>
 				</h5>
 			</div>

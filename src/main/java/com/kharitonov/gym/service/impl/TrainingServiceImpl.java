@@ -10,6 +10,7 @@ import com.kharitonov.gym.service.TrainingService;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.Optional;
 
 public class TrainingServiceImpl implements TrainingService {
     private static final String SECONDS_POSTFIX = ":00";
@@ -25,10 +26,13 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws ServiceException {
+    public int addTraining(String sTrainerId, int clientId, String trainingDate, String trainingTime) throws ServiceException {
         TrainingDao dao = new TrainingDaoImpl();
+        int trainerId = Integer.parseInt(sTrainerId);
+        Date date = Date.valueOf(trainingDate);
+        Time time = Time.valueOf(trainingTime + (trainingTime.length() == TIME_LENGTH ? BLANK : SECONDS_POSTFIX));
         try {
-            dao.addTraining(trainerId, clientId, trainingDate, trainingTime);
+            return dao.addTraining(trainerId, clientId, date, time);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -65,10 +69,11 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void deleteTraining(int trainingId, int userId) throws ServiceException {
+    public void deleteTraining(String trainingId, int userId) throws ServiceException {
         TrainingDao dao = new TrainingDaoImpl();
+        int id = Integer.parseInt(trainingId);
         try {
-            dao.deleteTraining(trainingId, userId);
+            dao.deleteTraining(id, userId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -116,6 +121,16 @@ public class TrainingServiceImpl implements TrainingService {
         int id = Integer.parseInt(trainerId);
         try {
             return dao.averageTrainerRating(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Optional<Training> findTrainingById(int trainingId) throws ServiceException {
+        TrainingDao dao = new TrainingDaoImpl();
+        try {
+            return dao.findTrainingById(trainingId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -38,10 +38,11 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
     }
 
     @Override
-    public List<TrainerApplication> deleteApplication(int userId) throws ServiceException {
+    public List<TrainerApplication> deleteApplication(String userId) throws ServiceException {
         TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
+        int id = Integer.parseInt(userId);
         try {
-            dao.deleteApplication(userId);
+            dao.deleteApplication(id);
             return dao.findAllApplications();
         } catch (DaoException e) {
             throw new ServiceException(e);
