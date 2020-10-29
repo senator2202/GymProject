@@ -5,7 +5,9 @@ import java.util.Base64;
 public class CryptoUtility {
     private static final int OFFSET = 4;
 
-    public String encryptMessage(String text) {
+    private CryptoUtility() {}
+
+    public static String encryptMessage(String text) {
         String b64encoded =
                 Base64.getEncoder().encodeToString(text.getBytes());
         String reverse = new StringBuffer(b64encoded).reverse().toString();

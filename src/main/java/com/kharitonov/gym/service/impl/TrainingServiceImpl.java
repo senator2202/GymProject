@@ -6,6 +6,7 @@ import com.kharitonov.gym.model.dao.TrainingDao;
 import com.kharitonov.gym.model.dao.impl.TrainingDaoImpl;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.service.TrainingService;
+import com.kharitonov.gym.validator.TrainingValidator;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -16,6 +17,7 @@ public class TrainingServiceImpl implements TrainingService {
     private static final String SECONDS_POSTFIX = ":00";
     private static final int TIME_LENGTH = 8;
     private static final String BLANK = "";
+    private static final int ERROR_ID = -1;
     private static final TrainingServiceImpl INSTANCE = new TrainingServiceImpl();
 
     private TrainingServiceImpl() {
@@ -27,10 +29,13 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public int addTraining(String sTrainerId, int clientId, String trainingDate, String trainingTime) throws ServiceException {
-        TrainingDao dao = new TrainingDaoImpl();
+        if (!TrainingValidator.correctAddTrainingParameters(sTrainerId, trainingDate, trainingTime)) {
+            return ERROR_ID;
+        }
         int trainerId = Integer.parseInt(sTrainerId);
         Date date = Date.valueOf(trainingDate);
         Time time = Time.valueOf(trainingTime + (trainingTime.length() == TIME_LENGTH ? BLANK : SECONDS_POSTFIX));
+        TrainingDao dao = new TrainingDaoImpl();
         try {
             return dao.addTraining(trainerId, clientId, date, time);
         } catch (DaoException e) {
@@ -128,6 +133,9 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public Optional<Training> findTrainingById(int trainingId) throws ServiceException {
+        if (!TrainingValidator.correctId(trainingId)) {
+            return Optional.empty();
+        }
         TrainingDao dao = new TrainingDaoImpl();
         try {
             return dao.findTrainingById(trainingId);

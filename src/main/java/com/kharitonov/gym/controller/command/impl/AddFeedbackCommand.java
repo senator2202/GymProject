@@ -2,6 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.RequestAttributeName;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.service.FeedbackService;
@@ -23,8 +24,12 @@ public class AddFeedbackCommand implements ActionCommand {
         String message = request.getParameter(RequestParameterName.FEEDBACK_MESSAGE);
         String page;
         try {
-            service.addFeedback(name, email, subject, message);
-            page = ProjectPage.INDEX.getDirectUrl();
+            if (service.addFeedback(name, email, subject, message)) {
+                request.getSession().setAttribute(RequestAttributeName.FEEDBACK_SENT, true);
+                page = ProjectPage.INDEX.getDirectUrl();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
             page = ProjectPage.ERROR_500.getDirectUrl();

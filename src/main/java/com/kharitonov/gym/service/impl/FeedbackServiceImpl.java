@@ -8,6 +8,7 @@ import com.kharitonov.gym.model.dao.impl.FeedbackDaoImpl;
 import com.kharitonov.gym.model.entity.Feedback;
 import com.kharitonov.gym.service.FeedbackService;
 import com.kharitonov.gym.util.mail.MailUtility;
+import com.kharitonov.gym.validator.FeedbackValidator;
 
 import java.util.List;
 
@@ -20,10 +21,14 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public void addFeedback(String name, String email, String subject, String message) throws ServiceException {
+    public boolean addFeedback(String name, String email, String subject, String message) throws ServiceException {
+        if (!FeedbackValidator.correctAddParameters(name, email, subject, message)) {
+            return false;
+        }
         FeedbackDao dao = new FeedbackDaoImpl();
         try {
             dao.addFeedback(name, email, subject, message);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

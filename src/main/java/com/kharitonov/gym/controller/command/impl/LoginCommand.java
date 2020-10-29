@@ -8,6 +8,7 @@ import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
+import com.kharitonov.gym.validator.ValidationErrorSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,28 +31,25 @@ public class LoginCommand implements ActionCommand {
         parameters.put(RequestParameterName.LOGIN, login);
         parameters.put(RequestParameterName.LOGIN_PASSWORD, password);
         try {
+            HttpSession session = request.getSession();
             Optional<User> optional = service.findUser(parameters);
             if (optional.isPresent()) {
                 User user = optional.get();
-                HttpSession session = request.getSession();
                 session.setAttribute(SessionAttributeName.USER, user);
                 if (user.getAccount().getRole() != UserRole.ADMIN) {
                     page = ProjectPage.INDEX.getDirectUrl();
                 } else {
                     page = ProjectPage.ADMIN_MAIN.getServletCommand();
                 }
-                clearSessionAttributesExceptUser(request);
             } else {
-                clearSessionAttributesExceptUser(request);
-                for (Map.Entry<String, String> entry : parameters.entrySet()) {
-                    request.getSession().setAttribute(entry.getKey(), entry.getValue());
-                }
-                request.getSession().setAttribute(SessionAttributeName.INCORRECT_LOGIN_PASSWORD, true);
+                ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+                session.setAttribute(SessionAttributeName.LOGIN_MAP, parameters);
+                session.setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
                 page = ProjectPage.INDEX.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_404.getDirectUrl();
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
         return page;
     }

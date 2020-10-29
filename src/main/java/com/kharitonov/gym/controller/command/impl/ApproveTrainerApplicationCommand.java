@@ -28,9 +28,9 @@ public class ApproveTrainerApplicationCommand implements ActionCommand {
         String instagram = request.getParameter(RequestParameterName.APPLICATION_INSTAGRAM);
         String page;
         try {
-            List<TrainerApplication> applications;
+
             userService.appointTrainer(id, institution, graduation, instagram);
-            applications = appService.deleteApplication(id);
+            List<TrainerApplication> applications = appService.deleteApplication(id);
             request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
             page = ProjectPage.ADMIN_MAIN.getServletCommand();
         } catch (ServiceException e) {

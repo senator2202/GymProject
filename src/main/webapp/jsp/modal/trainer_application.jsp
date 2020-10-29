@@ -20,12 +20,12 @@
 							<div class="form-group">
 								<label for="institution"><fmt:message key="trainer_application.institution"/></label>
 								<input type="text" class="form-control" id="institution" name="institution"
-								       style="background-color: #fff;">
+								       style="background-color: #fff;" required>
 							</div>
 							<div class="form-group">
 								<label for="graduationYear"><fmt:message key="trainer_application.year"/></label>
 								<input type="text" class="form-control" id="graduationYear" name="graduationYear"
-								       style="background-color: #fff;">
+								       style="background-color: #fff;" required>
 							</div>
 							<div class="form-group">
 								<label for="instagramLink"><fmt:message key="trainer_application.instagram"/></label>

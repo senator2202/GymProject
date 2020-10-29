@@ -99,7 +99,8 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(342, 'badumba', '9Vrgph\\g', 'viq89486@bcaoo.com', 'CLIENT', '2020-10-22 11:13:36', 'RUSSIAN', 1),
 	(343, 'tomat', '9Vrgph\\g', 'quj16414@bcaoo.com', 'CLIENT', '2020-10-22 11:21:43', 'ENGLISH', 1),
 	(344, 'bomba_pushka', '9Vrgph\\g', 'bomba@pushka.ru', 'CLIENT', '2020-10-26 15:34:12', 'RUSSIAN', 0),
-	(345, 'gradusnik', '9Vrgph\\g', 'temperature@tut.by', 'CLIENT', '2020-10-26 15:36:44', 'RUSSIAN', 0);
+	(345, 'gradusnik', '9Vrgph\\g', 'temperature@tut.by', 'CLIENT', '2020-10-26 15:36:44', 'RUSSIAN', 0),
+	(346, 'woody', '9Vrgph\\g', 'tarantul@gmail.com', 'CLIENT', '2020-10-29 14:24:47', 'RUSSIAN', 0);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.diets
@@ -158,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   UNIQUE KEY `report_id` (`feedback_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы gym.feedbacks: ~11 rows (приблизительно)
+-- Дамп данных таблицы gym.feedbacks: ~12 rows (приблизительно)
 /*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
 REPLACE INTO `feedbacks` (`feedback_id`, `sender_name`, `sender_email`, `feedback_subject`, `feedback_message`, `feedback_datetime`, `reply_message`) VALUES
 	(1, 'Alex', 'alex222@mail.ru', 'service', 'service is good', '2020-10-16 12:56:51', 'thank you for your feedback'),
@@ -172,7 +173,10 @@ REPLACE INTO `feedbacks` (`feedback_id`, `sender_name`, `sender_email`, `feedbac
 	(19, 'Алексей', 'tratata@mail.ru', 'Предъява', 'не, ну вы нормальные?', '2020-10-26 10:33:09', NULL),
 	(20, 'Федор', 'azaza@tut.by', '', 'дайте скидку постоянному клиенту', '2020-10-26 10:41:00', NULL),
 	(21, 'Goodwin', 'goodwin@tut.by', 'brain', 'need some brain, could u help me?', '2020-10-26 10:43:09', NULL),
-	(24, '', 'mail222@tut.by', '', 'how much is the fish?', '2020-10-28 16:22:23', NULL);
+	(24, '', 'mail222@tut.by', '', 'how much is the fish?', '2020-10-28 16:22:23', NULL),
+	(25, 'Andrei', 'andrei@tut.by', 'Время работы', 'начните работать 24/7!', '2020-10-29 15:15:25', NULL),
+	(26, 'Вася', 'abra@yahoo.com', '', 'Че по чем, пацанчики?', '2020-10-29 15:18:01', NULL),
+	(27, 'Тарас', 'taras@mail.ru', 'спортпит', 'начните продавать на входе спортивное питание, Спасибо!', '2020-10-29 15:25:09', NULL);
 /*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.trainer_applications
@@ -213,11 +217,10 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~10 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~11 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`, `description`, `training_rating`) VALUES
 	(9, 301, 284, '2020-10-25', '17:00:00', 1, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.', 4),
-	(10, 302, 284, '2020-10-29', '18:00:00', 0, NULL, 0),
 	(12, 301, 284, '2020-10-23', '12:00:00', 1, 'Пресс, бицепс, трицепс', 3),
 	(13, 301, 284, '2020-11-05', '17:00:00', 0, 'Бег на дорожке 10 мин. Жим лежа 4 подхода на 10 повторений', 0),
 	(14, 301, 303, '2020-10-25', '12:00:00', 0, 'Тест на ошибку\r\nСработает\r\nИли нет?', 0),
@@ -226,7 +229,8 @@ REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_da
 	(24, 274, 284, '2020-11-01', '17:20:00', 0, NULL, 0),
 	(27, 301, 284, '2020-10-31', '15:05:00', 0, 'Отжимания на брусьях, 5х15, разводка гантелей 4x10, пресс 2х20', 0),
 	(28, 301, 284, '2020-11-02', '04:00:00', 0, NULL, 0),
-	(29, 302, 284, '2020-11-07', '11:36:00', 0, NULL, 0);
+	(29, 302, 284, '2020-11-07', '11:36:00', 0, NULL, 0),
+	(35, 301, 284, '2020-11-08', '17:15:00', 0, NULL, 0);
 /*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.users
@@ -317,7 +321,8 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(342, '', '', '', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
 	(343, 'Абдурахман', 'Петрович', '80172306303', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 173, 9),
 	(344, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0),
-	(345, '', '', '', 0, NULL, NULL, NULL, 6, NULL, NULL, 100, 0);
+	(345, '', '', '', 0, NULL, NULL, NULL, 6, NULL, NULL, 100, 0),
+	(346, '', '', '', 0, NULL, NULL, NULL, 0, NULL, NULL, 100, 0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

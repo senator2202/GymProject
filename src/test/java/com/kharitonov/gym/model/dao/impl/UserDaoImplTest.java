@@ -18,12 +18,11 @@ public class UserDaoImplTest {
     @Test
     public void testAddClient() throws DaoException {
         for (int i = 0; i < 10; i++) {
-            CryptoUtility cipher = new CryptoUtility();
             Random random = new Random();
             String login = "client" + random.nextInt(10000000);
             String password = "password" + random.nextInt(1000);
             String email = "email" + random.nextInt(10000000) + "@gmail.com";
-            String encryptedPassword = cipher.encryptMessage(password);
+            String encryptedPassword = CryptoUtility.encryptMessage(password);
             boolean result;
             dao.addUser(login, encryptedPassword, email);
             result = dao.checkLoginPassword(login, encryptedPassword).isPresent();
@@ -34,12 +33,11 @@ public class UserDaoImplTest {
     @Test
     public void testAddTrainer() throws DaoException {
         for (int i = 0; i < 10; i++) {
-            CryptoUtility cipher = new CryptoUtility();
             Random random = new Random();
             String login = "trainer" + random.nextInt(10000000);
             String password = "password" + random.nextInt(1000);
             String email = "email" + random.nextInt(10000000) + "@gmail.com";
-            String encryptedString = cipher.encryptMessage(password);
+            String encryptedString = CryptoUtility.encryptMessage(password);
             boolean result;
             dao.addUser(login, encryptedString, email);
             result = dao.checkLoginPassword(login, encryptedString).isPresent();
@@ -61,8 +59,7 @@ public class UserDaoImplTest {
     public void testCheckLoginPassword() throws DaoException {
         String name = StaticDataProvider.ADMIN_LOGIN;
         String password = StaticDataProvider.ADMIN_PASSWORD;
-        CryptoUtility cipher = new CryptoUtility();
-        String encryptedString = cipher.encryptMessage(password);
+        String encryptedString = CryptoUtility.encryptMessage(password);
         boolean result =
                 dao.checkLoginPassword(name, encryptedString).isPresent();
         assertTrue(result);

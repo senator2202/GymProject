@@ -18,10 +18,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class AddTrainingCommand implements ActionCommand {
-    private static final String SECONDS_POSTFIX = ":00";
     private static final Logger LOGGER = LogManager.getLogger(AddTrainingCommand.class);
     private final UserService userService = UserServiceImpl.getInstance();
     private final TrainingService trainingService = TrainingServiceImpl.getInstance();
+    private static final int INVALID_ID = -1;
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -29,16 +29,21 @@ public class AddTrainingCommand implements ActionCommand {
         int clientId = client.getAccount().getId();
         String trainerId = request.getParameter(RequestParameterName.SELECTED_TRAINER_ID);
         String date = request.getParameter(RequestParameterName.TRAINING_DATE);
-        String time = request.getParameter(RequestParameterName.TRAINING_TIME) + SECONDS_POSTFIX;
+        String time = request.getParameter(RequestParameterName.TRAINING_TIME);
         String page;
         try {
             int trainingId = trainingService.addTraining(trainerId, clientId, date, time);
-            Training training = trainingService.findTrainingById(trainingId).get();
-            restoreRequestAttributes(request);
-            List<Training> planned = (List<Training>) request.getAttribute(RequestAttributeName.PLANNED_TRAININGS);
-            planned.add(training);
-            client.setBoughtTrainings(client.getBoughtTrainings() - 1);
-            page = ProjectPage.SCHEDULE.getServletCommand();
+            if (trainingId == INVALID_ID) {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            } else {
+                Training training = trainingService.findTrainingById(trainingId).get();
+                restoreRequestAttributes(request);//restoring client schedule page attributes
+                List<Training> planned = (List<Training>) request.getAttribute(RequestAttributeName.PLANNED_TRAININGS);
+                planned.add(training);
+                client.setBoughtTrainings(client.getBoughtTrainings() - 1);
+                page = ProjectPage.SCHEDULE.getServletCommand();
+            }
+
         } catch (ServiceException e) {
             LOGGER.error(e);
             page = ProjectPage.ERROR_500.getDirectUrl();

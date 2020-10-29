@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class CryptoUtilityTest {
-    private final CryptoUtility cryptoUtility = new CryptoUtility();
 
     @DataProvider
     public static Object[][] dataDecrypt() {
@@ -32,7 +31,7 @@ public class CryptoUtilityTest {
     @Test(dataProvider = "dataEncrypt")
     public void testEncrypt(String source, String expectedEncrypted,
                             boolean expected) {
-        String actualEncrypted = cryptoUtility.encryptMessage(source);
+        String actualEncrypted = CryptoUtility.encryptMessage(source);
         boolean actual = actualEncrypted.equals(expectedEncrypted);
         assertEquals(actual, expected);
     }

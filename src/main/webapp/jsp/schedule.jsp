@@ -42,7 +42,7 @@
 </head>
 
 <body>
-    <jsp:include page="/jsp/popup/add_training_error.jsp"/>
+    <jsp:include page="/jsp/modal/add_training_error.jsp"/>
 
     <!-- Page Preloder -->
     <div id="preloder">

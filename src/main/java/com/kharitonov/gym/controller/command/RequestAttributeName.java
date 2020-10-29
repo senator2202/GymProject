@@ -18,6 +18,7 @@ public class RequestAttributeName {
     public static final String CONFIRMATION_SENT = "confirmationSent";
     public static final String PLANNED_TRAININGS = "plannedTrainings";
     public static final String PREVIOUS_TRAININGS = "previousTrainings";
+    public static final String FEEDBACK_SENT = "feedbackSent";
 
     private RequestAttributeName() {
 

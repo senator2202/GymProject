@@ -7,7 +7,7 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<jsp:include page="/jsp/popup/edit_description.jsp"/>
+<jsp:include page="/jsp/modal/edit_description.jsp"/>
 
 <section class="trainer-schedule class-timetable spad">
 	<div class="container-fluid">

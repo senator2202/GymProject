@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<jsp:include page="/jsp/popup/feedback_reply.jsp"/>
+<jsp:include page="/jsp/modal/feedback_reply.jsp"/>
 <div class="wrapper ">
 	<jsp:include page="/jsp/admin_sidebar.jsp"/>
 	<div class="main-panel">

@@ -32,8 +32,8 @@
 	<script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
 </head>
 <body>
-<jsp:include page="/jsp/popup/client_profile.jsp"/>
-<jsp:include page="/jsp/popup/trainer_profile.jsp"/>
+<jsp:include page="/jsp/modal/client_profile.jsp"/>
+<jsp:include page="/jsp/modal/trainer_profile.jsp"/>
 
 <div class="wrapper ">
 	<jsp:include page="/jsp/admin_sidebar.jsp"/>

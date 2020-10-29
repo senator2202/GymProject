@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.kharitonov.gym.validator.ValidationError" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ctg" uri="customtags" %>
@@ -46,12 +47,19 @@
 </div>
 
 <jsp:include page="/jsp/part/header.jsp"/>
-<jsp:include page="/jsp/popup/confirm_sent.jsp"/>
-<jsp:include page="/jsp/popup/confirmed.jsp"/>
-<jsp:include page="/jsp/popup/access_error.jsp"/>
-<jsp:include page="/jsp/popup/login.jsp"/>
+<jsp:include page="/jsp/modal/confirm_sent.jsp"/>
+<jsp:include page="/jsp/modal/confirmed.jsp"/>
+<jsp:include page="/jsp/modal/access_error.jsp"/>
+<jsp:include page="/jsp/modal/login.jsp"/>
+<jsp:include page="/jsp/modal/feedback_sent.jsp"/>
 
 <ctg:message/>
+
+<%--<c:if test="${errorSet.contains(ValidationError.WRONG_LOGIN_PASSWORD)}">
+	<script>
+		$('#modalLogin').modal('show');
+	</script>
+</c:if>--%>
 
 <section class="hero-section">
 	<div class="hero-items owl-carousel">

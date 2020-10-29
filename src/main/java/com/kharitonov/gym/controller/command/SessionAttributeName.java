@@ -11,6 +11,9 @@ public class SessionAttributeName {
     public static final String LOGIN_EMAIL_EXISTS = "loginEmailExists";
     public static final String ACCESS_ERROR = "accessError";
     public static final String LOW_BALANCE = "lowbalance";
+    public static final String ERROR_SET = "errorSet";
+    public static final String LOGIN_MAP = "loginMap";
+    public static final String REGISTRAION_MAP = "regMap";
 
     private SessionAttributeName() {
     }

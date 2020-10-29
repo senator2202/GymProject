@@ -32,7 +32,7 @@
 </head>
 
 <body>
-<jsp:include page="/jsp/popup/client_profile.jsp"/>
+<jsp:include page="/jsp/modal/client_profile.jsp"/>
 <div class="wrapper ">
 	<jsp:include page="/jsp/admin_sidebar.jsp"/>
 	<div class="main-panel">

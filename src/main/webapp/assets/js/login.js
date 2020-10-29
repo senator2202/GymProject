@@ -16,12 +16,3 @@
         });
     }, false);
 })();
-
-function checkSimilarPasswords() {
-    var repeat = document.getElementById("repeat_password");
-    if (repeat.value != document.getElementById('reg_password').value) {
-       repeat.setCustomValidity('Passwords are not the same!');
-    } else {
-        repeat.setCustomValidity('')
-    }
-}

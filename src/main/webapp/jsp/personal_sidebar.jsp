@@ -4,7 +4,7 @@
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<jsp:include page="/jsp/popup/trainer_application.jsp"/>
+<jsp:include page="/jsp/modal/trainer_application.jsp"/>
 
 <div class="sidebar" data-color="purple" data-background-color="white">
     <div class="logo">

@@ -11,7 +11,9 @@ import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.UserService;
 import com.kharitonov.gym.util.CryptoUtility;
 import com.kharitonov.gym.util.mail.MailUtility;
-import com.kharitonov.gym.validator.FormValidator;
+import com.kharitonov.gym.validator.UserValidator;
+import com.kharitonov.gym.validator.ValidationError;
+import com.kharitonov.gym.validator.ValidationErrorSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,17 +33,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findUser(Map<String, String> parameters)
             throws ServiceException {
-        if (!FormValidator.validateLoginParameters(parameters)) {
+        if (!UserValidator.correctLoginParameters(parameters)) {
             return Optional.empty();
         }
         String login = parameters.get(RequestParameterName.LOGIN);
         String password = parameters.get(RequestParameterName.LOGIN_PASSWORD);
-        CryptoUtility cryptoUtility = new CryptoUtility();
-        String encryptedPassword = cryptoUtility.encryptMessage(password);
+        String encryptedPassword = CryptoUtility.encryptMessage(password);
         UserDao dao = new UserDaoImpl();
         Optional<User> optional;
         try {
             optional = dao.findUser(login, encryptedPassword);
+            if (optional.isEmpty()) {
+                ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+                errorSet.add(ValidationError.WRONG_LOGIN_PASSWORD);
+            }
             LOGGER.info("Login result: {}", optional.isPresent());
         } catch (DaoException e) {
             throw new ServiceException("Error, accessing database!", e);
@@ -52,24 +57,31 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> registerUser(Map<String, String> parameters)
             throws ServiceException {
-        if (!FormValidator.validateRegisterParameters(parameters)) {
+        if (!UserValidator.correctRegisterParameters(parameters)) {
             return Optional.empty();
         }
         String login = parameters.get(RequestParameterName.REGISTRATION_LOGIN);
         String password = parameters.get(RequestParameterName.REGISTRATION_PASSWORD);
         String email = parameters.get(RequestParameterName.REGISTRATION_EMAIL);
-        CryptoUtility cryptoUtility = new CryptoUtility();
-        String encryptedPassword = cryptoUtility.encryptMessage(password);
+        String encryptedPassword = CryptoUtility.encryptMessage(password);
         UserDao dao = new UserDaoImpl();
         try {
-            if (dao.findByLogin(login) || dao.findByEmail(email)) {
+            ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+            boolean exists = false;
+            if (dao.findByLogin(login)) {
+                errorSet.add(ValidationError.LOGIN_EXISTS);
+                exists = true;
+            }
+            if (dao.findByEmail(email)) {
+                errorSet.add(ValidationError.EMAIL_EXISTS);
+                exists = true;
+            }
+            if (exists) {
                 return Optional.empty();
             }
-            MailUtility service;
-            User user;
             dao.addUser(login, encryptedPassword, email);
-            user = dao.findUser(login, encryptedPassword).get();
-            service = new MailUtility();
+            User user = dao.findUser(login, encryptedPassword).get();
+            MailUtility service = new MailUtility();
             try {
                 service.sendConfirmMessage(email, user.getAccount().getId());
                 LOGGER.info("User '{}' was successfully registered!", login);
@@ -98,7 +110,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateAccountData(int userId, String email, String locale) throws ServiceException {
-        if (!FormValidator.validateEmail(email)) {
+        if (!UserValidator.correctEmail(email)) {
             return false;
         }
         UserDao dao = new UserDaoImpl();

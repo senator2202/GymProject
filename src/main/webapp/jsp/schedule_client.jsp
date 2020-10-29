@@ -7,11 +7,11 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<jsp:include page="/jsp/popup/buy_trainings.jsp"/>
-<jsp:include page="/jsp/popup/add_training.jsp"/>
-<jsp:include page="/jsp/popup/edit_training.jsp"/>
-<jsp:include page="/jsp/popup/rating.jsp"/>
-<jsp:include page="/jsp/popup/low_balance.jsp"/>
+<jsp:include page="/jsp/modal/buy_trainings.jsp"/>
+<jsp:include page="/jsp/modal/add_training.jsp"/>
+<jsp:include page="/jsp/modal/edit_training.jsp"/>
+<jsp:include page="/jsp/modal/rating.jsp"/>
+<jsp:include page="/jsp/modal/low_balance.jsp"/>
 
 <ctg:message/>
 

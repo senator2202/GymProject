@@ -6,7 +6,7 @@ import com.kharitonov.gym.model.entity.Feedback;
 import java.util.List;
 
 public interface FeedbackService {
-    void addFeedback(String name, String email, String subject, String message) throws ServiceException;
+    boolean addFeedback(String name, String email, String subject, String message) throws ServiceException;
 
     List<Feedback> findAllFeedbacks() throws ServiceException;
 

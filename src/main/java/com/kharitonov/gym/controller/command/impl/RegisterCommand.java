@@ -4,6 +4,8 @@ import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
+import com.kharitonov.gym.validator.ValidationError;
+import com.kharitonov.gym.validator.ValidationErrorSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,25 +33,22 @@ public class RegisterCommand implements ActionCommand {
         parameters.put(RequestParameterName.REGISTRATION_EMAIL, email);
         String page;
         try {
+            HttpSession session = request.getSession();
             Optional<User> optionalUser = service.registerUser(parameters);
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
-                HttpSession session = request.getSession();
-                clearSessionAttributesExceptUser(request);
                 session.setAttribute(SessionAttributeName.USER, user);
                 session.setAttribute(RequestAttributeName.CONFIRMATION_SENT, true);
                 page = ProjectPage.INDEX.getDirectUrl();
             } else {
-                clearSessionAttributesExceptUser(request);
-                for (Map.Entry<String, String> entry : parameters.entrySet()) {
-                    request.getSession().setAttribute(entry.getKey(), entry.getValue());
-                }
-                request.getSession().setAttribute(SessionAttributeName.LOGIN_EMAIL_EXISTS, true);
+                ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+                session.setAttribute(SessionAttributeName.REGISTRAION_MAP, parameters);
+                session.setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
                 page = ProjectPage.INDEX.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error("Unable to register new user!", e);
-            page = ProjectPage.ERROR_404.getDirectUrl();
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
         return page;
     }
