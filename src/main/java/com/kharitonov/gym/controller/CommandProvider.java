@@ -23,7 +23,7 @@ public class CommandProvider {
         try {
             type = CommandType.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException e) {
-           type = CommandType.INVALID;
+            type = CommandType.INVALID;
         }
         return type;
     }

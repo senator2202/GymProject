@@ -11,12 +11,11 @@ import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.UserService;
 import com.kharitonov.gym.util.CryptoUtility;
 import com.kharitonov.gym.util.mail.MailUtility;
-import com.kharitonov.gym.validator.UserValidator;
-import com.kharitonov.gym.validator.ValidationError;
-import com.kharitonov.gym.validator.ValidationErrorSet;
+import com.kharitonov.gym.validator.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,6 +23,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private static final UserServiceImpl INSTANCE = new UserServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
+    private static final int DEFAULT_USERS_NUMBER = 30;
 
 
     public static UserServiceImpl getInstance() {
@@ -95,14 +95,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void confirmAccount(int id) throws ServiceException {
-        if (id < 1) {
-            throw new ServiceException("Incorrect id value!");
+    public boolean confirmAccount(String accountId) throws ServiceException {
+        if (!UserValidator.correctId(accountId)) {
+            return false;
         }
         UserDao dao = new UserDaoImpl();
+        int id = Integer.parseInt(accountId);
         try {
             dao.confirmAccount(id);
             LOGGER.info("Account id={} was confirmed!", id);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -147,20 +149,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void appointTrainer(String userId, String institution,
-                               String graduationYear, String instagramLink) throws ServiceException {
+    public boolean appointTrainer(String userId, String institution,
+                                  String graduationYear, String instagramLink) throws ServiceException {
+        if (!TrainerApplicationValidator.correctApplicationParameters(userId, institution,
+                graduationYear, instagramLink)) {
+            return false;
+        }
         UserDao dao = new UserDaoImpl();
         int id = Integer.parseInt(userId);
         int year = Integer.parseInt(graduationYear);
         try {
             dao.changeRoleToTrainer(id, institution, year, instagramLink);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public List<User> findRecentUsers(int days) throws ServiceException {
+    public List<User> findRecentUsers(String daysNumber) throws ServiceException {
+        if (!UserValidator.correctDaysNumber(daysNumber)) {
+            ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+            errorSet.add(ValidationError.INVALID_NUMBER_FORMAT);
+            return Collections.EMPTY_LIST;
+        }
+        int days = daysNumber != null
+                ? Integer.parseInt(daysNumber)
+                : DEFAULT_USERS_NUMBER;
         UserDao dao = new UserDaoImpl();
         try {
             return dao.findRecentUsers(days);
@@ -181,6 +196,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean buyTrainings(Client client, String trainingsNumber, double trainingCost) throws ServiceException {
+        ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+        if (!TrainingValidator.correctTrainingsNumber(trainingsNumber)) {
+            errorSet.add(ValidationError.INVALID_NUMBER_FORMAT);
+            return false;
+        }
         int number = Integer.parseInt(trainingsNumber);
         double discount = client.getPersonalDiscount();
         double balance = client.getMoneyBalance();
@@ -188,6 +208,7 @@ public class UserServiceImpl implements UserService {
         double absoluteDiscount = sum * discount / 100;
         sum -= absoluteDiscount;
         if (balance < sum) {
+            errorSet.add(ValidationError.LOW_BALANCE);
             return false;
         }
         int id = client.getAccount().getId();
@@ -214,12 +235,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addToBalance(int clientId, String stringAmount) throws ServiceException {
-        int amount;
-        try {
-            amount = Integer.parseInt(stringAmount);
-        } catch (NumberFormatException e) {
+        if (!UserValidator.correctDepositAmount(stringAmount)) {
             return false;
         }
+        int amount = Integer.parseInt(stringAmount);
         UserDao dao = new UserDaoImpl();
         try {
             dao.addToBalance(clientId, amount);
@@ -240,11 +259,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void blockUser(String userId) throws ServiceException {
+    public boolean blockUser(String userId) throws ServiceException {
+        if (!UserValidator.correctId(userId)) {
+            return false;
+        }
         UserDao dao = new UserDaoImpl();
         int id = Integer.parseInt(userId);
         try {
             dao.blockUser(id);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -255,17 +278,6 @@ public class UserServiceImpl implements UserService {
         UserDao dao = new UserDaoImpl();
         try {
             dao.unblockUser(userId);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public void updateRating(String trainerId, double rating) throws ServiceException {
-        UserDao dao = new UserDaoImpl();
-        int id = Integer.parseInt(trainerId);
-        try {
-            dao.updateRating(id, rating);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

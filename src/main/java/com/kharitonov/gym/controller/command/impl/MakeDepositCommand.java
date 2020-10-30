@@ -22,15 +22,20 @@ public class MakeDepositCommand implements ActionCommand {
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
         int id = client.getAccount().getId();
         String amount = request.getParameter(RequestParameterName.AMOUNT);
+        String page;
         try {
             if (service.addToBalance(id, amount)) {
                 double balance = client.getMoneyBalance();
                 int intAmount = Integer.parseInt(amount);
                 client.setMoneyBalance(balance + intAmount);
+                page = ProjectPage.PERSONAL_FINANCE.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.PERSONAL_FINANCE.getServletCommand();
+        return page;
     }
 }

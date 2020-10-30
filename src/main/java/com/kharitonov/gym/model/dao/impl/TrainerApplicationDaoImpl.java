@@ -12,13 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.kharitonov.gym.model.dao.impl.TrainerApplicationStatementCreator.*;
+import static com.kharitonov.gym.model.dao.impl.UserStatementCreator.statementUpdateTrainer;
+import static com.kharitonov.gym.model.dao.impl.UserStatementCreator.statementUpdateTrainerRole;
 
 public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
-    public void addApplication(int userId, String institution,
-                               int graduationYear, String instagramLink) throws DaoException {
+    public void add(int userId, String institution,
+                    int graduationYear, String instagramLink) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementInsertApplication(connection, userId,
                      institution, graduationYear, instagramLink)) {
@@ -29,9 +31,9 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     }
 
     @Override
-    public boolean applicationExists(int userId) throws DaoException {
+    public boolean exists(int userId) throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = statementSelectApplication(connection, userId);
+             PreparedStatement statement = statementFindById(connection, userId);
              ResultSet resultSet = statement.executeQuery()) {
             return resultSet.next();
         } catch (SQLException e) {
@@ -40,7 +42,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     }
 
     @Override
-    public void deleteApplication(int userId) throws DaoException {
+    public void delete(int userId) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementDeleteApplication(connection, userId)) {
             statement.execute();
@@ -50,7 +52,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     }
 
     @Override
-    public List<TrainerApplication> findAllApplications() throws DaoException {
+    public List<TrainerApplication> findAll() throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementSelectAllApplications(connection);
              ResultSet resultSet = statement.executeQuery()) {
@@ -61,6 +63,53 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
             }
             return applications;
         } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void approve(int userId, String institution, int graduationYear, String instagramLink) throws DaoException {
+        Connection connection = pool.getConnection();
+        try {
+            connection.setAutoCommit(false);
+            setTrainerRole(connection, userId);
+            updateUserData(connection, userId, institution, graduationYear, instagramLink);
+            deleteApplication(connection, userId);
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        } finally {
+            setAutoCommitTrue(connection);
+            pool.releaseConnection(connection);
+        }
+    }
+
+    private void setTrainerRole(Connection connection, int userId) throws DaoException {
+        try (PreparedStatement statement = statementUpdateTrainerRole(connection, userId)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        }
+    }
+
+    private void updateUserData(Connection connection, int userId, String institution,
+                                int graduationYear, String instagramLink) throws DaoException {
+        try (PreparedStatement statement = statementUpdateTrainer(connection, institution,
+                graduationYear, instagramLink, userId)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        }
+    }
+
+    private void deleteApplication(Connection connection, int userId) throws DaoException {
+        try (PreparedStatement statement = statementDeleteApplication(connection, userId)) {
+            statement.execute();
+        } catch (SQLException e) {
+            rollback(connection);
             throw new DaoException(e);
         }
     }

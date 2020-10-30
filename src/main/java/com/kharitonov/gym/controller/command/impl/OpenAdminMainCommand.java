@@ -20,12 +20,15 @@ public class OpenAdminMainCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        String page;
         try {
             List<TrainerApplication> applications = service.getAllApplications();
             request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.APPLICATIONS_TAB);
             request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
+            page = ProjectPage.ADMIN_MAIN.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error("Applications loading error!", e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
         return ProjectPage.ADMIN_MAIN.getDirectUrl();
     }

@@ -68,7 +68,7 @@ class UserStatementCreator {
             "UPDATE accounts SET active=false WHERE account_id=?";
     private static final String SQL_UNBLOCK_USER =
             "UPDATE accounts SET active=true WHERE account_id=?";
-    private static final String SQL_UPDATE_RATING =
+    private static final String SQL_UPDATE_TRAINER_RATING =
             "UPDATE users SET rating=? WHERE user_id=?";
     private static final String SQL_UPDATE_DISCOUNT =
             "UPDATE users SET discount=? WHERE user_id=?";
@@ -286,15 +286,15 @@ class UserStatementCreator {
         return statement;
     }
 
-    static PreparedStatement statementUpdateRating(Connection connection, int id, double rating) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_RATING);
+    static PreparedStatement statementUpdateTrainerRating(Connection connection, int id, double rating) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_TRAINER_RATING);
         statement.setDouble(1, rating);
         statement.setInt(2, id);
         return statement;
     }
 
     static PreparedStatement statementUpdateDiscount(Connection connection, int id, double discount)
-        throws SQLException {
+            throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_DISCOUNT);
         statement.setDouble(1, discount);
         statement.setInt(2, id);

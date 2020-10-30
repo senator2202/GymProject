@@ -37,7 +37,7 @@ public class OpenScheduleCommand implements ActionCommand {
             page = ProjectPage.SCHEDULE.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_404.getDirectUrl();
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
         return page;
     }

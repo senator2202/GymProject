@@ -19,7 +19,7 @@ public class MessageTag extends SimpleTagSupport {
         StringBuilder html = new StringBuilder();
         EnumSet<ValidationError> errorSet =
                 (EnumSet<ValidationError>) context.findAttribute(SessionAttributeName.ERROR_SET);
-        if (errorSet != null &&errorSet.contains(ValidationError.WRONG_LOGIN_PASSWORD)) {
+        if (errorSet != null && errorSet.contains(ValidationError.WRONG_LOGIN_PASSWORD)) {
             html.append("\n<script>$('#modalLogin').modal('show');</script>");
             errorSet.remove(ValidationError.WRONG_LOGIN_PASSWORD);
         }
@@ -29,25 +29,25 @@ public class MessageTag extends SimpleTagSupport {
             errorSet.remove(ValidationError.LOGIN_EXISTS);
             errorSet.remove(ValidationError.EMAIL_EXISTS);
         }
-        if (context.findAttribute(RequestAttributeName.CONFIRMED_ACCOUNT) !=null) {
+        if (errorSet != null && errorSet.contains(ValidationError.LOW_BALANCE)) {
+            html.append("\n<script>$('#modalLowBalance').modal('show');</script>");
+            errorSet.remove(ValidationError.LOW_BALANCE);
+        }
+        if (context.findAttribute(RequestAttributeName.CONFIRMED_ACCOUNT) != null) {
             html.append("\n<script>$('#modalConfirmed').modal('show');</script>");
             context.removeAttribute(RequestAttributeName.CONFIRMED_ACCOUNT);
         }
-        if (context.findAttribute(RequestAttributeName.CONFIRMATION_SENT) !=null) {
+        if (context.findAttribute(RequestAttributeName.CONFIRMATION_SENT) != null) {
             html.append("\n<script>$('#modalConfirmationSent').modal('show');</script>");
             context.removeAttribute(RequestAttributeName.CONFIRMATION_SENT);
         }
-        if (context.findAttribute(RequestAttributeName.FEEDBACK_SENT) !=null) {
+        if (context.findAttribute(RequestAttributeName.FEEDBACK_SENT) != null) {
             html.append("\n<script>$('#modalFeedbackSent').modal('show');</script>");
             context.removeAttribute(RequestAttributeName.FEEDBACK_SENT);
         }
-        if (context.findAttribute(SessionAttributeName.ACCESS_ERROR) !=null) {
+        if (context.findAttribute(SessionAttributeName.ACCESS_ERROR) != null) {
             html.append("\n<script>$('#modalAccessError').modal('show');</script>");
             context.removeAttribute(SessionAttributeName.ACCESS_ERROR);
-        }
-        if (context.findAttribute(SessionAttributeName.LOW_BALANCE) !=null) {
-            html.append("\n<script>$('#modalLowBalance').modal('show');</script>");
-            context.removeAttribute(SessionAttributeName.LOW_BALANCE);
         }
         if (context.findAttribute(SessionAttributeName.USER) == null) {
             html.append("\n<script>\n" +

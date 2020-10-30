@@ -21,14 +21,20 @@ public class CancelTrainingCommand implements ActionCommand {
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
         int clientId = client.getAccount().getId();
         String trainingId = request.getParameter(RequestParameterName.TRAINING_ID);
+        String page;
         try {
-            List<Training> trainings;
-            service.deleteTraining(trainingId, clientId);
-            client.setBoughtTrainings(client.getBoughtTrainings() + 1);
-            trainings = service.findClientTrainings(clientId);
-            request.setAttribute(RequestAttributeName.TRAININGS, trainings);
+            if (service.deleteTraining(trainingId, clientId)) {
+                restoreRequestAttributes(request);
+                List<Training> trainings = (List<Training>) request.getAttribute(RequestAttributeName.PLANNED_TRAININGS);
+                int id = Integer.parseInt(trainingId);
+                trainings.stream().filter(t -> t.getTrainingId() == id).findFirst().map(trainings::remove);
+                client.setBoughtTrainings(client.getBoughtTrainings() + 1);
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
         return ProjectPage.SCHEDULE.getServletCommand();
     }

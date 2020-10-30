@@ -7,6 +7,8 @@ import com.kharitonov.gym.model.dao.impl.TrainingDaoImpl;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.service.TrainingService;
 import com.kharitonov.gym.validator.TrainingValidator;
+import com.kharitonov.gym.validator.ValidationError;
+import com.kharitonov.gym.validator.ValidationErrorSet;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -17,7 +19,7 @@ public class TrainingServiceImpl implements TrainingService {
     private static final String SECONDS_POSTFIX = ":00";
     private static final int TIME_LENGTH = 8;
     private static final String BLANK = "";
-    private static final int ERROR_ID = -1;
+    private static final int ERROR_VALUE = -1;
     private static final TrainingServiceImpl INSTANCE = new TrainingServiceImpl();
 
     private TrainingServiceImpl() {
@@ -30,7 +32,7 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public int addTraining(String sTrainerId, int clientId, String trainingDate, String trainingTime) throws ServiceException {
         if (!TrainingValidator.correctAddTrainingParameters(sTrainerId, trainingDate, trainingTime)) {
-            return ERROR_ID;
+            return ERROR_VALUE;
         }
         int trainerId = Integer.parseInt(sTrainerId);
         Date date = Date.valueOf(trainingDate);
@@ -74,11 +76,15 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void deleteTraining(String trainingId, int userId) throws ServiceException {
+    public boolean deleteTraining(String trainingId, int userId) throws ServiceException {
+        if (!TrainingValidator.correctId(trainingId)) {
+            return false;
+        }
         TrainingDao dao = new TrainingDaoImpl();
         int id = Integer.parseInt(trainingId);
         try {
             dao.deleteTraining(id, userId);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -109,12 +115,17 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void rateTraining(String sTrainingId, String trainingRating) throws ServiceException {
+    public boolean rateTraining(String sTrainingId, String sTrainingRating, String sTrainerId) throws ServiceException {
+        if (!TrainingValidator.correctRateTrainingParameters(sTrainingId, sTrainingRating, sTrainerId)) {
+            return false;
+        }
         TrainingDao dao = new TrainingDaoImpl();
         int trainingId = Integer.parseInt(sTrainingId);
-        int rating = Integer.parseInt(trainingRating);
+        int trainingRating = Integer.parseInt(sTrainingRating);
+        int trainerId = Integer.parseInt(sTrainerId);
         try {
-            dao.updateRating(trainingId, rating);
+            dao.updateTrainingRating(trainingId, trainingRating, trainerId);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -122,6 +133,11 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public double averageTrainerRating(String trainerId) throws ServiceException {
+        if (!TrainingValidator.correctId(trainerId)) {
+            ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+            errorSet.add(ValidationError.INVALID_NUMBER_FORMAT);
+            return ERROR_VALUE;
+        }
         TrainingDao dao = new TrainingDaoImpl();
         int id = Integer.parseInt(trainerId);
         try {

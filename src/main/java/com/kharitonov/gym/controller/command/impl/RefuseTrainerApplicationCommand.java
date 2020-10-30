@@ -21,12 +21,23 @@ public class RefuseTrainerApplicationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String id = request.getParameter(RequestParameterName.APPLICATION_ID);
+        String page;
         try {
-            List<TrainerApplication> applications = service.deleteApplication(id);
-            request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
+            if (service.deleteApplication(id)) {
+                restoreRequestAttributes(request);
+                List<TrainerApplication> applications =
+                        (List<TrainerApplication>) request.getAttribute(RequestAttributeName.APPLICATIONS);
+                int userId = Integer.parseInt(id);
+                applications.stream().filter(a -> a.getUser().getAccount().getId() == userId).map(applications::remove);
+                request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
+                page = ProjectPage.ADMIN_MAIN.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.ADMIN_MAIN.getServletCommand();
+        return page;
     }
 }

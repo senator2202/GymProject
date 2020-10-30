@@ -4,7 +4,6 @@ import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
-import com.kharitonov.gym.validator.ValidationError;
 import com.kharitonov.gym.validator.ValidationErrorSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

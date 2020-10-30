@@ -14,7 +14,7 @@ public interface UserService {
 
     Optional<User> registerUser(Map<String, String> parameters) throws ServiceException;
 
-    void confirmAccount(int id) throws ServiceException;
+    boolean confirmAccount(String accountId) throws ServiceException;
 
     boolean updateAccountData(int userId, String email, String locale) throws ServiceException;
 
@@ -25,10 +25,10 @@ public interface UserService {
     void updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws ServiceException;
 
-    void appointTrainer(String userId, String institution,
-                        String graduationYear, String instagramLink) throws ServiceException;
+    boolean appointTrainer(String userId, String institution,
+                           String graduationYear, String instagramLink) throws ServiceException;
 
-    List<User> findRecentUsers(int days) throws ServiceException;
+    List<User> findRecentUsers(String daysNumber) throws ServiceException;
 
     void updateUserImage(int userId, String imageName) throws ServiceException;
 
@@ -40,11 +40,9 @@ public interface UserService {
 
     Optional<String> findEmailById(int userId) throws ServiceException;
 
-    void blockUser(String userId) throws ServiceException;
+    boolean blockUser(String userId) throws ServiceException;
 
     void unblockUser(int userId) throws ServiceException;
-
-    void updateRating(String trainerId, double rating) throws ServiceException;
 
     void updateDiscount(String clientId, String discount) throws ServiceException;
 }

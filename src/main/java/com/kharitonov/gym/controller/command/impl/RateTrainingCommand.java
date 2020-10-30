@@ -23,14 +23,18 @@ public class RateTrainingCommand implements ActionCommand {
         String trainingId = request.getParameter(RequestParameterName.TRAINING_ID);
         String trainingRating = request.getParameter(RequestParameterName.TRAINING_RAITING);
         String trainerId = request.getParameter(RequestParameterName.TRAINER_ID);
+        String page;
         try {
-            double avgRating;
-            trainingService.rateTraining(trainingId, trainingRating);
-            avgRating = trainingService.averageTrainerRating(trainerId);
-            userService.updateRating(trainerId, avgRating);
+            if (trainingService.rateTraining(trainingId, trainingRating, trainerId)) {
+                page = ProjectPage.SCHEDULE.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
+
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.SCHEDULE.getServletCommand();
+        return page;
     }
 }

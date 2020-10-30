@@ -98,7 +98,7 @@
 														${application.graduationYear}
 												</td>
 												<td>
-													<a href="http://${application.instagramLink}">${application.instagramLink}</a>
+													<a href="${application.instagramLink}">${application.instagramLink}</a>
 												</td>
 												<td>
 														${application.applicationDate}

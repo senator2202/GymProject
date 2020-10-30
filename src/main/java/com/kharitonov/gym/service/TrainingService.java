@@ -15,14 +15,14 @@ public interface TrainingService {
 
     void updateDescription(int trainingId, String description) throws ServiceException;
 
-    void deleteTraining(String trainingId, int userId) throws ServiceException;
+    boolean deleteTraining(String trainingId, int userId) throws ServiceException;
 
     void updateTraining(String trainingId, String trainingDate, String trainingTime, String description)
             throws ServiceException;
 
     void setTrainingDone(String trainingId) throws ServiceException;
 
-    void rateTraining(String trainingId, String rating) throws ServiceException;
+    boolean rateTraining(String trainingId, String rating, String trainerId) throws ServiceException;
 
     double averageTrainerRating(String trainerId) throws ServiceException;
 

@@ -16,22 +16,24 @@ public class ConfirmAccountCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String stringId = request.getParameter(RequestParameterName.ID);
+        String accountId = request.getParameter(RequestParameterName.ID);
         String page;
-        int id = Integer.parseInt(stringId);
         try {
-            Optional<String> optional;
-            service.confirmAccount(id);
-            optional = service.findEmailById(id);
-            if (optional.isPresent()) {
-                User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
-                String email = optional.get();
-                request.setAttribute(RequestAttributeName.CONFIRMED_ACCOUNT, email);
-                if (user != null) {
-                    user.getAccount().setIsActive(true);
+            if (service.confirmAccount(accountId)) {
+                int id = Integer.parseInt(accountId);
+                Optional<String> optional = service.findEmailById(id);
+                if (optional.isPresent()) {
+                    User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
+                    String email = optional.get();
+                    request.setAttribute(RequestAttributeName.CONFIRMED_ACCOUNT, email);
+                    if (user != null && user.getAccount().getId() == id) {
+                        user.getAccount().setIsActive(true);
+                    }
                 }
+                page = ProjectPage.INDEX.getDirectUrl();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
             }
-            page = ProjectPage.INDEX.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error(e);
             page = ProjectPage.ERROR_500.getDirectUrl();

@@ -9,7 +9,10 @@ public interface TrainerApplicationService {
     boolean sendApplication(int id, String institution,
                             int graduationYear, String instagramLink) throws ServiceException;
 
-    List<TrainerApplication> deleteApplication(String id) throws ServiceException;
+    boolean deleteApplication(String id) throws ServiceException;
+
+    boolean approveApplication(String userId, String institution,
+                               String graduationYear, String instagramLink) throws ServiceException;
 
     List<TrainerApplication> getAllApplications() throws ServiceException;
 }

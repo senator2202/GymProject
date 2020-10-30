@@ -1,16 +1,19 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.*;
+import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.RequestAttributeName;
+import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
+import com.kharitonov.gym.validator.ValidationError;
+import com.kharitonov.gym.validator.ValidationErrorSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
-import static java.lang.Math.min;
 
 public class OpenAdminRegistrationsCommand implements ActionCommand {
     private static final int DEFAULT_USERS_NUMBER = 30;
@@ -21,23 +24,22 @@ public class OpenAdminRegistrationsCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        String days = request.getParameter(RequestParameterName.RECENT_DAYS);
+        String page;
         try {
-            String daysParameter = request.getParameter(RequestParameterName.RECENT_DAYS);
-            int days = daysParameter != null
-                    ? Integer.parseInt(daysParameter)
-                    : DEFAULT_USERS_NUMBER;
             List<User> users = service.findRecentUsers(days);
-            List<User> usersPerPage;
-            String stringOffset = request.getParameter(RequestParameterName.TABLE_OFFSET);
-            int offset = stringOffset == null ? DEFAULT_OFFSET : Integer.parseInt(stringOffset);
-            request.setAttribute(RequestAttributeName.DAYS_NUMBER, days);
-            request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.REGISTRATIONS_TAB);
-            usersPerPage = users.subList((offset - DEFAULT_OFFSET) * DEFAULT_ROWS, min(offset * DEFAULT_ROWS, users.size()));
-            request.setAttribute(RequestAttributeName.RECENT_USERS, users);
-            request.setAttribute(RequestParameterName.TOTAL_RECENT_USERS, users.size());
+            ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+            if (errorSet.contains(ValidationError.INVALID_NUMBER_FORMAT)) {
+                errorSet.clear();
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            } else {
+                request.setAttribute(RequestAttributeName.RECENT_USERS, users);
+                page = ProjectPage.ADMIN_REGISTRATIONS.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.ADMIN_REGISTRATIONS.getDirectUrl();
+        return page;
     }
 }

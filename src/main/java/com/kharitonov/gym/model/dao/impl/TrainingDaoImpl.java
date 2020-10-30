@@ -118,11 +118,48 @@ public class TrainingDaoImpl implements TrainingDao {
     }
 
     @Override
-    public void updateRating(int trainingId, int rating) throws DaoException {
-        try (Connection connection = pool.getConnection();
-             PreparedStatement statement = statementUpdateRating(connection, trainingId, rating)) {
-            statement.executeUpdate();
+    public void updateTrainingRating(int trainingId, int rating, int trainerId) throws DaoException {
+        Connection connection = pool.getConnection();
+        try {
+            connection.setAutoCommit(false);
+            setTrainingRating(connection, trainingId, rating);
+            double trainerRating = averageTrainerRating(trainerId);
+            updateTrainerRaiting(connection, trainerId, trainerRating);
+            connection.commit();
         } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        } finally {
+            setAutoCommitTrue(connection);
+            pool.releaseConnection(connection);
+        }
+    }
+
+    private void setTrainingRating(Connection connection, int trainingId, int rating) throws DaoException {
+        try (PreparedStatement updTraining = statementUpdateTrainingRating(connection, trainingId, rating)) {
+            updTraining.executeUpdate();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        }
+    }
+
+    private double countAverageRating(Connection connection, int trainerId) throws DaoException {
+        try (PreparedStatement countAvgRating = statementAverageRaiting(connection, trainerId);
+             ResultSet resultSet = countAvgRating.executeQuery();) {
+            resultSet.next();
+            return resultSet.getDouble(TableColumnName.AVERAGE_TRAINER_RATING);
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DaoException(e);
+        }
+    }
+
+    private void updateTrainerRaiting(Connection connection, int trainerId, double rating) throws DaoException {
+        try (PreparedStatement updTraining = statementUpdateTrainerRating(connection, trainerId, rating)) {
+            updTraining.executeUpdate();
+        } catch (SQLException e) {
+            rollback(connection);
             throw new DaoException(e);
         }
     }

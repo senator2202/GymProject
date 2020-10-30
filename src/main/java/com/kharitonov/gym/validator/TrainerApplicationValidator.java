@@ -1,16 +1,16 @@
 package com.kharitonov.gym.validator;
 
 public class TrainerApplicationValidator {
-    private static final String ID_REGEX = "\\d{1,10}";
+    private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
     private static final String YEAR_REGEX = "\\d{4}";
     private static final String INSTITUTION_REGEX = "\\p{L}{2,30}";
-    private static final int MAX_INSTAGRAM_LENGTH = 30;
+    private static final int MAX_INSTAGRAM_LENGTH = 50;
 
     private TrainerApplicationValidator() {
     }
 
-    public static boolean correctAppointTrainerParameters(String userId, String institution,
-                                                          String graduationYear, String instagramLink) {
+    public static boolean correctApplicationParameters(String userId, String institution,
+                                                       String graduationYear, String instagramLink) {
         return correctId(userId) && correctInstitution(institution)
                 && correctYeat(graduationYear) && correctInstagram(instagramLink);
     }

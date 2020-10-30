@@ -28,11 +28,16 @@ public class ApproveTrainerApplicationCommand implements ActionCommand {
         String instagram = request.getParameter(RequestParameterName.APPLICATION_INSTAGRAM);
         String page;
         try {
-
-            userService.appointTrainer(id, institution, graduation, instagram);
-            List<TrainerApplication> applications = appService.deleteApplication(id);
-            request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
-            page = ProjectPage.ADMIN_MAIN.getServletCommand();
+            if (appService.approveApplication(id, institution, graduation, instagram)) {
+                restoreRequestAttributes(request);
+                List<TrainerApplication> applications =
+                        (List<TrainerApplication>) request.getAttribute(RequestAttributeName.APPLICATIONS);
+                int userId = Integer.parseInt(id);
+                applications.stream().filter(a -> a.getUser().getAccount().getId() == userId).map(applications::remove);
+                page = ProjectPage.ADMIN_MAIN.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
             page = ProjectPage.ERROR_500.getDirectUrl();

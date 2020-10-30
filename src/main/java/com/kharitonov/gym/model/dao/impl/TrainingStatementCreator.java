@@ -1,7 +1,5 @@
 package com.kharitonov.gym.model.dao.impl;
 
-import com.kharitonov.gym.model.entity.Training;
-
 import java.sql.*;
 
 class TrainingStatementCreator {
@@ -47,8 +45,10 @@ class TrainingStatementCreator {
             "UPDATE trainings SET training_date=?, training_time=?, description=? WHERE training_id=?";
     private static final String SQL_SET_TRAINING_DONE =
             "UPDATE trainings SET done=true WHERE training_id=?";
-    private static final String SQL_UPDATE_RATING =
+    private static final String SQL_UPDATE_TRAINING_RATING =
             "UPDATE trainings SET training_rating=? WHERE training_id=?";
+    private static final String SQL_UPDATE_TRAINER_RATING =
+            "UPDATE users SET rating=? WHERE user_id=?";
     private static final String SQL_AVERAGE_RATING =
             "SELECT AVG(training_rating) AS trainer_rating " +
                     "FROM (SELECT training_rating FROM trainings WHERE trainer_id=?) AS temp " +
@@ -137,11 +137,19 @@ class TrainingStatementCreator {
         return statement;
     }
 
-    static PreparedStatement statementUpdateRating(Connection connection, int trainingId, int rating)
+    static PreparedStatement statementUpdateTrainingRating(Connection connection, int trainingId, int rating)
             throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_RATING);
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_TRAINING_RATING);
         statement.setInt(1, rating);
         statement.setInt(2, trainingId);
+        return statement;
+    }
+
+    static PreparedStatement statementUpdateTrainerRating(Connection connection, int id, double rating)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_TRAINER_RATING);
+        statement.setDouble(1, rating);
+        statement.setInt(2, id);
         return statement;
     }
 

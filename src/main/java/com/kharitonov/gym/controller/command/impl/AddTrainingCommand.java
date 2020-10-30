@@ -12,16 +12,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
-import java.util.Optional;
 
 public class AddTrainingCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(AddTrainingCommand.class);
+    private static final int INVALID_ID = -1;
     private final UserService userService = UserServiceImpl.getInstance();
     private final TrainingService trainingService = TrainingServiceImpl.getInstance();
-    private static final int INVALID_ID = -1;
 
     @Override
     public String execute(HttpServletRequest request) {

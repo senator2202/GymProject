@@ -20,13 +20,16 @@ public class OpenAdminFeedbacksCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        String page;
         try {
             List<Feedback> feedbacks = service.findAllFeedbacks();
             request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.FEEDBACKS_TAB);
             request.setAttribute(RequestAttributeName.FEEDBACKS, feedbacks);
+            page = ProjectPage.ADMIN_FEEDBACKS.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.ADMIN_FEEDBACKS.getDirectUrl();
+        return page;
     }
 }

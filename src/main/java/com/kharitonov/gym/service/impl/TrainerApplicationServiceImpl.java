@@ -6,6 +6,8 @@ import com.kharitonov.gym.model.dao.TrainerApplicationDao;
 import com.kharitonov.gym.model.dao.impl.TrainerApplicationDaoImpl;
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.service.TrainerApplicationService;
+import com.kharitonov.gym.validator.TrainerApplicationValidator;
+import com.kharitonov.gym.validator.UserValidator;
 
 import java.util.List;
 
@@ -25,8 +27,8 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
         TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
         try {
             boolean firstAttempt;
-            if (!dao.applicationExists(id)) {
-                dao.addApplication(id, institution, graduationYear, instagramLink);
+            if (!dao.exists(id)) {
+                dao.add(id, institution, graduationYear, instagramLink);
                 firstAttempt = true;
             } else {
                 firstAttempt = false;
@@ -38,12 +40,33 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
     }
 
     @Override
-    public List<TrainerApplication> deleteApplication(String userId) throws ServiceException {
+    public boolean deleteApplication(String userId) throws ServiceException {
+        if (!UserValidator.correctId(userId)) {
+            return false;
+        }
         TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
         int id = Integer.parseInt(userId);
         try {
-            dao.deleteApplication(id);
-            return dao.findAllApplications();
+            dao.delete(id);
+            return true;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean approveApplication(String userId, String institution, String graduationYear, String instagramLink)
+            throws ServiceException {
+        if (!TrainerApplicationValidator.correctApplicationParameters(userId, institution,
+                graduationYear, instagramLink)) {
+            return false;
+        }
+        int id = Integer.parseInt(userId);
+        int year = Integer.parseInt(graduationYear);
+        TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
+        try {
+            dao.approve(id, institution, year, instagramLink);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -53,7 +76,7 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
     public List<TrainerApplication> getAllApplications() throws ServiceException {
         TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
         try {
-            return dao.findAllApplications();
+            return dao.findAll();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

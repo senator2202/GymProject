@@ -1,12 +1,9 @@
 package com.kharitonov.gym.controller.filter;
 
-import com.kharitonov.gym.controller.CommandProvider;
 import com.kharitonov.gym.controller.command.CommandType;
-import com.kharitonov.gym.controller.command.impl.InvalidCommand;
 import com.kharitonov.gym.model.entity.UserRole;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 

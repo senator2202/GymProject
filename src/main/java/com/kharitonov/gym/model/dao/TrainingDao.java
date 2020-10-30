@@ -23,7 +23,7 @@ public interface TrainingDao extends BaseDao {
 
     void setTrainingDone(int trainingId) throws DaoException;
 
-    void updateRating(int trainingId, int rating) throws DaoException;
+    void updateTrainingRating(int trainingId, int rating, int trainerId) throws DaoException;
 
     double averageTrainerRating(int trainerId) throws DaoException;
 
