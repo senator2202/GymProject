@@ -8,6 +8,8 @@ import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.service.TrainerApplicationService;
 import com.kharitonov.gym.validator.TrainerApplicationValidator;
 import com.kharitonov.gym.validator.UserValidator;
+import com.kharitonov.gym.validator.ValidationError;
+import com.kharitonov.gym.validator.ValidationErrorSet;
 
 import java.util.List;
 
@@ -23,17 +25,23 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
 
     @Override
     public boolean sendApplication(int id, String institution,
-                                   int graduationYear, String instagramLink) throws ServiceException {
+                                   String graduationYear, String instagramLink) throws ServiceException {
+        if (!TrainerApplicationValidator.correctSendParameters(id, institution, graduationYear, instagramLink)) {
+            return false;
+        }
         TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
+        int year = Integer.parseInt(graduationYear);
         try {
-            boolean firstAttempt;
-            if (!dao.exists(id)) {
-                dao.add(id, institution, graduationYear, instagramLink);
-                firstAttempt = true;
+            boolean result;
+            if (dao.exists(id)) {
+                ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+                errorSet.add(ValidationError.APPLICATION_EXISTS);
+                result = false;
             } else {
-                firstAttempt = false;
+                dao.add(id, institution, year, instagramLink);
+                result = true;
             }
-            return firstAttempt;
+            return result;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

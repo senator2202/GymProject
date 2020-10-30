@@ -15,8 +15,8 @@ public enum ProjectPage {
     PERSONAL_FINANCE("/jsp/personal_finance.jsp", "/mainController?command=open_personal_finance"),
     SCHEDULE("/jsp/schedule.jsp", "/mainController?command=open_schedule");
 
-    private String directUrl;
-    private String servletCommand;
+    private final String directUrl;
+    private final String servletCommand;
 
     ProjectPage(String directUrl, String servletCommand) {
         this.directUrl = directUrl;

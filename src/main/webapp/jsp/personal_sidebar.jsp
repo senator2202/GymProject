@@ -1,10 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
 <jsp:include page="/jsp/modal/trainer_application.jsp"/>
+<jsp:include page="/jsp/modal/application_exists.jsp"/>
+
+<ctg:message/>
 
 <div class="sidebar" data-color="purple" data-background-color="white">
     <div class="logo">

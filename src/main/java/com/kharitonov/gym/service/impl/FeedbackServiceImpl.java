@@ -14,7 +14,6 @@ import java.util.List;
 
 public class FeedbackServiceImpl implements FeedbackService {
     private static final FeedbackServiceImpl INSTANCE = new FeedbackServiceImpl();
-    private static final String BLANK = "";
 
     public static FeedbackServiceImpl getInstance() {
         return INSTANCE;
@@ -45,18 +44,18 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public void sendReplyMessage(String feedbackId, String email, String subject, String replyMessage) throws ServiceException {
+    public boolean sendReplyMessage(String feedbackId, String email, String subject, String replyMessage) throws ServiceException {
+        if (!FeedbackValidator.correctReplyParameters(feedbackId, email, subject, replyMessage)) {
+            return false;
+        }
         FeedbackDao dao = new FeedbackDaoImpl();
         int id = Integer.parseInt(feedbackId);
         try {
             dao.addReplyMessage(id, replyMessage);
             MailUtility utility = new MailUtility();
-            try {
-                utility.sendMessage(email, subject, replyMessage);
-            } catch (PropertyReaderException e) {
-                dao.addReplyMessage(id, BLANK);
-            }
-        } catch (DaoException e) {
+            utility.sendMessage(email, subject, replyMessage);
+            return true;
+        } catch (DaoException | PropertyReaderException e) {
             throw new ServiceException(e);
         }
     }

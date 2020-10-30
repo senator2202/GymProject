@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao extends BaseDao {
-    void addUser(String login, String encryptedPassword, String email) throws DaoException;
+    int addUser(String login, String encryptedPassword, String email) throws DaoException;
 
     Optional<User> findUser(String name, String encryptedPassword) throws DaoException;
 

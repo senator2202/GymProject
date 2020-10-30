@@ -11,7 +11,10 @@ import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.UserService;
 import com.kharitonov.gym.util.CryptoUtility;
 import com.kharitonov.gym.util.mail.MailUtility;
-import com.kharitonov.gym.validator.*;
+import com.kharitonov.gym.validator.TrainingValidator;
+import com.kharitonov.gym.validator.UserValidator;
+import com.kharitonov.gym.validator.ValidationError;
+import com.kharitonov.gym.validator.ValidationErrorSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -79,18 +82,23 @@ public class UserServiceImpl implements UserService {
             if (exists) {
                 return Optional.empty();
             }
-            dao.addUser(login, encryptedPassword, email);
-            User user = dao.findUser(login, encryptedPassword).get();
-            MailUtility service = new MailUtility();
-            try {
-                service.sendConfirmMessage(email, user.getAccount().getId());
-                LOGGER.info("User '{}' was successfully registered!", login);
-            } catch (PropertyReaderException e) {
-                LOGGER.error("Error occurred while sending confirmation link!", e);
-            }
-            return Optional.of(user);
+            int id = dao.addUser(login, encryptedPassword, email);
+            sendConfirmationLink(email, id);
+            return dao.findUser(login, encryptedPassword);
         } catch (DaoException e) {
             throw new ServiceException(e);
+        }
+    }
+
+    private boolean sendConfirmationLink(String email, int id) {
+        MailUtility service = new MailUtility();
+        try {
+            service.sendConfirmMessage(email, id);
+            LOGGER.info("Confirmation was sent to '{}'", email);
+            return true;
+        } catch (PropertyReaderException e) {
+            LOGGER.error("Error occurred while sending confirmation link!", e);
+            return false;
         }
     }
 
@@ -125,19 +133,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserInfo(String firstName, String lastName, String phone,
-                               String email, String locale, int id)
-            throws ServiceException {
-        UserDao dao = new UserDaoImpl();
-        try {
-            dao.updateUserInfo(firstName, lastName, phone, email, locale, id);
-            LOGGER.info("Account id={} was updated!", id);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     public void updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws ServiceException {
         UserDao dao = new UserDaoImpl();
@@ -149,29 +144,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean appointTrainer(String userId, String institution,
-                                  String graduationYear, String instagramLink) throws ServiceException {
-        if (!TrainerApplicationValidator.correctApplicationParameters(userId, institution,
-                graduationYear, instagramLink)) {
-            return false;
-        }
-        UserDao dao = new UserDaoImpl();
-        int id = Integer.parseInt(userId);
-        int year = Integer.parseInt(graduationYear);
-        try {
-            dao.changeRoleToTrainer(id, institution, year, instagramLink);
-            return true;
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     public List<User> findRecentUsers(String daysNumber) throws ServiceException {
         if (!UserValidator.correctDaysNumber(daysNumber)) {
             ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
             errorSet.add(ValidationError.INVALID_NUMBER_FORMAT);
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
         int days = daysNumber != null
                 ? Integer.parseInt(daysNumber)
@@ -274,10 +251,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void unblockUser(int userId) throws ServiceException {
+    public boolean unblockUser(String userId) throws ServiceException {
+        if (!UserValidator.correctId(userId)) {
+            return false;
+        }
+        int id = Integer.parseInt(userId);
         UserDao dao = new UserDaoImpl();
         try {
-            dao.unblockUser(userId);
+            dao.unblockUser(id);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

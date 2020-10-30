@@ -7,8 +7,6 @@ import com.kharitonov.gym.model.dao.impl.TrainingDaoImpl;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.service.TrainingService;
 import com.kharitonov.gym.validator.TrainingValidator;
-import com.kharitonov.gym.validator.ValidationError;
-import com.kharitonov.gym.validator.ValidationErrorSet;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -104,11 +102,15 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void setTrainingDone(String trainingId) throws ServiceException {
+    public boolean setTrainingDone(String trainingId) throws ServiceException {
+        if (!TrainingValidator.correctId(trainingId)) {
+            return false;
+        }
         TrainingDao dao = new TrainingDaoImpl();
         int id = Integer.parseInt(trainingId);
         try {
             dao.setTrainingDone(id);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -126,22 +128,6 @@ public class TrainingServiceImpl implements TrainingService {
         try {
             dao.updateTrainingRating(trainingId, trainingRating, trainerId);
             return true;
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public double averageTrainerRating(String trainerId) throws ServiceException {
-        if (!TrainingValidator.correctId(trainerId)) {
-            ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
-            errorSet.add(ValidationError.INVALID_NUMBER_FORMAT);
-            return ERROR_VALUE;
-        }
-        TrainingDao dao = new TrainingDaoImpl();
-        int id = Integer.parseInt(trainerId);
-        try {
-            return dao.averageTrainerRating(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
                 .build();
         User user = null;
         if (userRole == UserRole.CLIENT) {
-            user = new Client(account, firstName, lastName, phone);
+            user = new Client(account);
             ((Client) user).setPersonalDiscount(discount);
             ((Client) user).setDietId(dietId);
             ((Client) user).setMoneyBalance(moneyBalance);
@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
             String institution = resultSet.getString(TableColumnName.USER_INSTITUTION);
             int graduation = resultSet.getInt(TableColumnName.USER_GRADUATION);
             String instagram = resultSet.getString(TableColumnName.USER_INSTAGRAM);
-            user = new Trainer(account, firstName, lastName, phone);
+            user = new Trainer(account);
             ((Trainer) user).setRating(rating);
             ((Trainer) user).setInstitution(institution);
             ((Trainer) user).setInstagramLink(instagram);
@@ -68,18 +68,21 @@ public class UserDaoImpl implements UserDao {
             user = new User(account);
         }
         user.setImageName(imageName);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhoneNumber(phone);
         return user;
     }
 
     @Override
-    public void addUser(String login, String password, String email) throws DaoException {
+    public int addUser(String login, String password, String email) throws DaoException {
         Connection connection = pool.getConnection();
         try {
             connection.setAutoCommit(false);
-            addAccount(connection, login, password, email);
-            int id = getAccountId(connection, login, password);
+            int id = addAccount(connection, login, password, email);
             addUser(connection, id);
             connection.commit();
+            return id;
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);
@@ -89,24 +92,19 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    private void addAccount(Connection connection, String login,
-                            String password, String email) throws DaoException {
+    private int addAccount(Connection connection, String login,
+                           String password, String email) throws DaoException {
+        ResultSet resultSet = null;
         try (PreparedStatement insertAccount = statementInsertAccount(connection, login, password, email)) {
-            insertAccount.execute();
-        } catch (SQLException e) {
-            rollback(connection);
-            throw new DaoException(e);
-        }
-    }
-
-    private int getAccountId(Connection connection, String login, String password) throws DaoException {
-        try (PreparedStatement select = statementSelectId(connection, login, password);
-             ResultSet resultSet = select.executeQuery()) {
+            insertAccount.executeUpdate();
+            resultSet = insertAccount.getGeneratedKeys();
             resultSet.next();
-            return resultSet.getInt(TableColumnName.ACCOUNT_ID);
+            return resultSet.getInt(1);
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);
+        } finally {
+            close(resultSet);
         }
     }
 

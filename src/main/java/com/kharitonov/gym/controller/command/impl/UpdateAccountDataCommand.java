@@ -39,7 +39,7 @@ public class UpdateAccountDataCommand implements ActionCommand {
             page = ProjectPage.PERSONAL_ACCOUNT.getServletCommand();
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_404.getDirectUrl();
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
         return page;
     }

@@ -19,12 +19,13 @@ public class TrainingDaoImpl implements TrainingDao {
     @Override
     public int addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException {
         Connection connection = pool.getConnection();
+        ResultSet resultSet = null;
         try (PreparedStatement statementAdd = statementInsertTraining(connection, trainerId, clientId, trainingDate, trainingTime);
              PreparedStatement statementDecrement = statementDecrementTrainings(connection, clientId)) {
             connection.setAutoCommit(false);
             statementAdd.execute();
             statementDecrement.executeUpdate();
-            ResultSet resultSet = statementAdd.getGeneratedKeys();
+            resultSet = statementAdd.getGeneratedKeys();
             resultSet.next();
             return resultSet.getInt(1);
         } catch (SQLException e) {
@@ -32,6 +33,7 @@ public class TrainingDaoImpl implements TrainingDao {
             throw new DaoException(e);
         } finally {
             setAutoCommitTrue(connection);
+            close(resultSet);
             pool.releaseConnection(connection);
         }
     }
@@ -146,7 +148,7 @@ public class TrainingDaoImpl implements TrainingDao {
 
     private double countAverageRating(Connection connection, int trainerId) throws DaoException {
         try (PreparedStatement countAvgRating = statementAverageRaiting(connection, trainerId);
-             ResultSet resultSet = countAvgRating.executeQuery();) {
+             ResultSet resultSet = countAvgRating.executeQuery()) {
             resultSet.next();
             return resultSet.getDouble(TableColumnName.AVERAGE_TRAINER_RATING);
         } catch (SQLException e) {

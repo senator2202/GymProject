@@ -1,9 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
-import com.kharitonov.gym.controller.command.RequestAttributeName;
-import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.controller.command.*;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
@@ -16,9 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class OpenAdminRegistrationsCommand implements ActionCommand {
-    private static final int DEFAULT_USERS_NUMBER = 30;
-    private static final int DEFAULT_ROWS = 10;
-    private static final int DEFAULT_OFFSET = 1;
     private static final Logger LOGGER = LogManager.getLogger(OpenAdminRegistrationsCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();
 
@@ -33,6 +27,7 @@ public class OpenAdminRegistrationsCommand implements ActionCommand {
                 errorSet.clear();
                 page = ProjectPage.ERROR_404.getDirectUrl();
             } else {
+                request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.REGISTRATIONS_TAB);
                 request.setAttribute(RequestAttributeName.RECENT_USERS, users);
                 page = ProjectPage.ADMIN_REGISTRATIONS.getDirectUrl();
             }

@@ -20,11 +20,9 @@ public interface TrainingService {
     void updateTraining(String trainingId, String trainingDate, String trainingTime, String description)
             throws ServiceException;
 
-    void setTrainingDone(String trainingId) throws ServiceException;
+    boolean setTrainingDone(String trainingId) throws ServiceException;
 
     boolean rateTraining(String trainingId, String rating, String trainerId) throws ServiceException;
-
-    double averageTrainerRating(String trainerId) throws ServiceException;
 
     Optional<Training> findTrainingById(int trainingId) throws ServiceException;
 }

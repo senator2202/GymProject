@@ -8,7 +8,6 @@ import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.service.TrainerApplicationService;
 import com.kharitonov.gym.service.impl.TrainerApplicationServiceImpl;
-import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +17,6 @@ import java.util.List;
 public class ApproveTrainerApplicationCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(ApproveTrainerApplicationCommand.class);
     private final TrainerApplicationService appService = TrainerApplicationServiceImpl.getInstance();
-    private final UserServiceImpl userService = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

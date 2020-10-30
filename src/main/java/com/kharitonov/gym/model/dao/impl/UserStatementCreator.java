@@ -5,6 +5,7 @@ import com.kharitonov.gym.model.entity.UserRole;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 class UserStatementCreator {
     private static final String SQL_INSERT_ACCOUNT =
@@ -82,7 +83,7 @@ class UserStatementCreator {
                                                     String email)
             throws SQLException {
         PreparedStatement statement =
-                connection.prepareStatement(SQL_INSERT_ACCOUNT);
+                connection.prepareStatement(SQL_INSERT_ACCOUNT, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, login);
         statement.setString(2, password);
         statement.setString(3, email);

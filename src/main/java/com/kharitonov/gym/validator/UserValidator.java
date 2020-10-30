@@ -15,7 +15,7 @@ public class UserValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
     private static final String DEPOSIT_AMOUNT_REGEX = "^[1-9]\\d{0,3}$";
     private static final String DAYS_NUMBER_REGEX = "^[1-9]\\d{0,4}$";
-    private static ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+    private static final ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
 
     private UserValidator() {
 

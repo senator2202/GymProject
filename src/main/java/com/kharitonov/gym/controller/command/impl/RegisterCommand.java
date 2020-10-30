@@ -38,13 +38,12 @@ public class RegisterCommand implements ActionCommand {
                 User user = optionalUser.get();
                 session.setAttribute(SessionAttributeName.USER, user);
                 session.setAttribute(RequestAttributeName.CONFIRMATION_SENT, true);
-                page = ProjectPage.INDEX.getDirectUrl();
             } else {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
                 session.setAttribute(SessionAttributeName.REGISTRAION_MAP, parameters);
                 session.setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
-                page = ProjectPage.INDEX.getDirectUrl();
             }
+            page = ProjectPage.INDEX.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error("Unable to register new user!", e);
             page = ProjectPage.ERROR_500.getDirectUrl();

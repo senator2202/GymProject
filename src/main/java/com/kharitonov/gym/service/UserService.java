@@ -18,15 +18,8 @@ public interface UserService {
 
     boolean updateAccountData(int userId, String email, String locale) throws ServiceException;
 
-    void updateUserInfo(String firstName, String lastName, String phone, String email,
-                        String locale, int id)
-            throws ServiceException;
-
     void updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws ServiceException;
-
-    boolean appointTrainer(String userId, String institution,
-                           String graduationYear, String instagramLink) throws ServiceException;
 
     List<User> findRecentUsers(String daysNumber) throws ServiceException;
 
@@ -42,7 +35,7 @@ public interface UserService {
 
     boolean blockUser(String userId) throws ServiceException;
 
-    void unblockUser(int userId) throws ServiceException;
+    boolean unblockUser(String userId) throws ServiceException;
 
     void updateDiscount(String clientId, String discount) throws ServiceException;
 }

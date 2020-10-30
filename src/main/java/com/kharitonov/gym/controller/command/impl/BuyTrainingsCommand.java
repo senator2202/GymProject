@@ -32,7 +32,7 @@ public class BuyTrainingsCommand implements ActionCommand {
                 if (errorSet.contains(ValidationError.LOW_BALANCE)) {
                     request.getSession().setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
                     page = ProjectPage.SCHEDULE.getServletCommand();
-                } else {//trainings number doesn't match regex
+                } else {
                     page = ProjectPage.ERROR_404.getDirectUrl();
                 }
             }

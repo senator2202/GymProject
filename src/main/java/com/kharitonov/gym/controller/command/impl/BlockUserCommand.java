@@ -21,7 +21,7 @@ public class BlockUserCommand implements ActionCommand {
         try {
             if (service.blockUser(id)) {
                 page = ProjectPage.ADMIN_REGISTRATIONS.getServletCommand();
-            } else {//invalid id
+            } else {
                 page = ProjectPage.ERROR_404.getDirectUrl();
             }
         } catch (ServiceException e) {

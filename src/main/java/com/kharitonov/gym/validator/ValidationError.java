@@ -3,6 +3,7 @@ package com.kharitonov.gym.validator;
 public enum ValidationError {
     LOGIN_EXISTS,
     EMAIL_EXISTS,
+    APPLICATION_EXISTS,
     INVALID_LOGIN_FORMAT,
     INVALID_PASSWORD_FORMAT,
     INVALID_NUMBER_FORMAT,

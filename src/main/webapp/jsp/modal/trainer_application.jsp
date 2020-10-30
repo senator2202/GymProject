@@ -20,17 +20,17 @@
 							<div class="form-group">
 								<label for="institution"><fmt:message key="trainer_application.institution"/></label>
 								<input type="text" class="form-control" id="institution" name="institution"
-								       style="background-color: #fff;" required>
+								       style="background-color: #fff;" pattern="\p{L}{2,30}" required>
 							</div>
 							<div class="form-group">
 								<label for="graduationYear"><fmt:message key="trainer_application.year"/></label>
 								<input type="text" class="form-control" id="graduationYear" name="graduationYear"
-								       style="background-color: #fff;" required>
+								       style="background-color: #fff;" pattern="^[12][09]\d{2}$" required>
 							</div>
 							<div class="form-group">
 								<label for="instagramLink"><fmt:message key="trainer_application.instagram"/></label>
 								<input type="text" class="form-control" id="instagramLink" name="instagramLink"
-								       style="background-color: #fff;">
+								       style="background-color: #fff;" pattern="^https://www.instagram.com/.*$">
 							</div>
 							<button type="submit" class="btn btn-primary mb-2"><fmt:message
 									key="trainer_application.send"/></button>

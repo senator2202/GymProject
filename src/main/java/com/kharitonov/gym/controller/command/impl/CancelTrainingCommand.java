@@ -29,6 +29,7 @@ public class CancelTrainingCommand implements ActionCommand {
                 int id = Integer.parseInt(trainingId);
                 trainings.stream().filter(t -> t.getTrainingId() == id).findFirst().map(trainings::remove);
                 client.setBoughtTrainings(client.getBoughtTrainings() + 1);
+                page = ProjectPage.SCHEDULE.getServletCommand();
             } else {
                 page = ProjectPage.ERROR_404.getDirectUrl();
             }
@@ -36,6 +37,6 @@ public class CancelTrainingCommand implements ActionCommand {
             LOGGER.error(e);
             page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.SCHEDULE.getServletCommand();
+        return page;
     }
 }

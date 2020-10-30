@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TrainerApplicationService {
     boolean sendApplication(int id, String institution,
-                            int graduationYear, String instagramLink) throws ServiceException;
+                            String graduationYear, String instagramLink) throws ServiceException;
 
     boolean deleteApplication(String id) throws ServiceException;
 

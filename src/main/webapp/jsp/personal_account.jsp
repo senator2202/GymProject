@@ -29,6 +29,9 @@
     <link href="/assets/css/select-list.css" rel="stylesheet" />
     <link href="/assets/css/img-upload.css" rel="stylesheet" />
 
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <<script src="/assets/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -121,8 +124,6 @@
     </form>
 </div>
 
-<script src="/assets/js/jquery-3.3.1.min.js"></script>
-<<script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/jquery.magnific-popup.min.js"></script>
 <script src="/assets/js/jquery.slicknav.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>

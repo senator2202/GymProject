@@ -21,11 +21,17 @@ public class SendFeedbackReplyCommand implements ActionCommand {
         String subject = request.getParameter(RequestParameterName.FEEDBACK_REPLY_SUBJECT);
         String message = request.getParameter(RequestParameterName.FEEDBACK_REPLY_MESSAGE);
         String id = request.getParameter(RequestParameterName.FEEDBACK_ID);
+        String page;
         try {
-            service.sendReplyMessage(id, email, subject, message);
+            if (service.sendReplyMessage(id, email, subject, message)) {
+                page = ProjectPage.ADMIN_FEEDBACKS.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.ADMIN_FEEDBACKS.getServletCommand();
+        return page;
     }
 }

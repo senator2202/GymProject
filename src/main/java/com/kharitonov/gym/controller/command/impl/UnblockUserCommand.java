@@ -16,12 +16,18 @@ public class UnblockUserCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter(RequestParameterName.USER_ID));
+        String id = request.getParameter(RequestParameterName.USER_ID);
+        String page;
         try {
-            service.unblockUser(id);
+            if (service.unblockUser(id)) {
+                page = ProjectPage.ADMIN_REGISTRATIONS.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.ADMIN_REGISTRATIONS.getServletCommand();
+        return page;
     }
 }

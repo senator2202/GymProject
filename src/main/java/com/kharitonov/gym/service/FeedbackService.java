@@ -10,5 +10,5 @@ public interface FeedbackService {
 
     List<Feedback> findAllFeedbacks() throws ServiceException;
 
-    void sendReplyMessage(String feedbackId, String email, String subject, String replyMessage) throws ServiceException;
+    boolean sendReplyMessage(String feedbackId, String email, String subject, String replyMessage) throws ServiceException;
 }

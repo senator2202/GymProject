@@ -30,6 +30,6 @@ public class OpenAdminMainCommand implements ActionCommand {
             LOGGER.error("Applications loading error!", e);
             page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.ADMIN_MAIN.getDirectUrl();
+        return page;
     }
 }

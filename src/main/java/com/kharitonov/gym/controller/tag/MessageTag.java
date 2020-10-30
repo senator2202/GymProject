@@ -33,6 +33,10 @@ public class MessageTag extends SimpleTagSupport {
             html.append("\n<script>$('#modalLowBalance').modal('show');</script>");
             errorSet.remove(ValidationError.LOW_BALANCE);
         }
+        if (errorSet != null && errorSet.contains(ValidationError.APPLICATION_EXISTS)) {
+            html.append("\n<script>$('#modalApplicationExists').modal('show');</script>");
+            errorSet.remove(ValidationError.APPLICATION_EXISTS);
+        }
         if (context.findAttribute(RequestAttributeName.CONFIRMED_ACCOUNT) != null) {
             html.append("\n<script>$('#modalConfirmed').modal('show');</script>");
             context.removeAttribute(RequestAttributeName.CONFIRMED_ACCOUNT);

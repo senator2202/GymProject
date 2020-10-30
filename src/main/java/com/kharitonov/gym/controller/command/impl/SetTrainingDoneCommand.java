@@ -18,11 +18,17 @@ public class SetTrainingDoneCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String id = request.getParameter(RequestParameterName.TRAINING_ID);
+        String page;
         try {
-            service.setTrainingDone(id);
+            if (service.setTrainingDone(id)) {
+                page = ProjectPage.SCHEDULE.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.SCHEDULE.getServletCommand();
+        return page;
     }
 }

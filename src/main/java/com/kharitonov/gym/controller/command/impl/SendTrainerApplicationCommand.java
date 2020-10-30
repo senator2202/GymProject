@@ -1,10 +1,15 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.*;
+import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.TrainerApplicationService;
 import com.kharitonov.gym.service.impl.TrainerApplicationServiceImpl;
+import com.kharitonov.gym.validator.ValidationError;
+import com.kharitonov.gym.validator.ValidationErrorSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,22 +27,31 @@ public class SendTrainerApplicationCommand implements ActionCommand {
         User user = (User) session.getAttribute(SessionAttributeName.USER);
         int id = user.getAccount().getId();
         String institution = request.getParameter(RequestParameterName.INSTITUTION);
-        String stringYear = request.getParameter(RequestParameterName.GRADUATION_YEAR);
-        int year = Integer.parseInt(stringYear);
+        String year = request.getParameter(RequestParameterName.GRADUATION_YEAR);
         String instagram = request.getParameter(RequestParameterName.INSTAGRAM_LINK);
+        String page;
         try {
             if (service.sendApplication(id, institution, year, instagram)) {
-                request.setAttribute(RequestAttributeName.APPLICATION_RESULT, true);
+                String prevPage = getPreviousPage(request);
+                ProjectPage projectPage = Arrays.stream(ProjectPage.values())
+                        .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.PERSONAL_ACCOUNT);
+                page = projectPage.getServletCommand();
             } else {
-                request.setAttribute(RequestAttributeName.ALREADY_SENT, true);
+                ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+                if (errorSet.contains(ValidationError.APPLICATION_EXISTS)) {
+                    request.getSession().setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
+                    String prevPage = getPreviousPage(request);
+                    ProjectPage projectPage = Arrays.stream(ProjectPage.values())
+                            .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.PERSONAL_ACCOUNT);
+                    page = projectPage.getServletCommand();
+                } else {
+                    page = ProjectPage.ERROR_404.getDirectUrl();
+                }
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            request.setAttribute(RequestAttributeName.APPLICATION_RESULT, false);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        String prevPage = getPreviousPage(request);
-        ProjectPage page = Arrays.stream(ProjectPage.values())
-                .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.PERSONAL_ACCOUNT);
-        return page.getServletCommand();
+        return page;
     }
 }
