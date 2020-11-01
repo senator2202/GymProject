@@ -38,7 +38,7 @@ public class CommandRoleMap {
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
         ROLE_MAP.put(CommandType.OPEN_HOME,
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
-        ROLE_MAP.put(CommandType.ADD_FEEDBACK, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST));
+        ROLE_MAP.put(CommandType.OPEN_PERSONAL_ACCOUNT,  Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.OPEN_PERSONAL_DATA, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.OPEN_PERSONAL_FINANCE, Arrays.asList(UserRole.CLIENT));
         ROLE_MAP.put(CommandType.OPEN_PORTFOLIO,
@@ -54,7 +54,7 @@ public class CommandRoleMap {
         ROLE_MAP.put(CommandType.UPDATE_ACCOUNT_DATA, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.UPDATE_DISCOUNT, Arrays.asList(UserRole.ADMIN));
         ROLE_MAP.put(CommandType.UPDATE_PERSONAL_DATA, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
-        ROLE_MAP.put(CommandType.UPDATE_TRAINING, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
+        ROLE_MAP.put(CommandType.UPDATE_TRAINING, Arrays.asList(UserRole.CLIENT));
         ROLE_MAP.put(CommandType.UPDATE_TRAINING_DESCRIPTION, Arrays.asList(UserRole.TRAINER));
         ROLE_MAP.put(CommandType.UPLOAD_IMAGE, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
     }

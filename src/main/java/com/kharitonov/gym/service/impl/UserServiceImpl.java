@@ -6,6 +6,7 @@ import com.kharitonov.gym.exception.PropertyReaderException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
+import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.UserService;
@@ -119,13 +120,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateAccountData(int userId, String email, String locale) throws ServiceException {
-        if (!UserValidator.correctEmail(email)) {
+    public boolean updateAccountData(User user, String email, String locale) throws ServiceException {
+        if (!UserValidator.correctAccountDataParameters(email, locale)) {
             return false;
         }
+        int userId = user.getAccount().getId();
         UserDao dao = new UserDaoImpl();
+        locale = locale == null
+                ? user.getAccount().getLocale().name()
+                : locale.toUpperCase();
         try {
             dao.updateAccountData(userId, email, locale);
+            Account.AccountLocale accountLocale = Account.AccountLocale.valueOf(locale);
+            user.getAccount().setEmail(email);
+            user.getAccount().setLocale(accountLocale);
             return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -133,11 +141,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePersonalData(int userId, String firstName, String lastName, String phone)
+    public boolean updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws ServiceException {
+        if (!UserValidator.correctPersonalDataParameters(userId, firstName, lastName, phone)) {
+            return false;
+        }
         UserDao dao = new UserDaoImpl();
         try {
             dao.updatePersonalData(userId, firstName, lastName, phone);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -162,10 +174,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserImage(int userId, String imageName) throws ServiceException {
+    public boolean updateUserImage(int userId, String imageName) throws ServiceException {
+        if (!UserValidator.correctUpdateImageParameters(userId, imageName)) {
+            return false;
+        }
         UserDao dao = new UserDaoImpl();
         try {
             dao.updateUserImage(userId, imageName);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -211,14 +227,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addToBalance(int clientId, String stringAmount) throws ServiceException {
+    public boolean addToBalance(Client client, String stringAmount) throws ServiceException {
         if (!UserValidator.correctDepositAmount(stringAmount)) {
             return false;
         }
+        int id = client.getAccount().getId();
         int amount = Integer.parseInt(stringAmount);
         UserDao dao = new UserDaoImpl();
         try {
-            dao.addToBalance(clientId, amount);
+            dao.addToBalance(id, amount);
+            double balance = client.getMoneyBalance();
+            client.setMoneyBalance(balance + amount);
             return true;
         } catch (DaoException e) {
             throw new ServiceException();
@@ -266,13 +285,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateDiscount(String clientId, String personalDiscount) throws ServiceException {
+    public boolean updateDiscount(String clientId, String personalDiscount) throws ServiceException {
+        if (!UserValidator.correctUpdateDiscountParameters(clientId, personalDiscount)) {
+            return false;
+        }
+        int id = Integer.parseInt(clientId);
+        double discount = Double.parseDouble(personalDiscount);
         UserDao dao = new UserDaoImpl();
         try {
-            int id = Integer.parseInt(clientId);
-            double discount = Double.parseDouble(personalDiscount);
             dao.updateDiscount(id, discount);
-        } catch (NumberFormatException | DaoException e) {
+            return true;
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

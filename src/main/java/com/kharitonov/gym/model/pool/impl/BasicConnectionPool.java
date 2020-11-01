@@ -76,10 +76,9 @@ public class BasicConnectionPool implements ConnectionPool {
 
     @Override
     public void releaseConnection(Connection connection) {
-        boolean result = false;
         if (connection instanceof ProxyConnection) {
             if (usedConnections.remove(connection)) {
-                result = freeConnections.offer((ProxyConnection) connection);
+                freeConnections.offer((ProxyConnection) connection);
             }
         } else {
             LOGGER.error("Releasing connection is not proxy!");

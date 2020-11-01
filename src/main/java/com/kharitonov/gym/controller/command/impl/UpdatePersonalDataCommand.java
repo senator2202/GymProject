@@ -27,11 +27,14 @@ public class UpdatePersonalDataCommand implements ActionCommand {
         String phone = request.getParameter(RequestParameterName.PHONE);
         String page;
         try {
-            service.updatePersonalData(id, firstName, lastName, phone);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPhoneNumber(phone);
-            page = ProjectPage.PERSONAL_DATA.getServletCommand();
+            if (service.updatePersonalData(id, firstName, lastName, phone)) {
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setPhoneNumber(phone);
+                page = ProjectPage.PERSONAL_DATA.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
             page = ProjectPage.ERROR_404.getDirectUrl();

@@ -21,11 +21,17 @@ public class UpdateTrainingCommand implements ActionCommand {
         String date = request.getParameter(RequestParameterName.TRAINING_DATE);
         String time = request.getParameter(RequestParameterName.TRAINING_TIME);
         String description = request.getParameter(RequestParameterName.TRAINING_DESCRIPTION);
+        String page;
         try {
-            service.updateTraining(id, date, time, description);
+            if (service.updateTraining(id, date, time, description)) {
+                page = ProjectPage.SCHEDULE.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.SCHEDULE.getServletCommand();
+        return page;
     }
 }

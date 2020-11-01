@@ -5,9 +5,7 @@ import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.service.TrainingService;
-import com.kharitonov.gym.service.UserService;
 import com.kharitonov.gym.service.impl.TrainingServiceImpl;
-import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +15,6 @@ import java.util.List;
 public class AddTrainingCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(AddTrainingCommand.class);
     private static final int INVALID_ID = -1;
-    private final UserService userService = UserServiceImpl.getInstance();
     private final TrainingService trainingService = TrainingServiceImpl.getInstance();
 
     @Override

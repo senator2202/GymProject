@@ -47,7 +47,7 @@ public class OpenScheduleCommand implements ActionCommand {
         List<User> trainers = userService.findAllTrainers();
         List<Training> trainings = trainingService.findClientTrainings(userId);
         List<Training> planned = trainings.stream().filter(t -> !t.isDone()).collect(Collectors.toList());
-        List<Training> previous = trainings.stream().filter(t -> t.isDone()).collect(Collectors.toList());
+        List<Training> previous = trainings.stream().filter(Training::isDone).collect(Collectors.toList());
         request.setAttribute(RequestAttributeName.PLANNED_TRAININGS, planned);
         request.setAttribute(RequestAttributeName.PREVIOUS_TRAININGS, previous);
         request.setAttribute(RequestAttributeName.TRAINERS, trainers);
@@ -57,7 +57,7 @@ public class OpenScheduleCommand implements ActionCommand {
         int userId = user.getAccount().getId();
         List<Training> trainings = trainingService.findTrainerTrainings(userId);
         List<Training> planned = trainings.stream().filter(t -> !t.isDone()).collect(Collectors.toList());
-        List<Training> previous = trainings.stream().filter(t -> t.isDone()).collect(Collectors.toList());
+        List<Training> previous = trainings.stream().filter(Training::isDone).collect(Collectors.toList());
         request.setAttribute(RequestAttributeName.PLANNED_TRAININGS, planned);
         request.setAttribute(RequestAttributeName.PREVIOUS_TRAININGS, previous);
     }

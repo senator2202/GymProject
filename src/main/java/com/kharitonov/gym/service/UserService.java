@@ -16,20 +16,20 @@ public interface UserService {
 
     boolean confirmAccount(String accountId) throws ServiceException;
 
-    boolean updateAccountData(int userId, String email, String locale) throws ServiceException;
+    boolean updateAccountData(User user, String email, String locale) throws ServiceException;
 
-    void updatePersonalData(int userId, String firstName, String lastName, String phone)
+    boolean updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws ServiceException;
 
     List<User> findRecentUsers(String daysNumber) throws ServiceException;
 
-    void updateUserImage(int userId, String imageName) throws ServiceException;
+    boolean updateUserImage(int userId, String imageName) throws ServiceException;
 
     boolean buyTrainings(Client client, String trainingsNumber, double trainingCost) throws ServiceException;
 
     List<User> findAllTrainers() throws ServiceException;
 
-    boolean addToBalance(int clientId, String amount) throws ServiceException;
+    boolean addToBalance(Client client, String amount) throws ServiceException;
 
     Optional<String> findEmailById(int userId) throws ServiceException;
 
@@ -37,5 +37,5 @@ public interface UserService {
 
     boolean unblockUser(String userId) throws ServiceException;
 
-    void updateDiscount(String clientId, String discount) throws ServiceException;
+    boolean updateDiscount(String clientId, String discount) throws ServiceException;
 }

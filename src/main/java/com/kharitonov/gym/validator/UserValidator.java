@@ -11,14 +11,35 @@ public class UserValidator {
     private static final String EMAIL_REGEX =
             "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)" +
                     "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-    private static final int MAX_EMAIL_LENGTH = 50;
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
     private static final String DEPOSIT_AMOUNT_REGEX = "^[1-9]\\d{0,3}$";
     private static final String DAYS_NUMBER_REGEX = "^[1-9]\\d{0,4}$";
+    private static final String LOCALE_REGEX = "^((russian)|(english))$";
+    private static final String DISCOUNT_REGEX = "^[1-9]\\d?([.,]\\d{1,2})?$";
+    private static final String PHONE_REGEX = "^((80\\d{2})|(\\+375\\d{2}))[1-9]\\d{6}$";
+    private static final String NAME_REGEX = "\\p{L}{0,30}";
+    private static final int MAX_EMAIL_LENGTH = 50;
+    private static final int MAX_IMAGE_NAME_LENGTH = 100;
     private static final ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
 
     private UserValidator() {
 
+    }
+
+    public static boolean correctUpdateImageParameters(int id, String imageName) {
+        return correctId(id) && correctImageName(imageName);
+    }
+
+    public static boolean correctPersonalDataParameters(int userId, String firstName, String lastName, String phone) {
+        return correctId(userId) && correctName(firstName) && correctName(lastName) && correctPhone(phone);
+    }
+
+    public static boolean correctAccountDataParameters(String email, String locale) {
+        return correctEmail(email) && correctLocale(locale);
+    }
+
+    public static boolean correctUpdateDiscountParameters(String id, String discount) {
+        return correctId(id) && correctDiscount(discount);
     }
 
     public static boolean correctLoginParameters(Map<String, String> parameters) {
@@ -68,18 +89,6 @@ public class UserValidator {
         return result;
     }
 
-    private static boolean correctLogin(String login) {
-        return login != null && login.matches(LOGIN_REGEX);
-    }
-
-    private static boolean correctPassword(String password) {
-        return password != null && password.matches(PASSWORD_REGEX);
-    }
-
-    public static boolean correctEmail(String email) {
-        return email != null && email.matches(EMAIL_REGEX) && email.length() <= MAX_EMAIL_LENGTH;
-    }
-
     public static boolean correctId(String id) {
         return id != null && id.matches(ID_REGEX);
     }
@@ -90,5 +99,41 @@ public class UserValidator {
 
     public static boolean correctDaysNumber(String days) {
         return days == null || days.matches(DAYS_NUMBER_REGEX);
+    }
+
+    public static boolean correctEmail(String email) {
+        return email != null && email.matches(EMAIL_REGEX) && email.length() <= MAX_EMAIL_LENGTH;
+    }
+
+    private static boolean correctLogin(String login) {
+        return login != null && login.matches(LOGIN_REGEX);
+    }
+
+    private static boolean correctPassword(String password) {
+        return password != null && password.matches(PASSWORD_REGEX);
+    }
+
+    private static boolean correctLocale(String locale) {
+        return locale == null || locale.matches(LOCALE_REGEX);
+    }
+
+    private static boolean correctDiscount(String discount) {
+        return discount != null && discount.matches(DISCOUNT_REGEX);
+    }
+
+    private static boolean correctId(int id) {
+        return id > 0;
+    }
+
+    private static boolean correctName(String name) {
+        return name != null && name.matches(NAME_REGEX);
+    }
+
+    private static boolean correctPhone(String phone) {
+        return phone != null && phone.matches(PHONE_REGEX);
+    }
+
+    private static boolean correctImageName(String imageName) {
+        return imageName != null && imageName.length() <= MAX_IMAGE_NAME_LENGTH;
     }
 }

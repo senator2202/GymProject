@@ -10,6 +10,15 @@ public class TrainingValidator {
     private TrainingValidator() {
     }
 
+    public static boolean correctUpdateDescriptionParameters(String id, String description) {
+        return correctId(id) && description != null;
+    }
+
+    public static boolean correctUpdateTrainingParameters(String trainingId, String trainingDate,
+                                                          String trainingTime, String description) {
+        return correctId(trainingId) && correctDate(trainingDate) && correctTime(trainingTime) && description != null;
+    }
+
     public static boolean correctAddTrainingParameters(String trainerId, String trainingDate, String trainingTime) {
         return correctId(trainerId) && correctDate(trainingDate) && correctTime(trainingTime);
     }

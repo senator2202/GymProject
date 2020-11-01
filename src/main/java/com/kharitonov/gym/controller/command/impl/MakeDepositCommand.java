@@ -20,14 +20,10 @@ public class MakeDepositCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
-        int id = client.getAccount().getId();
         String amount = request.getParameter(RequestParameterName.AMOUNT);
         String page;
         try {
-            if (service.addToBalance(id, amount)) {
-                double balance = client.getMoneyBalance();
-                int intAmount = Integer.parseInt(amount);
-                client.setMoneyBalance(balance + intAmount);
+            if (service.addToBalance(client, amount)) {
                 page = ProjectPage.PERSONAL_FINANCE.getServletCommand();
             } else {
                 page = ProjectPage.ERROR_404.getDirectUrl();

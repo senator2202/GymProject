@@ -13,11 +13,11 @@ public interface TrainingService {
 
     List<Training> findTrainerTrainings(int trainerId) throws ServiceException;
 
-    void updateDescription(int trainingId, String description) throws ServiceException;
+    boolean updateDescription(String trainingId, String description) throws ServiceException;
 
     boolean deleteTraining(String trainingId, int userId) throws ServiceException;
 
-    void updateTraining(String trainingId, String trainingDate, String trainingTime, String description)
+    boolean updateTraining(String trainingId, String trainingDate, String trainingTime, String description)
             throws ServiceException;
 
     boolean setTrainingDone(String trainingId) throws ServiceException;

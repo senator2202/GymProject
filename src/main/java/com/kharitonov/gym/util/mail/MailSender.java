@@ -42,7 +42,7 @@ public class MailSender {
     }
 
     private void initMessage() throws MessagingException {
-        Session mailSession = null;
+        Session mailSession;
         mailSession = SessionFactory.createSession(properties);
         mailSession.setDebug(true);
         message = new MimeMessage(mailSession);

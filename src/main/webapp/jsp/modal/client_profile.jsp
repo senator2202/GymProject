@@ -76,7 +76,7 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="quantity">
-											<input name="personalDiscount" id="discountInput" type="number" min="0" max="100" step="1"> %
+											<input name="personalDiscount" id="discountInput" type="number" min="0" max="100" step="0.5"> %
 										</div>
 									</div>
 								</div>

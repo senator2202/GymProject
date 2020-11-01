@@ -5,7 +5,6 @@ import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.exception.ServiceException;
-import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
@@ -22,21 +21,15 @@ public class UpdateAccountDataCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttributeName.USER);
-        int id = user.getAccount().getId();
         String email = request.getParameter(RequestParameterName.EMAIL);
-        String localeName = request.getParameter(RequestParameterName.LOCALE) == null
-                ? user.getAccount().getLocale().name()
-                : request.getParameter(RequestParameterName.LOCALE).toUpperCase();
-        Account.AccountLocale locale = Account.AccountLocale.valueOf(localeName);
+        String locale = request.getParameter(RequestParameterName.LOCALE);
         String page;
         try {
-            if (service.updateAccountData(id, email, localeName)) {
-                user.getAccount().setEmail(email);
-                user.getAccount().setLocale(locale);
+            if (service.updateAccountData(user, email, locale)) {
+                page = ProjectPage.PERSONAL_ACCOUNT.getServletCommand();
             } else {
-                session.setAttribute(SessionAttributeName.INCORRECT_EMAIL_FORMAT, true);
+                page = ProjectPage.ERROR_404.getDirectUrl();
             }
-            page = ProjectPage.PERSONAL_ACCOUNT.getServletCommand();
         } catch (ServiceException e) {
             LOGGER.error(e);
             page = ProjectPage.ERROR_500.getDirectUrl();

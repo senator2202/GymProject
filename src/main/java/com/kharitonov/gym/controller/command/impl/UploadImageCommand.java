@@ -3,11 +3,9 @@ package com.kharitonov.gym.controller.command.impl;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.controller.command.SessionAttributeName;
-import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.service.impl.UserServiceImpl;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.logging.log4j.LogManager;
@@ -15,8 +13,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.Iterator;
-import java.util.List;
 import java.util.UUID;
 
 public class UploadImageCommand implements ActionCommand {
@@ -33,25 +29,25 @@ public class UploadImageCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
         String uploadPath = defineUploadPath(request);
-        List<FileItem> items;
         File file = new File(uploadPath);
         DiskFileItemFactory factory = new DiskFileItemFactory(FILE_SIZE_THRESHOLD, file);
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setSizeMax(MAX_REQUEST_SIZE);
-        Iterator<FileItem> iterator;
+        String page;
         try {
-            items = upload.parseRequest(request);
-            iterator = items.iterator();
-            if (iterator.hasNext()) {
-                FileItem fileItem = iterator.next();
-                String localPath = saveItem(fileItem, request);
-                service.updateUserImage(user.getAccount().getId(), localPath);
+            FileItem fileItem = upload.parseRequest(request).get(0);
+            String localPath = saveItem(fileItem, request);
+            if (service.updateUserImage(user.getAccount().getId(), localPath)) {
                 user.setImageName(localPath);
+                page = ProjectPage.PERSONAL_DATA.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
             }
-        } catch (FileUploadException | ServiceException e) {
+        } catch (Exception e) {
             LOGGER.error(e);
+            page = ProjectPage.ERROR_500.getDirectUrl();
         }
-        return ProjectPage.PERSONAL_DATA.getServletCommand();
+        return page;
     }
 
     private String defineUploadPath(HttpServletRequest request) {
@@ -64,21 +60,14 @@ public class UploadImageCommand implements ActionCommand {
         return uploadPath;
     }
 
-    private String saveItem(FileItem fileItem, HttpServletRequest request) {
+    private String saveItem(FileItem fileItem, HttpServletRequest request) throws Exception {
         String uploadPath = defineUploadPath(request);
         String uploadName = generateName(fileItem.getName());
         File uploadedFile = new File(uploadPath + uploadName);
-        String contextPath;
-        try {
-            String itemName = fileItem.getName();
-            fileItem.write(uploadedFile);
-            LOGGER.info("File {} was successfully uploaded!", itemName);
-            contextPath = SLASH + UPLOAD_DIR + SLASH + uploadName;
-        } catch (Exception e) {
-            LOGGER.info("Unable to save file!", e);
-            contextPath = null;
-        }
-        return contextPath;
+        String itemName = fileItem.getName();
+        fileItem.write(uploadedFile);
+        LOGGER.info("File {} was successfully uploaded!", itemName);
+        return SLASH + UPLOAD_DIR + SLASH + uploadName;
     }
 
     private String generateName(String realName) {

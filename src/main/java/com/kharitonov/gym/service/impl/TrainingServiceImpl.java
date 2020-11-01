@@ -64,10 +64,15 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void updateDescription(int trainingId, String description) throws ServiceException {
+    public boolean updateDescription(String trainingId, String description) throws ServiceException {
+        if (!TrainingValidator.correctUpdateDescriptionParameters(trainingId, description)) {
+            return false;
+        }
         TrainingDao dao = new TrainingDaoImpl();
+        int id = Integer.parseInt(trainingId);
         try {
-            dao.updateDescription(trainingId, description);
+            dao.updateDescription(id, description);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -89,13 +94,18 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void updateTraining(String trainingId, String trainingDate, String trainingTime, String description) throws ServiceException {
+    public boolean updateTraining(String trainingId, String trainingDate, String trainingTime, String description)
+            throws ServiceException {
+        if (!TrainingValidator.correctUpdateTrainingParameters(trainingId, trainingDate, trainingTime, description)) {
+            return false;
+        }
         TrainingDao dao = new TrainingDaoImpl();
         int id = Integer.parseInt(trainingId);
         Date date = Date.valueOf(trainingDate);
         Time time = Time.valueOf(trainingTime + (trainingTime.length() == TIME_LENGTH ? BLANK : SECONDS_POSTFIX));
         try {
             dao.updateTraining(id, date, time, description);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

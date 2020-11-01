@@ -20,8 +20,11 @@ public class UpdateDiscountCommand implements ActionCommand {
         String discount = request.getParameter(RequestParameterName.PERSONAL_DISCOUNT);
         String page;
         try {
-            service.updateDiscount(id, discount);
-            page = ProjectPage.ADMIN_REGISTRATIONS.getServletCommand();
+            if (service.updateDiscount(id, discount)) {
+                page = ProjectPage.ADMIN_REGISTRATIONS.getServletCommand();
+            } else {
+                page = ProjectPage.ERROR_404.getDirectUrl();
+            }
         } catch (ServiceException e) {
             LOGGER.error(e);
             page = ProjectPage.ERROR_500.getDirectUrl();
