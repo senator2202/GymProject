@@ -34,10 +34,6 @@ public class AddTrainingCommand implements ActionCommand {
             if (trainingId == INVALID_ID) {
                 page = ProjectPage.ERROR_404.getDirectUrl();
             } else {
-                Training training = trainingService.findTrainingById(trainingId).get();
-                restoreRequestAttributes(request);//restoring client schedule page attributes
-                List<Training> planned = (List<Training>) request.getAttribute(RequestAttributeName.PLANNED_TRAININGS);
-                planned.add(training);
                 client.setBoughtTrainings(client.getBoughtTrainings() - 1);
                 page = ProjectPage.SCHEDULE.getServletCommand();
             }

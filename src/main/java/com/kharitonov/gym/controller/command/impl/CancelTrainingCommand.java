@@ -4,17 +4,14 @@ import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
-import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.model.service.TrainingService;
 import com.kharitonov.gym.model.service.impl.TrainingServiceImpl;
-import com.kharitonov.gym.util.RequestAttributeName;
 import com.kharitonov.gym.util.RequestParameterName;
 import com.kharitonov.gym.util.SessionAttributeName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 public class CancelTrainingCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(AddTrainingCommand.class);
@@ -28,10 +25,6 @@ public class CancelTrainingCommand implements ActionCommand {
         String page;
         try {
             if (service.deleteTraining(trainingId, clientId)) {
-                restoreRequestAttributes(request);
-                List<Training> trainings = (List<Training>) request.getAttribute(RequestAttributeName.PLANNED_TRAININGS);
-                int id = Integer.parseInt(trainingId);
-                trainings.stream().filter(t -> t.getTrainingId() == id).findFirst().map(trainings::remove);
                 client.setBoughtTrainings(client.getBoughtTrainings() + 1);
                 page = ProjectPage.SCHEDULE.getServletCommand();
             } else {

@@ -27,11 +27,6 @@ public class ApproveTrainerApplicationCommand implements ActionCommand {
         String page;
         try {
             if (appService.approveApplication(id, institution, graduation, instagram)) {
-                restoreRequestAttributes(request);
-                List<TrainerApplication> applications =
-                        (List<TrainerApplication>) request.getAttribute(RequestAttributeName.APPLICATIONS);
-                int userId = Integer.parseInt(id);
-                applications.stream().filter(a -> a.getUser().getAccount().getId() == userId).map(applications::remove);
                 page = ProjectPage.ADMIN_MAIN.getServletCommand();
             } else {
                 page = ProjectPage.ERROR_404.getDirectUrl();

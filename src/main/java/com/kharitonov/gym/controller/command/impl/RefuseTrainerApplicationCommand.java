@@ -24,12 +24,6 @@ public class RefuseTrainerApplicationCommand implements ActionCommand {
         String page;
         try {
             if (service.deleteApplication(id)) {
-                restoreRequestAttributes(request);
-                List<TrainerApplication> applications =
-                        (List<TrainerApplication>) request.getAttribute(RequestAttributeName.APPLICATIONS);
-                int userId = Integer.parseInt(id);
-                applications.stream().filter(a -> a.getUser().getAccount().getId() == userId).map(applications::remove);
-                request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
                 page = ProjectPage.ADMIN_MAIN.getServletCommand();
             } else {
                 page = ProjectPage.ERROR_404.getDirectUrl();
