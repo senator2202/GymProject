@@ -16,7 +16,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
-    public void addFeedback(String name, String email, String subject, String message) throws DaoException {
+    public void add(String name, String email, String subject, String message) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementAddFeedback(connection, name, email, subject, message)) {
             statement.execute();
@@ -26,7 +26,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
     }
 
     @Override
-    public List<Feedback> findAllFeedbacks() throws DaoException {
+    public List<Feedback> findAll() throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementSelectAll(connection);
              ResultSet resultSet = statement.executeQuery()) {
@@ -55,7 +55,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
         int id = resultSet.getInt(TableColumnName.FEEDBACK_ID);
         String name = resultSet.getString(TableColumnName.FEEDBACK_SENDER_NAME);
         String email = resultSet.getString(TableColumnName.FEEDBACK_SENDER_EMAIL);
-        String subject = resultSet.getString(TableColumnName.FEEDBCAK_SUBJECT);
+        String subject = resultSet.getString(TableColumnName.FEEDBACK_SUBJECT);
         String message = resultSet.getString(TableColumnName.FEEDBACK_MESSAGE);
         Date date = resultSet.getDate(TableColumnName.FEEDBACK_DATETIME);
         String reply = resultSet.getString(TableColumnName.FEEDBACK_REPLY_MESSAGE);

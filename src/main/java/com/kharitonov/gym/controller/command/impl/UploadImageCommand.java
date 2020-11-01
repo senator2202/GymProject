@@ -2,9 +2,9 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
-import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.service.impl.UserServiceImpl;
+import com.kharitonov.gym.model.service.impl.UserServiceImpl;
+import com.kharitonov.gym.util.SessionAttributeName;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;

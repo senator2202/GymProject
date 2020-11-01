@@ -1,8 +1,8 @@
 package com.kharitonov.gym.controller;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.controller.command.impl.UploadImageCommand;
+import com.kharitonov.gym.util.RequestParameterName;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

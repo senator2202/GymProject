@@ -1,4 +1,4 @@
-package com.kharitonov.gym.validator;
+package com.kharitonov.gym.model.validator;
 
 public enum ValidationError {
     LOGIN_EXISTS,

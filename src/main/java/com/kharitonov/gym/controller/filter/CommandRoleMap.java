@@ -38,7 +38,7 @@ public class CommandRoleMap {
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
         ROLE_MAP.put(CommandType.OPEN_HOME,
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
-        ROLE_MAP.put(CommandType.OPEN_PERSONAL_ACCOUNT,  Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
+        ROLE_MAP.put(CommandType.OPEN_PERSONAL_ACCOUNT, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.OPEN_PERSONAL_DATA, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.OPEN_PERSONAL_FINANCE, Arrays.asList(UserRole.CLIENT));
         ROLE_MAP.put(CommandType.OPEN_PORTFOLIO,

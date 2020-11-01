@@ -1,6 +1,7 @@
 package com.kharitonov.gym.controller.command;
 
 import com.kharitonov.gym.controller.RequestAttributesWrapper;
+import com.kharitonov.gym.util.SessionAttributeName;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -1,4 +1,4 @@
-package com.kharitonov.gym.service;
+package com.kharitonov.gym.model.service;
 
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Training;

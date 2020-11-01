@@ -1,4 +1,4 @@
-package com.kharitonov.gym.validator;
+package com.kharitonov.gym.model.validator;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

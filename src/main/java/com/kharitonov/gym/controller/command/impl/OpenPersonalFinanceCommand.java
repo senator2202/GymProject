@@ -2,8 +2,8 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
-import com.kharitonov.gym.controller.command.RequestAttributeName;
 import com.kharitonov.gym.controller.command.RequestAttributeValue;
+import com.kharitonov.gym.util.RequestAttributeName;
 
 import javax.servlet.http.HttpServletRequest;
 

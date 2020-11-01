@@ -1,7 +1,7 @@
-package com.kharitonov.gym.controller.tag;
+package com.kharitonov.gym.tag;
 
-import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.util.SessionAttributeName;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;

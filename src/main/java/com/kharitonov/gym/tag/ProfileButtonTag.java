@@ -1,4 +1,4 @@
-package com.kharitonov.gym.controller.tag;
+package com.kharitonov.gym.tag;
 
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Trainer;

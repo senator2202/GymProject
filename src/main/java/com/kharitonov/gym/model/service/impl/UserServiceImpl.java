@@ -1,6 +1,5 @@
-package com.kharitonov.gym.service.impl;
+package com.kharitonov.gym.model.service.impl;
 
-import com.kharitonov.gym.controller.command.RequestParameterName;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.PropertyReaderException;
 import com.kharitonov.gym.exception.ServiceException;
@@ -9,13 +8,14 @@ import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.service.UserService;
+import com.kharitonov.gym.model.service.UserService;
+import com.kharitonov.gym.model.validator.TrainingValidator;
+import com.kharitonov.gym.model.validator.UserValidator;
+import com.kharitonov.gym.model.validator.ValidationError;
+import com.kharitonov.gym.model.validator.ValidationErrorSet;
 import com.kharitonov.gym.util.CryptoUtility;
+import com.kharitonov.gym.util.RequestParameterName;
 import com.kharitonov.gym.util.mail.MailUtility;
-import com.kharitonov.gym.validator.TrainingValidator;
-import com.kharitonov.gym.validator.UserValidator;
-import com.kharitonov.gym.validator.ValidationError;
-import com.kharitonov.gym.validator.ValidationErrorSet;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
             if (exists) {
                 return Optional.empty();
             }
-            int id = dao.addUser(login, encryptedPassword, email);
+            int id = dao.add(login, encryptedPassword, email);
             sendConfirmationLink(email, id);
             return dao.findUser(login, encryptedPassword);
         } catch (DaoException e) {

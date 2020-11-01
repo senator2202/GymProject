@@ -1,4 +1,4 @@
-package com.kharitonov.gym.service.impl;
+package com.kharitonov.gym.model.service.impl;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.PropertyReaderException;
@@ -6,9 +6,9 @@ import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.FeedbackDao;
 import com.kharitonov.gym.model.dao.impl.FeedbackDaoImpl;
 import com.kharitonov.gym.model.entity.Feedback;
-import com.kharitonov.gym.service.FeedbackService;
+import com.kharitonov.gym.model.service.FeedbackService;
+import com.kharitonov.gym.model.validator.FeedbackValidator;
 import com.kharitonov.gym.util.mail.MailUtility;
-import com.kharitonov.gym.validator.FeedbackValidator;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         }
         FeedbackDao dao = new FeedbackDaoImpl();
         try {
-            dao.addFeedback(name, email, subject, message);
+            dao.add(name, email, subject, message);
             return true;
         } catch (DaoException e) {
             throw new ServiceException(e);
@@ -37,7 +37,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     public List<Feedback> findAllFeedbacks() throws ServiceException {
         FeedbackDao dao = new FeedbackDaoImpl();
         try {
-            return dao.findAllFeedbacks();
+            return dao.findAll();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

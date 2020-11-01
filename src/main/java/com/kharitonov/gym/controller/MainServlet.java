@@ -1,9 +1,9 @@
 package com.kharitonov.gym.controller;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.RequestParameterName;
-import com.kharitonov.gym.controller.command.SessionAttributeName;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
+import com.kharitonov.gym.util.RequestParameterName;
+import com.kharitonov.gym.util.SessionAttributeName;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

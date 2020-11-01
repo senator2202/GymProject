@@ -1,15 +1,15 @@
-package com.kharitonov.gym.service.impl;
+package com.kharitonov.gym.model.service.impl;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.TrainerApplicationDao;
 import com.kharitonov.gym.model.dao.impl.TrainerApplicationDaoImpl;
 import com.kharitonov.gym.model.entity.TrainerApplication;
-import com.kharitonov.gym.service.TrainerApplicationService;
-import com.kharitonov.gym.validator.TrainerApplicationValidator;
-import com.kharitonov.gym.validator.UserValidator;
-import com.kharitonov.gym.validator.ValidationError;
-import com.kharitonov.gym.validator.ValidationErrorSet;
+import com.kharitonov.gym.model.service.TrainerApplicationService;
+import com.kharitonov.gym.model.validator.TrainerApplicationValidator;
+import com.kharitonov.gym.model.validator.UserValidator;
+import com.kharitonov.gym.model.validator.ValidationError;
+import com.kharitonov.gym.model.validator.ValidationErrorSet;
 
 import java.util.List;
 

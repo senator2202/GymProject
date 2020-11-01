@@ -7,7 +7,7 @@
 
     <tag>
         <name>table-utility</name>
-        <tag-class>com.kharitonov.gym.controller.tag.TableUtilityTag</tag-class>
+        <tag-class>com.kharitonov.gym.tag.TableUtilityTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -19,18 +19,20 @@
         <attribute>
             <name>order</name>
             <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
             <type>int</type>
         </attribute>
         <attribute>
             <name>direction</name>
             <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
     </tag>
 
     <tag>
         <name>profile-button</name>
-        <tag-class>com.kharitonov.gym.controller.tag.ProfileButtonTag</tag-class>
+        <tag-class>com.kharitonov.gym.tag.ProfileButtonTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -49,7 +51,7 @@
     
     <tag>
         <name>cancel-button</name>
-        <tag-class>com.kharitonov.gym.controller.tag.CancelButtonTag</tag-class>
+        <tag-class>com.kharitonov.gym.tag.CancelButtonTag</tag-class>
         <body-content>empty</body-content>
         
         <attribute>
@@ -68,7 +70,7 @@
 
     <tag>
         <name>message</name>
-        <tag-class>com.kharitonov.gym.controller.tag.MessageTag</tag-class>
+        <tag-class>com.kharitonov.gym.tag.MessageTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 

@@ -1,8 +1,8 @@
-package com.kharitonov.gym.controller.tag;
+package com.kharitonov.gym.tag;
 
-import com.kharitonov.gym.controller.command.RequestAttributeName;
-import com.kharitonov.gym.controller.command.SessionAttributeName;
-import com.kharitonov.gym.validator.ValidationError;
+import com.kharitonov.gym.model.validator.ValidationError;
+import com.kharitonov.gym.util.RequestAttributeName;
+import com.kharitonov.gym.util.SessionAttributeName;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;

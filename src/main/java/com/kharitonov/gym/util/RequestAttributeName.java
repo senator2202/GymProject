@@ -1,4 +1,4 @@
-package com.kharitonov.gym.controller.command;
+package com.kharitonov.gym.util;
 
 public class RequestAttributeName {
     public static final String APPLICATIONS = "applications";
@@ -11,6 +11,7 @@ public class RequestAttributeName {
     public static final String PLANNED_TRAININGS = "plannedTrainings";
     public static final String PREVIOUS_TRAININGS = "previousTrainings";
     public static final String FEEDBACK_SENT = "feedbackSent";
+    public static final String DAYS = "days";
 
     private RequestAttributeName() {
 

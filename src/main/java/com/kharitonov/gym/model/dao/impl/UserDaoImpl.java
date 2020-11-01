@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int addUser(String login, String password, String email) throws DaoException {
+    public int add(String login, String password, String email) throws DaoException {
         Connection connection = pool.getConnection();
         try {
             connection.setAutoCommit(false);
@@ -151,22 +151,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public String findPassword(String login) throws DaoException {
-        String password = BLANK;
-        try (Connection connection = pool.getConnection();
-             PreparedStatement statementSelect = statementSelectPassword(connection, login);
-             ResultSet resultSet = statementSelect.executeQuery()) {
-            if (resultSet.next()) {
-                String column = TableColumnName.ACCOUNT_PASSWORD;
-                password = resultSet.getString(column);
-            }
-            return password;
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
-    @Override
     public boolean findByEmail(String email) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statementSelect = statementSelectByEmail(connection, email);
@@ -228,26 +212,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUserInfo(String firstName, String lastName, String phone,
-                               String email, String locale, int id)
-            throws DaoException {
-        Connection connection = pool.getConnection();
-        try (PreparedStatement statementUpdateUser = statementUpdateUser(connection,
-                firstName, lastName, phone, id);
-             PreparedStatement statementUpdateLocale = statementUpdateAccount(connection, email, locale, id)) {
-            connection.setAutoCommit(false);
-            statementUpdateUser.executeUpdate();
-            statementUpdateLocale.executeUpdate();
-        } catch (SQLException e) {
-            rollback(connection);
-            throw new DaoException(e);
-        } finally {
-            setAutoCommitTrue(connection);
-            pool.releaseConnection(connection);
-        }
-    }
-
-    @Override
     public void updatePersonalData(int userId, String firstName, String lastName, String phone) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateUser(connection, firstName, lastName, phone, userId)) {
@@ -255,24 +219,6 @@ public class UserDaoImpl implements UserDao {
 
         } catch (SQLException e) {
             throw new DaoException(e);
-        }
-    }
-
-    @Override
-    public void changeRoleToTrainer(int userId, String institution, int graduationYear, String instagramLink) throws DaoException {
-        Connection connection = pool.getConnection();
-        try (PreparedStatement statementRole = statementUpdateTrainerRole(connection, userId);
-             PreparedStatement statementTrainer = statementUpdateTrainer(connection, institution, graduationYear, instagramLink, userId)) {
-            connection.setAutoCommit(false);
-            statementRole.execute();
-            statementTrainer.execute();
-            connection.commit();
-        } catch (SQLException e) {
-            rollback(connection);
-            throw new DaoException(e);
-        } finally {
-            setAutoCommitTrue(connection);
-            pool.releaseConnection(connection);
         }
     }
 

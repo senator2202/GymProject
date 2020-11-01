@@ -1,11 +1,15 @@
 package com.kharitonov.gym.controller.command.impl;
 
-import com.kharitonov.gym.controller.command.*;
+import com.kharitonov.gym.controller.command.ActionCommand;
+import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
-import com.kharitonov.gym.service.TrainingService;
-import com.kharitonov.gym.service.impl.TrainingServiceImpl;
+import com.kharitonov.gym.model.service.TrainingService;
+import com.kharitonov.gym.model.service.impl.TrainingServiceImpl;
+import com.kharitonov.gym.util.RequestAttributeName;
+import com.kharitonov.gym.util.RequestParameterName;
+import com.kharitonov.gym.util.SessionAttributeName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

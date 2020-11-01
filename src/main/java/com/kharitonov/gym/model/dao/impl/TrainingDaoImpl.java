@@ -17,7 +17,7 @@ public class TrainingDaoImpl implements TrainingDao {
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     @Override
-    public int addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException {
+    public int add(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException {
         Connection connection = pool.getConnection();
         ResultSet resultSet = null;
         try (PreparedStatement statementAdd = statementInsertTraining(connection, trainerId, clientId, trainingDate, trainingTime);

@@ -68,7 +68,7 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
-	(284, 'senator2202', '9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'ENGLISH', 1),
+	(284, 'senator2202', '9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
 	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 1),
@@ -103,48 +103,6 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(346, 'woody', '9Vrgph\\g', 'tarantul@gmail.com', 'CLIENT', '2020-10-29 14:24:47', 'RUSSIAN', 1),
 	(347, 'bublik', '9Vrgph\\g', 'bublik@mail.ru', 'CLIENT', '2020-10-30 21:08:12', 'RUSSIAN', 1);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
-
--- Дамп структуры для таблица gym.diets
-DROP TABLE IF EXISTS `diets`;
-CREATE TABLE IF NOT EXISTS `diets` (
-  `diet_id` int NOT NULL AUTO_INCREMENT,
-  `diet_type` enum('SLIMMING','WEIGHT_GAIN','KEEPING_SHAPE') NOT NULL DEFAULT 'KEEPING_SHAPE',
-  PRIMARY KEY (`diet_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
--- Дамп данных таблицы gym.diets: ~3 rows (приблизительно)
-/*!40000 ALTER TABLE `diets` DISABLE KEYS */;
-REPLACE INTO `diets` (`diet_id`, `diet_type`) VALUES
-	(1, 'SLIMMING'),
-	(2, 'KEEPING_SHAPE'),
-	(3, 'WEIGHT_GAIN');
-/*!40000 ALTER TABLE `diets` ENABLE KEYS */;
-
--- Дамп структуры для таблица gym.diet_meals
-DROP TABLE IF EXISTS `diet_meals`;
-CREATE TABLE IF NOT EXISTS `diet_meals` (
-  `diet_id` int NOT NULL AUTO_INCREMENT,
-  `meal_type` enum('BREAKFAST','LUNCH','DINNER','SUPPER') NOT NULL,
-  `meal_description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  KEY `FK_meals_diets` (`diet_id`),
-  CONSTRAINT `FK_meals_diets` FOREIGN KEY (`diet_id`) REFERENCES `diets` (`diet_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
--- Дамп данных таблицы gym.diet_meals: ~11 rows (приблизительно)
-/*!40000 ALTER TABLE `diet_meals` DISABLE KEYS */;
-REPLACE INTO `diet_meals` (`diet_id`, `meal_type`, `meal_description`) VALUES
-	(1, 'BREAKFAST', 'Яичница с сыром, 2 тоста с арахисовым маслом, кофе с молоком'),
-	(1, 'DINNER', 'Рис отварной без масла, куриная грудка'),
-	(1, 'SUPPER', 'Салат "Цезарь с курицей", апельсиновый сок '),
-	(2, 'BREAKFAST', 'Гречневая каша с кусочком масла, жареные куриные крылышки, кофе, творожный пудинг'),
-	(2, 'LUNCH', 'Творожная паста "Снежок" с желатином, чай '),
-	(2, 'DINNER', 'Куриный суп, рисовая каша, куриное филе'),
-	(2, 'SUPPER', 'Салат из овощей, консервированный тунец, стакан апельсинового сока'),
-	(3, 'BREAKFAST', 'Хлопья "Nesquick" с молоком, яичница с ветчиной и сыром, кофе со сливками'),
-	(3, 'LUNCH', 'Блинчики с кленовым сиропом, молоко'),
-	(3, 'DINNER', 'Куриный бульон, паста болоньезе, молочный коктейль'),
-	(3, 'SUPPER', 'Салат "Цезарь с курицей", протеиновый коктейль');
-/*!40000 ALTER TABLE `diet_meals` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.feedbacks
 DROP TABLE IF EXISTS `feedbacks`;
@@ -292,7 +250,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(281, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100, 0),
 	(282, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 100, 0),
 	(283, '', '', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, 100, 0),
-	(284, 'Александр', 'Шмюгельсон', '+375335678962', NULL, NULL, NULL, NULL, 10, 1, '/uploads/882ff907-c294-423b-9b0f-13dd4b019cea.jpg', 320, 8),
+	(284, 'Александр', 'Шмюгельсон', '+375335678962', NULL, NULL, NULL, NULL, 12, 1, '/uploads/882ff907-c294-423b-9b0f-13dd4b019cea.jpg', 320, 8),
 	(285, '', '', '', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
 	(286, '', '', '', 0, NULL, NULL, NULL, 0, NULL, '/uploads/75ae7dfe-11d7-429e-a540-87e67cf3bc24.jpg', 100, 0),
 	(288, 'Chef', 'Ivlev', '80295554466', 0, NULL, NULL, NULL, 0, 2, '/uploads/86a6627b-4a7c-4834-b3d5-983058734a6c.jpg', 100, 0),

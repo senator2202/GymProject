@@ -1,4 +1,4 @@
-package com.kharitonov.gym.controller.tag;
+package com.kharitonov.gym.tag;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;

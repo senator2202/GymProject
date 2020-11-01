@@ -8,13 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao extends BaseDao {
-    int addUser(String login, String encryptedPassword, String email) throws DaoException;
+    int add(String login, String encryptedPassword, String email) throws DaoException;
 
     Optional<User> findUser(String name, String encryptedPassword) throws DaoException;
 
     List<User> findAllUsers() throws DaoException;
-
-    String findPassword(String login) throws DaoException;
 
     boolean findByLogin(String login) throws DaoException;
 
@@ -27,14 +25,8 @@ public interface UserDao extends BaseDao {
 
     void updateAccountData(int userId, String email, String locale) throws DaoException;
 
-    void updateUserInfo(String firstName, String lastName, String phone, String email,
-                        String locale, int id) throws DaoException;
-
     void updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws DaoException;
-
-    void changeRoleToTrainer(int userId, String institution,
-                             int graduationYear, String instagramLink) throws DaoException;
 
     List<User> findRecentUsers(int days) throws DaoException;
 

@@ -1,4 +1,4 @@
-package com.kharitonov.gym.validator;
+package com.kharitonov.gym.model.validator;
 
 public class TrainerApplicationValidator {
     private static final String ID_REGEX = "^[1-9]\\d{0,9}$";

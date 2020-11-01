@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TrainingDao extends BaseDao {
-    int addTraining(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException;
+    int add(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException;
 
     List<Training> findClientTrainings(int clientId) throws DaoException;
 

@@ -1,6 +1,6 @@
-package com.kharitonov.gym.validator;
+package com.kharitonov.gym.model.validator;
 
-import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.util.RequestParameterName;
 
 import java.util.Map;
 

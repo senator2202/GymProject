@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
-import com.kharitonov.gym.controller.command.RequestParameterName;
+import com.kharitonov.gym.util.RequestParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

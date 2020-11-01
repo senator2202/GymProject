@@ -1,12 +1,12 @@
-package com.kharitonov.gym.service.impl;
+package com.kharitonov.gym.model.service.impl;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.TrainingDao;
 import com.kharitonov.gym.model.dao.impl.TrainingDaoImpl;
 import com.kharitonov.gym.model.entity.Training;
-import com.kharitonov.gym.service.TrainingService;
-import com.kharitonov.gym.validator.TrainingValidator;
+import com.kharitonov.gym.model.service.TrainingService;
+import com.kharitonov.gym.model.validator.TrainingValidator;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -37,7 +37,7 @@ public class TrainingServiceImpl implements TrainingService {
         Time time = Time.valueOf(trainingTime + (trainingTime.length() == TIME_LENGTH ? BLANK : SECONDS_POSTFIX));
         TrainingDao dao = new TrainingDaoImpl();
         try {
-            return dao.addTraining(trainerId, clientId, date, time);
+            return dao.add(trainerId, clientId, date, time);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

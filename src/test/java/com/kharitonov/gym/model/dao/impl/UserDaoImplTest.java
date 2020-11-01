@@ -24,7 +24,7 @@ public class UserDaoImplTest {
             String email = "email" + random.nextInt(10000000) + "@gmail.com";
             String encryptedPassword = CryptoUtility.encryptMessage(password);
             boolean result;
-            dao.addUser(login, encryptedPassword, email);
+            dao.add(login, encryptedPassword, email);
             result = dao.checkLoginPassword(login, encryptedPassword).isPresent();
             assertTrue(result);
         }
@@ -39,7 +39,7 @@ public class UserDaoImplTest {
             String email = "email" + random.nextInt(10000000) + "@gmail.com";
             String encryptedString = CryptoUtility.encryptMessage(password);
             boolean result;
-            dao.addUser(login, encryptedString, email);
+            dao.add(login, encryptedString, email);
             result = dao.checkLoginPassword(login, encryptedString).isPresent();
             assertTrue(result);
         }

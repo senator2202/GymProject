@@ -41,7 +41,7 @@ class TableColumnName {
     static final String FEEDBACK_ID = "feedback_id";
     static final String FEEDBACK_SENDER_NAME = "sender_name";
     static final String FEEDBACK_SENDER_EMAIL = "sender_email";
-    static final String FEEDBCAK_SUBJECT = "feedback_subject";
+    static final String FEEDBACK_SUBJECT = "feedback_subject";
     static final String FEEDBACK_MESSAGE = "feedback_message";
     static final String FEEDBACK_DATETIME = "feedback_datetime";
     static final String FEEDBACK_REPLY_MESSAGE = "reply_message";

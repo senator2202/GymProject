@@ -1,4 +1,4 @@
-package com.kharitonov.gym.controller.command;
+package com.kharitonov.gym.util;
 
 public class RequestParameterName {
     public static final String LOGIN = "login";
