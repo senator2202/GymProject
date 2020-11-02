@@ -1,5 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
+import com.kharitonov.gym.controller.ActiveUsersMap;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.exception.ServiceException;
@@ -12,6 +13,7 @@ import com.kharitonov.gym.util.SessionAttributeName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -39,7 +41,10 @@ public class RegisterCommand implements ActionCommand {
             HttpSession session = request.getSession();
             Optional<User> optionalUser = service.registerUser(parameters);
             if (optionalUser.isPresent()) {
+                ServletContext context = request.getServletContext();
+                ActiveUsersMap map = ActiveUsersMap.getInstance();
                 User user = optionalUser.get();
+                map.put(user.getAccount().getId(), user.getAccount().getIsActive());
                 session.setAttribute(SessionAttributeName.USER, user);
                 session.setAttribute(RequestAttributeName.CONFIRMATION_SENT, true);
             } else {

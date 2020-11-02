@@ -2,10 +2,10 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
-import com.kharitonov.gym.controller.command.SessionAttributeValue;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.util.SessionAttributeName;
+import com.kharitonov.gym.util.SessionAttributeValue;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;

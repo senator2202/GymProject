@@ -1,7 +1,9 @@
+<%@ page isErrorPage="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
 <link href="/assets/css/error-500.css" rel="stylesheet">
 
-<div class="page-404">
+<div class="page-500">
 	<div class="outer">
 		<div class="middle">
 			<div class="inner">

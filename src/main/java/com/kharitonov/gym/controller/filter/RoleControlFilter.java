@@ -35,8 +35,9 @@ public class RoleControlFilter implements Filter {
             UserRole role = defineUserRole(request);
             if (!MAP.containsRole(type, role)) {
                 LOGGER.warn("Filter interception: '{}' attempted to execute '{}' command ", role, command);
-                request.getSession().setAttribute(SessionAttributeName.ACCESS_ERROR, true);
-                response.sendRedirect(ProjectPage.INDEX.getDirectUrl());
+                //request.getSession().setAttribute(SessionAttributeName.ACCESS_ERROR, true);
+                //response.sendRedirect(ProjectPage.INDEX.getDirectUrl());
+                response.sendError(HttpServletResponse.SC_FORBIDDEN);
                 return;
             }
         } else {

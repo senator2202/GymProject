@@ -1,5 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
+import com.kharitonov.gym.controller.ActiveUsersMap;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.exception.ServiceException;
@@ -20,6 +21,9 @@ public class UnblockUserCommand implements ActionCommand {
         String page;
         try {
             if (service.unblockUser(id)) {
+                int userId = Integer.parseInt(id);
+                ActiveUsersMap map = ActiveUsersMap.getInstance();
+                map.put(userId, true);
                 page = ProjectPage.ADMIN_REGISTRATIONS.getServletCommand();
             } else {
                 page = ProjectPage.ERROR_404.getDirectUrl();

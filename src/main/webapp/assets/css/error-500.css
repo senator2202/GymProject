@@ -10,7 +10,7 @@
 body {
     background: #f0f0f0 !important;
 }
-.page-404 .outer {
+.page-500 .outer {
     position: absolute;
     top: 0;
 
@@ -19,31 +19,31 @@ body {
     width: 100%;
     height: 100%;
 }
-.page-404 .outer .middle {
+.page-500 .outer .middle {
     display: table-cell;
 
     vertical-align: middle;
 }
-.page-404 .outer .middle .inner {
+.page-500 .outer .middle .inner {
     width: 300px;
     margin-right: auto;
     margin-left: auto;
 }
-.page-404 .outer .middle .inner .inner-circle {
+.page-500 .outer .middle .inner .inner-circle {
     height: 300px;
 
     border-radius: 50%;
     background-color: #ffffff;
 }
-.page-404 .outer .middle .inner .inner-circle:hover i {
+.page-500 .outer .middle .inner .inner-circle:hover i {
     color: #39bbdb!important;
     background-color: #f5f5f5;
     box-shadow: 0 0 0 15px #39bbdb;
 }
-.page-404 .outer .middle .inner .inner-circle:hover span {
+.page-500 .outer .middle .inner .inner-circle:hover span {
     color: #39bbdb;
 }
-.page-404 .outer .middle .inner .inner-circle i {
+.page-500 .outer .middle .inner .inner-circle i {
     font-size: 5em;
     line-height: 1em;
 
@@ -64,7 +64,7 @@ body {
     background-color: #39bbdb;
     box-shadow: 0 0 0 15px #f0f0f0;
 }
-.page-404 .outer .middle .inner .inner-circle span {
+.page-500 .outer .middle .inner .inner-circle span {
     font-size: 11em;
     font-weight: 700;
     line-height: 1.2em;
@@ -77,7 +77,7 @@ body {
 
     color: #e0e0e0;
 }
-.page-404 .outer .middle .inner .inner-status {
+.page-500 .outer .middle .inner .inner-status {
     font-size: 20px;
 
     display: block;
@@ -89,7 +89,7 @@ body {
 
     color: #39bbdb;
 }
-.page-404 .outer .middle .inner .inner-detail {
+.page-500 .outer .middle .inner .inner-detail {
     line-height: 1.4em;
 
     display: block;

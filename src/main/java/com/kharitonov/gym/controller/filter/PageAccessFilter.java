@@ -39,7 +39,8 @@ public class PageAccessFilter implements Filter {
         String page = request.getRequestURI();
         if (RESTRICTED_PAGES.contains(page)) {
             LOGGER.warn("Filter interception: attemption of direct access to page '{}'", request.getRequestURI());
-            response.sendRedirect(request.getContextPath() + ProjectPage.INDEX.getDirectUrl());
+            //response.sendRedirect(request.getContextPath() + ProjectPage.INDEX.getDirectUrl());
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
         chain.doFilter(request, response);

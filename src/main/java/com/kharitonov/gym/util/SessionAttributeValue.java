@@ -1,4 +1,4 @@
-package com.kharitonov.gym.controller.command;
+package com.kharitonov.gym.util;
 
 public class SessionAttributeValue {
     public static final String EN_LOCALE = "en";

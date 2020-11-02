@@ -1,5 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
+import com.kharitonov.gym.controller.ActiveUsersMap;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.exception.ServiceException;
@@ -12,6 +13,7 @@ import com.kharitonov.gym.util.SessionAttributeName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -36,10 +38,13 @@ public class LoginCommand implements ActionCommand {
             if (optional.isPresent()) {
                 User user = optional.get();
                 session.setAttribute(SessionAttributeName.USER, user);
-                if (user.getAccount().getRole() != UserRole.ADMIN) {
-                    page = ProjectPage.INDEX.getDirectUrl();
-                } else {
+                if (user.getAccount().getRole() == UserRole.ADMIN) {
                     page = ProjectPage.ADMIN_MAIN.getServletCommand();
+                } else {
+                    ServletContext context = request.getServletContext();
+                    ActiveUsersMap map = ActiveUsersMap.getInstance();
+                    map.put(user.getAccount().getId(), user.getAccount().getIsActive());
+                    page = ProjectPage.INDEX.getDirectUrl();
                 }
             } else {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();

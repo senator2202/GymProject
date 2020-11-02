@@ -3,16 +3,13 @@ package com.kharitonov.gym.controller.command.impl;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.exception.ServiceException;
-import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.model.service.TrainerApplicationService;
 import com.kharitonov.gym.model.service.impl.TrainerApplicationServiceImpl;
-import com.kharitonov.gym.util.RequestAttributeName;
 import com.kharitonov.gym.util.RequestParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 public class ApproveTrainerApplicationCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(ApproveTrainerApplicationCommand.class);
