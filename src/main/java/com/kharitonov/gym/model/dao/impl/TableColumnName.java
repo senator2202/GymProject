@@ -22,6 +22,7 @@ class TableColumnName {
     static final String USER_INSTITUTION = "institution";
     static final String USER_GRADUATION = "graduation";
     static final String USER_INSTAGRAM = "instagram";
+    static final String USER_SHORT_SUMMARY = "short_summary";
     static final String TRAINER_APPLICATION_INSTITUTION = "app_institution";
     static final String TRAINER_APPLICATION_GRADUATION_YEAR = "app_graduation";
     static final String TRAINER_APPLICATION_INSTAGRAM_LINK = "app_instagram";

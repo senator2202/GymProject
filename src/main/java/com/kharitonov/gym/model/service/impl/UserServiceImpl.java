@@ -7,6 +7,7 @@ import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.Client;
+import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.validator.TrainingValidator;
@@ -28,6 +29,7 @@ public class UserServiceImpl implements UserService {
     private static final UserServiceImpl INSTANCE = new UserServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
     private static final int DEFAULT_USERS_NUMBER = 30;
+    private static final double DEFAULT_TRAINING_COST = 20;
 
 
     public static UserServiceImpl getInstance() {
@@ -188,7 +190,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean buyTrainings(Client client, String trainingsNumber, double trainingCost) throws ServiceException {
+    public boolean buyTrainings(Client client, String trainingsNumber) throws ServiceException {
         ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
         if (!TrainingValidator.correctTrainingsNumber(trainingsNumber)) {
             errorSet.add(ValidationError.INVALID_NUMBER_FORMAT);
@@ -197,7 +199,7 @@ public class UserServiceImpl implements UserService {
         int number = Integer.parseInt(trainingsNumber);
         double discount = client.getPersonalDiscount();
         double balance = client.getMoneyBalance();
-        double sum = number * trainingCost;
+        double sum = number * DEFAULT_TRAINING_COST;
         double absoluteDiscount = sum * discount / 100;
         sum -= absoluteDiscount;
         if (balance < sum) {
@@ -217,7 +219,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllTrainers() throws ServiceException {
+    public List<Trainer> findAllTrainers() throws ServiceException {
         UserDao dao = new UserDaoImpl();
         try {
             return dao.findAllTrainers();

@@ -1,6 +1,7 @@
 package com.kharitonov.gym.model.dao;
 
 import com.kharitonov.gym.exception.DaoException;
+import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 
@@ -34,7 +35,7 @@ public interface UserDao extends BaseDao {
 
     void updateBalanceAndBoughtTrainings(int userId, double decreaseBalance, int increaseTrainings) throws DaoException;
 
-    List<User> findAllTrainers() throws DaoException;
+    List<Trainer> findAllTrainers() throws DaoException;
 
     void addToBalance(int userId, int amount) throws DaoException;
 

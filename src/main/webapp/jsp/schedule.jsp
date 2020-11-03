@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="/assets/css/themify-icons.css"/>
     <link rel="stylesheet" href="/assets/css/select-list.css"/>
     <link rel="stylesheet" href="/assets/css/rating.css"/>
+    <link href="../assets/css/img-upload.css" rel="stylesheet"/>
     <link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -69,6 +70,7 @@
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/modal-data.js"></script>
     <script src="/assets/js/rating.js"></script>
+    <script src="/assets/js/img-upload.js"></script>
 </body>
 
 </html>

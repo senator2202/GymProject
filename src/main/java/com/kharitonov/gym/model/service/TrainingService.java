@@ -1,9 +1,11 @@
 package com.kharitonov.gym.model.service;
 
 import com.kharitonov.gym.exception.ServiceException;
+import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface TrainingService {
@@ -25,4 +27,6 @@ public interface TrainingService {
     boolean rateTraining(String trainingId, String rating, String trainerId) throws ServiceException;
 
     Optional<Training> findTrainingById(int trainingId) throws ServiceException;
+
+    Map<Integer, Client> findTrainerClients(int trainerId) throws ServiceException;
 }

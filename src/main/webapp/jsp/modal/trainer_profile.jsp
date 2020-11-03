@@ -26,14 +26,16 @@
 					</div>
 					<div class="card-body">
 						<div class="container">
-							<div class="row">
-								<div class="col-lg-6">
-									<fmt:message key="trainer_profile.userType"/>
+							<c:if test="${user.account.role=='ADMIN'}">
+								<div class="row">
+									<div class="col-lg-6">
+										<fmt:message key="trainer_profile.userType"/>
+									</div>
+									<div class="col-lg-6">
+										<label id="roleText" style="color: #0b0b0b"></label>
+									</div>
 								</div>
-								<div class="col-lg-6">
-									<label id="roleText" style="color: #0b0b0b"></label>
-								</div>
-							</div>
+							</c:if>
 							<div class="row">
 								<div class="col-lg-6">
 									<fmt:message key="trainer_profile.email"/>
@@ -71,7 +73,7 @@
 									<fmt:message key="trainer_profile.instagram"/>
 								</div>
 								<div class="col-lg-6">
-									<label id="instagramText" style="color: #0b0b0b"></label>
+									<a id="instagramRef"><fmt:message key="trainer_profile.instagramLink"/></a>
 								</div>
 							</div>
 							<div class="row">

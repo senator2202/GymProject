@@ -2,6 +2,7 @@ package com.kharitonov.gym.model.service;
 
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
+import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.model.entity.User;
 
 import java.util.List;
@@ -25,9 +26,9 @@ public interface UserService {
 
     boolean updateUserImage(int userId, String imageName) throws ServiceException;
 
-    boolean buyTrainings(Client client, String trainingsNumber, double trainingCost) throws ServiceException;
+    boolean buyTrainings(Client client, String trainingsNumber) throws ServiceException;
 
-    List<User> findAllTrainers() throws ServiceException;
+    List<Trainer> findAllTrainers() throws ServiceException;
 
     boolean addToBalance(Client client, String amount) throws ServiceException;
 

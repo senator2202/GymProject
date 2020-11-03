@@ -16,9 +16,7 @@
 			<nav class="mainmenu mobile-menu">
 				<ul>
 					<li class="active"><a href="/mainController?command=open_home">Home</a></li>
-					<li><a href="/mainController?command=open_about">About</a></li>
 					<li><a href="/mainController?command=open_schedule" id="scheduleRef">Schedule</a></li>
-					<li><a href="/mainController?command=open_portfolio">Portfolio</a></li>
 					<li><a href="/mainController?command=open_contacts">Contacts</a></li>
 					<c:choose>
 						<c:when test="${sessionScope.user!=null}">

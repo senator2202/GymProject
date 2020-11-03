@@ -42,7 +42,7 @@ $('#modalTrainerProfile').on('show.bs.modal', function (e) {
     var rating = e.relatedTarget.dataset.rating;
     modal.find('#institutionText').text(institution);
     modal.find('#graduationText').text(graduationYear);
-    modal.find('#instagramText').text(instagramLink);
+    modal.find('#instagramRef').attr('href',instagramLink);
     $('#ratingTrainerProfile').raty({
         readOnly: true,
         score: rating,
@@ -67,11 +67,12 @@ $('#modalEditTraining').on('show.bs.modal', function (e) {
     var trainingTime = e.relatedTarget.dataset.trainingtime;
     var trainingDescription = e.relatedTarget.dataset.trainingdescription;
     var modal = $(this);
-    modal.find('#trainingId').val(trainingId);
-    modal.find('#trainerName').text(trainerName);
-    modal.find('#trainingDate').val(trainingDate);
-    modal.find('#trainingTime').val(trainingTime);
-    modal.find('#trainingDescription').val(trainingDescription);
+    modal.find('#editTrainingId').val(trainingId);
+    modal.find('#editTrainerName').text(trainerName);
+    modal.find('#editTrainingDate').val(trainingDate);
+    modal.find('#editTrainingTime').val(trainingTime);
+    modal.find('#editTrainingDescription').val(trainingDescription);
+    setEditRanges();
 });
 
 $('#modalRating').on('show.bs.modal', function (e) {
@@ -86,6 +87,35 @@ $('#modalDescription').on('show.bs.modal', function (e) {
     var trainingId = e.relatedTarget.dataset.trainingid;
     var trainingDescription = e.relatedTarget.dataset.trainingdescription;
     var modal = $(this);
-    modal.find('#trainingId').val(trainingId);
+    modal.find('#descrTrainingId').val(trainingId);
     modal.find('#trainingDescription').val(trainingDescription);
 });
+
+$('#modalAddTraining').on('show.bs.modal', function (e) {
+    setAddRanges();
+});
+
+function setAddRanges() {
+    $('#addTrainingDate').attr('min', currentDate());
+    $('#addTrainingTime').attr('min', '07:00');
+    $('#addTrainingTime').attr('max', '23:00');
+}
+
+function setEditRanges() {
+    $('#editTrainingDate').attr('min', currentDate());
+    $('#editTrainingTime').attr('min', '07:00');
+    $('#editTrainingTime').attr('max', '23:00');
+}
+
+function currentDate() {
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    var minDate= year + '-' + month + '-' + day;
+    return minDate;
+}

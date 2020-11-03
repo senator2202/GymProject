@@ -22,7 +22,7 @@
 					<div class="card-body">
 						<form action="/mainController" method="post">
 							<input type="hidden" name="command" value="update_training_description"/>
-							<input type="hidden" name="trainingId" id="trainingId"/>
+							<input type="hidden" name="trainingId" id="descrTrainingId"/>
 							<div class="form-group">
 								<textarea class="form-control" rows="4" id="trainingDescription"
 								          name="trainingDescription">

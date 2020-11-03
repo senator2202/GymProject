@@ -30,14 +30,16 @@
 						<input type="hidden" name="clientId" id="clientId">
 						<div class="card-body">
 							<div class="container">
-								<div class="row">
-									<div class="col-lg-6">
-										<fmt:message key="client_profile.userType"/>
+								<c:if test="${user.account.role=='ADMIN'}">
+									<div class="row">
+										<div class="col-lg-6">
+											<fmt:message key="client_profile.userType"/>
+										</div>
+										<div class="col-lg-6">
+											<label id="roleText" style="color: #0b0b0b"></label>
+										</div>
 									</div>
-									<div class="col-lg-6">
-										<label id="roleText" style="color: #0b0b0b"></label>
-									</div>
-								</div>
+								</c:if>
 								<div class="row">
 									<div class="col-lg-6">
 										<fmt:message key="client_profile.email"/>
@@ -54,37 +56,45 @@
 										<label id="phoneText" style="color: #0b0b0b"></label>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<fmt:message key="client_profile.balance"/> Br
-									</div>
-									<div class="col-lg-6">
-										<label id="moneyText" style="color: #0b0b0b"></label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<fmt:message key="client_profile.trainings"/>
-									</div>
-									<div class="col-lg-6">
-										<label id="boughtText" style="color: #0b0b0b"></label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<fmt:message key="client_profile.discount"/>
-									</div>
-									<div class="col-lg-6">
-										<div class="quantity">
-											<input name="personalDiscount" id="discountInput" type="number" min="0" max="100" step="0.5"> %
+								<c:if test="${user.account.role=='ADMIN'}">
+									<div class="row">
+										<div class="col-lg-6">
+											<fmt:message key="client_profile.balance"/> Br
+										</div>
+										<div class="col-lg-6">
+											<label id="moneyText" style="color: #0b0b0b"></label>
 										</div>
 									</div>
-								</div>
+								</c:if>
+								<c:if test="${user.account.role=='ADMIN'}">
+									<div class="row">
+										<div class="col-lg-6">
+											<fmt:message key="client_profile.trainings"/>
+										</div>
+										<div class="col-lg-6">
+											<label id="boughtText" style="color: #0b0b0b"></label>
+										</div>
+									</div>
+								</c:if>
+								<c:if test="${user.account.role=='ADMIN'}">
+									<div class="row">
+										<div class="col-lg-6">
+											<fmt:message key="client_profile.discount"/>
+										</div>
+										<div class="col-lg-6">
+											<div class="quantity">
+												<input name="personalDiscount" id="discountInput" type="number" min="0" max="100" step="0.5"> %
+											</div>
+										</div>
+									</div>
+								</c:if>
 							</div>
 						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary mb-2">Сделать скидку</button>
-						</div>
+						<c:if test="${user.account.role=='ADMIN'}">
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary mb-2">Сделать скидку</button>
+							</div>
+						</c:if>
 					</form>
 				</div>
 			</div>

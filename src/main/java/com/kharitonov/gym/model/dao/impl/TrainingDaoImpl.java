@@ -2,9 +2,12 @@ package com.kharitonov.gym.model.dao.impl;
 
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.dao.TrainingDao;
+import com.kharitonov.gym.model.entity.Account;
+import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
+import com.mysql.cj.xdevapi.Table;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -190,6 +193,30 @@ public class TrainingDaoImpl implements TrainingDao {
                 optional = Optional.empty();
             }
             return optional;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public List<Client> findTrainerClients(int trainerId) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementSelectTrainerClients(connection, trainerId);
+             ResultSet resultSet = statement.executeQuery()) {
+            List<Client> clients = new ArrayList<>();
+            while (resultSet.next()) {
+                Account account = Account.AccountBuilder.anAccount()
+                        .withId(resultSet.getInt(TableColumnName.ACCOUNT_ID))
+                        .withEmail(resultSet.getString(TableColumnName.ACCOUNT_EMAIL))
+                        .build();
+                Client client = new Client(account);
+                client.setFirstName(resultSet.getString(TableColumnName.USER_FIRST_NAME));
+                client.setLastName(resultSet.getString(TableColumnName.USER_LAST_NAME));
+                client.setPhoneNumber(resultSet.getString(TableColumnName.USER_PHONE));
+                client.setImageName(resultSet.getString(TableColumnName.USER_IMAGE));
+                clients.add(client);
+            }
+            return clients;
         } catch (SQLException e) {
             throw new DaoException(e);
         }

@@ -12,6 +12,7 @@
 <jsp:include page="/jsp/modal/edit_training.jsp"/>
 <jsp:include page="/jsp/modal/rating.jsp"/>
 <jsp:include page="/jsp/modal/low_balance.jsp"/>
+<jsp:include page="/jsp/modal/trainer_profile.jsp"/>
 
 <ctg:message/>
 
@@ -74,6 +75,9 @@
                                             <fmt:message key="schedule_client.trainer"/>
                                         </th>
                                         <th>
+
+                                        </th>
+                                        <th>
                                             <fmt:message key="schedule_client.date"/>
                                         </th>
                                         <th>
@@ -91,6 +95,10 @@
                                             <tr>
                                                 <td>
                                                         ${training.trainerFirstName} ${training.trainerLastName}
+                                                </td>
+                                                <td class="td-actions">
+                                                    <fmt:message key="admin_feedbacks.openProfile" var="openProfile"/>
+                                                    <ctg:profile-button user="${trainerMap[training.trainerId]}" tooltip="${openProfile}"/>
                                                 </td>
                                                 <td>
                                                         ${training.date}
@@ -122,7 +130,7 @@
                                             </tr>
                                         </c:forEach>
                                         </tbody>
-                                        <ctg:table-utility tableId="clientTrainings" order="1" direction="asc"/>
+                                        <ctg:table-utility tableId="clientTrainings" order="2" direction="asc"/>
                                     </table>
                                     <button type="button" id="addButton" class="btn btn-outline-primary btn-round"
                                             data-toggle="modal"
@@ -137,6 +145,9 @@
                                         <thead class=" text-primary">
                                         <th>
                                             <fmt:message key="schedule_client.trainer"/>
+                                        </th>
+                                        <th>
+
                                         </th>
                                         <th>
                                             <fmt:message key="schedule_client.date"/>
@@ -159,6 +170,10 @@
                                             <tr>
                                                 <td>
                                                         ${training.trainerFirstName} ${training.trainerLastName}
+                                                </td>
+                                                <td class="td-actions">
+                                                    <fmt:message key="admin_feedbacks.openProfile" var="openProfile"/>
+                                                    <ctg:profile-button user="${trainerMap[training.trainerId]}" tooltip="${openProfile}"/>
                                                 </td>
                                                 <td>
                                                         ${training.date}

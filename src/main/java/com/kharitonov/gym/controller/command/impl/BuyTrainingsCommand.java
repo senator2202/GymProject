@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 
 public class BuyTrainingsCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(BuyTrainingsCommand.class);
-    private static final double DEFAULT_TRAINING_COST = 20;
     private final UserServiceImpl userService = UserServiceImpl.getInstance();
 
     @Override
@@ -25,7 +24,7 @@ public class BuyTrainingsCommand implements ActionCommand {
         Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
         String page;
         try {
-            if (userService.buyTrainings(client, trainingsNumber, DEFAULT_TRAINING_COST)) {
+            if (userService.buyTrainings(client, trainingsNumber)) {
                 page = ProjectPage.SCHEDULE.getServletCommand();
             } else {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();

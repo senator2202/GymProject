@@ -19,11 +19,11 @@
 					<div class="card-body">
 						<form action="/mainController" method="post">
 							<input type="hidden" name="command" value="add_training">
-							<input type="hidden" name="trainerId" id="trainerId">
+							<input type="hidden" name="trainerId" id="addTrainerId">
 							<div class="form-group">
 								<div class="select">
-									<select name="selectedTrainerId">
-										<option selected disabled><fmt:message key="add_training.select"/></option>
+									<select name="selectedTrainerId" required>
+										<option selected disabled value=""><fmt:message key="add_training.select"/></option>
 										<c:forEach items="${trainers}" var="trainer">
 											<option value="${trainer.account.id}">
 													${trainer.firstName} ${trainer.lastName}
@@ -33,10 +33,10 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="date" name="trainingDate"/>
+								<input type="date" name="trainingDate" id="addTrainingDate" required />
 							</div>
 							<div class="form-group">
-								<input type="time" name="trainingTime"/>
+								<input type="time" name="trainingTime" id="addTrainingTime" required/>
 							</div>
 							<button type="submit" class="btn btn-primary mb-2"><fmt:message
 									key="add_training.add"/></button>

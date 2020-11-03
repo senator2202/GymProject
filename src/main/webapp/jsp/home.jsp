@@ -35,6 +35,7 @@
 	<link rel="stylesheet" href="/assets/css/style.css" type="text/css"/>
 	<link rel="stylesheet" href="/assets/css/popup.css" type="text/css"/>
 	<link rel="stylesheet" href="/assets/css/login.css" type="text/css">
+	<link rel="stylesheet" href="/assets/css/rating.css"/>
 
 	<script src="/assets/js/jquery-3.3.1.min.js"></script>
 	<script src="/assets/js/bootstrap.min.js"></script>
@@ -133,62 +134,65 @@
 			<div class="row m-0">
 				<div class="col-lg-4 order-lg-1 p-0">
 					<div class="member-pic first">
-						<img src="assets/img/trainer-1.jpg" alt="">
+						<img src="${trainers.get(0).imageName}" alt="">
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-2 p-0">
 					<div class="member-text">
-						<span>Gymer</span>
-						<h5>Martin Alex</h5>
-						<p>Body Building, the original LES MILLS barbell class,
-							will sculpt, tone and strengthen
-							your entire body, fast!</p>
-						<div class="member-social">
+						<%--<span>Gymer</span>--%>
+						<h5>${trainers.get(0).firstName} ${trainers.get(0).lastName}</h5>
+						<p>${trainers.get(0).shortSummary}</p>
+						<%--<div class="member-social">
 							<a href="#"><i class="ti-facebook"></i></a>
 							<a href="#"><i class="ti-twitter-alt"></i></a>
 							<a href="#"><i class="ti-pinterest"></i></a>
 							<a href="#"><i class="ti-vimeo-alt"></i></a>
-						</div>
+						</div>--%>
+						<p>
+							<div class="ratingView" data-score="${trainers.get(0).rating}" data-half="true"></div>
+						</p>
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-3 p-0">
 					<div class="member-pic second">
-						<img src="assets/img/trainer-2.jpg" alt="">
+						<img src="${trainers.get(1).imageName}" alt="">
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-6 p-0">
 					<div class="member-text second">
-						<span>Body Building</span>
-						<h5>Martin Alex</h5>
-						<p>Body Building, the original LES MILLS barbell class,
-							will sculpt, tone and strengthen
-							your entire body, fast!</p>
-						<div class="member-social">
+						<%--<span>Gymer</span>--%>
+						<h5>${trainers.get(1).firstName} ${trainers.get(1).lastName}</h5>
+						<p>${trainers.get(1).shortSummary}</p>
+						<%--<div class="member-social">
 							<a href="#"><i class="ti-facebook"></i></a>
 							<a href="#"><i class="ti-twitter-alt"></i></a>
 							<a href="#"><i class="ti-pinterest"></i></a>
 							<a href="#"><i class="ti-vimeo-alt"></i></a>
-						</div>
+						</div>--%>
+						<p>
+						<div class="ratingView" data-score="${trainers.get(1).rating}" data-half="true"></div>
+						</p>
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-5 p-0">
 					<div class="member-pic third">
-						<img src="assets/img/trainer-3.jpg" alt="">
+						<img src="${trainers.get(2).imageName}" alt="">
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-4 p-0">
 					<div class="member-text third">
-						<span>Yoga</span>
-						<h5>Martin Alex</h5>
-						<p>Body Building, the original LES MILLS barbell class,
-							will sculpt, tone and strengthen
-							your entire body, fast!</p>
-						<div class="member-social">
+						<%--<span>Gymer</span>--%>
+						<h5>${trainers.get(2).firstName} ${trainers.get(2).lastName}</h5>
+						<p>${trainers.get(2).shortSummary}</p>
+						<%--<div class="member-social">
 							<a href="#"><i class="ti-facebook"></i></a>
 							<a href="#"><i class="ti-twitter-alt"></i></a>
 							<a href="#"><i class="ti-pinterest"></i></a>
 							<a href="#"><i class="ti-vimeo-alt"></i></a>
-						</div>
+						</div>--%>
+						<p>
+						<div class="ratingView" data-score="${trainers.get(2).rating}" data-half="true"></div>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -215,6 +219,7 @@
 <script src="/assets/js/mixitup.min.js"></script>
 <script src="/assets/js/jquery.slicknav.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/rating.js"></script>
 <script src="/assets/js/main.js"></script>
 </body>
 

@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trainer extends User {
-    private List<Training> plannedTrainings;
     private String institution;
     private int graduationYear;
     private String instagramLink;
+    private String shortSummary;
     private double rating;
 
     public Trainer() {
-        plannedTrainings = new ArrayList<>();
         account = Account.AccountBuilder.anAccount().build();
         account.setRole(UserRole.TRAINER);
     }
 
     public Trainer(Account account) {
-        plannedTrainings = new ArrayList<>();
         account.setRole(UserRole.TRAINER);
         this.account = account;
     }
@@ -59,7 +57,11 @@ public class Trainer extends User {
         this.rating = rating;
     }
 
-    public void setPlannedTrainings(List<Training> plannedTrainings) {
-        this.plannedTrainings = plannedTrainings;
+    public String getShortSummary() {
+        return shortSummary;
+    }
+
+    public void setShortSummary(String shortSummary) {
+        this.shortSummary = shortSummary;
     }
 }

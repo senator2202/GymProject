@@ -277,19 +277,27 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findAllTrainers() throws DaoException {
+    public List<Trainer> findAllTrainers() throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementSelectAllTrainers(connection);
              ResultSet resultSet = statement.executeQuery()) {
-            List<User> trainers = new ArrayList<>();
+            List<Trainer> trainers = new ArrayList<>();
             while (resultSet.next()) {
                 Account account = Account.AccountBuilder.anAccount()
                         .withId(resultSet.getInt(TableColumnName.ACCOUNT_ID))
+                        .withEmail(resultSet.getString(TableColumnName.ACCOUNT_EMAIL))
                         .build();
-                User user = new Trainer(account);
-                user.setFirstName(resultSet.getString(TableColumnName.USER_FIRST_NAME));
-                user.setLastName(resultSet.getString(TableColumnName.USER_LAST_NAME));
-                trainers.add(user);
+                Trainer trainer = new Trainer(account);
+                trainer.setFirstName(resultSet.getString(TableColumnName.USER_FIRST_NAME));
+                trainer.setLastName(resultSet.getString(TableColumnName.USER_LAST_NAME));
+                trainer.setPhoneNumber(resultSet.getString(TableColumnName.USER_PHONE));
+                trainer.setImageName(resultSet.getString(TableColumnName.USER_IMAGE));
+                trainer.setInstitution(resultSet.getString(TableColumnName.USER_INSTITUTION));
+                trainer.setInstagramLink(resultSet.getString(TableColumnName.USER_INSTAGRAM));
+                trainer.setGraduationYear(resultSet.getInt(TableColumnName.USER_GRADUATION));
+                trainer.setRating(resultSet.getDouble(TableColumnName.USER_RATING));
+                trainer.setShortSummary(resultSet.getString(TableColumnName.USER_SHORT_SUMMARY));
+                trainers.add(trainer);
             }
             return trainers;
         } catch (SQLException e) {

@@ -10,7 +10,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title w-100 text-center" style="font-size: large; color: black">
-                    <fmt:message key="feedback_sent.message"/> ${user.account.email}
+                    <fmt:message key="feedback_sent.message"/>
                 </h5>
             </div>
         </div>

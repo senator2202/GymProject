@@ -8,6 +8,7 @@
 <fmt:setBundle basename="property/pagecontent"/>
 
 <jsp:include page="/jsp/modal/edit_description.jsp"/>
+<jsp:include page="/jsp/modal/client_profile.jsp"/>
 
 <section class="trainer-schedule class-timetable spad">
 	<div class="container-fluid">
@@ -35,6 +36,9 @@
 											<fmt:message key="schedule_trainer.client"/>
 										</th>
 										<th>
+
+										</th>
+										<th>
 											<fmt:message key="schedule_trainer.date"/>
 										<th>
 											<fmt:message key="schedule_trainer.time"/>
@@ -51,6 +55,10 @@
 											<tr>
 												<td>
 														${training.clientFirstName}  ${training.clientLastName}
+												</td>
+												<td class="td-actions">
+													<fmt:message key="admin_feedbacks.openProfile" var="openProfile"/>
+													<ctg:profile-button user="${clientMap[training.clientId]}" tooltip="${openProfile}"/>
 												</td>
 												<td>
 														${training.date}
@@ -87,7 +95,7 @@
 											</tr>
 										</c:forEach>
 										</tbody>
-										<ctg:table-utility tableId="trainerTrainings" order="1" direction="asc"/>
+										<ctg:table-utility tableId="trainerTrainings" order="2" direction="asc"/>
 									</table>
 								</div>
 							</div>
@@ -97,6 +105,9 @@
 										<thead class=" text-primary">
 										<th>
 											<fmt:message key="schedule_trainer.client"/>
+										</th>
+										<th>
+
 										</th>
 										<th>
 											<fmt:message key="schedule_trainer.date"/>
@@ -116,6 +127,10 @@
 											<tr>
 												<td>
 														${training.clientFirstName} ${training.clientLastName}
+												</td>
+												<td class="td-actions">
+													<fmt:message key="admin_feedbacks.openProfile" var="openProfile"/>
+													<ctg:profile-button user="${clientMap[training.clientId]}" tooltip="${openProfile}"/>
 												</td>
 												<td>
 														${training.date}

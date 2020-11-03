@@ -3,9 +3,8 @@ package com.kharitonov.gym.controller.command.impl;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.exception.ServiceException;
-import com.kharitonov.gym.model.entity.Training;
-import com.kharitonov.gym.model.entity.User;
-import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.entity.*;
+import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.service.impl.TrainingServiceImpl;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.util.RequestAttributeName;
@@ -14,7 +13,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OpenScheduleCommand implements ActionCommand {
@@ -44,13 +45,21 @@ public class OpenScheduleCommand implements ActionCommand {
 
     private void doClientScenario(HttpServletRequest request, User user) throws ServiceException {
         int userId = user.getAccount().getId();
-        List<User> trainers = userService.findAllTrainers();
+        List<Trainer> trainers = userService.findAllTrainers();
+        Map<Integer, Trainer> trainerMap = createMap(trainers);
         List<Training> trainings = trainingService.findClientTrainings(userId);
         List<Training> planned = trainings.stream().filter(t -> !t.isDone()).collect(Collectors.toList());
         List<Training> previous = trainings.stream().filter(Training::isDone).collect(Collectors.toList());
         request.setAttribute(RequestAttributeName.PLANNED_TRAININGS, planned);
         request.setAttribute(RequestAttributeName.PREVIOUS_TRAININGS, previous);
         request.setAttribute(RequestAttributeName.TRAINERS, trainers);
+        request.setAttribute(RequestAttributeName.TRAINER_MAP, trainerMap);
+    }
+
+    private Map<Integer, Trainer> createMap(List<Trainer> users) {
+        Map<Integer, Trainer> userMap = new HashMap<>();
+        users.forEach(u-> userMap.put(u.getAccount().getId(), u));
+        return userMap;
     }
 
     private void doTrainerScenario(HttpServletRequest request, User user) throws ServiceException {
@@ -58,7 +67,9 @@ public class OpenScheduleCommand implements ActionCommand {
         List<Training> trainings = trainingService.findTrainerTrainings(userId);
         List<Training> planned = trainings.stream().filter(t -> !t.isDone()).collect(Collectors.toList());
         List<Training> previous = trainings.stream().filter(Training::isDone).collect(Collectors.toList());
+        Map<Integer, Client> clientMap = trainingService.findTrainerClients(userId);
         request.setAttribute(RequestAttributeName.PLANNED_TRAININGS, planned);
         request.setAttribute(RequestAttributeName.PREVIOUS_TRAININGS, previous);
+        request.setAttribute(RequestAttributeName.CLIENT_MAP, clientMap);
     }
 }

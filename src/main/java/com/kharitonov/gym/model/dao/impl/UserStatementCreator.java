@@ -58,9 +58,11 @@ class UserStatementCreator {
     private static final String SQL_INCREASE_TRAININGS =
             "UPDATE users SET bought_trainings=bought_trainings+? WHERE user_id=?";
     private static final String SQL_SELECT_ALL_TRAINERS =
-            "SELECT account_id, first_name, last_name " +
+            "SELECT account_id, email, rating, first_name, last_name, phone, rating, institution, " +
+                    "graduation, instagram, image_name, short_summary " +
                     "FROM users JOIN accounts ON user_id=account_id " +
-                    "WHERE role='TRAINER'";
+                    "WHERE role='TRAINER' " +
+                    "ORDER BY rating DESC, short_summary DESC";
     private static final String SQL_SELECT_USER_ID =
             "SELECT user_id FROM users WHERE first_name=? AND last_name=?";
     private static final String SQL_UPDATE_BALANCE =

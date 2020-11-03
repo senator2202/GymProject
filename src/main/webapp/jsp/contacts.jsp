@@ -34,7 +34,6 @@
     <!-- Map Section Begin -->
     <div class="contact-map">
         <iframe src="https://maps.google.com/maps?q=minsk%20adrenalin%20loshitsa&t=&z=13&ie=UTF8&iwloc=&output=embed" style="border:0;" allowfullscreen=""></iframe>
-        <%--<i class="fa fa-map-marker"></i>--%>
     </div>
     <!-- Map Section End -->
 
@@ -72,7 +71,27 @@
                     <h2>Leave message</h2>
                     <p>Our staff will call back later and answer your questions.</p>
                 </div>
-                <form action="#">
+                <form action="/mainController" method="post">
+                    <input type="hidden" name="command" value="add_feedback"/>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="text" placeholder="Name" name="senderName" id="senderName">
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="email" placeholder="Email" name="senderEmail" id="senderEmail" required>
+                        </div>
+                        <div class="col-lg-12">
+                            <input type="text" name="feedbackSubject"
+                                   placeholder="Subject" id="feedbackSubject">
+                            <textarea name="feedbackMessage" id="feedbackMessage" required
+                                      placeholder="Message"></textarea>
+                            <button type="submit">Submit <i
+                                    class="ti-angle-double-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <%--<form action="#">
                     <div class="row">
                         <div class="col-lg-6">
                             <input type="text" placeholder="Your name">
@@ -85,7 +104,7 @@
                             <button type="button">Send Message</button>
                         </div>
                     </div>
-                </form>
+                </form>--%>
             </div>
         </div>
     </section>

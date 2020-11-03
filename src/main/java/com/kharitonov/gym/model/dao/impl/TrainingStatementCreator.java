@@ -67,6 +67,11 @@ class TrainingStatementCreator {
                     "done, \n" +
                     "training_rating \n" +
                     "FROM trainings WHERE training_id=?";
+    private static final String SQL_SELECT_TRAINER_CLIENTS =
+            "SELECT account_id, first_name, last_name, email, phone, image_name\n" +
+                    "FROM accounts JOIN users ON account_id=user_id JOIN trainings ON client_id=user_id\n" +
+                    "WHERE trainer_id=?\n" +
+                    "GROUP BY client_id";
 
     private TrainingStatementCreator() {
 
@@ -162,6 +167,12 @@ class TrainingStatementCreator {
 
     static PreparedStatement statementSelectTrainingById(Connection connection, int id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_SELECT_TRAINING_BY_ID);
+        statement.setInt(1, id);
+        return statement;
+    }
+
+    static PreparedStatement statementSelectTrainerClients(Connection connection, int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_TRAINER_CLIENTS);
         statement.setInt(1, id);
         return statement;
     }

@@ -4,13 +4,16 @@ import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.TrainingDao;
 import com.kharitonov.gym.model.dao.impl.TrainingDaoImpl;
+import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.model.service.TrainingService;
 import com.kharitonov.gym.model.validator.TrainingValidator;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class TrainingServiceImpl implements TrainingService {
@@ -151,6 +154,19 @@ public class TrainingServiceImpl implements TrainingService {
         TrainingDao dao = new TrainingDaoImpl();
         try {
             return dao.findTrainingById(trainingId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Map<Integer, Client> findTrainerClients(int trainerId) throws ServiceException {
+        TrainingDao dao = new TrainingDaoImpl();
+        try {
+            List<Client> clients = dao.findTrainerClients(trainerId);
+            Map<Integer, Client> clientMap = new HashMap<>();
+            clients.forEach(c->clientMap.put(c.getAccount().getId(), c));
+            return clientMap;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
