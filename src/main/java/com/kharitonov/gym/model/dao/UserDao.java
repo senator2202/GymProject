@@ -46,4 +46,6 @@ public interface UserDao extends BaseDao {
     void unblockUser(int userId) throws DaoException;
 
     void updateDiscount(int clientId, double discount) throws DaoException;
+
+    void updateShortSummary(int trainerId, String shortSummary) throws DaoException;
 }

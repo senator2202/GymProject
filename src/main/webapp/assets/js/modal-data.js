@@ -89,7 +89,13 @@ $('#modalDescription').on('show.bs.modal', function (e) {
     var modal = $(this);
     modal.find('#descrTrainingId').val(trainingId);
     modal.find('#trainingDescription').val(trainingDescription);
-});
+});/*
+
+$('#modalEditSummary').on('show.bs.modal', function (e) {
+    var summary = e.relatedTarget.dataset.summary;
+    var modal = $(this);
+    modal.find('#shortSummary').val(summary);
+});*/
 
 $('#modalAddTraining').on('show.bs.modal', function (e) {
     setAddRanges();

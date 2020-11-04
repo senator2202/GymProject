@@ -36,6 +36,7 @@ public enum CommandType {
     UPDATE_ACCOUNT_DATA(new UpdateAccountDataCommand()),
     UPDATE_DISCOUNT(new UpdateDiscountCommand()),
     UPDATE_PERSONAL_DATA(new UpdatePersonalDataCommand()),
+    UPDATE_SHORT_SUMMARY(new UpdateShortSummaryCommand()),
     UPDATE_TRAINING(new UpdateTrainingCommand()),
     UPLOAD_IMAGE(new UploadImageCommand()),
     UPDATE_TRAINING_DESCRIPTION(new UpdateTrainingDescriptionCommand());

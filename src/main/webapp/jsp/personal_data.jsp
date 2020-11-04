@@ -34,6 +34,10 @@
 </head>
 
 <body>
+<!-- Page Preloder -->
+<div id="preloder">
+	<div class="loader"></div>
+</div>
 
 <jsp:include page="/jsp/part/header_black_no_logo.jsp"/>
 
@@ -103,7 +107,7 @@
 														Institution
 													</td>
 													<td>
-														<input type="text" id="institution" name="institution" readonly
+														<input type="text" name="institution" readonly
 														       class="form-control"
 														       value="${sessionScope.user.institution}"/>
 													</td>
@@ -113,7 +117,7 @@
 														Graduation year
 													</td>
 													<td>
-														<input type="text" id="graduationYear" name="graduationYear"
+														<input type="text" name="graduationYear"
 														       readonly
 														       class="form-control"
 														       value="${sessionScope.user.graduationYear}"/>
@@ -124,7 +128,7 @@
 														Instagram Link
 													</td>
 													<td>
-														<input type="text" id="instagramLink" name="instagramLink"
+														<input type="text" name="instagramLink"
 														       class="form-control"
 														       value="${sessionScope.user.instagramLink}"/>
 													</td>
@@ -156,6 +160,7 @@
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/img-upload.js"></script>
+<script src="/assets/js/modal-data.js"></script>
 
 </body>
 

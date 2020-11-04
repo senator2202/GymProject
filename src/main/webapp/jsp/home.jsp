@@ -123,8 +123,7 @@
 			<div class="col-lg-12">
 				<div class="section-title">
 					<h2>Our Trainer</h2>
-					<p>Our fitness experts can help you discover new training
-						techniques.</p>
+					<p>Our fitness experts can help you discover new training techniques.</p>
 				</div>
 				<button type="button" class="btn primary-btn" data-toggle="modal" data-target="#modalAllTrainers">View All</button>
 			</div>
@@ -139,10 +138,11 @@
 				<div class="col-lg-4 order-lg-2 p-0">
 					<div class="member-text">
 						<h5>${trainers.get(0).firstName} ${trainers.get(0).lastName}</h5>
+						<h5><div class="ratingView" data-score="${trainers.get(0).rating}" data-half="true"></div></h5>
 						<p>${trainers.get(0).shortSummary}</p>
-						<p>
-							<div class="ratingView" data-score="${trainers.get(0).rating}" data-half="true"></div>
-						</p>
+						<div class="member-social">
+							<a href="${trainers.get(0).instagramLink}" target="_blank"><i class="ti-instagram"></i></a>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-3 p-0">
@@ -153,10 +153,11 @@
 				<div class="col-lg-4 order-lg-6 p-0">
 					<div class="member-text second">
 						<h5>${trainers.get(1).firstName} ${trainers.get(1).lastName}</h5>
+						<h5><div class="ratingView" data-score="${trainers.get(1).rating}" data-half="true"></div></h5>
 						<p>${trainers.get(1).shortSummary}</p>
-						<p>
-						<div class="ratingView" data-score="${trainers.get(1).rating}" data-half="true"></div>
-						</p>
+						<div class="member-social">
+							<a href="${trainers.get(1).instagramLink}" target="_blank"><i class="ti-instagram"></i></a>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-5 p-0">
@@ -164,12 +165,14 @@
 						<img src="${trainers.get(2).imageName}" alt="">
 					</div>
 				</div>
+				<div class="col-lg-4 order-lg-4 p-0">
 					<div class="member-text third">
 						<h5>${trainers.get(2).firstName} ${trainers.get(2).lastName}</h5>
+						<h5><div class="ratingView" data-score="${trainers.get(2).rating}" data-half="true"></div></h5>
 						<p>${trainers.get(2).shortSummary}</p>
-						<p>
-						<div class="ratingView" data-score="${trainers.get(2).rating}" data-half="true"></div>
-						</p>
+						<div class="member-social">
+							<a href="${trainers.get(2).instagramLink}" target="_blank"><i class="ti-instagram"></i></a>
+						</div>
 					</div>
 				</div>
 			</div>

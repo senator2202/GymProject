@@ -54,6 +54,7 @@ public class CommandRoleMap {
         ROLE_MAP.put(CommandType.UPDATE_ACCOUNT_DATA, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.UPDATE_DISCOUNT, Arrays.asList(UserRole.ADMIN));
         ROLE_MAP.put(CommandType.UPDATE_PERSONAL_DATA, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
+        ROLE_MAP.put(CommandType.UPDATE_SHORT_SUMMARY, Arrays.asList(UserRole.TRAINER));
         ROLE_MAP.put(CommandType.UPDATE_TRAINING, Arrays.asList(UserRole.CLIENT));
         ROLE_MAP.put(CommandType.UPDATE_TRAINING_DESCRIPTION, Arrays.asList(UserRole.TRAINER));
         ROLE_MAP.put(CommandType.UPLOAD_IMAGE, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));

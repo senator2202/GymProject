@@ -26,7 +26,7 @@
 										<option selected disabled value=""><fmt:message key="add_training.select"/></option>
 										<c:forEach items="${trainers}" var="trainer">
 											<option value="${trainer.account.id}">
-													${trainer.firstName} ${trainer.lastName}
+													${trainer.firstName} ${trainer.lastName} <div class="ratingView" data-score="${trainer.rating}" data-half="true"></div>
 											</option>
 										</c:forEach>
 									</select>

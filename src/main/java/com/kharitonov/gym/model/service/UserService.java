@@ -1,5 +1,6 @@
 package com.kharitonov.gym.model.service;
 
+import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Trainer;
@@ -39,4 +40,6 @@ public interface UserService {
     boolean unblockUser(String userId) throws ServiceException;
 
     boolean updateDiscount(String clientId, String discount) throws ServiceException;
+
+    boolean updateShortSummary(int trainerId, String shortSummary) throws ServiceException;
 }

@@ -19,6 +19,7 @@ public class PageAccessFilter implements Filter {
 
     static {
         RESTRICTED_PAGES = new HashSet<>();
+        RESTRICTED_PAGES.add(ProjectPage.HOME.getDirectUrl());
         RESTRICTED_PAGES.add(ProjectPage.SCHEDULE.getDirectUrl());
         RESTRICTED_PAGES.add(ProjectPage.PERSONAL_FINANCE.getDirectUrl());
         RESTRICTED_PAGES.add(ProjectPage.PERSONAL_ACCOUNT.getDirectUrl());

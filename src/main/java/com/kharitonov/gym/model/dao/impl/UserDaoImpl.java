@@ -5,6 +5,7 @@ import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.entity.*;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
+import com.mysql.cj.xdevapi.Table;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,10 +35,10 @@ public class UserDaoImpl implements UserDao {
         String lastName = resultSet.getString(TableColumnName.USER_LAST_NAME);
         String phone = resultSet.getString(TableColumnName.USER_PHONE);
         double discount = resultSet.getDouble(TableColumnName.USER_DISCOUNT);
-        int dietId = resultSet.getInt(TableColumnName.USER_DIET_ID);
         String imageName = resultSet.getString(TableColumnName.USER_IMAGE);
         double moneyBalance = resultSet.getDouble(TableColumnName.USER_MONEY_BALANCE);
         int boughtTrainings = resultSet.getInt(TableColumnName.USER_BOUGHT_TRAININGS);
+        String shortSummary = resultSet.getString(TableColumnName.USER_SHORT_SUMMARY);
         Account account = Account.AccountBuilder.anAccount()
                 .withId(id)
                 .withName(login)
@@ -51,7 +52,6 @@ public class UserDaoImpl implements UserDao {
         if (userRole == UserRole.CLIENT) {
             user = new Client(account);
             ((Client) user).setPersonalDiscount(discount);
-            ((Client) user).setDietId(dietId);
             ((Client) user).setMoneyBalance(moneyBalance);
             ((Client) user).setBoughtTrainings(boughtTrainings);
         } else if (userRole == UserRole.TRAINER) {
@@ -64,6 +64,7 @@ public class UserDaoImpl implements UserDao {
             ((Trainer) user).setInstitution(institution);
             ((Trainer) user).setInstagramLink(instagram);
             ((Trainer) user).setGraduationYear(graduation);
+            ((Trainer) user).setShortSummary(shortSummary);
         } else if (userRole == UserRole.ADMIN) {
             user = new User(account);
         }
@@ -358,6 +359,16 @@ public class UserDaoImpl implements UserDao {
     public void updateDiscount(int clientId, double discount) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateDiscount(connection, clientId, discount)) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void updateShortSummary(int trainerId, String shortSummary) throws DaoException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = statementUpdateShortSummary(connection, trainerId, shortSummary)) {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

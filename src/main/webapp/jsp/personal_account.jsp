@@ -35,6 +35,10 @@
 </head>
 
 <body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
 <jsp:include page="/jsp/part/header_black_no_logo.jsp"/>
 
@@ -130,6 +134,8 @@
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/core/popper.min.js"></script>
 <script src="/assets/js/img-upload.js"></script>
+<script src="/assets/js/modal-data.js"></script>
+
 
 </body>
 

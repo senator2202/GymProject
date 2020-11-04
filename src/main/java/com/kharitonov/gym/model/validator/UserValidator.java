@@ -20,10 +20,15 @@ public class UserValidator {
     private static final String NAME_REGEX = "\\p{L}{0,30}";
     private static final int MAX_EMAIL_LENGTH = 50;
     private static final int MAX_IMAGE_NAME_LENGTH = 100;
+    private static final int MAX_SUMMARY_LENGTH = 250;
     private static final ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
 
     private UserValidator() {
 
+    }
+
+    public  static boolean correctUpdateSummaryParameters(int id, String summary) {
+        return correctId(id) && correctSummary(summary);
     }
 
     public static boolean correctUpdateImageParameters(int id, String imageName) {
@@ -135,5 +140,9 @@ public class UserValidator {
 
     private static boolean correctImageName(String imageName) {
         return imageName != null && imageName.length() <= MAX_IMAGE_NAME_LENGTH;
+    }
+
+    private static boolean correctSummary(String summary) {
+        return summary != null && summary.length() <= MAX_SUMMARY_LENGTH;
     }
 }

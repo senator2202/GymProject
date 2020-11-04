@@ -91,20 +91,6 @@
                         </div>
                     </div>
                 </form>
-                <%--<form action="#">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <input type="text" placeholder="Your name">
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" placeholder="Your Email">
-                        </div>
-                        <div class="col-lg-12 text-center">
-                            <textarea placeholder="Your message"></textarea>
-                            <button type="button">Send Message</button>
-                        </div>
-                    </div>
-                </form>--%>
             </div>
         </div>
     </section>

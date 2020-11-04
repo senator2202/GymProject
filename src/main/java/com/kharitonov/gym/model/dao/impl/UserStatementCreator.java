@@ -15,8 +15,8 @@ class UserStatementCreator {
     private static final String SQL_SELECT_USER =
             "SELECT account_id, login, email, role, registration_date, locale, " +
                     "active, first_name, last_name, phone, discount, " +
-                    "rating, diet_id_fk, image_name, money_balance, bought_trainings, " +
-                    "institution, graduation, instagram " +
+                    "rating, image_name, money_balance, bought_trainings, " +
+                    "institution, graduation, instagram, short_summary " +
                     "FROM accounts JOIN users ON account_id=user_id " +
                     "WHERE login=? AND password=?";
     private static final String SQL_SELECT_ID =
@@ -75,6 +75,8 @@ class UserStatementCreator {
             "UPDATE users SET rating=? WHERE user_id=?";
     private static final String SQL_UPDATE_DISCOUNT =
             "UPDATE users SET discount=? WHERE user_id=?";
+    private static final String SQL_UPDATE_SHORT_SUMMARY =
+            "UPDATE users SET short_summary=? WHERE user_id=?";
 
     private UserStatementCreator() {
     }
@@ -300,6 +302,14 @@ class UserStatementCreator {
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_DISCOUNT);
         statement.setDouble(1, discount);
+        statement.setInt(2, id);
+        return statement;
+    }
+
+    static PreparedStatement statementUpdateShortSummary(Connection connection, int id, String shortSummary)
+            throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_SHORT_SUMMARY);
+        statement.setString(1, shortSummary);
         statement.setInt(2, id);
         return statement;
     }

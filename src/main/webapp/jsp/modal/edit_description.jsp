@@ -5,10 +5,6 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
-               scope="session"/>
-<fmt:setBundle basename="property/pagecontent"/>
-
 <div class="modal fade" id="modalDescription" role="dialog">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">

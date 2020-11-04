@@ -37,6 +37,11 @@
 </head>
 
 <body>
+<!-- Page Preloder -->
+<div id="preloder">
+	<div class="loader"></div>
+</div>
+
 <jsp:include page="/jsp/part/header_black_no_logo.jsp"/>
 <jsp:include page="/jsp/modal/deposit.jsp"/>
 
@@ -89,9 +94,6 @@
 												<button type="button" class="btn btn-primary" data-toggle="modal"
 												        data-target="#popupDeposit"><fmt:message
 														key="personal_profile.deposit"/></button>
-												<%--<button type="submit" class="btn btn-primary">
-													<fmt:message key="personal_profile.deposit"/>
-												</button>--%>
 											</td>
 										</tr>
 										</tbody>

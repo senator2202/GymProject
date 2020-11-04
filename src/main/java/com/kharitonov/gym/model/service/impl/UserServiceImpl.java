@@ -301,4 +301,18 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public boolean updateShortSummary(int trainerId, String shortSummary) throws ServiceException {
+        if (!UserValidator.correctUpdateSummaryParameters(trainerId, shortSummary)) {
+            return false;
+        }
+        UserDao dao = new UserDaoImpl();
+        try {
+            dao.updateShortSummary(trainerId, shortSummary);
+            return true;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }
