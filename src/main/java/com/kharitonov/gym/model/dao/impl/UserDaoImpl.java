@@ -231,16 +231,6 @@ public class UserDaoImpl implements UserDao {
             List<User> users = new ArrayList<>();
             while (resultSet.next()) {
                 User user = create(resultSet);
-                /*int id = resultSet.getInt(TableColumnName.USER_ID);
-                String firstName = resultSet.getString(TableColumnName.USER_FIRST_NAME);
-                String lastName = resultSet.getString(TableColumnName.USER_LAST_NAME);
-                String email = resultSet.getString(TableColumnName.ACCOUNT_EMAIL);
-                Date date = resultSet.getDate(TableColumnName.ACCOUNT_REGISTRATION_DATE);
-                user.getAccount().setId(id);
-                user.getAccount().setEmail(email);
-                user.getAccount().setRegistrationDate(date);
-                user.setFirstName(firstName);
-                user.setLastName(lastName);*/
                 users.add(user);
             }
             return users;

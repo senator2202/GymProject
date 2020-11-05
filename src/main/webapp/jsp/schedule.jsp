@@ -15,7 +15,7 @@
     <meta name="keywords" content="PONIGYM, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PONIGYM | Template</title>
+    <title><fmt:message key="title"/></title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
@@ -50,7 +50,7 @@
         <div class="loader"></div>
     </div>
 
-    <jsp:include page="/jsp/part/header_black.jsp"/>
+    <jsp:include page="/jsp/section/header_black.jsp"/>
 
     <c:choose>
         <c:when test="${user.account.role=='CLIENT'}">
@@ -61,7 +61,7 @@
         </c:when>
     </c:choose>
 
-    <jsp:include page="/jsp/part/footer.jsp"/>
+    <jsp:include page="/jsp/section/footer.jsp"/>
 
     <script src="/assets/js/jquery.magnific-popup.min.js"></script>
     <script src="/assets/js/mixitup.min.js"></script>

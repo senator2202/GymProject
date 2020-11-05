@@ -98,7 +98,8 @@
                                                 </td>
                                                 <td class="td-actions">
                                                     <fmt:message key="admin_feedbacks.openProfile" var="openProfile"/>
-                                                    <ctg:profile-button user="${trainerMap[training.trainerId]}" tooltip="${openProfile}"/>
+                                                    <ctg:profile-button user="${trainerMap[training.trainerId]}"
+                                                                        tooltip="${openProfile}"/>
                                                 </td>
                                                 <td>
                                                         ${training.date}
@@ -173,7 +174,8 @@
                                                 </td>
                                                 <td class="td-actions">
                                                     <fmt:message key="admin_feedbacks.openProfile" var="openProfile"/>
-                                                    <ctg:profile-button user="${trainerMap[training.trainerId]}" tooltip="${openProfile}"/>
+                                                    <ctg:profile-button user="${trainerMap[training.trainerId]}"
+                                                                        tooltip="${openProfile}"/>
                                                 </td>
                                                 <td>
                                                         ${training.date}

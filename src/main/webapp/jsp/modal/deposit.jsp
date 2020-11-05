@@ -11,25 +11,25 @@
 				<form class="credit-card" action="/mainController" method="post">
 					<input type="hidden" name="command" value="make_deposit">
 					<div class="form-header">
-						<h4 class="title">Credit card detail</h4>
+						<h4 class="title"><fmt:message key="deposit.title"/></h4>
 					</div>
 					<div class="form-body">
 						<input type="text" class="card-number" placeholder="Card Number" required pattern="\d{16}">
 						<div class="date-field">
 							<div class="month">
 								<select name="Month">
-									<option value="january">January</option>
-									<option value="february">February</option>
-									<option value="march">March</option>
-									<option value="april">April</option>
-									<option value="may">May</option>
-									<option value="june">June</option>
-									<option value="july">July</option>
-									<option value="august">August</option>
-									<option value="september">September</option>
-									<option value="october">October</option>
-									<option value="november">November</option>
-									<option value="december">December</option>
+									<option value="january"><fmt:message key="deposit.january"/></option>
+									<option value="february"><fmt:message key="deposit.february"/></option>
+									<option value="march"><fmt:message key="deposit.march"/></option>
+									<option value="april"><fmt:message key="deposit.april"/></option>
+									<option value="may"><fmt:message key="deposit.may"/></option>
+									<option value="june"><fmt:message key="deposit.june"/></option>
+									<option value="july"><fmt:message key="deposit.july"/></option>
+									<option value="august"><fmt:message key="deposit.august"/></option>
+									<option value="september"><fmt:message key="deposit.september"/></option>
+									<option value="october"><fmt:message key="deposit.october"/></option>
+									<option value="november"><fmt:message key="deposit.november"/></option>
+									<option value="december"><fmt:message key="deposit.december"/></option>
 								</select>
 							</div>
 							<div class="year">
@@ -53,7 +53,7 @@
 							</div>
 						</div>
 						<p>
-							<button type="submit" class="proceed-btn">Proceed</button>
+							<button type="submit" class="proceed-btn"><fmt:message key="deposit.procced"/></button>
 						</p>
 					</div>
 				</form>

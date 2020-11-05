@@ -28,8 +28,6 @@ public class CommandRoleMap {
         ROLE_MAP.put(CommandType.LOGOUT,
                 Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.ADMIN, UserRole.GUEST));
         ROLE_MAP.put(CommandType.MAKE_DEPOSIT, Arrays.asList(UserRole.CLIENT));
-        ROLE_MAP.put(CommandType.OPEN_ABOUT,
-                Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
         ROLE_MAP.put(CommandType.OPEN_PERSONAL_ACCOUNT, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.OPEN_ADMIN_FEEDBACKS, Arrays.asList(UserRole.ADMIN));
         ROLE_MAP.put(CommandType.OPEN_ADMIN_MAIN, Arrays.asList(UserRole.ADMIN));
@@ -41,8 +39,6 @@ public class CommandRoleMap {
         ROLE_MAP.put(CommandType.OPEN_PERSONAL_ACCOUNT, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.OPEN_PERSONAL_DATA, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.OPEN_PERSONAL_FINANCE, Arrays.asList(UserRole.CLIENT));
-        ROLE_MAP.put(CommandType.OPEN_PORTFOLIO,
-                Arrays.asList(UserRole.TRAINER, UserRole.CLIENT, UserRole.GUEST, UserRole.ADMIN));
         ROLE_MAP.put(CommandType.OPEN_SCHEDULE, Arrays.asList(UserRole.TRAINER, UserRole.CLIENT));
         ROLE_MAP.put(CommandType.RATE_TRAINING, Arrays.asList(UserRole.CLIENT));
         ROLE_MAP.put(CommandType.REFUSE_TRAINER_APPLICATION, Arrays.asList(UserRole.ADMIN));

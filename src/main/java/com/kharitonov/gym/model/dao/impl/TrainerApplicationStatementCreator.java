@@ -12,8 +12,8 @@ class TrainerApplicationStatementCreator {
             "SELECT user_id FROM trainer_applications WHERE user_id=?";
     private static final String SQL_SELECT_ALL_APPLICATIONS =
             "SELECT account_id, login, email, role, registration_date, locale, active, first_name, last_name, " +
-                    "phone, discount, rating, diet_id_fk, image_name, money_balance, bought_trainings, institution, " +
-                    "graduation, instagram, u.user_id, app_institution, app_graduation, app_instagram, " +
+                    "phone, discount, rating, image_name, money_balance, bought_trainings, institution, " +
+                    "graduation, instagram, u.user_id, app_institution, app_graduation, app_instagram, short_summary, " +
                     "application_date FROM accounts AS  a JOIN users AS u ON a.account_id=u.user_id " +
                     "JOIN trainer_applications AS t ON a.account_id=t.user_id";
     private static final String SQL_DELETE_APPLICATION =

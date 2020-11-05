@@ -20,8 +20,9 @@
                             <input type="hidden" name="command" value="update_short_summary"/>
                             <div class="form-group">
 								<textarea class="form-control" rows="6" id="shortSummary" maxlength="250"
-                                          name="shortSummary">${user.shortSummary}
-								</textarea>
+                                          name="shortSummary">
+                                    ${user.shortSummary}
+                                </textarea>
                             </div>
                             <button type="submit" class="btn btn-primary mb-2"><fmt:message
                                     key="edit_description.save"/></button>

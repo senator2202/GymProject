@@ -42,7 +42,7 @@
 	<div class="loader"></div>
 </div>
 
-<jsp:include page="/jsp/part/header_black_no_logo.jsp"/>
+<jsp:include page="/jsp/section/header_black.jsp"/>
 <jsp:include page="/jsp/modal/deposit.jsp"/>
 
 <div class="wrapper">

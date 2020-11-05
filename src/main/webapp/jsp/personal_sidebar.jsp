@@ -5,9 +5,15 @@
 <fmt:setLocale value="${sessionScope.user.account.locale.postfix}" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<jsp:include page="/jsp/modal/trainer_application.jsp"/>
-<jsp:include page="/jsp/modal/application_exists.jsp"/>
-<jsp:include page="modal/edit_summary.jsp"/>
+<c:choose>
+    <c:when test="${user.account.role=='CLIENT'}">
+        <jsp:include page="/jsp/modal/trainer_application.jsp"/>
+        <jsp:include page="/jsp/modal/application_exists.jsp"/>
+    </c:when>
+    <c:when test="${user.account.role=='TRAINER'}">
+        <jsp:include page="modal/edit_summary.jsp"/>
+    </c:when>
+</c:choose>
 
 <ctg:message/>
 

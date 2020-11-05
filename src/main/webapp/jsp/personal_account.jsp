@@ -40,7 +40,7 @@
     <div class="loader"></div>
 </div>
 
-<jsp:include page="/jsp/part/header_black_no_logo.jsp"/>
+<jsp:include page="/jsp/section/header_black.jsp"/>
 
 <div class="wrapper">
     <jsp:include page="/jsp/personal_sidebar.jsp"/>

@@ -15,7 +15,7 @@ public class UserValidator {
     private static final String DEPOSIT_AMOUNT_REGEX = "^[1-9]\\d{0,3}$";
     private static final String DAYS_NUMBER_REGEX = "^[1-9]\\d{0,4}$";
     private static final String LOCALE_REGEX = "^((russian)|(english))$";
-    private static final String DISCOUNT_REGEX = "^[1-9]\\d?([.,]\\d{1,2})?$";
+    private static final String DISCOUNT_REGEX = "^\\d+([.,]\\d{1,2})?$";
     private static final String PHONE_REGEX = "^((80\\d{2})|(\\+375\\d{2}))[1-9]\\d{6}$";
     private static final String NAME_REGEX = "\\p{L}{0,30}";
     private static final int MAX_EMAIL_LENGTH = 50;

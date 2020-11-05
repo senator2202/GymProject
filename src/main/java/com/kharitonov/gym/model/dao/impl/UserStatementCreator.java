@@ -47,8 +47,8 @@ class UserStatementCreator {
     private static final String SQL_SELECT_RECENT =
             "SELECT account_id, login, email, role, registration_date, locale, " +
                     "active, first_name, last_name, phone, discount, " +
-                    "rating, diet_id_fk, image_name, money_balance, bought_trainings, " +
-                    "institution, graduation, instagram " +
+                    "rating, image_name, money_balance, bought_trainings, " +
+                    "institution, graduation, instagram, short_summary " +
                     "FROM accounts JOIN users ON account_id=user_id " +
                     "WHERE date(registration_date) >= CURDATE() - INTERVAL ? DAY ";
     private static final String SQL_UPDATE_IMAGE =

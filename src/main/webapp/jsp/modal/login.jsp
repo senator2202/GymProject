@@ -52,7 +52,7 @@
                                                 key="login.incorrectLoginPassword"/></label>
                                     </c:if>
                                     <label style="color: red; font-size: medium; display: none" id="needLogin">
-                                        You need login first!
+                                        <fmt:message key="login.loginFirst"/>
                                     </label>
                                     <div class="hr"></div>
                                 </div>

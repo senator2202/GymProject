@@ -9,7 +9,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" style="font-size: large; color: black">
+                <h5 class="modal-title w-100 text-center" style="font-size: large; color: black" id="message">
                     <fmt:message key="feedback_sent.message"/>
                 </h5>
             </div>
