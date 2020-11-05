@@ -22,15 +22,15 @@
 
 	<link rel="stylesheet" type="text/css"
 	      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-	<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css">
 	<!-- CSS Files -->
-	<link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
-	<link href="/assets/css/style.css" rel="stylesheet"/>
-	<link href="/assets/css/slicknav.min.css" rel="stylesheet"/>
-	<link href="/assets/css/img-upload.css" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/slicknav.min.css" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/img-upload.css" rel="stylesheet"/>
 
-	<script src="/assets/js/jquery-3.3.1.min.js"></script>
-	<script src="/assets/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -39,10 +39,10 @@
 	<div class="loader"></div>
 </div>
 
-<jsp:include page="/jsp/section/header_black.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/section/header_black.jsp"/>
 
 <div class="wrapper">
-	<jsp:include page="/jsp/personal_sidebar.jsp"/>
+	<jsp:include page="${pageContext.request.contextPath}/jsp/personal_sidebar.jsp"/>
 
 	<form action="/mainController" method="post">
 		<input type="hidden" name="command" value="update_personal_data">
@@ -104,7 +104,7 @@
 											<c:if test="${sessionScope.user.account.role=='TRAINER'}">
 												<tr>
 													<td>
-														Institution
+														<fmt:message key="personal_profile.institution"/>
 													</td>
 													<td>
 														<input type="text" name="institution" readonly
@@ -114,7 +114,7 @@
 												</tr>
 												<tr>
 													<td>
-														Graduation year
+														<fmt:message key="personal_profile.year"/>
 													</td>
 													<td>
 														<input type="text" name="graduationYear"
@@ -125,7 +125,7 @@
 												</tr>
 												<tr>
 													<td>
-														Instagram Link
+														<fmt:message key="personal_profile.instagram"/>
 													</td>
 													<td>
 														<input type="text" name="instagramLink"

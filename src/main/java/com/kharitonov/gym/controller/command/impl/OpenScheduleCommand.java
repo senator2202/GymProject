@@ -4,7 +4,6 @@ import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.*;
-import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.service.impl.TrainingServiceImpl;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.util.RequestAttributeName;
@@ -48,8 +47,8 @@ public class OpenScheduleCommand implements ActionCommand {
         List<Trainer> trainers = userService.findAllTrainers();
         Map<Integer, Trainer> trainerMap = createMap(trainers);
         List<Training> trainings = trainingService.findClientTrainings(userId);
-        List<Training> planned = trainings.stream().filter(t -> !t.isDone()).collect(Collectors.toList());
-        List<Training> previous = trainings.stream().filter(Training::isDone).collect(Collectors.toList());
+        List<Training> planned = trainings.stream().filter(t -> !t.getIsDone()).collect(Collectors.toList());
+        List<Training> previous = trainings.stream().filter(Training::getIsDone).collect(Collectors.toList());
         request.setAttribute(RequestAttributeName.PLANNED_TRAININGS, planned);
         request.setAttribute(RequestAttributeName.PREVIOUS_TRAININGS, previous);
         request.setAttribute(RequestAttributeName.TRAINERS, trainers);
@@ -58,15 +57,15 @@ public class OpenScheduleCommand implements ActionCommand {
 
     private Map<Integer, Trainer> createMap(List<Trainer> users) {
         Map<Integer, Trainer> userMap = new HashMap<>();
-        users.forEach(u-> userMap.put(u.getAccount().getId(), u));
+        users.forEach(u -> userMap.put(u.getAccount().getId(), u));
         return userMap;
     }
 
     private void doTrainerScenario(HttpServletRequest request, User user) throws ServiceException {
         int userId = user.getAccount().getId();
         List<Training> trainings = trainingService.findTrainerTrainings(userId);
-        List<Training> planned = trainings.stream().filter(t -> !t.isDone()).collect(Collectors.toList());
-        List<Training> previous = trainings.stream().filter(Training::isDone).collect(Collectors.toList());
+        List<Training> planned = trainings.stream().filter(t -> !t.getIsDone()).collect(Collectors.toList());
+        List<Training> previous = trainings.stream().filter(Training::getIsDone).collect(Collectors.toList());
         Map<Integer, Client> clientMap = trainingService.findTrainerClients(userId);
         request.setAttribute(RequestAttributeName.PLANNED_TRAININGS, planned);
         request.setAttribute(RequestAttributeName.PREVIOUS_TRAININGS, previous);

@@ -6,7 +6,7 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<link href="/assets/css/quantity.css" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/assets/css/quantity.css" rel="stylesheet"/>
 
 <div class="modal fade" id="modalClientProfile" role="dialog">
     <div class="modal-dialog modal-dialog-centered">

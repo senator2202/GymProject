@@ -4,7 +4,6 @@ import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;

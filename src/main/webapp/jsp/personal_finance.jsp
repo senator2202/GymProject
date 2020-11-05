@@ -25,15 +25,15 @@
 	      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 	<!-- CSS Files -->
-	<link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
-	<link href="/assets/css/style.css" rel="stylesheet"/>
-	<link href="/assets/css/slicknav.min.css" rel="stylesheet"/>
-	<link href="/assets/css/select-list.css" rel="stylesheet"/>
-	<link href="/assets/css/deposit.css" rel="stylesheet"/>
-	<link href="/assets/css/img-upload.css" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/slicknav.min.css" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/select-list.css" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/deposit.css" rel="stylesheet"/>
+	<link href="${pageContext.request.contextPath}/assets/css/img-upload.css" rel="stylesheet"/>
 
-	<script src="/assets/js/jquery-3.3.1.min.js"></script>
-	<script src="/assets/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -42,12 +42,11 @@
 	<div class="loader"></div>
 </div>
 
-<jsp:include page="/jsp/section/header_black.jsp"/>
-<jsp:include page="/jsp/modal/deposit.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/section/header_black.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/deposit.jsp"/>
 
 <div class="wrapper">
-	<jsp:include page="/jsp/personal_sidebar.jsp"/>
-
+	<jsp:include page="${pageContext.request.contextPath}/jsp/personal_sidebar.jsp"/>
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
@@ -107,14 +106,11 @@
 		</div>
 	</div>
 </div>
-
-<script src="/assets/js/jquery.magnific-popup.min.js"></script>
-<script src="/assets/js/jquery.slicknav.js"></script>
-<script src="/assets/js/owl.carousel.min.js"></script>
-<script src="/assets/js/main.js"></script>
-<script src="/assets/js/core/popper.min.js"></script>
-<script src="/assets/js/img-upload.js"></script>
-
+<script src="${pageContext.request.contextPath}/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/jquery.slicknav.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/core/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/img-upload.js"></script>
 </body>
-
 </html>

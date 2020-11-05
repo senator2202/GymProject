@@ -165,7 +165,7 @@ public class TrainingServiceImpl implements TrainingService {
         try {
             List<Client> clients = dao.findTrainerClients(trainerId);
             Map<Integer, Client> clientMap = new HashMap<>();
-            clients.forEach(c->clientMap.put(c.getAccount().getId(), c));
+            clients.forEach(c -> clientMap.put(c.getAccount().getId(), c));
             return clientMap;
         } catch (DaoException e) {
             throw new ServiceException(e);

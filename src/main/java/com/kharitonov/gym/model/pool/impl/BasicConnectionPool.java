@@ -18,10 +18,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class BasicConnectionPool implements ConnectionPool {
-    private static final Logger LOGGER =
-            LogManager.getLogger(BasicConnectionPool.class);
-    private static final BasicConnectionPool INSTANCE =
-            new BasicConnectionPool();
+    private static final Logger LOGGER = LogManager.getLogger(BasicConnectionPool.class);
+    private static final BasicConnectionPool INSTANCE = new BasicConnectionPool();
     private static final int POOL_SIZE = 10;
     private final BlockingQueue<ProxyConnection> freeConnections;
     private final BlockingQueue<ProxyConnection> usedConnections;
@@ -46,10 +44,8 @@ public class BasicConnectionPool implements ConnectionPool {
         usedConnections = new LinkedBlockingQueue<>(POOL_SIZE);
         for (int i = 0; i < POOL_SIZE; i++) {
             try {
-                Connection connection =
-                        DriverManager.getConnection(url, properties);
-                ProxyConnection proxyConnection =
-                        new ProxyConnection(connection);
+                Connection connection = DriverManager.getConnection(url, properties);
+                ProxyConnection proxyConnection = new ProxyConnection(connection);
                 freeConnections.add(proxyConnection);
             } catch (SQLException e) {
                 LOGGER.error("Unable to create connection!", e);

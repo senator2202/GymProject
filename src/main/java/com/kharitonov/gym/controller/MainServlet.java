@@ -38,8 +38,7 @@ public class MainServlet extends HttpServlet {
     private String processRequest(HttpServletRequest request) {
         String commandName = request.getParameter(RequestParameterName.COMMAND);
         ActionCommand command = CommandProvider.defineCommand(commandName);
-        String page = command.execute(request);
-        return page;
+        return command.execute(request);
     }
 
     private void saveRequestAttributes(HttpServletRequest request) {

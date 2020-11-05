@@ -5,7 +5,7 @@
                scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<link href="/assets/css/error-403.css" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/assets/css/error-403.css" rel="stylesheet"/>
 
 <div class="scene">
     <div class="overlay"></div>

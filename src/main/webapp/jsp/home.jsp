@@ -45,19 +45,19 @@
     <div class="loader"></div>
 </div>
 
-<jsp:include page="/jsp/section/header.jsp"/>
-<jsp:include page="/jsp/modal/confirm_sent.jsp"/>
-<jsp:include page="/jsp/modal/confirmed.jsp"/>
-<jsp:include page="/jsp/modal/access_error.jsp"/>
-<jsp:include page="/jsp/modal/login.jsp"/>
-<jsp:include page="/jsp/modal/feedback_sent.jsp"/>
-<jsp:include page="/jsp/modal/all_trainers.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/section/header.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/confirm_sent.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/confirmed.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/access_error.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/login.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/feedback_sent.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/all_trainers.jsp"/>
 
 <ctg:message/>
 
 <section class="hero-section">
     <div class="hero-items owl-carousel">
-        <div class="single-hero-item set-bg" data-setbg="assets/img/slider-bg-1.jpg">
+        <div class="single-hero-item set-bg" data-setbg="${pageContext.request.contextPath}/assets/img/slider-bg-1.jpg">
             <div class="container">
                 <div class="hero-text">
                     <h4><fmt:message key="home.elite"/></h4>
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div class="single-hero-item set-bg" data-setbg="assets/img/slider-bg-2.jpg">
+        <div class="single-hero-item set-bg" data-setbg="${pageContext.request.contextPath}/assets/img/slider-bg-2.jpg">
             <div class="container">
                 <div class="hero-text">
                     <h4><fmt:message key="home.elite"/></h4>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="single-hero-item set-bg" data-setbg="assets/img/slider-bg-3.jpg">
+        <div class="single-hero-item set-bg" data-setbg="${pageContext.request.contextPath}/assets/img/slider-bg-3.jpg">
             <div class="container">
                 <div class="hero-text">
                     <h4><fmt:message key="home.elite"/></h4>

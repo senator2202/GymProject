@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class CancelTrainingCommand implements ActionCommand {
-    private static final Logger LOGGER = LogManager.getLogger(AddTrainingCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(CancelTrainingCommand.class);
     private final TrainingService service = TrainingServiceImpl.getInstance();
 
     @Override

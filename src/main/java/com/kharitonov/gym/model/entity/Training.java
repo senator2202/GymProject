@@ -20,14 +20,6 @@ public class Training {
     private Training() {
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void setDone(boolean done) {
-        isDone = done;
-    }
-
     public int getTrainingId() {
         return trainingId;
     }

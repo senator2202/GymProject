@@ -22,19 +22,19 @@
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
-    <link href="../assets/css/img-upload.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/img-upload.css" rel="stylesheet"/>
 
-    <script src="/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/plugins/jquery.dataTables.min.js"></script>
 
 </head>
 
 <body>
-<jsp:include page="/jsp/modal/client_profile.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/client_profile.jsp"/>
 <div class="wrapper ">
-    <jsp:include page="/jsp/admin_sidebar.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/jsp/admin_sidebar.jsp"/>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
@@ -108,7 +108,7 @@
                                                                         tooltip="open profile"/>
                                                 </td>
                                                 <td class="td-actions text-right">
-                                                    <form action="/mainController" method="post">
+                                                    <form action="${pageContext.request.contextPath}/mainController" method="post">
                                                         <input type="hidden" name="command"
                                                                value="approve_trainer_application"/>
                                                         <input type="hidden" name="appId"
@@ -126,7 +126,7 @@
                                                     </form>
                                                 </td>
                                                 <td class="td-actions text-right">
-                                                    <form action="/mainController" method="post">
+                                                    <form action="${pageContext.request.contextPath}/mainController" method="post">
                                                         <input type="hidden" name="command"
                                                                value="refuse_trainer_application"/>
                                                         <input type="hidden" name="appId"
@@ -151,8 +151,8 @@
         </div>
     </div>
 </div>
-<script src="/assets/js/img-upload.js"></script>
-<script src="/assets/js/rating.js"></script>
-<script src="/assets/js/modal-data.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/img-upload.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/rating.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-data.js"></script>
 </body>
 </html>

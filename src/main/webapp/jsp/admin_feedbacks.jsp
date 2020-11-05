@@ -22,11 +22,11 @@
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
 
-    <script src="/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/plugins/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -118,6 +118,6 @@
         </div>
     </div>
 </div>
-<script src="/assets/js/modal-data.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-data.js"></script>
 </body>
 </html>

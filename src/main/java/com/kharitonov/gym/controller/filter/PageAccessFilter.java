@@ -29,9 +29,6 @@ public class PageAccessFilter implements Filter {
         RESTRICTED_PAGES.add(ProjectPage.ADMIN_REGISTRATIONS.getDirectUrl());
     }
 
-    public void destroy() {
-    }
-
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws ServletException, IOException {
@@ -40,15 +37,9 @@ public class PageAccessFilter implements Filter {
         String page = request.getRequestURI();
         if (RESTRICTED_PAGES.contains(page)) {
             LOGGER.warn("Filter interception: attemption of direct access to page '{}'", request.getRequestURI());
-            //response.sendRedirect(request.getContextPath() + ProjectPage.INDEX.getDirectUrl());
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }
         chain.doFilter(request, response);
     }
-
-    public void init(FilterConfig config) throws ServletException {
-
-    }
-
 }

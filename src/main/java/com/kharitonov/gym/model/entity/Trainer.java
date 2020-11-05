@@ -1,8 +1,5 @@
 package com.kharitonov.gym.model.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Trainer extends User {
     private String institution;
     private int graduationYear;

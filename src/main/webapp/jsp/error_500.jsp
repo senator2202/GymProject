@@ -5,8 +5,8 @@
 			   scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
-<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
-<link href="/assets/css/error-500.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/assets/css/error-500.css" rel="stylesheet">
 
 <div class="page-500">
 	<div class="outer">

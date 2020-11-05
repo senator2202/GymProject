@@ -7,7 +7,6 @@ import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
-import com.mysql.cj.xdevapi.Table;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -129,7 +128,7 @@ public class TrainingDaoImpl implements TrainingDao {
             connection.setAutoCommit(false);
             setTrainingRating(connection, trainingId, rating);
             double trainerRating = averageTrainerRating(trainerId);
-            updateTrainerRaiting(connection, trainerId, trainerRating);
+            updateTrainerRating(connection, trainerId, trainerRating);
             connection.commit();
         } catch (SQLException e) {
             rollback(connection);
@@ -149,18 +148,7 @@ public class TrainingDaoImpl implements TrainingDao {
         }
     }
 
-    private double countAverageRating(Connection connection, int trainerId) throws DaoException {
-        try (PreparedStatement countAvgRating = statementAverageRaiting(connection, trainerId);
-             ResultSet resultSet = countAvgRating.executeQuery()) {
-            resultSet.next();
-            return resultSet.getDouble(TableColumnName.AVERAGE_TRAINER_RATING);
-        } catch (SQLException e) {
-            rollback(connection);
-            throw new DaoException(e);
-        }
-    }
-
-    private void updateTrainerRaiting(Connection connection, int trainerId, double rating) throws DaoException {
+    private void updateTrainerRating(Connection connection, int trainerId, double rating) throws DaoException {
         try (PreparedStatement updTraining = statementUpdateTrainerRating(connection, trainerId, rating)) {
             updTraining.executeUpdate();
         } catch (SQLException e) {

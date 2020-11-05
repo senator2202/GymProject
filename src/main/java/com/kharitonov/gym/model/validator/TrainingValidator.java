@@ -5,7 +5,7 @@ public class TrainingValidator {
     private static final String DATE_REGEX = "^202\\d-((0[1-9])|(1[0-2]))-((0[1-9])|(1\\d)|(2\\d)|(3[0,1]))$";
     private static final String TIME_REGEX = "^(([0,1]\\d)|2[0-3])(:[0-5]\\d){1,2}$";
     private static final String TRAINING_NUMBER_REGEX = "^(5)|(10)|(20)$";
-    private static final String RATING_REGEX = "[1-5]";
+    private static final String RATING_REGEX = "[0-5]";
 
     private TrainingValidator() {
     }

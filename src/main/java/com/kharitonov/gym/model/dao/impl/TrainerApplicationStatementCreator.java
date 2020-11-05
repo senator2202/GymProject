@@ -46,8 +46,7 @@ class TrainerApplicationStatementCreator {
 
     static PreparedStatement statementSelectAllApplications(Connection connection)
             throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ALL_APPLICATIONS);
-        return statement;
+        return connection.prepareStatement(SQL_SELECT_ALL_APPLICATIONS);
     }
 
     static PreparedStatement statementDeleteApplication(Connection connection, int userId)

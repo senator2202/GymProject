@@ -14,9 +14,6 @@ public class MailUtility {
     private static final String MESSAGE_SUBJECT = "Email confirmation";
     private static final String CONFIRM_LINK = "http://localhost:8083/mainController?command=confirm_account&id=%d";
 
-    public MailUtility() {
-    }
-
     public void sendConfirmMessage(String email, int id) throws PropertyReaderException {
         PropertiesReader reader = new PropertiesReader();
         String path = PropertiesPath.MAIL_PROPERTIES;

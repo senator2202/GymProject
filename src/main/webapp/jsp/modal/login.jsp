@@ -4,7 +4,7 @@
 
 <fmt:setBundle basename="property/pagecontent"/>
 
-<script src="/assets/js/login.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/login.js"></script>
 
 <div class="modal fade" id="modalLogin" role="dialog">
     <div class="modal-dialog modal-dialog-centered">

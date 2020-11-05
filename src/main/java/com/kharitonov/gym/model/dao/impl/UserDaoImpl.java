@@ -5,7 +5,6 @@ import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.entity.*;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
-import com.mysql.cj.xdevapi.Table;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +17,6 @@ import static com.kharitonov.gym.model.dao.impl.UserStatementCreator.*;
 
 public class UserDaoImpl implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
-    private static final String BLANK = "";
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
     static User create(ResultSet resultSet) throws SQLException {

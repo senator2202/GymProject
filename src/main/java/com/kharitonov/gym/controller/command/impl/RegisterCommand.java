@@ -13,7 +13,6 @@ import com.kharitonov.gym.util.SessionAttributeName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -41,7 +40,6 @@ public class RegisterCommand implements ActionCommand {
             HttpSession session = request.getSession();
             Optional<User> optionalUser = service.registerUser(parameters);
             if (optionalUser.isPresent()) {
-                ServletContext context = request.getServletContext();
                 ActiveUsersMap map = ActiveUsersMap.getInstance();
                 User user = optionalUser.get();
                 map.put(user.getAccount().getId(), user.getAccount().getIsActive());

@@ -259,8 +259,7 @@ class UserStatementCreator {
     }
 
     static PreparedStatement statementSelectAllTrainers(Connection connection) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ALL_TRAINERS);
-        return statement;
+        return connection.prepareStatement(SQL_SELECT_ALL_TRAINERS);
     }
 
     static PreparedStatement statementSelectUserId(Connection connection, String firstName, String lastName)

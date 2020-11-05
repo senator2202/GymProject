@@ -10,8 +10,8 @@
 
 <head>
     <meta charset="utf-8"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
         <fmt:message key="admin.title"/>
@@ -20,23 +20,23 @@
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="../assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
-    <link rel="stylesheet" href="/assets/css/select-list.css"/>
-    <link href="../assets/css/img-upload.css" rel="stylesheet"/>
-    <link href="../assets/css/rating.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/select-list.css"/>
+    <link href="${pageContext.request.contextPath}/assets/css/img-upload.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/rating.css" rel="stylesheet"/>
 
-    <script src="/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/plugins/jquery.dataTables.min.js"></script>
 </head>
 <body>
-<jsp:include page="/jsp/modal/client_profile.jsp"/>
-<jsp:include page="/jsp/modal/trainer_profile.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/client_profile.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/trainer_profile.jsp"/>
 
 <div class="wrapper ">
-    <jsp:include page="/jsp/admin_sidebar.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/jsp/admin_sidebar.jsp"/>
 
     <div class="main-panel">
         <div class="content">
@@ -196,8 +196,8 @@
         </div>
     </div>
 </div>
-<script src="/assets/js/img-upload.js"></script>
-<script src="/assets/js/rating.js"></script>
-<script src="/assets/js/modal-data.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/img-upload.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/rating.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modal-data.js"></script>
 </body>
 </html>

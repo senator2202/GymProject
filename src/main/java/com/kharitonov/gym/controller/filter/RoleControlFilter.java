@@ -22,9 +22,6 @@ public class RoleControlFilter implements Filter {
     private static final CommandRoleMap MAP = CommandRoleMap.getInstance();
     private static final Logger LOGGER = LogManager.getLogger(RoleControlFilter.class);
 
-    public void destroy() {
-    }
-
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
@@ -35,8 +32,6 @@ public class RoleControlFilter implements Filter {
             UserRole role = defineUserRole(request);
             if (!MAP.containsRole(type, role)) {
                 LOGGER.warn("Filter interception: '{}' attempted to execute '{}' command ", role, command);
-                //request.getSession().setAttribute(SessionAttributeName.ACCESS_ERROR, true);
-                //response.sendRedirect(ProjectPage.INDEX.getDirectUrl());
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);
                 return;
             }
@@ -55,9 +50,4 @@ public class RoleControlFilter implements Filter {
                 ? UserRole.GUEST
                 : user.getAccount().getRole();
     }
-
-    public void init(FilterConfig config) throws ServletException {
-
-    }
-
 }

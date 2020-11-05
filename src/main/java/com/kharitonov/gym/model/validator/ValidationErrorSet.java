@@ -1,6 +1,7 @@
 package com.kharitonov.gym.model.validator;
 
 import java.util.EnumSet;
+import java.util.Set;
 
 public class ValidationErrorSet {
     private static final ValidationErrorSet INSTANCE = new ValidationErrorSet();
@@ -25,7 +26,7 @@ public class ValidationErrorSet {
         errors.clear();
     }
 
-    public EnumSet<ValidationError> getAllAndClear() {
+    public Set<ValidationError> getAllAndClear() {
         EnumSet<ValidationError> copy = EnumSet.copyOf(errors);
         errors.clear();
         return copy;

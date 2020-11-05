@@ -27,7 +27,7 @@ public class UserValidator {
 
     }
 
-    public  static boolean correctUpdateSummaryParameters(int id, String summary) {
+    public static boolean correctUpdateSummaryParameters(int id, String summary) {
         return correctId(id) && correctSummary(summary);
     }
 

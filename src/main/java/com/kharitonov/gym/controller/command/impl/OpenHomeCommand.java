@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class OpenHomeCommand implements ActionCommand {
-    private static final Logger LOGGER = LogManager.getLogger(BuyTrainingsCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(OpenHomeCommand.class);
     private final UserServiceImpl userService = UserServiceImpl.getInstance();
 
     @Override
