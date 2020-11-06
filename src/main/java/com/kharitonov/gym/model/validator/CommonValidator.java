@@ -1,6 +1,6 @@
 package com.kharitonov.gym.model.validator;
 
-public abstract class AbstractValidator {
+public abstract class CommonValidator {
     protected static final String ID_REGEX = "^[1-9]\\d{0,9}$";
     private static final String EMAIL_REGEX = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)" +
             "*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";

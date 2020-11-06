@@ -1,6 +1,6 @@
 package com.kharitonov.gym.model.validator;
 
-public class TrainerApplicationValidator extends AbstractValidator {
+public class TrainerApplicationValidator extends CommonValidator {
     private static final String YEAR_REGEX = "^[12][09]\\d{2}$";
     private static final String INSTITUTION_REGEX = "\\p{L}{2,30}";
     private static final String INSTAGRAM_REGEX = "^(https://www.instagram.com/.{0,70})?$";

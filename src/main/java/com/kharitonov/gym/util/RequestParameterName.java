@@ -10,7 +10,6 @@ public class RequestParameterName {
     public static final String USER_ID = "userId";
     public static final String COMMAND = "command";
     public static final String EMAIL = "email";
-    public static final String PAGE = "page";
     public static final String ID = "id";
     public static final String FIRST_NAME = "firstName";
     public static final String LAST_NAME = "lastName";
@@ -29,7 +28,7 @@ public class RequestParameterName {
     public static final String TRAINING_TIME = "trainingTime";
     public static final String TRAINING_ID = "trainingId";
     public static final String TRAINING_DESCRIPTION = "trainingDescription";
-    public static final String TRAINING_RAITING = "trainingRating";
+    public static final String TRAINING_RATING = "trainingRating";
     public static final String TRAINER_ID = "trainerId";
     public static final String SELECTED_TRAINER_ID = "selectedTrainerId";
     public static final String FEEDBACK_SENDER_NAME = "senderName";

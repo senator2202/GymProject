@@ -18,7 +18,7 @@ public class RateTrainingCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String trainingId = request.getParameter(RequestParameterName.TRAINING_ID);
-        String trainingRating = request.getParameter(RequestParameterName.TRAINING_RAITING);
+        String trainingRating = request.getParameter(RequestParameterName.TRAINING_RATING);
         String trainerId = request.getParameter(RequestParameterName.TRAINER_ID);
         String page;
         try {

@@ -47,7 +47,7 @@ public class RegisterCommand implements ActionCommand {
                 session.setAttribute(RequestAttributeName.CONFIRMATION_SENT, true);
             } else {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
-                session.setAttribute(SessionAttributeName.REGISTRAION_MAP, parameters);
+                session.setAttribute(SessionAttributeName.REGISTRATION_MAP, parameters);
                 session.setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
             }
             page = ProjectPage.INDEX.getDirectUrl();

@@ -4,7 +4,7 @@ import com.kharitonov.gym.util.RequestParameterName;
 
 import java.util.Map;
 
-public class UserValidator extends AbstractValidator {
+public class UserValidator extends CommonValidator {
     private static final String BLANK = "";
     private static final String LOGIN_REGEX = "[a-zA-Z][a-zA-Z0-9_]{1,19}";
     private static final String PASSWORD_REGEX = "[a-zA-Z0-9_]{5,30}";

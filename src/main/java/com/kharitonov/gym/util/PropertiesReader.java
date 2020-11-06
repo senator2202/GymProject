@@ -14,7 +14,7 @@ public class PropertiesReader {
 
     public Properties readProperties(String path) throws PropertyReaderException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        try (InputStream inputStream = classLoader.getResourceAsStream(path);) {
+        try (InputStream inputStream = classLoader.getResourceAsStream(path)) {
             Properties properties = new Properties();
             properties.load(inputStream);
             LOGGER.info("Properties were successfully read form '{}'", path);

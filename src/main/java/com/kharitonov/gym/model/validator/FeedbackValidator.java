@@ -3,7 +3,7 @@ package com.kharitonov.gym.model.validator;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class FeedbackValidator extends AbstractValidator {
+public class FeedbackValidator extends CommonValidator {
     private static final String SUBJECT_REGEX = "^.{0,30}$";
     private static final String SENDER_NAME_REGEX = "^[\\p{L}\\d]{0,30}$";
 

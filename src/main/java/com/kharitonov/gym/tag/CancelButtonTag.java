@@ -1,7 +1,6 @@
 package com.kharitonov.gym.tag;
 
 import javax.servlet.jsp.JspContext;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
@@ -11,7 +10,7 @@ public class CancelButtonTag extends SimpleTagSupport {
     private String tooltip = "cancel";
 
     @Override
-    public void doTag() throws JspException, IOException {
+    public void doTag() throws IOException {
         JspContext context = getJspContext();
         JspWriter out = context.getOut();
         String html =

@@ -49,10 +49,6 @@ public class MessageTag extends SimpleTagSupport {
             html.append("\n<script>$('#modalFeedbackSent').modal('show');</script>");
             context.removeAttribute(RequestAttributeName.FEEDBACK_SENT);
         }
-        if (context.findAttribute(SessionAttributeName.ACCESS_ERROR) != null) {
-            html.append("\n<script>$('#modalAccessError').modal('show');</script>");
-            context.removeAttribute(SessionAttributeName.ACCESS_ERROR);
-        }
         if (context.findAttribute(SessionAttributeName.USER) == null) {
             html.append("\n<script>\n" +
                     "   $('#scheduleRef').on('click', function (e) {\n" +

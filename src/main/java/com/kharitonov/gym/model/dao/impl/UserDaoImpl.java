@@ -368,7 +368,7 @@ public class UserDaoImpl implements UserDao {
     public String findPassword(int userId) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementSelectPassword(connection, userId);
-             ResultSet resultSet = statement.executeQuery();) {
+             ResultSet resultSet = statement.executeQuery()) {
             String result;
             if (resultSet.next()) {
                 return resultSet.getString(TableColumnName.ACCOUNT_PASSWORD);

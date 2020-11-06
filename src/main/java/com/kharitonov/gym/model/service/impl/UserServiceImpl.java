@@ -10,10 +10,7 @@ import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.service.UserService;
-import com.kharitonov.gym.model.validator.TrainingValidator;
-import com.kharitonov.gym.model.validator.UserValidator;
-import com.kharitonov.gym.model.validator.ValidationError;
-import com.kharitonov.gym.model.validator.ValidationErrorSet;
+import com.kharitonov.gym.model.validator.*;
 import com.kharitonov.gym.util.CryptoUtility;
 import com.kharitonov.gym.util.RequestParameterName;
 import com.kharitonov.gym.util.mail.MailUtility;
@@ -83,6 +80,8 @@ public class UserServiceImpl implements UserService {
                 exists = true;
             }
             if (exists) {
+                parameters.put(RequestParameterName.REGISTRATION_PASSWORD, "");
+                parameters.put(RequestParameterName.REPEAT_PASSWORD, "");
                 return Optional.empty();
             }
             int id = dao.add(login, encryptedPassword, email);
@@ -107,7 +106,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean confirmAccount(String accountId) throws ServiceException {
-        if (!UserValidator.correctId(accountId)) {
+        if (!CommonValidator.correctId(accountId)) {
             return false;
         }
         UserDao dao = new UserDaoImpl();
@@ -270,7 +269,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean blockUser(String userId) throws ServiceException {
-        if (!UserValidator.correctId(userId)) {
+        if (!CommonValidator.correctId(userId)) {
             return false;
         }
         UserDao dao = new UserDaoImpl();
@@ -285,7 +284,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean unblockUser(String userId) throws ServiceException {
-        if (!UserValidator.correctId(userId)) {
+        if (!CommonValidator.correctId(userId)) {
             return false;
         }
         int id = Integer.parseInt(userId);

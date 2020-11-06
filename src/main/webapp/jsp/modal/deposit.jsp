@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <p>
-                            <button type="submit" class="proceed-btn"><fmt:message key="deposit.procced"/></button>
+                            <button type="submit" class="proceed-btn"><fmt:message key="deposit.procceed"/></button>
                         </p>
                     </div>
                 </form>
