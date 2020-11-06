@@ -24,7 +24,8 @@
                                 <div class="select">
                                     <select name="selectedTrainerId" required>
                                         <option selected disabled value=""><fmt:message
-                                                key="add_training.select"/></option>
+                                                key="add_training.select"/> *
+                                        </option>
                                         <c:forEach items="${trainers}" var="trainer">
                                             <option value="${trainer.account.id}">
                                                     ${trainer.firstName} ${trainer.lastName}
@@ -34,10 +35,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="date" name="trainingDate" id="addTrainingDate" required/>
+                                <input type="date" name="trainingDate" id="addTrainingDate" required/> *
                             </div>
                             <div class="form-group">
-                                <input type="time" name="trainingTime" id="addTrainingTime" required/>
+                                <input type="time" name="trainingTime" id="addTrainingTime" required/> *
                             </div>
                             <button type="submit" class="btn btn-primary mb-2"><fmt:message
                                     key="add_training.add"/></button>

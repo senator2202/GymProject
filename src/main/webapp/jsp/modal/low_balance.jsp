@@ -9,7 +9,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title w-100 text-center" style="font-size: large; color: black">
-                        <fmt:message key="low_balance.message"/>
+                    <fmt:message key="low_balance.message"/>
                 </h5>
             </div>
         </div>

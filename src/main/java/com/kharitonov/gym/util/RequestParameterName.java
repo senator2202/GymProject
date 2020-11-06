@@ -44,6 +44,8 @@ public class RequestParameterName {
     public static final String PERSONAL_DISCOUNT = "personalDiscount";
     public static final String CLIENT_ID = "clientId";
     public static final String SHORT_SUMMARY = "shortSummary";
+    public static final String NEW_PASSWORD = "newPassword";
+    public static final String REPEAT_NEW_PASSWORD = "repeatNewPassword";
 
     private RequestParameterName() {
     }

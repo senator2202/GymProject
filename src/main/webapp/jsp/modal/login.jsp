@@ -21,27 +21,27 @@
                             <fmt:message key="login.signUp"/>
                         </label>
                         <div class="login-form">
-                            <form action="/mainController" method="post" class="needs-validation" novalidate>
+                            <form action="/mainController" method="post">
                                 <div class="sign-in-htm">
                                     <input type="hidden" name="command" value="login"/>
                                     <div class="group">
                                         <label for="login" class="label"><fmt:message key="login.userName"/></label>
                                         <input class="input" type="text" id="login" name="login"
                                                value="${loginMap['login']}" required
-                                               pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}">
-                                        <div class="invalid-feedback">
-                                            <fmt:message key="login.invalidLoginFormat"/>
-                                        </div>
+                                               pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}"
+                                               onchange="this.setCustomValidity('')"
+                                               oninvalid="this.setCustomValidity('<fmt:message
+                                                       key="login.invalidLoginFormat"/>')">
                                     </div>
                                     <div class="group">
                                         <label for="loginPassword" class="label"><fmt:message
                                                 key="login.password"/></label>
                                         <input class="input" id="loginPassword" type="password" name="loginPassword"
                                                value="${loginMap['loginPassword']}" required
-                                               pattern="[a-zA-Z0-9_]{5,30}">
-                                        <div class="invalid-feedback">
-                                            <fmt:message key="login.invalidPasswordFormat"/>
-                                        </div>
+                                               pattern="[a-zA-Z0-9_]{5,30}"
+                                               onchange="this.setCustomValidity('')"
+                                               oninvalid="this.setCustomValidity('<fmt:message
+                                                       key="login.invalidPasswordFormat"/>')">
                                     </div>
                                     <div class="group">
                                         <fmt:message key="login.signIn" var="loginSubmit" scope="page"/>
@@ -57,8 +57,7 @@
                                     <div class="hr"></div>
                                 </div>
                             </form>
-                            <form action="/mainController" method="post" class="needs-validation" novalidate
-                                  id="regForm">
+                            <form action="/mainController" method="post" id="regForm">
                                 <div class="sign-up-htm">
                                     <input type="hidden" name="command" value="register"/>
                                     <div class="group">
@@ -67,10 +66,10 @@
                                         </label>
                                         <input id="regLogin" type="text" name="regLogin" class="input"
                                                value="${regMap['regLogin']}" required
-                                               pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}">
-                                        <div class="invalid-feedback">
-                                            <fmt:message key="login.invalidLoginFormat"/>
-                                        </div>
+                                               pattern="[a-zA-Z][a-zA-Z0-9_]{1,19}"
+                                               onchange="this.setCustomValidity('')"
+                                               oninvalid="this.setCustomValidity('<fmt:message
+                                                       key="login.invalidLoginFormat"/>')">
                                         <c:if test="${errorSet.contains(ValidationError.LOGIN_EXISTS)}">
                                             <label style="color: red; font-size: medium"><fmt:message
                                                     key="login.loginExists"/></label>
@@ -81,27 +80,25 @@
                                                 key="login.password"/></label>
                                         <input id="regPassword" type="password" name="regPassword" class="input"
                                                value="${regMap['regPassword']}" required pattern="[a-zA-Z0-9_]{5,30}"
-                                               onchange="form.repeatPassword.pattern = this.value">
-                                        <div class="invalid-feedback">
-                                            <fmt:message key="login.invalidPasswordFormat"/>
-                                        </div>
+                                               onchange="form.repeatPassword.pattern = this.value; this.setCustomValidity('')"
+                                               oninvalid="this.setCustomValidity('<fmt:message
+                                                       key="login.invalidPasswordFormat"/>')">
                                     </div>
                                     <div class="group">
                                         <label for="repeatPassword" class="label"><fmt:message
                                                 key="login.repeatPassword"/></label>
                                         <input id="repeatPassword" name="repeatPassword" type="password" class="input"
-                                               required>
-                                        <div class="invalid-feedback">
-                                            <fmt:message key="login.passwordsNotEqual"/>
-                                        </div>
+                                               required onchange="this.setCustomValidity('')"
+                                               oninvalid="this.setCustomValidity('<fmt:message
+                                                       key="login.passwordsNotEqual"/>')">
                                     </div>
                                     <div class="group">
                                         <label for="regEmail" class="label"><fmt:message key="login.email"/></label>
                                         <input id="regEmail" type="email" name="regEmail" class="input" required
-                                               value="${regMap['regEmail']}">
-                                        <div class="invalid-feedback">
-                                            <fmt:message key="login.invalidEmailFormat"/>
-                                        </div>
+                                               value="${regMap['regEmail']}"
+                                               onchange="this.setCustomValidity('')"
+                                               oninvalid="this.setCustomValidity('<fmt:message
+                                                       key="login.invalidEmailFormat"/>')">
                                         <c:if test="${errorSet.contains(ValidationError.EMAIL_EXISTS)}">
                                             <label style="color: red; font-size: medium"><fmt:message
                                                     key="login.emailExists"/></label>

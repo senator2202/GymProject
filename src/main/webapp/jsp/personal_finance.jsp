@@ -10,101 +10,101 @@
 <html>
 
 <head>
-	<meta charset="utf-8"/>
-	<meta name="viewport"
-	      content="width=device-width, initial-scale=1.0, shrink-to-fit=yes"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=yes"/>
 
-	<title><fmt:message key="personal_profile.personalProfile"/></title>
+    <title><fmt:message key="personal_profile.personalProfile"/></title>
 
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" type="text/css"
-	      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-	<!-- CSS Files -->
-	<link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
-	<link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet"/>
-	<link href="${pageContext.request.contextPath}/assets/css/slicknav.min.css" rel="stylesheet"/>
-	<link href="${pageContext.request.contextPath}/assets/css/select-list.css" rel="stylesheet"/>
-	<link href="${pageContext.request.contextPath}/assets/css/deposit.css" rel="stylesheet"/>
-	<link href="${pageContext.request.contextPath}/assets/css/img-upload.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="${pageContext.request.contextPath}/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/slicknav.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/select-list.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/deposit.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/css/img-upload.css" rel="stylesheet"/>
 
-	<script src="${pageContext.request.contextPath}/assets/js/jquery-3.3.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 <!-- Page Preloder -->
 <div id="preloder">
-	<div class="loader"></div>
+    <div class="loader"></div>
 </div>
 
 <jsp:include page="${pageContext.request.contextPath}/jsp/section/header_black.jsp"/>
 <jsp:include page="${pageContext.request.contextPath}/jsp/modal/deposit.jsp"/>
 
 <div class="wrapper">
-	<jsp:include page="${pageContext.request.contextPath}/jsp/personal_sidebar.jsp"/>
-	<div class="main-panel">
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="card">
-							<div class="card-header card-header-primary">
-								<h4 class="card-title "><fmt:message key="personal_profile.finance"/></h4>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="feedTable" class="table">
-										<thead class=" text-primary">
-										<th>
+    <jsp:include page="${pageContext.request.contextPath}/jsp/personal_sidebar.jsp"/>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title "><fmt:message key="personal_profile.finance"/></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="feedTable" class="table">
+                                        <thead class=" text-primary">
+                                        <th>
 
-										</th>
-										<th>
+                                        </th>
+                                        <th>
 
-										</th>
-										</thead>
-										<tbody>
-										<tr>
-											<td>
-												<fmt:message key="personal_profile.moneyBalance"/>
-											</td>
-											<td>
-												<input type="text" id="moneyBalance" name="moneyBalance" readonly
-												       class="form-control" value="${sessionScope.user.moneyBalance}"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<fmt:message key="personal_profile.personalDiscount"/>
-											</td>
-											<td>
-												<input type="text" id="personalDiscount" name="personalDiscount"
-												       readonly
-												       class="form-control"
-												       value="${sessionScope.user.personalDiscount}"/>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<button type="button" class="btn btn-primary" data-toggle="modal"
-												        data-target="#popupDeposit"><fmt:message
-														key="personal_profile.deposit"/></button>
-											</td>
-										</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                        </th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <fmt:message key="personal_profile.moneyBalance"/>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="moneyBalance" name="moneyBalance" readonly
+                                                       class="form-control" value="${sessionScope.user.moneyBalance}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <fmt:message key="personal_profile.personalDiscount"/>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="personalDiscount" name="personalDiscount"
+                                                       readonly
+                                                       class="form-control"
+                                                       value="${sessionScope.user.personalDiscount}"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#popupDeposit"><fmt:message
+                                                        key="personal_profile.deposit"/></button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="${pageContext.request.contextPath}/assets/js/jquery.magnific-popup.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/jquery.slicknav.js"></script>

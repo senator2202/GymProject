@@ -15,16 +15,16 @@ public interface UserDao extends BaseDao {
 
     List<User> findAllUsers() throws DaoException;
 
-    boolean findByLogin(String login) throws DaoException;
+    boolean loginExists(String login) throws DaoException;
 
-    boolean findByEmail(String email) throws DaoException;
+    int findByEmail(String email) throws DaoException;
 
     Optional<UserRole> checkLoginPassword(String login, String encryptedPassword)
             throws DaoException;
 
     void confirmAccount(int id) throws DaoException;
 
-    void updateAccountData(int userId, String email, String locale) throws DaoException;
+    void updateAccountData(int userId, String email, String locale, String password) throws DaoException;
 
     void updatePersonalData(int userId, String firstName, String lastName, String phone)
             throws DaoException;
@@ -48,4 +48,6 @@ public interface UserDao extends BaseDao {
     void updateDiscount(int clientId, double discount) throws DaoException;
 
     void updateShortSummary(int trainerId, String shortSummary) throws DaoException;
+
+    String findPassword(int userId) throws DaoException;
 }

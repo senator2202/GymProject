@@ -14,6 +14,7 @@ public class SessionAttributeName {
     public static final String ERROR_SET = "errorSet";
     public static final String LOGIN_MAP = "loginMap";
     public static final String REGISTRAION_MAP = "regMap";
+    public static final String UPDATE_ACCOUNT_MAP = "updateMap";
 
     private SessionAttributeName() {
     }

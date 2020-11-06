@@ -30,9 +30,9 @@
 </head>
 
 <body>
-<jsp:include page="/jsp/modal/feedback_reply.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/jsp/modal/feedback_reply.jsp"/>
 <div class="wrapper ">
-    <jsp:include page="/jsp/admin_sidebar.jsp"/>
+    <jsp:include page="${pageContext.request.contextPath}/jsp/admin_sidebar.jsp"/>
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">

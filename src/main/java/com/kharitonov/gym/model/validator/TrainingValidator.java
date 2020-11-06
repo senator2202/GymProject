@@ -1,11 +1,10 @@
 package com.kharitonov.gym.model.validator;
 
-public class TrainingValidator {
-    private static final String ID_REGEX = "^[1-9]\\d{0,9}$";
+public class TrainingValidator extends AbstractValidator {
     private static final String DATE_REGEX = "^202\\d-((0[1-9])|(1[0-2]))-((0[1-9])|(1\\d)|(2\\d)|(3[0,1]))$";
     private static final String TIME_REGEX = "^(([0,1]\\d)|2[0-3])(:[0-5]\\d){1,2}$";
-    private static final String TRAINING_NUMBER_REGEX = "^(5)|(10)|(20)$";
-    private static final String RATING_REGEX = "[0-5]";
+    private static final String TRAINING_NUMBER_REGEX = "^(5)$|^(10)$|^(20)$";
+    private static final String RATING_REGEX = "^[0-5]$";
 
     private TrainingValidator() {
     }
@@ -29,14 +28,6 @@ public class TrainingValidator {
 
     public static boolean correctTrainingsNumber(String trainingsNumber) {
         return trainingsNumber != null && trainingsNumber.matches(TRAINING_NUMBER_REGEX);
-    }
-
-    public static boolean correctId(int id) {
-        return id > 0;
-    }
-
-    public static boolean correctId(String id) {
-        return id != null && id.matches(ID_REGEX);
     }
 
     private static boolean correctDate(String date) {

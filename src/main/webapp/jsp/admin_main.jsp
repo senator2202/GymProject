@@ -108,7 +108,8 @@
                                                                         tooltip="open profile"/>
                                                 </td>
                                                 <td class="td-actions text-right">
-                                                    <form action="${pageContext.request.contextPath}/mainController" method="post">
+                                                    <form action="${pageContext.request.contextPath}/mainController"
+                                                          method="post">
                                                         <input type="hidden" name="command"
                                                                value="approve_trainer_application"/>
                                                         <input type="hidden" name="appId"
@@ -126,7 +127,8 @@
                                                     </form>
                                                 </td>
                                                 <td class="td-actions text-right">
-                                                    <form action="${pageContext.request.contextPath}/mainController" method="post">
+                                                    <form action="${pageContext.request.contextPath}/mainController"
+                                                          method="post">
                                                         <input type="hidden" name="command"
                                                                value="refuse_trainer_application"/>
                                                         <input type="hidden" name="appId"

@@ -3,7 +3,7 @@ package com.kharitonov.gym.model.dao.impl;
 class TableColumnName {
     static final String ACCOUNT_ID = "account_id";
     static final String ACCOUNT_LOGIN = "login";
-    static final String ACCOUNT_PASSWORD = "login.password";
+    static final String ACCOUNT_PASSWORD = "password";
     static final String ACCOUNT_EMAIL = "email";
     static final String ACCOUNT_ROLE = "role";
     static final String ACCOUNT_REGISTRATION_DATE = "registration_date";

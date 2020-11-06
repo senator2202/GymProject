@@ -74,4 +74,17 @@
         <body-content>empty</body-content>
     </tag>
 
+    <tag>
+        <name>flusher</name>
+        <tag-class>com.kharitonov.gym.tag.AttributeFlusherTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>error</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>com.kharitonov.gym.model.validator.ValidationError</type>
+        </attribute>
+    </tag>
+
 </taglib>

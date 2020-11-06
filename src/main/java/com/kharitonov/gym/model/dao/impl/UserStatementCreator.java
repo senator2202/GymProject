@@ -29,7 +29,7 @@ class UserStatementCreator {
     private static final String SQL_UPDATE_ACTIVE =
             "UPDATE accounts SET active=1 WHERE  account_id=?";
     private static final String SQL_SELECT_PASSWORD =
-            "SELECT password FROM accounts WHERE login=?";
+            "SELECT password FROM accounts WHERE account_id=?";
     private static final String SQL_SELECT_BY_LOGIN =
             "SELECT account_id FROM accounts WHERE login=?";
     private static final String SQL_SELECT_BY_EMAIL =
@@ -39,7 +39,7 @@ class UserStatementCreator {
     private static final String SQL_UPDATE_USER =
             "UPDATE users SET first_name=?, last_name=?, phone=? WHERE user_id=?";
     private static final String SQL_UPDATE_ACCOUNT =
-            "UPDATE accounts SET email=?, locale=? WHERE account_id=?";
+            "UPDATE accounts SET email=?, locale=?, password=? WHERE account_id=?";
     private static final String SQL_UPDATE_TRAINER_ROLE =
             "UPDATE accounts SET role='TRAINER' WHERE account_id=?;";
     private static final String SQL_UPDATE_TRAINER =
@@ -147,11 +147,11 @@ class UserStatementCreator {
     }
 
     static PreparedStatement statementSelectPassword(Connection connection,
-                                                     String login)
+                                                     int id)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_PASSWORD);
-        statement.setString(1, login);
+        statement.setInt(1, id);
         return statement;
     }
 
@@ -201,12 +201,14 @@ class UserStatementCreator {
     static PreparedStatement statementUpdateAccount(Connection connection,
                                                     String email,
                                                     String locale,
+                                                    String password,
                                                     int id)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_ACCOUNT);
         statement.setString(1, email);
         statement.setString(2, locale);
-        statement.setInt(3, id);
+        statement.setString(3, password);
+        statement.setInt(4, id);
         return statement;
     }
 

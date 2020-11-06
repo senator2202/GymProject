@@ -74,11 +74,11 @@ public class UserServiceImpl implements UserService {
         try {
             ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
             boolean exists = false;
-            if (dao.findByLogin(login)) {
+            if (dao.loginExists(login)) {
                 errorSet.add(ValidationError.LOGIN_EXISTS);
                 exists = true;
             }
-            if (dao.findByEmail(email)) {
+            if (dao.findByEmail(email) != 0) {
                 errorSet.add(ValidationError.EMAIL_EXISTS);
                 exists = true;
             }
@@ -122,17 +122,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateAccountData(User user, String email, String locale) throws ServiceException {
-        if (!UserValidator.correctAccountDataParameters(email, locale)) {
+    public boolean updateAccountData(User user, String email, String locale, String newPassword, String repeatPassword)
+            throws ServiceException {
+        if (!UserValidator.correctAccountDataParameters(email, locale, newPassword, repeatPassword)) {
             return false;
         }
-        int userId = user.getAccount().getId();
         UserDao dao = new UserDaoImpl();
-        locale = locale == null
-                ? user.getAccount().getLocale().name()
-                : locale.toUpperCase();
         try {
-            dao.updateAccountData(userId, email, locale);
+            int id = dao.findByEmail(email);
+            if (id != 0 && id != user.getAccount().getId()) {
+                ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
+                errorSet.add(ValidationError.CHANGE_EMAIL_EXISTS);
+                return false;
+            }
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        int userId = user.getAccount().getId();
+        locale = locale == null ? user.getAccount().getLocale().name() : locale.toUpperCase();
+        try {
+            String encrypted = newPassword.isEmpty()
+                    ? dao.findPassword(userId)
+                    : CryptoUtility.encryptMessage(newPassword);
+            dao.updateAccountData(userId, email, locale, encrypted);
             Account.AccountLocale accountLocale = Account.AccountLocale.valueOf(locale);
             user.getAccount().setEmail(email);
             user.getAccount().setLocale(accountLocale);

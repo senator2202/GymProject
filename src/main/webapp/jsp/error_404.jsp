@@ -10,8 +10,9 @@
 <head>
     <title><fmt:message key="error.title"/></title>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico" type="image/x-icon"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/error-404.css" type="text/css"/>
 </head>
 <body>

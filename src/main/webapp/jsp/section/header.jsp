@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<fmt:setLocale value="${sessionScope.user.account.locale.postfix}"
-               scope="session"/>
+<fmt:setLocale value="${sessionScope.user.account.locale.postfix}" scope="session"/>
 <fmt:setBundle basename="property/pagecontent"/>
 
 <header class="header-section">
