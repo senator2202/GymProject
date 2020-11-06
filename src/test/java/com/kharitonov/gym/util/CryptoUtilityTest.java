@@ -8,22 +8,10 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class CryptoUtilityTest {
-
-    @DataProvider
-    public static Object[][] dataDecrypt() {
-        return new Object[][]{
-                {StaticDataProvider.CLIENT_PASSWORD_ENCRYPTED,
-                        StaticDataProvider.CLIENT_PASSWORD, true},
-                {StaticDataProvider.CLIENT_PASSWORD_ENCRYPTED,
-                        "blablabla", false}
-        };
-    }
-
     @DataProvider
     public Object[][] dataEncrypt() {
         return new Object[][]{
-                {StaticDataProvider.CLIENT_PASSWORD,
-                        StaticDataProvider.CLIENT_PASSWORD_ENCRYPTED, true},
+                {StaticDataProvider.CLIENT_PASSWORD, StaticDataProvider.CLIENT_PASSWORD_ENCRYPTED, true},
                 {StaticDataProvider.CLIENT_PASSWORD, "blablabla", false},
         };
     }

@@ -12,28 +12,16 @@ public class PropertiesReader {
     private static final Logger LOGGER =
             LogManager.getLogger(PropertiesReader.class);
 
-    public Properties readProperties(String path)
-            throws PropertyReaderException {
-        ClassLoader classLoader =
-                Thread.currentThread().getContextClassLoader();
-        InputStream inputStream =
-                classLoader.getResourceAsStream(path);
-        Properties properties = new Properties();
-        try {
+    public Properties readProperties(String path) throws PropertyReaderException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        try (InputStream inputStream = classLoader.getResourceAsStream(path);) {
+            Properties properties = new Properties();
             properties.load(inputStream);
-            LOGGER.info("Properties were successfully read form '{}'",
-                    path);
+            LOGGER.info("Properties were successfully read form '{}'", path);
+            return properties;
         } catch (IOException e) {
-            throw new PropertyReaderException("Impossible to read " +
-                    "properties!");
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException e) {
-                LOGGER.warn("Unable to close input stream!");
-            }
+            throw new PropertyReaderException("Impossible to read properties!");
         }
-        return properties;
     }
 
 
