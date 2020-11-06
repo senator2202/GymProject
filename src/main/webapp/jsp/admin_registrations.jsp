@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8"/>
     <link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
         <fmt:message key="admin.title"/>
