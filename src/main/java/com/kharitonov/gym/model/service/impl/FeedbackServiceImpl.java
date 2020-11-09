@@ -19,6 +19,8 @@ public class FeedbackServiceImpl implements FeedbackService {
         return INSTANCE;
     }
 
+    private FeedbackServiceImpl () {}
+
     @Override
     public boolean addFeedback(String name, String email, String subject, String message) throws ServiceException {
         if (!FeedbackValidator.correctAddParameters(name, email, subject, message)) {
