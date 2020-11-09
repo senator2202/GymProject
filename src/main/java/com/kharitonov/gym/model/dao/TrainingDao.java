@@ -16,15 +16,15 @@ public interface TrainingDao extends BaseDao {
 
     List<Training> findTrainerTrainings(int trainerId) throws DaoException;
 
-    void updateDescription(int trainingId, String description) throws DaoException;
+    boolean updateDescription(int trainingId, String description) throws DaoException;
 
-    void deleteTraining(int trainingId, int userId) throws DaoException;
+    boolean deleteTraining(int trainingId, int userId) throws DaoException;
 
-    void updateTraining(int trainingId, Date trainingDate, Time trainingTime, String description) throws DaoException;
+    boolean updateTraining(int trainingId, Date trainingDate, Time trainingTime, String description) throws DaoException;
 
-    void setTrainingDone(int trainingId) throws DaoException;
+    boolean setTrainingDone(int trainingId) throws DaoException;
 
-    void updateTrainingRating(int trainingId, int rating, int trainerId) throws DaoException;
+    boolean updateTrainingRating(int trainingId, int rating, int trainerId) throws DaoException;
 
     double averageTrainerRating(int trainerId) throws DaoException;
 

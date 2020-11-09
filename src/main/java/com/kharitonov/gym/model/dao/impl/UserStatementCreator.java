@@ -19,6 +19,13 @@ class UserStatementCreator {
                     "institution, graduation, instagram, short_summary " +
                     "FROM accounts JOIN users ON account_id=user_id " +
                     "WHERE login=? AND password=?";
+    private static final String SQL_SELECT_USER_BY_ID =
+            "SELECT account_id, login, email, role, registration_date, locale, " +
+                    "active, first_name, last_name, phone, discount, " +
+                    "rating, image_name, money_balance, bought_trainings, " +
+                    "institution, graduation, instagram, short_summary " +
+                    "FROM accounts JOIN users ON account_id=user_id " +
+                    "WHERE account_id=?";
     private static final String SQL_SELECT_ID =
             "SELECT account_id FROM accounts WHERE login=? AND password=?";
     private static final String SQL_SELECT_EMAIL_BY_ID =
@@ -81,11 +88,8 @@ class UserStatementCreator {
     private UserStatementCreator() {
     }
 
-    static PreparedStatement statementInsertAccount(Connection connection,
-                                                    String login,
-                                                    String password,
-                                                    String email)
-            throws SQLException {
+    static PreparedStatement statementInsertAccount(Connection connection, String login, String password,
+                                                    String email) throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_INSERT_ACCOUNT, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, login);
@@ -95,23 +99,26 @@ class UserStatementCreator {
         return statement;
     }
 
-    static PreparedStatement statementInsertUser(Connection connection,
-                                                 int accountId)
-            throws SQLException {
+    static PreparedStatement statementInsertUser(Connection connection, int accountId) throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_INSERT_USER);
         statement.setInt(1, accountId);
         return statement;
     }
 
-    static PreparedStatement statementSelectUser(Connection connection,
-                                                 String login,
-                                                 String password)
+    static PreparedStatement statementSelectUser(Connection connection, String login, String password)
             throws SQLException {
         PreparedStatement statement =
                 connection.prepareStatement(SQL_SELECT_USER);
         statement.setString(1, login);
         statement.setString(2, password);
+        return statement;
+    }
+
+    static PreparedStatement statementSelectUserById(Connection connection, int id) throws SQLException {
+        PreparedStatement statement =
+                connection.prepareStatement(SQL_SELECT_USER_BY_ID);
+        statement.setInt(1, id);
         return statement;
     }
 

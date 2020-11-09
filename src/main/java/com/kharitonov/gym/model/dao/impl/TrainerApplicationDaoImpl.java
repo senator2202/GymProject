@@ -16,15 +16,23 @@ import static com.kharitonov.gym.model.dao.impl.UserStatementCreator.statementUp
 import static com.kharitonov.gym.model.dao.impl.UserStatementCreator.statementUpdateTrainerRole;
 
 public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
+    private static final TrainerApplicationDaoImpl INSTANCE = new TrainerApplicationDaoImpl();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
+    private TrainerApplicationDaoImpl() {
+    }
+
+    public static TrainerApplicationDaoImpl getInstance() {
+        return INSTANCE;
+    }
+
     @Override
-    public void add(int userId, String institution,
-                    int graduationYear, String instagramLink) throws DaoException {
+    public boolean add(int userId, String institution,
+                       int graduationYear, String instagramLink) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementInsertApplication(connection, userId,
                      institution, graduationYear, instagramLink)) {
-            statement.execute();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -42,10 +50,10 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     }
 
     @Override
-    public void delete(int userId) throws DaoException {
+    public boolean delete(int userId) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementDeleteApplication(connection, userId)) {
-            statement.execute();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -68,14 +76,15 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     }
 
     @Override
-    public void approve(int userId, String institution, int graduationYear, String instagramLink) throws DaoException {
+    public boolean approve(int userId, String institution, int graduationYear, String instagramLink) throws DaoException {
         Connection connection = pool.getConnection();
         try {
             connection.setAutoCommit(false);
             setTrainerRole(connection, userId);
             updateUserData(connection, userId, institution, graduationYear, instagramLink);
-            deleteApplication(connection, userId);
+            boolean result = deleteApplication(connection, userId);
             connection.commit();
+            return result;
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);
@@ -105,9 +114,9 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
         }
     }
 
-    private void deleteApplication(Connection connection, int userId) throws DaoException {
+    private boolean deleteApplication(Connection connection, int userId) throws DaoException {
         try (PreparedStatement statement = statementDeleteApplication(connection, userId)) {
-            statement.execute();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);

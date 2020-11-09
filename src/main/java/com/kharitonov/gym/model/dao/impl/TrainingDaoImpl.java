@@ -16,7 +16,14 @@ import java.util.Optional;
 import static com.kharitonov.gym.model.dao.impl.TrainingStatementCreator.*;
 
 public class TrainingDaoImpl implements TrainingDao {
+    private static final TrainingDaoImpl INSTANCE = new TrainingDaoImpl();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
+
+    private TrainingDaoImpl() {}
+
+    public static final TrainingDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public int add(int trainerId, int clientId, Date trainingDate, Time trainingTime) throws DaoException {
@@ -73,23 +80,25 @@ public class TrainingDaoImpl implements TrainingDao {
     }
 
     @Override
-    public void updateDescription(int trainingId, String description) throws DaoException {
+    public boolean updateDescription(int trainingId, String description) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateDescription(connection, trainingId, description)) {
-            statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public void deleteTraining(int trainingId, int userId) throws DaoException {
+    public boolean deleteTraining(int trainingId, int userId) throws DaoException {
         Connection connection = pool.getConnection();
         try (PreparedStatement statementAdd = statementDeleteTraining(connection, trainingId);
              PreparedStatement statementDecrement = statementIncrementTrainings(connection, userId)) {
             connection.setAutoCommit(false);
             statementAdd.execute();
-            statementDecrement.executeUpdate();
+            boolean result = statementDecrement.executeUpdate() > 0;
+            connection.commit();
+            return result;
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);
@@ -100,36 +109,37 @@ public class TrainingDaoImpl implements TrainingDao {
     }
 
     @Override
-    public void updateTraining(int trainingId, Date trainingDate, Time trainingTime, String description)
+    public boolean updateTraining(int trainingId, Date trainingDate, Time trainingTime, String description)
             throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement =
                      statementUpdateTraining(connection, trainingDate, trainingTime, description, trainingId)) {
-            statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public void setTrainingDone(int trainingId) throws DaoException {
+    public boolean setTrainingDone(int trainingId) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementSetTrainingDone(connection, trainingId)) {
-            statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public void updateTrainingRating(int trainingId, int rating, int trainerId) throws DaoException {
+    public boolean updateTrainingRating(int trainingId, int rating, int trainerId) throws DaoException {
         Connection connection = pool.getConnection();
         try {
             connection.setAutoCommit(false);
             setTrainingRating(connection, trainingId, rating);
             double trainerRating = averageTrainerRating(trainerId);
-            updateTrainerRating(connection, trainerId, trainerRating);
+            boolean result = updateTrainerRating(connection, trainerId, trainerRating);
             connection.commit();
+            return result;
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);
@@ -148,9 +158,9 @@ public class TrainingDaoImpl implements TrainingDao {
         }
     }
 
-    private void updateTrainerRating(Connection connection, int trainerId, double rating) throws DaoException {
+    private boolean updateTrainerRating(Connection connection, int trainerId, double rating) throws DaoException {
         try (PreparedStatement updTraining = statementUpdateTrainerRating(connection, trainerId, rating)) {
-            updTraining.executeUpdate();
+            return updTraining.executeUpdate() > 0;
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);

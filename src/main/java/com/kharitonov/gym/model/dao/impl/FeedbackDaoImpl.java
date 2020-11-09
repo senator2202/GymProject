@@ -13,13 +13,20 @@ import java.util.List;
 import static com.kharitonov.gym.model.dao.impl.FeedbackStatementCreator.*;
 
 public class FeedbackDaoImpl implements FeedbackDao {
+    private static final FeedbackDaoImpl INSTANCE = new FeedbackDaoImpl();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
+    private FeedbackDaoImpl() {}
+
+    public static FeedbackDaoImpl getInstance() {
+        return INSTANCE;
+    }
+
     @Override
-    public void add(String name, String email, String subject, String message) throws DaoException {
+    public boolean add(String name, String email, String subject, String message) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementAddFeedback(connection, name, email, subject, message)) {
-            statement.execute();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -42,10 +49,10 @@ public class FeedbackDaoImpl implements FeedbackDao {
     }
 
     @Override
-    public void addReplyMessage(int feedbackId, String message) throws DaoException {
+    public boolean addReplyMessage(int feedbackId, String message) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateReplyMessage(connection, feedbackId, message)) {
-            statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }

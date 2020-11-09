@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class TrainingServiceImpl implements TrainingService {
+    private final TrainingDao dao = TrainingDaoImpl.getInstance();
     private static final String SECONDS_POSTFIX = ":00";
     private static final int TIME_LENGTH = 8;
     private static final String BLANK = "";
@@ -38,7 +39,6 @@ public class TrainingServiceImpl implements TrainingService {
         int trainerId = Integer.parseInt(sTrainerId);
         Date date = Date.valueOf(trainingDate);
         Time time = Time.valueOf(trainingTime + (trainingTime.length() == TIME_LENGTH ? BLANK : SECONDS_POSTFIX));
-        TrainingDao dao = new TrainingDaoImpl();
         try {
             return dao.add(trainerId, clientId, date, time);
         } catch (DaoException e) {
@@ -48,7 +48,6 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public List<Training> findClientTrainings(int clientId) throws ServiceException {
-        TrainingDao dao = new TrainingDaoImpl();
         try {
             return dao.findClientTrainings(clientId);
         } catch (DaoException e) {
@@ -58,7 +57,6 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public List<Training> findTrainerTrainings(int trainerId) throws ServiceException {
-        TrainingDao dao = new TrainingDaoImpl();
         try {
             return dao.findTrainerTrainings(trainerId);
         } catch (DaoException e) {
@@ -71,7 +69,6 @@ public class TrainingServiceImpl implements TrainingService {
         if (!TrainingValidator.correctUpdateDescriptionParameters(trainingId, description)) {
             return false;
         }
-        TrainingDao dao = new TrainingDaoImpl();
         int id = Integer.parseInt(trainingId);
         try {
             dao.updateDescription(id, description);
@@ -86,7 +83,6 @@ public class TrainingServiceImpl implements TrainingService {
         if (!TrainingValidator.correctId(trainingId)) {
             return false;
         }
-        TrainingDao dao = new TrainingDaoImpl();
         int id = Integer.parseInt(trainingId);
         try {
             dao.deleteTraining(id, userId);
@@ -102,7 +98,6 @@ public class TrainingServiceImpl implements TrainingService {
         if (!TrainingValidator.correctUpdateTrainingParameters(trainingId, trainingDate, trainingTime, description)) {
             return false;
         }
-        TrainingDao dao = new TrainingDaoImpl();
         int id = Integer.parseInt(trainingId);
         Date date = Date.valueOf(trainingDate);
         Time time = Time.valueOf(trainingTime + (trainingTime.length() == TIME_LENGTH ? BLANK : SECONDS_POSTFIX));
@@ -119,7 +114,6 @@ public class TrainingServiceImpl implements TrainingService {
         if (!TrainingValidator.correctId(trainingId)) {
             return false;
         }
-        TrainingDao dao = new TrainingDaoImpl();
         int id = Integer.parseInt(trainingId);
         try {
             dao.setTrainingDone(id);
@@ -134,7 +128,6 @@ public class TrainingServiceImpl implements TrainingService {
         if (!TrainingValidator.correctRateTrainingParameters(sTrainingId, sTrainingRating, sTrainerId)) {
             return false;
         }
-        TrainingDao dao = new TrainingDaoImpl();
         int trainingId = Integer.parseInt(sTrainingId);
         int trainingRating = Integer.parseInt(sTrainingRating);
         int trainerId = Integer.parseInt(sTrainerId);
@@ -151,7 +144,6 @@ public class TrainingServiceImpl implements TrainingService {
         if (!TrainingValidator.correctId(trainingId)) {
             return Optional.empty();
         }
-        TrainingDao dao = new TrainingDaoImpl();
         try {
             return dao.findTrainingById(trainingId);
         } catch (DaoException e) {
@@ -161,7 +153,6 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public Map<Integer, Client> findTrainerClients(int trainerId) throws ServiceException {
-        TrainingDao dao = new TrainingDaoImpl();
         try {
             List<Client> clients = dao.findTrainerClients(trainerId);
             Map<Integer, Client> clientMap = new HashMap<>();

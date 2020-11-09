@@ -1,5 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
+import com.kharitonov.gym.controller.ActiveUsersMap;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.ProjectPage;
 import com.kharitonov.gym.exception.ServiceException;
@@ -30,8 +31,9 @@ public class ConfirmAccountCommand implements ActionCommand {
                     User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
                     String email = optional.get();
                     request.setAttribute(RequestAttributeName.CONFIRMED_ACCOUNT, email);
-                    if (user != null && user.getAccount().getId() == id) {
-                        user.getAccount().setIsActive(true);
+                    ActiveUsersMap map = ActiveUsersMap.getInstance();
+                    if (user != null && map.containsKey(id)) {
+                        map.put(user.getAccount().getId(), true);
                     }
                 }
                 page = ProjectPage.INDEX.getDirectUrl();

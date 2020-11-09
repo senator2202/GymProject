@@ -6,8 +6,8 @@ import com.kharitonov.gym.model.dao.TrainerApplicationDao;
 import com.kharitonov.gym.model.dao.impl.TrainerApplicationDaoImpl;
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.model.service.TrainerApplicationService;
+import com.kharitonov.gym.model.validator.CommonValidator;
 import com.kharitonov.gym.model.validator.TrainerApplicationValidator;
-import com.kharitonov.gym.model.validator.UserValidator;
 import com.kharitonov.gym.model.validator.ValidationError;
 import com.kharitonov.gym.model.validator.ValidationErrorSet;
 
@@ -15,6 +15,7 @@ import java.util.List;
 
 public class TrainerApplicationServiceImpl implements TrainerApplicationService {
     private static final TrainerApplicationServiceImpl INSTANCE = new TrainerApplicationServiceImpl();
+    private final TrainerApplicationDao dao = TrainerApplicationDaoImpl.getInstance();
 
     private TrainerApplicationServiceImpl() {
     }
@@ -29,7 +30,6 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
         if (!TrainerApplicationValidator.correctSendParameters(id, institution, graduationYear, instagramLink)) {
             return false;
         }
-        TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
         int year = Integer.parseInt(graduationYear);
         try {
             boolean result;
@@ -38,8 +38,7 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
                 errorSet.add(ValidationError.APPLICATION_EXISTS);
                 result = false;
             } else {
-                dao.add(id, institution, year, instagramLink);
-                result = true;
+                result = dao.add(id, institution, year, instagramLink);
             }
             return result;
         } catch (DaoException e) {
@@ -49,14 +48,12 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
 
     @Override
     public boolean deleteApplication(String userId) throws ServiceException {
-        if (!UserValidator.correctId(userId)) {
+        if (!CommonValidator.correctId(userId)) {
             return false;
         }
-        TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
         int id = Integer.parseInt(userId);
         try {
-            dao.delete(id);
-            return true;
+            return dao.delete(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -71,10 +68,8 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
         }
         int id = Integer.parseInt(userId);
         int year = Integer.parseInt(graduationYear);
-        TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
         try {
-            dao.approve(id, institution, year, instagramLink);
-            return true;
+            return dao.approve(id, institution, year, instagramLink);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -82,7 +77,6 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
 
     @Override
     public List<TrainerApplication> getAllApplications() throws ServiceException {
-        TrainerApplicationDao dao = new TrainerApplicationDaoImpl();
         try {
             return dao.findAll();
         } catch (DaoException e) {

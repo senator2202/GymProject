@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
     private static final int DEFAULT_USERS_NUMBER = 30;
     private static final double DEFAULT_TRAINING_COST = 20;
-
+    private final UserDao dao = UserDaoImpl.getInstance();
 
     public static UserServiceImpl getInstance() {
         return INSTANCE;
@@ -42,10 +42,9 @@ public class UserServiceImpl implements UserService {
         String login = parameters.get(RequestParameterName.LOGIN);
         String password = parameters.get(RequestParameterName.LOGIN_PASSWORD);
         String encryptedPassword = CryptoUtility.encryptMessage(password);
-        UserDao dao = new UserDaoImpl();
         Optional<User> optional;
         try {
-            optional = dao.findUser(login, encryptedPassword);
+            optional = dao.findUserByLoginPassword(login, encryptedPassword);
             if (optional.isEmpty()) {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
                 errorSet.add(ValidationError.WRONG_LOGIN_PASSWORD);
@@ -67,7 +66,6 @@ public class UserServiceImpl implements UserService {
         String password = parameters.get(RequestParameterName.REGISTRATION_PASSWORD);
         String email = parameters.get(RequestParameterName.REGISTRATION_EMAIL);
         String encryptedPassword = CryptoUtility.encryptMessage(password);
-        UserDao dao = new UserDaoImpl();
         try {
             ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
             boolean exists = false;
@@ -85,22 +83,9 @@ public class UserServiceImpl implements UserService {
                 return Optional.empty();
             }
             int id = dao.add(login, encryptedPassword, email);
-            sendConfirmationLink(email, id);
-            return dao.findUser(login, encryptedPassword);
+            return dao.findUserById(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
-        }
-    }
-
-    private boolean sendConfirmationLink(String email, int id) {
-        MailUtility service = new MailUtility();
-        try {
-            service.sendConfirmMessage(email, id);
-            LOGGER.info("Confirmation was sent to '{}'", email);
-            return true;
-        } catch (PropertyReaderException e) {
-            LOGGER.error("Error occurred while sending confirmation link!", e);
-            return false;
         }
     }
 
@@ -109,12 +94,15 @@ public class UserServiceImpl implements UserService {
         if (!CommonValidator.correctId(accountId)) {
             return false;
         }
-        UserDao dao = new UserDaoImpl();
         int id = Integer.parseInt(accountId);
         try {
-            dao.confirmAccount(id);
-            LOGGER.info("Account id={} was confirmed!", id);
-            return true;
+            boolean result = dao.confirmAccount(id);
+            if (result) {
+                LOGGER.info("Account id={} was confirmed!", id);
+            } else {
+                LOGGER.error("Account id={} confirmation error", id);
+            }
+            return result;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -126,7 +114,6 @@ public class UserServiceImpl implements UserService {
         if (!UserValidator.correctAccountDataParameters(email, locale, newPassword, repeatPassword)) {
             return false;
         }
-        UserDao dao = new UserDaoImpl();
         try {
             int id = dao.findByEmail(email);
             if (id != 0 && id != user.getAccount().getId()) {
@@ -143,11 +130,13 @@ public class UserServiceImpl implements UserService {
             String encrypted = newPassword.isEmpty()
                     ? dao.findPassword(userId)
                     : CryptoUtility.encryptMessage(newPassword);
-            dao.updateAccountData(userId, email, locale, encrypted);
-            Account.AccountLocale accountLocale = Account.AccountLocale.valueOf(locale);
-            user.getAccount().setEmail(email);
-            user.getAccount().setLocale(accountLocale);
-            return true;
+            boolean result = dao.updateAccountData(userId, email, locale, encrypted);
+            if (result) {
+                Account.AccountLocale accountLocale = Account.AccountLocale.valueOf(locale);
+                user.getAccount().setEmail(email);
+                user.getAccount().setLocale(accountLocale);
+            }
+            return result;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -159,10 +148,8 @@ public class UserServiceImpl implements UserService {
         if (!UserValidator.correctPersonalDataParameters(userId, firstName, lastName, phone)) {
             return false;
         }
-        UserDao dao = new UserDaoImpl();
         try {
-            dao.updatePersonalData(userId, firstName, lastName, phone);
-            return true;
+            return dao.updatePersonalData(userId, firstName, lastName, phone);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -178,7 +165,6 @@ public class UserServiceImpl implements UserService {
         int days = daysNumber != null
                 ? Integer.parseInt(daysNumber)
                 : DEFAULT_USERS_NUMBER;
-        UserDao dao = new UserDaoImpl();
         try {
             return dao.findRecentUsers(days);
         } catch (DaoException e) {
@@ -191,10 +177,8 @@ public class UserServiceImpl implements UserService {
         if (!UserValidator.correctUpdateImageParameters(userId, imageName)) {
             return false;
         }
-        UserDao dao = new UserDaoImpl();
         try {
-            dao.updateUserImage(userId, imageName);
-            return true;
+            return dao.updateUserImage(userId, imageName);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -218,12 +202,13 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         int id = client.getAccount().getId();
-        UserDao dao = new UserDaoImpl();
         try {
-            dao.updateBalanceAndBoughtTrainings(id, sum, number);
-            client.setBoughtTrainings(client.getBoughtTrainings() + number);
-            client.setMoneyBalance(client.getMoneyBalance() - sum);
-            return true;
+            boolean result = dao.updateBalanceAndBoughtTrainings(id, sum, number);
+            if (result) {
+                client.setBoughtTrainings(client.getBoughtTrainings() + number);
+                client.setMoneyBalance(client.getMoneyBalance() - sum);
+            }
+            return result;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -231,7 +216,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Trainer> findAllTrainers() throws ServiceException {
-        UserDao dao = new UserDaoImpl();
         try {
             return dao.findAllTrainers();
         } catch (DaoException e) {
@@ -246,7 +230,6 @@ public class UserServiceImpl implements UserService {
         }
         int id = client.getAccount().getId();
         int amount = Integer.parseInt(stringAmount);
-        UserDao dao = new UserDaoImpl();
         try {
             dao.addToBalance(id, amount);
             double balance = client.getMoneyBalance();
@@ -259,7 +242,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<String> findEmailById(int userId) throws ServiceException {
-        UserDao dao = new UserDaoImpl();
         try {
             return dao.findEmailById(userId);
         } catch (DaoException e) {
@@ -272,11 +254,9 @@ public class UserServiceImpl implements UserService {
         if (!CommonValidator.correctId(userId)) {
             return false;
         }
-        UserDao dao = new UserDaoImpl();
         int id = Integer.parseInt(userId);
         try {
-            dao.blockUser(id);
-            return true;
+            return dao.blockUser(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -288,10 +268,8 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         int id = Integer.parseInt(userId);
-        UserDao dao = new UserDaoImpl();
         try {
-            dao.unblockUser(id);
-            return true;
+            return dao.unblockUser(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -304,10 +282,8 @@ public class UserServiceImpl implements UserService {
         }
         int id = Integer.parseInt(clientId);
         double discount = Double.parseDouble(personalDiscount);
-        UserDao dao = new UserDaoImpl();
         try {
-            dao.updateDiscount(id, discount);
-            return true;
+            return dao.updateDiscount(id, discount);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -318,10 +294,8 @@ public class UserServiceImpl implements UserService {
         if (!UserValidator.correctUpdateSummaryParameters(trainerId, shortSummary)) {
             return false;
         }
-        UserDao dao = new UserDaoImpl();
         try {
-            dao.updateShortSummary(trainerId, shortSummary);
-            return true;
+            return dao.updateShortSummary(trainerId, shortSummary);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

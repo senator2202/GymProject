@@ -5,8 +5,6 @@ import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.entity.*;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,9 +14,15 @@ import java.util.Optional;
 import static com.kharitonov.gym.model.dao.impl.UserStatementCreator.*;
 
 public class UserDaoImpl implements UserDao {
-    private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
+    private static final UserDaoImpl INSTANCE = new UserDaoImpl();
     private static final String BLANK = "";
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
+
+    private UserDaoImpl() {}
+
+    public static final UserDaoImpl getInstance() {
+        return INSTANCE;
+    }
 
     static User create(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt(TableColumnName.ACCOUNT_ID);
@@ -118,7 +122,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findUser(String name, String encryptedPassword)
+    public Optional<User> findUserByLoginPassword(String name, String encryptedPassword)
             throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statementSelect = statementSelectUser(connection, name, encryptedPassword);
@@ -126,7 +130,6 @@ public class UserDaoImpl implements UserDao {
             if (resultSet.next()) {
                 return Optional.of(create(resultSet));
             } else {
-                LOGGER.warn("There is no user with such name and password!");
                 return Optional.empty();
             }
         } catch (SQLException e) {
@@ -135,16 +138,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findAllUsers() throws DaoException {
-        List<User> users = new ArrayList<>();
+    public Optional<User> findUserById(int userId) throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statementSelect = statementSelectAll(connection);
+             PreparedStatement statementSelect = statementSelectUserById(connection, userId);
              ResultSet resultSet = statementSelect.executeQuery()) {
-            while (resultSet.next()) {
-                User user = create(resultSet);
-                users.add(user);
+            if (resultSet.next()) {
+                return Optional.of(create(resultSet));
+            } else {
+                return Optional.empty();
             }
-            return users;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -173,50 +175,30 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<UserRole> checkLoginPassword(String name, String encryptedPassword)
-            throws DaoException {
-        try (Connection connection = pool.getConnection();
-             PreparedStatement statementSelect = statementSelectUser(connection, name, encryptedPassword);
-             ResultSet resultSet = statementSelect.executeQuery()) {
-            Optional<UserRole> optional = Optional.empty();
-            if (resultSet.next()) {
-                String column = TableColumnName.ACCOUNT_ROLE;
-                String stringRole = resultSet.getString(column);
-                UserRole role = UserRole.valueOf(stringRole);
-                optional = Optional.of(role);
-            }
-            return optional;
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        }
-    }
-
-    @Override
-    public void confirmAccount(int id) throws DaoException {
+    public boolean confirmAccount(int id) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statementUpdate = statementUpdateActive(connection, id)) {
-            statementUpdate.executeUpdate();
+            return statementUpdate.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public void updateAccountData(int userId, String email, String locale, String password) throws DaoException {
+    public boolean updateAccountData(int userId, String email, String locale, String password) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statementUpdate = statementUpdateAccount(connection, email, locale, password, userId)) {
-            statementUpdate.executeUpdate();
+            return statementUpdate.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public void updatePersonalData(int userId, String firstName, String lastName, String phone) throws DaoException {
+    public boolean updatePersonalData(int userId, String firstName, String lastName, String phone) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateUser(connection, firstName, lastName, phone, userId)) {
-            statement.executeUpdate();
-
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -239,24 +221,25 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUserImage(int userId, String imageName) throws DaoException {
+    public boolean updateUserImage(int userId, String imageName) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateImage(connection, userId, imageName)) {
-            statement.execute();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public void updateBalanceAndBoughtTrainings(int userId, double decreaseBalance, int increaseTrainings) throws DaoException {
+    public boolean updateBalanceAndBoughtTrainings(int userId, double decreaseBalance, int increaseTrainings) throws DaoException {
         Connection connection = pool.getConnection();
         try (PreparedStatement statementDecrease = statementDecreaseBalance(connection, userId, decreaseBalance);
              PreparedStatement statementIncrease = statementIncreaseTrainings(connection, userId, increaseTrainings)) {
             connection.setAutoCommit(false);
             statementDecrease.execute();
-            statementIncrease.execute();
+            boolean result = statementIncrease.executeUpdate() > 0;
             connection.commit();
+            return result;
         } catch (SQLException e) {
             rollback(connection);
             throw new DaoException(e);
@@ -325,40 +308,40 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void blockUser(int userId) throws DaoException {
+    public boolean blockUser(int userId) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementBlockUser(connection, userId)) {
-            statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public void unblockUser(int userId) throws DaoException {
+    public boolean unblockUser(int userId) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUnblockUser(connection, userId)) {
-            statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public void updateDiscount(int clientId, double discount) throws DaoException {
+    public boolean updateDiscount(int clientId, double discount) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateDiscount(connection, clientId, discount)) {
-            statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
-    public void updateShortSummary(int trainerId, String shortSummary) throws DaoException {
+    public boolean updateShortSummary(int trainerId, String shortSummary) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateShortSummary(connection, trainerId, shortSummary)) {
-            statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -371,10 +354,11 @@ public class UserDaoImpl implements UserDao {
              ResultSet resultSet = statement.executeQuery()) {
             String result;
             if (resultSet.next()) {
-                return resultSet.getString(TableColumnName.ACCOUNT_PASSWORD);
+                result = resultSet.getString(TableColumnName.ACCOUNT_PASSWORD);
             } else {
-                return BLANK;
+                result = BLANK;
             }
+            return result;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
