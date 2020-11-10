@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.util.RequestParameterName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +15,6 @@ public class InvalidCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String command = request.getParameter(RequestParameterName.COMMAND);
         LOGGER.error("Command '{}' is not defined!", command);
-        return ProjectPage.ERROR_404.getDirectUrl();
+        return PagePath.ERROR_404.getDirectUrl();
     }
 }

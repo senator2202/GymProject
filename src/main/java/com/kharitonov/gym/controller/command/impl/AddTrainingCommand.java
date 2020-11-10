@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.service.TrainingService;
@@ -29,15 +29,15 @@ public class AddTrainingCommand implements ActionCommand {
         try {
             int trainingId = trainingService.addTraining(trainerId, clientId, date, time);
             if (trainingId == INVALID_ID) {
-                page = ProjectPage.ERROR_404.getDirectUrl();
+                page = PagePath.ERROR_404.getDirectUrl();
             } else {
                 client.setBoughtTrainings(client.getBoughtTrainings() - 1);
-                page = ProjectPage.SCHEDULE.getServletCommand();
+                page = PagePath.SCHEDULE.getServletCommand();
             }
 
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

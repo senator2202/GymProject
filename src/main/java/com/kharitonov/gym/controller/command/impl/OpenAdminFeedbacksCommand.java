@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Feedback;
 import com.kharitonov.gym.model.service.FeedbackService;
@@ -25,10 +25,10 @@ public class OpenAdminFeedbacksCommand implements ActionCommand {
             List<Feedback> feedbacks = service.findAllFeedbacks();
             request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.FEEDBACKS_TAB);
             request.setAttribute(RequestAttributeName.FEEDBACKS, feedbacks);
-            page = ProjectPage.ADMIN_FEEDBACKS.getDirectUrl();
+            page = PagePath.ADMIN_FEEDBACKS.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

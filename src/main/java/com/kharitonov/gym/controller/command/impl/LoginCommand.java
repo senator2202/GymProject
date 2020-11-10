@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.ActiveUsersMap;
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
@@ -38,21 +38,21 @@ public class LoginCommand implements ActionCommand {
                 User user = optional.get();
                 session.setAttribute(SessionAttributeName.USER, user);
                 if (user.getAccount().getRole() == UserRole.ADMIN) {
-                    page = ProjectPage.ADMIN_MAIN.getServletCommand();
+                    page = PagePath.ADMIN_MAIN.getServletCommand();
                 } else {
                     ActiveUsersMap map = ActiveUsersMap.getInstance();
                     map.put(user.getAccount().getId(), user.getAccount().getIsActive());
-                    page = ProjectPage.INDEX.getDirectUrl();
+                    page = PagePath.INDEX.getDirectUrl();
                 }
             } else {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
                 session.setAttribute(SessionAttributeName.LOGIN_MAP, parameters);
                 session.setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
-                page = ProjectPage.INDEX.getDirectUrl();
+                page = PagePath.INDEX.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

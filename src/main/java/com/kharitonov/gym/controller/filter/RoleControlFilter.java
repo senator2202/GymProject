@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.filter;
 
 import com.kharitonov.gym.controller.CommandProvider;
 import com.kharitonov.gym.controller.command.CommandType;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.util.RequestParameterName;
@@ -37,7 +37,7 @@ public class RoleControlFilter implements Filter {
             }
         } else {
             LOGGER.warn("Filter interception: no command to execute!");
-            RequestDispatcher dispatcher = request.getRequestDispatcher(ProjectPage.ERROR_404.getDirectUrl());
+            RequestDispatcher dispatcher = request.getRequestDispatcher(PagePath.ERROR_404.getDirectUrl());
             dispatcher.forward(request, response);
         }
         chain.doFilter(request, response);

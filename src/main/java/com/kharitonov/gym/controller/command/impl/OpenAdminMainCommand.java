@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.model.service.TrainerApplicationService;
@@ -25,10 +25,10 @@ public class OpenAdminMainCommand implements ActionCommand {
             List<TrainerApplication> applications = service.getAllApplications();
             request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.APPLICATIONS_TAB);
             request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
-            page = ProjectPage.ADMIN_MAIN.getDirectUrl();
+            page = PagePath.ADMIN_MAIN.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error("Applications loading error!", e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
@@ -25,19 +25,19 @@ public class BuyTrainingsCommand implements ActionCommand {
         String page;
         try {
             if (userService.buyTrainings(client, trainingsNumber)) {
-                page = ProjectPage.SCHEDULE.getServletCommand();
+                page = PagePath.SCHEDULE.getServletCommand();
             } else {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
                 if (errorSet.contains(ValidationError.LOW_BALANCE)) {
                     request.getSession().setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
-                    page = ProjectPage.SCHEDULE.getServletCommand();
+                    page = PagePath.SCHEDULE.getServletCommand();
                 } else {
-                    page = ProjectPage.ERROR_404.getDirectUrl();
+                    page = PagePath.ERROR_404.getDirectUrl();
                 }
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

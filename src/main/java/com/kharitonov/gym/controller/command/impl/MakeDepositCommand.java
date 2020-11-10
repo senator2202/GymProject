@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.service.UserService;
@@ -24,13 +24,13 @@ public class MakeDepositCommand implements ActionCommand {
         String page;
         try {
             if (service.addToBalance(client, amount)) {
-                page = ProjectPage.PERSONAL_FINANCE.getServletCommand();
+                page = PagePath.PERSONAL_FINANCE.getServletCommand();
             } else {
-                page = ProjectPage.ERROR_404.getDirectUrl();
+                page = PagePath.ERROR_404.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

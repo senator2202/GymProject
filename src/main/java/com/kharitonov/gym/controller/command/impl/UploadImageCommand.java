@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.util.SessionAttributeName;
@@ -39,13 +39,13 @@ public class UploadImageCommand implements ActionCommand {
             String localPath = saveItem(fileItem, request);
             if (service.updateUserImage(user.getAccount().getId(), localPath)) {
                 user.setImageName(localPath);
-                page = ProjectPage.PERSONAL_DATA.getServletCommand();
+                page = PagePath.PERSONAL_DATA.getServletCommand();
             } else {
-                page = ProjectPage.ERROR_404.getDirectUrl();
+                page = PagePath.ERROR_404.getDirectUrl();
             }
         } catch (Exception e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

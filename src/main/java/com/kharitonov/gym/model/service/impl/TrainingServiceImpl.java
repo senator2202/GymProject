@@ -7,6 +7,7 @@ import com.kharitonov.gym.model.dao.impl.TrainingDaoImpl;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.model.service.TrainingService;
+import com.kharitonov.gym.model.validator.CommonValidator;
 import com.kharitonov.gym.model.validator.TrainingValidator;
 import com.kharitonov.gym.model.validator.UserValidator;
 
@@ -72,8 +73,7 @@ public class TrainingServiceImpl implements TrainingService {
         }
         int id = Integer.parseInt(trainingId);
         try {
-            dao.updateDescription(id, description);
-            return true;
+            return dao.updateDescription(id, description);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -81,13 +81,12 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public boolean deleteTraining(String trainingId, int userId) throws ServiceException {
-        if (!TrainingValidator.correctId(trainingId)) {
+        if (!CommonValidator.correctId(trainingId) || !CommonValidator.correctId(userId)) {
             return false;
         }
         int id = Integer.parseInt(trainingId);
         try {
-            dao.deleteTraining(id, userId);
-            return true;
+            return dao.deleteTraining(id, userId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -103,8 +102,7 @@ public class TrainingServiceImpl implements TrainingService {
         Date date = Date.valueOf(trainingDate);
         Time time = Time.valueOf(trainingTime + (trainingTime.length() == TIME_LENGTH ? BLANK : SECONDS_POSTFIX));
         try {
-            dao.updateTraining(id, date, time, description);
-            return true;
+            return dao.updateTraining(id, date, time, description);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -117,8 +115,7 @@ public class TrainingServiceImpl implements TrainingService {
         }
         int id = Integer.parseInt(trainingId);
         try {
-            dao.setTrainingDone(id);
-            return true;
+            return dao.setTrainingDone(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -133,8 +130,7 @@ public class TrainingServiceImpl implements TrainingService {
         int trainingRating = Integer.parseInt(sTrainingRating);
         int trainerId = Integer.parseInt(sTrainerId);
         try {
-            dao.updateTrainingRating(trainingId, trainingRating, trainerId);
-            return true;
+            return dao.updateTrainingRating(trainingId, trainingRating, trainerId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

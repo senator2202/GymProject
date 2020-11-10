@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.ActiveUsersMap;
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.util.SessionAttributeName;
 
@@ -19,6 +19,6 @@ public class LogoutCommand implements ActionCommand {
             map.remove(user.getAccount().getId());
         }
         session.invalidate();
-        return ProjectPage.INDEX.getDirectUrl();
+        return PagePath.INDEX.getDirectUrl();
     }
 }

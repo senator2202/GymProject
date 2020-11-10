@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.ActiveUsersMap;
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
@@ -36,13 +36,13 @@ public class ConfirmAccountCommand implements ActionCommand {
                         map.put(user.getAccount().getId(), true);
                     }
                 }
-                page = ProjectPage.INDEX.getDirectUrl();
+                page = PagePath.INDEX.getDirectUrl();
             } else {
-                page = ProjectPage.ERROR_404.getDirectUrl();
+                page = PagePath.ERROR_404.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

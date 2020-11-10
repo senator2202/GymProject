@@ -1,6 +1,6 @@
 package com.kharitonov.gym.controller.filter;
 
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,14 +19,14 @@ public class PageAccessFilter implements Filter {
 
     static {
         RESTRICTED_PAGES = new HashSet<>();
-        RESTRICTED_PAGES.add(ProjectPage.HOME.getDirectUrl());
-        RESTRICTED_PAGES.add(ProjectPage.SCHEDULE.getDirectUrl());
-        RESTRICTED_PAGES.add(ProjectPage.PERSONAL_FINANCE.getDirectUrl());
-        RESTRICTED_PAGES.add(ProjectPage.PERSONAL_ACCOUNT.getDirectUrl());
-        RESTRICTED_PAGES.add(ProjectPage.PERSONAL_DATA.getDirectUrl());
-        RESTRICTED_PAGES.add(ProjectPage.ADMIN_FEEDBACKS.getDirectUrl());
-        RESTRICTED_PAGES.add(ProjectPage.ADMIN_MAIN.getDirectUrl());
-        RESTRICTED_PAGES.add(ProjectPage.ADMIN_REGISTRATIONS.getDirectUrl());
+        RESTRICTED_PAGES.add(PagePath.HOME.getDirectUrl());
+        RESTRICTED_PAGES.add(PagePath.SCHEDULE.getDirectUrl());
+        RESTRICTED_PAGES.add(PagePath.PERSONAL_FINANCE.getDirectUrl());
+        RESTRICTED_PAGES.add(PagePath.PERSONAL_ACCOUNT.getDirectUrl());
+        RESTRICTED_PAGES.add(PagePath.PERSONAL_DATA.getDirectUrl());
+        RESTRICTED_PAGES.add(PagePath.ADMIN_FEEDBACKS.getDirectUrl());
+        RESTRICTED_PAGES.add(PagePath.ADMIN_MAIN.getDirectUrl());
+        RESTRICTED_PAGES.add(PagePath.ADMIN_REGISTRATIONS.getDirectUrl());
     }
 
     @Override

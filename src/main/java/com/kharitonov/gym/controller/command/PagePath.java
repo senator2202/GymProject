@@ -1,6 +1,6 @@
 package com.kharitonov.gym.controller.command;
 
-public enum ProjectPage {
+public enum PagePath {
     ABOUT("/jsp/about.jsp", "/mainController?command=open_about"),
     ADMIN_FEEDBACKS("/jsp/admin_feedbacks.jsp", "/mainController?command=open_admin_feedbacks"),
     ADMIN_MAIN("/jsp/admin_main.jsp", "/mainController?command=open_admin_main"),
@@ -18,7 +18,7 @@ public enum ProjectPage {
     private final String directUrl;
     private final String servletCommand;
 
-    ProjectPage(String directUrl, String servletCommand) {
+    PagePath(String directUrl, String servletCommand) {
         this.directUrl = directUrl;
         this.servletCommand = servletCommand;
     }

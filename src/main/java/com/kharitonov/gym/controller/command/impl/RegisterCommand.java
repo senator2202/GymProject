@@ -2,8 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.ActiveUsersMap;
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
-import com.kharitonov.gym.exception.PropertyReaderException;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
@@ -53,10 +52,10 @@ public class RegisterCommand implements ActionCommand {
                 session.setAttribute(SessionAttributeName.REGISTRATION_MAP, parameters);
                 session.setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
             }
-            page = ProjectPage.INDEX.getDirectUrl();
+            page = PagePath.INDEX.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error("Unable to register new user!", e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

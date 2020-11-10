@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.util.SessionAttributeName;
@@ -21,8 +21,8 @@ public class ChangeAdminLocaleCommand implements ActionCommand {
         restoreRequestAttributes(request);
         user.getAccount().setLocale(Account.AccountLocale.localeByPostfix(newLocale));
         String prevPage = getPreviousPage(request);
-        ProjectPage page = Arrays.stream(ProjectPage.values())
-                .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.ADMIN_MAIN);
+        PagePath page = Arrays.stream(PagePath.values())
+                .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(PagePath.ADMIN_MAIN);
         return page.getServletCommand();
     }
 }

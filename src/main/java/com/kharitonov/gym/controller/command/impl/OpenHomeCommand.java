@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
@@ -22,10 +22,10 @@ public class OpenHomeCommand implements ActionCommand {
         try {
             List<Trainer> trainers = userService.findAllTrainers();
             request.setAttribute(RequestAttributeName.TRAINERS, trainers);
-            page = ProjectPage.HOME.getDirectUrl();
+            page = PagePath.HOME.getDirectUrl();
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

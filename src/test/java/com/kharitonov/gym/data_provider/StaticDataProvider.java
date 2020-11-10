@@ -122,4 +122,74 @@ public class StaticDataProvider {
                 {null, 24, "2020-05-05", "14:25:00", -1}
         };
     }
+
+    @DataProvider
+    @Test
+    public Object [][] dataUpdateDescription() {
+        return new Object[][]{
+                {"12", "sadsadasddsa", true},
+                {"12", "", true},
+                {"12", null, false},
+                {"", "asdasdas", false},
+                {"-12", "ASdsads", false},
+                {null, "ASdasd", false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataDeleteTraining() {
+        return new Object[][] {
+                {"12", 25, true},
+                {"12", -25, false},
+                {"-12", 25, false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object [][] dataUpdateTraining() {
+        return new Object[][] {
+                {"25", "2020-12-12", "18:00:00", "asdas", true},
+                {"25", "2020-12-12", "18:00:00", "", true},
+                {"25", "2020-12-12", "18:00:00", null, false},
+                {"25", "2020-12-12", "118:00:00", "asdas", false},
+                {"25", "2020-12-12", "", "asdas", false},
+                {"25", "2020-12-12", null, "asdas", false},
+                {"25", "202011-12-12", "18:00:00", "asdas", false},
+                {"25", "", "18:00:00", "asdas", false},
+                {"25", null, "18:00:00", "asdas", false},
+                {"-1225", "2020-12-12", "18:00:00", "asdas", false},
+                {"", "2020-12-12", "18:00:00", "asdas", false},
+                {null, "2020-12-12", "18:00:00", "asdas", false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object [][] dataSetTrainingDone() {
+        return new Object[][] {
+                {"25", true},
+                {"", false},
+                {"-25", false},
+                {null, false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataRateTraining() {
+        return new Object[][] {
+                {"25", "4", "35", true},
+                {"25", "4", "", false},
+                {"25", "4", "-35", false},
+                {"25", "4", null, false},
+                {"25", "", "35", false},
+                {"25", "24", "35", false},
+                {"25", null, "35", false},
+                {"", "4", "35", false},
+                {"-252", "4", "35", false},
+                {null, "4", "35", false}
+        };
+    }
 }

@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
@@ -27,15 +27,15 @@ public class UpdateShortSummaryCommand implements ActionCommand {
             if (service.updateShortSummary(id, summary)) {
                 trainer.setShortSummary(summary);
                 String prevPage = getPreviousPage(request);
-                ProjectPage projectPage = Arrays.stream(ProjectPage.values())
-                        .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(ProjectPage.PERSONAL_ACCOUNT);
-                page = projectPage.getServletCommand();
+                PagePath pagePath = Arrays.stream(PagePath.values())
+                        .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(PagePath.PERSONAL_ACCOUNT);
+                page = pagePath.getServletCommand();
             } else {
-                page = ProjectPage.ERROR_404.getDirectUrl();
+                page = PagePath.ERROR_404.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

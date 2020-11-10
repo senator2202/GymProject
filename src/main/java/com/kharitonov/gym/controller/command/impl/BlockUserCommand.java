@@ -2,7 +2,7 @@ package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.ActiveUsersMap;
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.util.RequestParameterName;
@@ -24,13 +24,13 @@ public class BlockUserCommand implements ActionCommand {
                 int userId = Integer.parseInt(id);
                 ActiveUsersMap map = ActiveUsersMap.getInstance();
                 map.put(userId, false);
-                page = ProjectPage.ADMIN_REGISTRATIONS.getServletCommand();
+                page = PagePath.ADMIN_REGISTRATIONS.getServletCommand();
             } else {
-                page = ProjectPage.ERROR_404.getDirectUrl();
+                page = PagePath.ERROR_404.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }

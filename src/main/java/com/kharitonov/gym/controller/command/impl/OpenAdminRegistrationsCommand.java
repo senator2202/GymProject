@@ -1,7 +1,7 @@
 package com.kharitonov.gym.controller.command.impl;
 
 import com.kharitonov.gym.controller.command.ActionCommand;
-import com.kharitonov.gym.controller.command.ProjectPage;
+import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
@@ -30,17 +30,17 @@ public class OpenAdminRegistrationsCommand implements ActionCommand {
             ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
             if (errorSet.contains(ValidationError.INVALID_NUMBER_FORMAT)) {
                 errorSet.clear();
-                page = ProjectPage.ERROR_404.getDirectUrl();
+                page = PagePath.ERROR_404.getDirectUrl();
             } else {
                 days = days == null ? DEFAULT_DAYS : days;
                 request.setAttribute(RequestAttributeName.DAYS, days);
                 request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.REGISTRATIONS_TAB);
                 request.setAttribute(RequestAttributeName.RECENT_USERS, users);
-                page = ProjectPage.ADMIN_REGISTRATIONS.getDirectUrl();
+                page = PagePath.ADMIN_REGISTRATIONS.getDirectUrl();
             }
         } catch (ServiceException e) {
             LOGGER.error(e);
-            page = ProjectPage.ERROR_500.getDirectUrl();
+            page = PagePath.ERROR_500.getDirectUrl();
         }
         return page;
     }
