@@ -8,13 +8,11 @@ import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.model.service.TrainingService;
 import com.kharitonov.gym.model.validator.TrainingValidator;
+import com.kharitonov.gym.model.validator.UserValidator;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class TrainingServiceImpl implements TrainingService {
     private final TrainingDao dao = TrainingDaoImpl.getInstance();
@@ -48,6 +46,9 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public List<Training> findClientTrainings(int clientId) throws ServiceException {
+        if (!UserValidator.correctId(clientId)) {
+            return new ArrayList<>();
+        }
         try {
             return dao.findClientTrainings(clientId);
         } catch (DaoException e) {
