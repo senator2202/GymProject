@@ -18,7 +18,8 @@ public class UserDaoImpl implements UserDao {
     private static final String BLANK = "";
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
-    private UserDaoImpl() {}
+    private UserDaoImpl() {
+    }
 
     public static final UserDaoImpl getInstance() {
         return INSTANCE;
@@ -279,10 +280,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addToBalance(int userId, int amount) throws DaoException {
+    public boolean addToBalance(int userId, int amount) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementUpdateBalance(connection, userId, amount)) {
-            statement.executeUpdate();
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }

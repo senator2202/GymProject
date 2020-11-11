@@ -18,8 +18,9 @@ public class TrainingValidator extends CommonValidator {
         return correctId(trainingId) && correctDate(trainingDate) && correctTime(trainingTime) && description != null;
     }
 
-    public static boolean correctAddTrainingParameters(String trainerId, String trainingDate, String trainingTime) {
-        return correctId(trainerId) && correctDate(trainingDate) && correctTime(trainingTime);
+    public static boolean correctAddTrainingParameters(String trainerId, int clientId,
+                                                       String trainingDate, String trainingTime) {
+        return correctId(trainerId) && correctId(clientId) && correctDate(trainingDate) && correctTime(trainingTime);
     }
 
     public static boolean correctRateTrainingParameters(String trainingId, String trainingRating, String trainerId) {

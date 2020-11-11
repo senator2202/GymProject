@@ -1,7 +1,6 @@
 package com.kharitonov.gym.model.service.impl;
 
 import com.kharitonov.gym.exception.DaoException;
-import com.kharitonov.gym.exception.PropertyReaderException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
@@ -13,7 +12,6 @@ import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.validator.*;
 import com.kharitonov.gym.util.CryptoUtility;
 import com.kharitonov.gym.util.RequestParameterName;
-import com.kharitonov.gym.util.mail.MailUtility;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,6 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
+    private static final String BLANK = "";
     private static final UserServiceImpl INSTANCE = new UserServiceImpl();
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
     private static final int DEFAULT_USERS_NUMBER = 30;
@@ -78,8 +77,8 @@ public class UserServiceImpl implements UserService {
                 exists = true;
             }
             if (exists) {
-                parameters.put(RequestParameterName.REGISTRATION_PASSWORD, "");
-                parameters.put(RequestParameterName.REPEAT_PASSWORD, "");
+                parameters.put(RequestParameterName.REGISTRATION_PASSWORD, BLANK);
+                parameters.put(RequestParameterName.REPEAT_PASSWORD, BLANK);
                 return Optional.empty();
             }
             int id = dao.add(login, encryptedPassword, email);
@@ -100,7 +99,7 @@ public class UserServiceImpl implements UserService {
             if (result) {
                 LOGGER.info("Account id={} was confirmed!", id);
             } else {
-                LOGGER.error("Account id={} confirmation error", id);
+                LOGGER.error("Account id={} was not found", id);
             }
             return result;
         } catch (DaoException e) {
@@ -231,10 +230,12 @@ public class UserServiceImpl implements UserService {
         int id = client.getAccount().getId();
         int amount = Integer.parseInt(stringAmount);
         try {
-            dao.addToBalance(id, amount);
-            double balance = client.getMoneyBalance();
-            client.setMoneyBalance(balance + amount);
-            return true;
+            boolean result = dao.addToBalance(id, amount);
+            if (result) {
+                double balance = client.getMoneyBalance();
+                client.setMoneyBalance(balance + amount);
+            }
+            return result;
         } catch (DaoException e) {
             throw new ServiceException();
         }
@@ -242,6 +243,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<String> findEmailById(int userId) throws ServiceException {
+        if (!CommonValidator.correctId(userId)) {
+            return Optional.empty();
+        }
         try {
             return dao.findEmailById(userId);
         } catch (DaoException e) {

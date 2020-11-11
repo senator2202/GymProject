@@ -16,12 +16,12 @@ import java.sql.Time;
 import java.util.*;
 
 public class TrainingServiceImpl implements TrainingService {
-    private final TrainingDao dao = TrainingDaoImpl.getInstance();
     private static final String SECONDS_POSTFIX = ":00";
     private static final int TIME_LENGTH = 8;
     private static final String BLANK = "";
     private static final int ERROR_VALUE = -1;
     private static final TrainingServiceImpl INSTANCE = new TrainingServiceImpl();
+    private final TrainingDao dao = TrainingDaoImpl.getInstance();
 
     private TrainingServiceImpl() {
     }
@@ -31,8 +31,9 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public int addTraining(String sTrainerId, int clientId, String trainingDate, String trainingTime) throws ServiceException {
-        if (!TrainingValidator.correctAddTrainingParameters(sTrainerId, trainingDate, trainingTime)) {
+    public int addTraining(String sTrainerId, int clientId, String trainingDate, String trainingTime)
+            throws ServiceException {
+        if (!TrainingValidator.correctAddTrainingParameters(sTrainerId, clientId, trainingDate, trainingTime)) {
             return ERROR_VALUE;
         }
         int trainerId = Integer.parseInt(sTrainerId);
@@ -150,6 +151,9 @@ public class TrainingServiceImpl implements TrainingService {
 
     @Override
     public Map<Integer, Client> findTrainerClients(int trainerId) throws ServiceException {
+        if (!CommonValidator.correctId(trainerId)) {
+            return new HashMap<>();
+        }
         try {
             List<Client> clients = dao.findTrainerClients(trainerId);
             Map<Integer, Client> clientMap = new HashMap<>();

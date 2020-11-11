@@ -80,7 +80,7 @@ public class StaticDataProvider {
 
     @DataProvider
     @Test
-    public Object[][] dataDeleteApplication() {
+    public Object[][] dataIdValidation() {
         return new Object[][]{
                 {"222", true},
                 {null, false},
@@ -125,7 +125,7 @@ public class StaticDataProvider {
 
     @DataProvider
     @Test
-    public Object [][] dataUpdateDescription() {
+    public Object[][] dataUpdateDescription() {
         return new Object[][]{
                 {"12", "sadsadasddsa", true},
                 {"12", "", true},
@@ -139,7 +139,7 @@ public class StaticDataProvider {
     @DataProvider
     @Test
     public Object[][] dataDeleteTraining() {
-        return new Object[][] {
+        return new Object[][]{
                 {"12", 25, true},
                 {"12", -25, false},
                 {"-12", 25, false}
@@ -148,8 +148,8 @@ public class StaticDataProvider {
 
     @DataProvider
     @Test
-    public Object [][] dataUpdateTraining() {
-        return new Object[][] {
+    public Object[][] dataUpdateTraining() {
+        return new Object[][]{
                 {"25", "2020-12-12", "18:00:00", "asdas", true},
                 {"25", "2020-12-12", "18:00:00", "", true},
                 {"25", "2020-12-12", "18:00:00", null, false},
@@ -167,8 +167,8 @@ public class StaticDataProvider {
 
     @DataProvider
     @Test
-    public Object [][] dataSetTrainingDone() {
-        return new Object[][] {
+    public Object[][] dataSetTrainingDone() {
+        return new Object[][]{
                 {"25", true},
                 {"", false},
                 {"-25", false},
@@ -179,7 +179,7 @@ public class StaticDataProvider {
     @DataProvider
     @Test
     public Object[][] dataRateTraining() {
-        return new Object[][] {
+        return new Object[][]{
                 {"25", "4", "35", true},
                 {"25", "4", "", false},
                 {"25", "4", "-35", false},
@@ -190,6 +190,103 @@ public class StaticDataProvider {
                 {"", "4", "35", false},
                 {"-252", "4", "35", false},
                 {null, "4", "35", false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataBuyTrainings() {
+        return new Object[][]{
+                {"5", true},
+                {"0", false},
+                {"", false},
+                {null, false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataUpdateAccount() {
+        return new Object[][]{
+                {"tratata@mail.ru", "russian", "qwerty", "qwerty", true},
+                {"tratata@mail.ru", "russian", "", "", true},
+                {"tratata@mail.ru", null, "qwerty", "qwerty", true},
+                {"tratata@mail.ru", null, "", "", true},
+                {"tratata@mail.ru", "russian", "qwerty", "", false},
+                {"tratata@mail.ru", "russian", "", "qwerty", false},
+                {"tratata@mail.ru", "russian", null, "qwerty", false},
+                {"tratata@mail.ru", "russian", "qwerty", null, false},
+                {"tratata@mail.ru", "russian", "q", "q", false},
+                {"tratata@mail.ru", "russianaaaaa", "qwerty", "qwerty", false},
+                {"tratata@mail.ru", "", "qwerty", "qwerty", false},
+                {"", "russian", "qwerty", "qwerty", false},
+                {null, "russian", "qwerty", "qwerty", false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataUpdatePersonalData() {
+        return new Object[][]{
+                {25, "alexey", "kharitonov", "+375296543211", true},
+                {25, "alexey", "kharitonov", "", true},
+                {25, "alexey", "", "", true},
+                {25, "", "", "", true},
+                {25, "alexey", "kharitonov", "+qwe", false},
+                {25, "alexey", "kharitonov", null, false},
+                {25, "alexey", "khariton'ov", "+375296543211", false},
+                {25, "alexey", null, "+375296543211", false},
+                {25, "alex''''ey", "kharitonov", "+375296543211", false},
+                {25, null, "kharitonov", "+375296543211", false},
+                {-25, "alexey", "kharitonov", "+375296543211", false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataUpdateUserImage() {
+        return new Object[][]{
+                {25, "path", true},
+                {25, "pathwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww" +
+                        "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww", false},
+                {25, null, false},
+                {-25, "path", false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataAddToBalance() {
+        return new Object[][]{
+                {"100", true},
+                {"", false},
+                {null, false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataUpdateDiscount() {
+        return new Object[][]{
+                {"15", "10.5", true},
+                {"15", "10,5", false},
+                {"15", null, false},
+                {"15.1", "10.5", false},
+                {null, "10.5", false}
+        };
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataUpdateShortSummary() {
+        return new Object[][]{
+                {15, "abc", true},
+                {-15, "abc", false},
+                {15, null, false},
+                {15, "abcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                        "aaaaaaaaaaaaaaaaaaa", false}
         };
     }
 }

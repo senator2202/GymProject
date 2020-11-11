@@ -16,7 +16,8 @@ public class FeedbackDaoImpl implements FeedbackDao {
     private static final FeedbackDaoImpl INSTANCE = new FeedbackDaoImpl();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
-    private FeedbackDaoImpl() {}
+    private FeedbackDaoImpl() {
+    }
 
     public static FeedbackDaoImpl getInstance() {
         return INSTANCE;

@@ -6,14 +6,14 @@ import java.util.Map;
 
 public class UserValidator extends CommonValidator {
     private static final String BLANK = "";
-    private static final String LOGIN_REGEX = "[a-zA-Z][a-zA-Z0-9_]{1,19}";
-    private static final String PASSWORD_REGEX = "[a-zA-Z0-9_]{5,30}";
+    private static final String LOGIN_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{1,19}$";
+    private static final String PASSWORD_REGEX = "^[a-zA-Z0-9_]{5,30}$";
     private static final String DEPOSIT_AMOUNT_REGEX = "^[1-9]\\d{0,3}$";
     private static final String DAYS_NUMBER_REGEX = "^[1-9]\\d{0,4}$";
     private static final String LOCALE_REGEX = "^((russian)|(english))$";
-    private static final String DISCOUNT_REGEX = "^\\d+([.,]\\d{1,2})?$";
-    private static final String PHONE_REGEX = "^((80\\d{2})|(\\+375\\d{2}))[1-9]\\d{6}$";
-    private static final String NAME_REGEX = "\\p{L}{0,30}";
+    private static final String DISCOUNT_REGEX = "^\\d+(\\.\\d{1,2})?$";
+    private static final String PHONE_REGEX = "^(((80\\d{2})|(\\+375\\d{2}))[1-9]\\d{6})?$";
+    private static final String NAME_REGEX = "^(\\p{L}{0,30})?$";
     private static final int MAX_IMAGE_NAME_LENGTH = 100;
     private static final int MAX_SUMMARY_LENGTH = 250;
     private static final ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
@@ -35,7 +35,14 @@ public class UserValidator extends CommonValidator {
 
     public static boolean correctAccountDataParameters(String email, String locale,
                                                        String newPassword, String repeatPassword) {
-        return correctEmail(email) && correctLocale(locale);
+        return correctEmail(email) && correctLocale(locale) && correctPasswords(newPassword, repeatPassword);
+    }
+
+    private static boolean correctPasswords(String password, String repeatPassword) {
+        boolean option1 = correctPassword(password) && correctPassword(repeatPassword)
+                && password.equals(repeatPassword);
+        boolean option2 = notNull(password, repeatPassword) && password.isEmpty() && repeatPassword.isEmpty();
+        return option1 || option2;
     }
 
     public static boolean correctUpdateDiscountParameters(String id, String discount) {
@@ -80,7 +87,7 @@ public class UserValidator extends CommonValidator {
             result = false;
         }
         String passwordRepeat = parameters.get(RequestParameterName.REPEAT_PASSWORD);
-        if (passwordRepeat == null || !passwordRepeat.equals(password)) {
+        if (!correctPassword(passwordRepeat) || !passwordRepeat.equals(password)) {
             parameters.put(RequestParameterName.REGISTRATION_PASSWORD, BLANK);
             parameters.put(RequestParameterName.REPEAT_PASSWORD, BLANK);
             errorSet.add(ValidationError.PASSWORDS_ARE_NOT_EQUAL);

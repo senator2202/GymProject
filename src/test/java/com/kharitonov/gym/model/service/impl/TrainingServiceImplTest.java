@@ -5,6 +5,7 @@ import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.dao.TrainingDao;
 import com.kharitonov.gym.model.dao.impl.TrainingDaoImpl;
+import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
 import com.kharitonov.gym.model.service.TrainingService;
 import org.powermock.reflect.Whitebox;
@@ -12,9 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
@@ -148,5 +147,53 @@ public class TrainingServiceImplTest {
     public void testRateTrainingException() throws DaoException, ServiceException {
         when(dao.updateTrainingRating(anyInt(), anyInt(), anyInt())).thenThrow(new DaoException());
         service.rateTraining("25", "4", "35");
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataFindTrainingById() {
+        Training training = Training.TrainingBuilder.aTraining().build();
+        return new Object[][]{
+                {20, Optional.of(training)},
+                {200, Optional.empty()},
+                {-20, Optional.empty()}
+        };
+    }
+
+    @Test(dataProvider = "dataFindTrainingById")
+    public void testFindTrainingById(int trainingId, Optional<Training> expected)
+            throws DaoException, ServiceException {
+        when(dao.findTrainingById(trainingId)).thenReturn(expected);
+        Optional<Training> actual = service.findTrainingById(trainingId);
+        assertEquals(actual, expected);
+    }
+
+    @Test(expectedExceptions = ServiceException.class, dependsOnMethods = "testFindTrainingById")
+    public void testFindTrainingByIdException() throws DaoException, ServiceException {
+        when(dao.findTrainingById(anyInt())).thenThrow(new DaoException());
+        service.findTrainingById(20);
+    }
+
+    @DataProvider
+    @Test
+    public Object[][] dataFindTrainerClients() {
+        return new Object[][]{
+                {24, new ArrayList<Client>(), new HashMap<Integer, Client>()},
+                {-24, null, new HashMap<Integer, Client>()}
+        };
+    }
+
+    @Test(dataProvider = "dataFindTrainerClients")
+    public void testFindTrainerClients(int trainerId, List<Client> expectedList, Map<Integer, Client> expectedMap)
+            throws DaoException, ServiceException {
+        when(dao.findTrainerClients(trainerId)).thenReturn(expectedList);
+        Map<Integer, Client> actualMap = service.findTrainerClients(trainerId);
+        assertEquals(actualMap, expectedMap);
+    }
+
+    @Test(expectedExceptions = ServiceException.class, dependsOnMethods = "testFindTrainerClients")
+    public void testFindTrainerClientsException() throws DaoException, ServiceException {
+        when(dao.findTrainerClients(anyInt())).thenThrow(new DaoException());
+        service.findTrainerClients(24);
     }
 }

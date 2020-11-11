@@ -56,7 +56,7 @@ public class TrainerApplicationServiceImplTest {
         service.sendApplication(2, "BSU", "2015", "https://www.instagram.com/xzibit");
     }
 
-    @Test(dataProviderClass = StaticDataProvider.class, dataProvider = "dataDeleteApplication")
+    @Test(dataProviderClass = StaticDataProvider.class, dataProvider = "dataIdValidation")
     public void testDeleteApplication(String userId, boolean expected) throws DaoException, ServiceException {
         when(dao.delete(anyInt())).thenReturn(expected);
         boolean actual = service.deleteApplication(userId);

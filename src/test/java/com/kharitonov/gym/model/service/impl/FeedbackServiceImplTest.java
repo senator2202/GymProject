@@ -9,7 +9,6 @@ import com.kharitonov.gym.model.entity.Feedback;
 import com.kharitonov.gym.model.service.FeedbackService;
 import org.powermock.reflect.Whitebox;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class FeedbackServiceImplTest {
     private FeedbackService service;

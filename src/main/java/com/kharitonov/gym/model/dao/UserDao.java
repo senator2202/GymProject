@@ -34,7 +34,7 @@ public interface UserDao extends BaseDao {
 
     List<Trainer> findAllTrainers() throws DaoException;
 
-    void addToBalance(int userId, int amount) throws DaoException;
+    boolean addToBalance(int userId, int amount) throws DaoException;
 
     Optional<String> findEmailById(int userId) throws DaoException;
 

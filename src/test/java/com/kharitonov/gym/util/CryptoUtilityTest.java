@@ -1,7 +1,6 @@
 package com.kharitonov.gym.util;
 
 import com.kharitonov.gym.data_provider.StaticDataProvider;
-import com.kharitonov.gym.util.CryptoUtility;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

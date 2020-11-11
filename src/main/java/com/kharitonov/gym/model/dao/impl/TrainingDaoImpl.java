@@ -19,7 +19,8 @@ public class TrainingDaoImpl implements TrainingDao {
     private static final TrainingDaoImpl INSTANCE = new TrainingDaoImpl();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
 
-    private TrainingDaoImpl() {}
+    private TrainingDaoImpl() {
+    }
 
     public static final TrainingDaoImpl getInstance() {
         return INSTANCE;
