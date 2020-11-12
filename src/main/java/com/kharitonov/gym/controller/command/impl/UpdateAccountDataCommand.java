@@ -33,12 +33,12 @@ public class UpdateAccountDataCommand implements ActionCommand {
         String page;
         try {
             if (service.updateAccountData(user, email, locale, newPassword, repeatNewPassword)) {
-                page = PagePath.PERSONAL_ACCOUNT.getServletCommand();
+                page = PagePath.PERSONAL_ACCOUNT.getServletPath();
             } else {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
                 if (errorSet.contains(ValidationError.CHANGE_EMAIL_EXISTS)) {
                     session.setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
-                    page = PagePath.PERSONAL_ACCOUNT.getServletCommand();
+                    page = PagePath.PERSONAL_ACCOUNT.getServletPath();
                 } else {
                     page = PagePath.ERROR_404.getDirectUrl();
                 }

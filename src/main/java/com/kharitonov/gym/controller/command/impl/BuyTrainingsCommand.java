@@ -28,12 +28,12 @@ public class BuyTrainingsCommand implements ActionCommand {
         String page;
         try {
             if (userService.buyTrainings(client, trainingsNumber)) {
-                page = PagePath.SCHEDULE.getServletCommand();
+                page = PagePath.SCHEDULE.getServletPath();
             } else {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
                 if (errorSet.contains(ValidationError.LOW_BALANCE)) {
                     request.getSession().setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
-                    page = PagePath.SCHEDULE.getServletCommand();
+                    page = PagePath.SCHEDULE.getServletPath();
                 } else {
                     page = PagePath.ERROR_404.getDirectUrl();
                 }

@@ -24,7 +24,7 @@ public class UpdateDiscountCommand implements ActionCommand {
         String page;
         try {
             if (service.updateDiscount(id, discount)) {
-                page = PagePath.ADMIN_REGISTRATIONS.getServletCommand();
+                page = PagePath.ADMIN_REGISTRATIONS.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

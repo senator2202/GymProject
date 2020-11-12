@@ -32,7 +32,7 @@ public class UpdateShortSummaryCommand implements ActionCommand {
                 String prevPage = getPreviousPage(request);
                 PagePath pagePath = Arrays.stream(PagePath.values())
                         .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(PagePath.PERSONAL_ACCOUNT);
-                page = pagePath.getServletCommand();
+                page = pagePath.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

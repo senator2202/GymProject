@@ -27,7 +27,7 @@ public class ApproveTrainerApplicationCommand implements ActionCommand {
         String page;
         try {
             if (appService.approveApplication(id, institution, graduation, instagram)) {
-                page = PagePath.ADMIN_MAIN.getServletCommand();
+                page = PagePath.ADMIN_MAIN.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

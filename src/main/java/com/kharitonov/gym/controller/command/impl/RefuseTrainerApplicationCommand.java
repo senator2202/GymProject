@@ -24,7 +24,7 @@ public class RefuseTrainerApplicationCommand implements ActionCommand {
         String page;
         try {
             if (service.deleteApplication(id)) {
-                page = PagePath.ADMIN_MAIN.getServletCommand();
+                page = PagePath.ADMIN_MAIN.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

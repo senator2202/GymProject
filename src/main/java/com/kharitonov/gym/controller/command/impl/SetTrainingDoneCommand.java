@@ -24,7 +24,7 @@ public class SetTrainingDoneCommand implements ActionCommand {
         String page;
         try {
             if (service.setTrainingDone(id)) {
-                page = PagePath.SCHEDULE.getServletCommand();
+                page = PagePath.SCHEDULE.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

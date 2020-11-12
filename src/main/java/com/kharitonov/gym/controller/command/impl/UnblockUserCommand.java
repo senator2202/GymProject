@@ -27,7 +27,7 @@ public class UnblockUserCommand implements ActionCommand {
                 int userId = Integer.parseInt(id);
                 ActiveUsersMap map = ActiveUsersMap.getInstance();
                 map.put(userId, true);
-                page = PagePath.ADMIN_REGISTRATIONS.getServletCommand();
+                page = PagePath.ADMIN_REGISTRATIONS.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

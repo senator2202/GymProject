@@ -26,6 +26,6 @@ public class ChangeAdminLocaleCommand implements ActionCommand {
         String prevPage = getPreviousPage(request);
         PagePath page = Arrays.stream(PagePath.values())
                 .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(PagePath.ADMIN_MAIN);
-        return page.getServletCommand();
+        return page.getServletPath();
     }
 }

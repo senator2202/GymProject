@@ -42,7 +42,7 @@ public class UploadImageCommand implements ActionCommand {
             String localPath = saveItem(fileItem, request);
             if (service.updateUserImage(user.getAccount().getId(), localPath)) {
                 user.setImageName(localPath);
-                page = PagePath.PERSONAL_DATA.getServletCommand();
+                page = PagePath.PERSONAL_DATA.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

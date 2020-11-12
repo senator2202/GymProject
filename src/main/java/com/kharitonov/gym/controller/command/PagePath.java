@@ -20,11 +20,11 @@ public enum PagePath {
     SCHEDULE("/jsp/schedule.jsp", "/mainController?command=open_schedule");
 
     private final String directUrl;
-    private final String servletCommand;
+    private final String servletPath;
 
-    PagePath(String directUrl, String servletCommand) {
+    PagePath(String directUrl, String servletPath) {
         this.directUrl = directUrl;
-        this.servletCommand = servletCommand;
+        this.servletPath = servletPath;
     }
 
     /**
@@ -37,11 +37,11 @@ public enum PagePath {
     }
 
     /**
-     * Gets servlet command.
+     * Gets servlet path.
      *
-     * @return the servlet command
+     * @return the servlet path
      */
-    public String getServletCommand() {
-        return servletCommand;
+    public String getServletPath() {
+        return servletPath;
     }
 }

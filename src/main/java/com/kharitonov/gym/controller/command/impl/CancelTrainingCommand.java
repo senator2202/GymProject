@@ -29,7 +29,7 @@ public class CancelTrainingCommand implements ActionCommand {
         try {
             if (service.deleteTraining(trainingId, clientId)) {
                 client.setBoughtTrainings(client.getBoughtTrainings() + 1);
-                page = PagePath.SCHEDULE.getServletCommand();
+                page = PagePath.SCHEDULE.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

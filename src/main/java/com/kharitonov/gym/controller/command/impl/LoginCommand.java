@@ -41,7 +41,7 @@ public class LoginCommand implements ActionCommand {
                 User user = optional.get();
                 session.setAttribute(SessionAttributeName.USER, user);
                 if (user.getAccount().getRole() == UserRole.ADMIN) {
-                    page = PagePath.ADMIN_MAIN.getServletCommand();
+                    page = PagePath.ADMIN_MAIN.getServletPath();
                 } else {
                     ActiveUsersMap map = ActiveUsersMap.getInstance();
                     map.put(user.getAccount().getId(), user.getAccount().getIsActive());

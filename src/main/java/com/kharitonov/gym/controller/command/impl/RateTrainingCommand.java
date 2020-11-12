@@ -26,7 +26,7 @@ public class RateTrainingCommand implements ActionCommand {
         String page;
         try {
             if (trainingService.rateTraining(trainingId, trainingRating, trainerId)) {
-                page = PagePath.SCHEDULE.getServletCommand();
+                page = PagePath.SCHEDULE.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

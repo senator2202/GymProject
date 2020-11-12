@@ -27,7 +27,7 @@ public class UpdateTrainingCommand implements ActionCommand {
         String page;
         try {
             if (service.updateTraining(id, date, time, description)) {
-                page = PagePath.SCHEDULE.getServletCommand();
+                page = PagePath.SCHEDULE.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

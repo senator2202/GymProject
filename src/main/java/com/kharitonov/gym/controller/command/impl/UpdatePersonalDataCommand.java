@@ -34,7 +34,7 @@ public class UpdatePersonalDataCommand implements ActionCommand {
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
                 user.setPhoneNumber(phone);
-                page = PagePath.PERSONAL_DATA.getServletCommand();
+                page = PagePath.PERSONAL_DATA.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

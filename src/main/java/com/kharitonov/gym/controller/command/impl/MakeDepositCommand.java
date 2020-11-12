@@ -27,7 +27,7 @@ public class MakeDepositCommand implements ActionCommand {
         String page;
         try {
             if (service.addToBalance(client, amount)) {
-                page = PagePath.PERSONAL_FINANCE.getServletCommand();
+                page = PagePath.PERSONAL_FINANCE.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }

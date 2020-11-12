@@ -35,7 +35,7 @@ public class AddTrainingCommand implements ActionCommand {
                 page = PagePath.ERROR_404.getDirectUrl();
             } else {
                 client.setBoughtTrainings(client.getBoughtTrainings() - 1);
-                page = PagePath.SCHEDULE.getServletCommand();
+                page = PagePath.SCHEDULE.getServletPath();
             }
 
         } catch (ServiceException e) {

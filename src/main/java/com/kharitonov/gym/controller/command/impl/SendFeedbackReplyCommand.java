@@ -31,7 +31,7 @@ public class SendFeedbackReplyCommand implements ActionCommand {
             if (FeedbackValidator.correctReplyParameters(id, email, subject, message) &&
                     MailUtility.sendMessage(email, subject, message) &&
                     service.addReplyMessage(id, email, subject, message)) {
-                page = PagePath.ADMIN_FEEDBACKS.getServletCommand();
+                page = PagePath.ADMIN_FEEDBACKS.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();
             }
