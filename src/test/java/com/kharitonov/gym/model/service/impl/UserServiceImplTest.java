@@ -1,5 +1,6 @@
 package com.kharitonov.gym.model.service.impl;
 
+import com.kharitonov.gym.builder.AccountBuilder;
 import com.kharitonov.gym.data_provider.StaticDataProvider;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
@@ -48,7 +49,7 @@ public class UserServiceImplTest {
         validMap.put(RequestParameterName.LOGIN, "tratata");
         validMap.put(RequestParameterName.LOGIN_PASSWORD, "qwerty");
         objects[1][0] = validMap;
-        objects[1][1] = Optional.of(new Client(Account.AccountBuilder.anAccount().build()));
+        objects[1][1] = Optional.of(new Client(new Account()));
         invalidMap.put(RequestParameterName.LOGIN, "");
         invalidMap.put(RequestParameterName.LOGIN_PASSWORD, "qwerty");
         objects[2][0] = invalidMap;
@@ -107,7 +108,7 @@ public class UserServiceImplTest {
         validMap.put(RequestParameterName.REPEAT_PASSWORD, "qwerty");
         validMap.put(RequestParameterName.REGISTRATION_EMAIL, "qwerty@gmail.com");
         objects[1][0] = validMap;
-        objects[1][1] = Optional.of(new Client(Account.AccountBuilder.anAccount().build()));
+        objects[1][1] = Optional.of(new Client(AccountBuilder.anAccount().build()));
         invalidMap.put(RequestParameterName.REGISTRATION_LOGIN, "");
         invalidMap.put(RequestParameterName.REGISTRATION_PASSWORD, "qwerty");
         invalidMap.put(RequestParameterName.REPEAT_PASSWORD, "qwerty");
@@ -251,7 +252,7 @@ public class UserServiceImplTest {
     @Test(groups = "updateAccount")
     public void testUpdateAccountDataEmailExisting() throws DaoException, ServiceException {
         when(dao.findByEmail(anyString())).thenReturn(99);
-        boolean actual = service.updateAccountData(new User(Account.AccountBuilder.anAccount().withId(22).build()),
+        boolean actual = service.updateAccountData(new User(AccountBuilder.anAccount().withId(22).build()),
                 "qwerty@mail.ru", "russian", "qwerty", "qwerty");
         ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
         boolean result = errorSet.contains(ValidationError.CHANGE_EMAIL_EXISTS) && !actual;
@@ -263,8 +264,7 @@ public class UserServiceImplTest {
     public void testUpdateAccountDataEmailNotExisting(String email, String locale, String newPassword,
                                                       String repeatPassword, boolean expected)
             throws DaoException, ServiceException {
-        Account account =
-                Account.AccountBuilder.anAccount().withId(222).withLocale(Account.AccountLocale.ENGLISH).build();
+        Account account = AccountBuilder.anAccount().withId(222).withLocale(Account.AccountLocale.ENGLISH).build();
         User user = new Client(account);
         when(dao.findByEmail(anyString())).thenReturn(0);
         when(dao.updateAccountData(anyInt(), anyString(), any(), any())).thenReturn(true);
@@ -274,8 +274,7 @@ public class UserServiceImplTest {
 
     @Test(dependsOnGroups = "updateAccount", expectedExceptions = ServiceException.class)
     public void testUpdateAccountDataException() throws DaoException, ServiceException {
-        Account account =
-                Account.AccountBuilder.anAccount().withId(222).withLocale(Account.AccountLocale.ENGLISH).build();
+        Account account = AccountBuilder.anAccount().withId(222).withLocale(Account.AccountLocale.ENGLISH).build();
         User user = new Client(account);
         when(dao.updateAccountData(anyInt(), anyString(), any(), any())).thenThrow(new DaoException());
         service.updateAccountData(user, "russ@mail.ru", "russian", "qwerty", "qwerty");
@@ -299,7 +298,7 @@ public class UserServiceImplTest {
     @Test
     public Object[][] dataFindRecentUsers() {
         List<User> users = new ArrayList<>();
-        users.add(new User(Account.AccountBuilder.anAccount().build()));
+        users.add(new User(AccountBuilder.anAccount().build()));
         return new Object[][]{
                 {"30", users},
                 {"100000", Collections.emptyList()},

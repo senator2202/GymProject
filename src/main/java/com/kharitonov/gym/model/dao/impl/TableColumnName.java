@@ -9,13 +9,11 @@ class TableColumnName {
     static final String ACCOUNT_REGISTRATION_DATE = "registration_date";
     static final String ACCOUNT_LOCALE = "locale";
     static final String ACCOUNT_IS_ACTIVE = "active";
-    static final String USER_ID = "user_id";
     static final String USER_FIRST_NAME = "first_name";
     static final String USER_LAST_NAME = "last_name";
     static final String USER_PHONE = "phone";
     static final String USER_DISCOUNT = "discount";
     static final String USER_RATING = "rating";
-    static final String USER_DIET_ID = "diet_id_fk";
     static final String USER_IMAGE = "image_name";
     static final String USER_MONEY_BALANCE = "money_balance";
     static final String USER_BOUGHT_TRAININGS = "bought_trainings";

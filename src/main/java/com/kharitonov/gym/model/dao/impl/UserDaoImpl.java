@@ -1,8 +1,12 @@
 package com.kharitonov.gym.model.dao.impl;
 
+import com.kharitonov.gym.builder.*;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.dao.UserDao;
-import com.kharitonov.gym.model.entity.*;
+import com.kharitonov.gym.model.entity.Account;
+import com.kharitonov.gym.model.entity.Trainer;
+import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 
@@ -21,16 +25,40 @@ public class UserDaoImpl implements UserDao {
     private UserDaoImpl() {
     }
 
-    public static final UserDaoImpl getInstance() {
+    public static UserDaoImpl getInstance() {
         return INSTANCE;
     }
 
     static User create(ResultSet resultSet) throws SQLException {
+        String role = resultSet.getString(TableColumnName.ACCOUNT_ROLE);
+        UserRole userRole = UserRole.valueOf(role);
+        UserBuilder userBuilder = null;
+        if (userRole == UserRole.CLIENT) {
+            double discount = resultSet.getDouble(TableColumnName.USER_DISCOUNT);
+            double moneyBalance = resultSet.getDouble(TableColumnName.USER_MONEY_BALANCE);
+            int boughtTrainings = resultSet.getInt(TableColumnName.USER_BOUGHT_TRAININGS);
+            userBuilder = ClientBuilder.aClient()
+                    .withMoneyBalance(moneyBalance)
+                    .withBoughtTrainings(boughtTrainings)
+                    .withPersonalDiscount(discount);
+        } else if (userRole == UserRole.TRAINER) {
+            double rating = resultSet.getDouble(TableColumnName.USER_RATING);
+            String institution = resultSet.getString(TableColumnName.USER_INSTITUTION);
+            int graduationYear = resultSet.getInt(TableColumnName.USER_GRADUATION);
+            String instagram = resultSet.getString(TableColumnName.USER_INSTAGRAM);
+            String shortSummary = resultSet.getString(TableColumnName.USER_SHORT_SUMMARY);
+            userBuilder = TrainerBuilder.aTrainer()
+                    .withGraduationYear(graduationYear)
+                    .withInstagramLink(instagram)
+                    .withInstitution(institution)
+                    .withRating(rating)
+                    .withShortSummary(shortSummary);
+        } else if (userRole == UserRole.ADMIN) {
+            userBuilder = AdminBuilder.anAdmin();
+        }
         int id = resultSet.getInt(TableColumnName.ACCOUNT_ID);
         String login = resultSet.getString(TableColumnName.ACCOUNT_LOGIN);
         String email = resultSet.getString(TableColumnName.ACCOUNT_EMAIL);
-        String role = resultSet.getString(TableColumnName.ACCOUNT_ROLE);
-        UserRole userRole = UserRole.valueOf(role);
         Date date = resultSet.getDate(TableColumnName.ACCOUNT_REGISTRATION_DATE);
         String locale = resultSet.getString(TableColumnName.ACCOUNT_LOCALE);
         Account.AccountLocale accountLocale = Account.AccountLocale.valueOf(locale);
@@ -38,12 +66,8 @@ public class UserDaoImpl implements UserDao {
         String firstName = resultSet.getString(TableColumnName.USER_FIRST_NAME);
         String lastName = resultSet.getString(TableColumnName.USER_LAST_NAME);
         String phone = resultSet.getString(TableColumnName.USER_PHONE);
-        double discount = resultSet.getDouble(TableColumnName.USER_DISCOUNT);
         String imageName = resultSet.getString(TableColumnName.USER_IMAGE);
-        double moneyBalance = resultSet.getDouble(TableColumnName.USER_MONEY_BALANCE);
-        int boughtTrainings = resultSet.getInt(TableColumnName.USER_BOUGHT_TRAININGS);
-        String shortSummary = resultSet.getString(TableColumnName.USER_SHORT_SUMMARY);
-        Account account = Account.AccountBuilder.anAccount()
+        Account account = AccountBuilder.anAccount()
                 .withId(id)
                 .withName(login)
                 .withEmail(email)
@@ -52,31 +76,12 @@ public class UserDaoImpl implements UserDao {
                 .withLocale(accountLocale)
                 .withIsActive(isActive)
                 .build();
-        User user = null;
-        if (userRole == UserRole.CLIENT) {
-            user = new Client(account);
-            ((Client) user).setPersonalDiscount(discount);
-            ((Client) user).setMoneyBalance(moneyBalance);
-            ((Client) user).setBoughtTrainings(boughtTrainings);
-        } else if (userRole == UserRole.TRAINER) {
-            double rating = resultSet.getDouble(TableColumnName.USER_RATING);
-            String institution = resultSet.getString(TableColumnName.USER_INSTITUTION);
-            int graduation = resultSet.getInt(TableColumnName.USER_GRADUATION);
-            String instagram = resultSet.getString(TableColumnName.USER_INSTAGRAM);
-            user = new Trainer(account);
-            ((Trainer) user).setRating(rating);
-            ((Trainer) user).setInstitution(institution);
-            ((Trainer) user).setInstagramLink(instagram);
-            ((Trainer) user).setGraduationYear(graduation);
-            ((Trainer) user).setShortSummary(shortSummary);
-        } else if (userRole == UserRole.ADMIN) {
-            user = new User(account);
-        }
-        user.setImageName(imageName);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPhoneNumber(phone);
-        return user;
+        return userBuilder.withAccount(account)
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withPhoneNumber(phone)
+                .withImageName(imageName)
+                .build();
     }
 
     @Override
@@ -257,20 +262,22 @@ public class UserDaoImpl implements UserDao {
              ResultSet resultSet = statement.executeQuery()) {
             List<Trainer> trainers = new ArrayList<>();
             while (resultSet.next()) {
-                Account account = Account.AccountBuilder.anAccount()
+                Account account = AccountBuilder.anAccount()
                         .withId(resultSet.getInt(TableColumnName.ACCOUNT_ID))
                         .withEmail(resultSet.getString(TableColumnName.ACCOUNT_EMAIL))
+                        .withRole(UserRole.TRAINER)
                         .build();
-                Trainer trainer = new Trainer(account);
-                trainer.setFirstName(resultSet.getString(TableColumnName.USER_FIRST_NAME));
-                trainer.setLastName(resultSet.getString(TableColumnName.USER_LAST_NAME));
-                trainer.setPhoneNumber(resultSet.getString(TableColumnName.USER_PHONE));
-                trainer.setImageName(resultSet.getString(TableColumnName.USER_IMAGE));
-                trainer.setInstitution(resultSet.getString(TableColumnName.USER_INSTITUTION));
-                trainer.setInstagramLink(resultSet.getString(TableColumnName.USER_INSTAGRAM));
-                trainer.setGraduationYear(resultSet.getInt(TableColumnName.USER_GRADUATION));
-                trainer.setRating(resultSet.getDouble(TableColumnName.USER_RATING));
-                trainer.setShortSummary(resultSet.getString(TableColumnName.USER_SHORT_SUMMARY));
+                Trainer trainer = TrainerBuilder.aTrainer()
+                        .withAccount(account)
+                        .withFirstName(resultSet.getString(TableColumnName.USER_FIRST_NAME))
+                        .withLastName(resultSet.getString(TableColumnName.USER_LAST_NAME))
+                        .withPhoneNumber(resultSet.getString(TableColumnName.USER_PHONE))
+                        .withImageName(resultSet.getString(TableColumnName.USER_IMAGE))
+                        .withInstitution(resultSet.getString(TableColumnName.USER_INSTITUTION))
+                        .withInstagramLink(resultSet.getString(TableColumnName.USER_INSTAGRAM))
+                        .withRating(resultSet.getDouble(TableColumnName.USER_RATING))
+                        .withShortSummary(resultSet.getString(TableColumnName.USER_SHORT_SUMMARY))
+                        .build();
                 trainers.add(trainer);
             }
             return trainers;

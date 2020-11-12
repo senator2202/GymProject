@@ -11,9 +11,6 @@ public class Account {
     private boolean isActive;
     private AccountLocale locale;
 
-    private Account() {
-    }
-
     public int getId() {
         return id;
     }
@@ -90,70 +87,6 @@ public class Account {
 
         public String getPostfix() {
             return postfix;
-        }
-    }
-
-    public static final class AccountBuilder {
-        private int id;
-        private String name;
-        private String email;
-        private UserRole type;
-        private Date registrationDate;
-        private boolean isActive;
-        private AccountLocale locale;
-
-        private AccountBuilder() {
-        }
-
-        public static AccountBuilder anAccount() {
-            return new AccountBuilder();
-        }
-
-        public AccountBuilder withId(int id) {
-            this.id = id;
-            return this;
-        }
-
-        public AccountBuilder withName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public AccountBuilder withEmail(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public AccountBuilder withRole(UserRole type) {
-            this.type = type;
-            return this;
-        }
-
-        public AccountBuilder withRegistrationDate(Date registrationDate) {
-            this.registrationDate = registrationDate;
-            return this;
-        }
-
-        public AccountBuilder withIsActive(boolean isActive) {
-            this.isActive = isActive;
-            return this;
-        }
-
-        public AccountBuilder withLocale(AccountLocale locale) {
-            this.locale = locale;
-            return this;
-        }
-
-        public Account build() {
-            Account account = new Account();
-            account.setId(id);
-            account.setName(name);
-            account.setEmail(email);
-            account.setRole(type);
-            account.setRegistrationDate(registrationDate);
-            account.setIsActive(isActive);
-            account.setLocale(locale);
-            return account;
         }
     }
 

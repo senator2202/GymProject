@@ -1,10 +1,14 @@
 package com.kharitonov.gym.model.dao.impl;
 
+import com.kharitonov.gym.builder.AccountBuilder;
+import com.kharitonov.gym.builder.ClientBuilder;
+import com.kharitonov.gym.builder.TrainingBuilder;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.dao.TrainingDao;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.Client;
 import com.kharitonov.gym.model.entity.Training;
+import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.pool.ConnectionPool;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 
@@ -22,7 +26,7 @@ public class TrainingDaoImpl implements TrainingDao {
     private TrainingDaoImpl() {
     }
 
-    public static final TrainingDaoImpl getInstance() {
+    public static TrainingDaoImpl getInstance() {
         return INSTANCE;
     }
 
@@ -204,15 +208,18 @@ public class TrainingDaoImpl implements TrainingDao {
              ResultSet resultSet = statement.executeQuery()) {
             List<Client> clients = new ArrayList<>();
             while (resultSet.next()) {
-                Account account = Account.AccountBuilder.anAccount()
+                Account account = AccountBuilder.anAccount()
                         .withId(resultSet.getInt(TableColumnName.ACCOUNT_ID))
                         .withEmail(resultSet.getString(TableColumnName.ACCOUNT_EMAIL))
+                        .withRole(UserRole.CLIENT)
                         .build();
-                Client client = new Client(account);
-                client.setFirstName(resultSet.getString(TableColumnName.USER_FIRST_NAME));
-                client.setLastName(resultSet.getString(TableColumnName.USER_LAST_NAME));
-                client.setPhoneNumber(resultSet.getString(TableColumnName.USER_PHONE));
-                client.setImageName(resultSet.getString(TableColumnName.USER_IMAGE));
+                Client client = ClientBuilder.aClient()
+                        .withAccount(account)
+                        .withFirstName(resultSet.getString(TableColumnName.USER_FIRST_NAME))
+                        .withLastName(resultSet.getString(TableColumnName.USER_LAST_NAME))
+                        .withPhoneNumber(resultSet.getString(TableColumnName.USER_PHONE))
+                        .withImageName(resultSet.getString(TableColumnName.USER_IMAGE))
+                        .build();
                 clients.add(client);
             }
             return clients;
@@ -224,7 +231,7 @@ public class TrainingDaoImpl implements TrainingDao {
 
     private Training createTraining(ResultSet resultSet) throws DaoException {
         try {
-            return Training.TrainingBuilder.aTraining()
+            return TrainingBuilder.aTraining()
                     .withTrainingId(resultSet.getInt(TableColumnName.TRAINING_ID))
                     .withTrainerId(resultSet.getInt(TableColumnName.TRAINER_ID))
                     .withTrainerFirstName(resultSet.getString(TableColumnName.TRAINER_FIRST_NAME))

@@ -1,5 +1,6 @@
 package com.kharitonov.gym.model.service.impl;
 
+import com.kharitonov.gym.builder.TrainingBuilder;
 import com.kharitonov.gym.data_provider.StaticDataProvider;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
@@ -50,7 +51,7 @@ public class TrainingServiceImplTest {
     public Object[][] dataFindTrainings() {
         return new Object[][]{
                 {-24, new ArrayList<>()},
-                {24, Arrays.asList(Training.TrainingBuilder.aTraining().build())}
+                {24, Arrays.asList(TrainingBuilder.aTraining().build())}
         };
     }
 
@@ -152,7 +153,7 @@ public class TrainingServiceImplTest {
     @DataProvider
     @Test
     public Object[][] dataFindTrainingById() {
-        Training training = Training.TrainingBuilder.aTraining().build();
+        Training training = TrainingBuilder.aTraining().build();
         return new Object[][]{
                 {20, Optional.of(training)},
                 {200, Optional.empty()},

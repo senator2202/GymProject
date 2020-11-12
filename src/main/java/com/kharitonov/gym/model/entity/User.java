@@ -11,8 +11,7 @@ public class User {
         this.account = account;
     }
 
-    protected User() {
-
+    public User() {
     }
 
     protected User(Account account, String firstName,

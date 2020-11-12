@@ -17,9 +17,6 @@ public class Training {
     private String description;
     private int rating;
 
-    private Training() {
-    }
-
     public int getTrainingId() {
         return trainingId;
     }
@@ -138,10 +135,7 @@ public class Training {
             return false;
         if (date != null ? !date.equals(training.date) : training.date != null) return false;
         if (time != null ? !time.equals(training.time) : training.time != null) return false;
-        if (description != null ? !description.equals(training.description) : training.description != null)
-            return false;
-
-        return true;
+        return description != null ? description.equals(training.description) : training.description == null;
     }
 
     @Override
@@ -161,102 +155,4 @@ public class Training {
         return result;
     }
 
-    public static final class TrainingBuilder {
-        private int trainingId;
-        private int trainerId;
-        private String trainerFirstName;
-        private String trainerLastName;
-        private int clientId;
-        private String clientFirstName;
-        private String clientLastName;
-        private Date date;
-        private Time time;
-        private boolean isDone;
-        private String description;
-        private int rating;
-
-        private TrainingBuilder() {
-        }
-
-        public static TrainingBuilder aTraining() {
-            return new TrainingBuilder();
-        }
-
-        public TrainingBuilder withTrainingId(int trainingId) {
-            this.trainingId = trainingId;
-            return this;
-        }
-
-        public TrainingBuilder withTrainerId(int trainerId) {
-            this.trainerId = trainerId;
-            return this;
-        }
-
-        public TrainingBuilder withTrainerFirstName(String trainerFirstName) {
-            this.trainerFirstName = trainerFirstName;
-            return this;
-        }
-
-        public TrainingBuilder withTrainerLastName(String trainerLastName) {
-            this.trainerLastName = trainerLastName;
-            return this;
-        }
-
-        public TrainingBuilder withClientId(int clientId) {
-            this.clientId = clientId;
-            return this;
-        }
-
-        public TrainingBuilder withClientFirstName(String clientFirstName) {
-            this.clientFirstName = clientFirstName;
-            return this;
-        }
-
-        public TrainingBuilder withClientLastName(String clientLastName) {
-            this.clientLastName = clientLastName;
-            return this;
-        }
-
-        public TrainingBuilder withDate(Date date) {
-            this.date = date;
-            return this;
-        }
-
-        public TrainingBuilder withTime(Time time) {
-            this.time = time;
-            return this;
-        }
-
-        public TrainingBuilder withIsDone(boolean isDone) {
-            this.isDone = isDone;
-            return this;
-        }
-
-        public TrainingBuilder withDescription(String description) {
-            this.description = description;
-            return this;
-        }
-
-        public TrainingBuilder withRating(int rating) {
-            this.rating = rating;
-            return this;
-        }
-
-        public Training build() {
-            Training training = new Training();
-            training.setTrainingId(trainingId);
-            training.setTrainerId(trainerId);
-            training.setTrainerFirstName(trainerFirstName);
-            training.setTrainerLastName(trainerLastName);
-            training.setClientId(clientId);
-            training.setClientFirstName(clientFirstName);
-            training.setClientLastName(clientLastName);
-            training.setDate(date);
-            training.setTime(time);
-            training.setIsDone(isDone);
-            training.setDescription(description);
-            training.setRating(rating);
-            return training;
-        }
-    }
 }

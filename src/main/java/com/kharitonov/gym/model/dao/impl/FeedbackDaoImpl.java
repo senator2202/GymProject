@@ -1,5 +1,6 @@
 package com.kharitonov.gym.model.dao.impl;
 
+import com.kharitonov.gym.builder.FeedbackBuilder;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.dao.FeedbackDao;
 import com.kharitonov.gym.model.entity.Feedback;
@@ -67,7 +68,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
         String message = resultSet.getString(TableColumnName.FEEDBACK_MESSAGE);
         Date date = resultSet.getDate(TableColumnName.FEEDBACK_DATETIME);
         String reply = resultSet.getString(TableColumnName.FEEDBACK_REPLY_MESSAGE);
-        return Feedback.FeedbackBuilder.aFeedback()
+        return FeedbackBuilder.aFeedback()
                 .withId(id)
                 .withSenderName(name)
                 .withSenderEmail(email)

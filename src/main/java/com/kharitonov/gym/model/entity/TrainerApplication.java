@@ -9,9 +9,6 @@ public class TrainerApplication {
     private String instagramLink;
     private Date applicationDate;
 
-    private TrainerApplication() {
-    }
-
     public User getUser() {
         return user;
     }
@@ -53,53 +50,4 @@ public class TrainerApplication {
     }
 
 
-    public static final class TrainerApplicationBuilder {
-        private User user;
-        private String institution;
-        private int graduationYear;
-        private String instagramLink;
-        private Date applicationDate;
-
-        private TrainerApplicationBuilder() {
-        }
-
-        public static TrainerApplicationBuilder aTrainerApplication() {
-            return new TrainerApplicationBuilder();
-        }
-
-        public TrainerApplicationBuilder withUser(User user) {
-            this.user = user;
-            return this;
-        }
-
-        public TrainerApplicationBuilder withInstitution(String institution) {
-            this.institution = institution;
-            return this;
-        }
-
-        public TrainerApplicationBuilder withGraduationYear(int graduationYear) {
-            this.graduationYear = graduationYear;
-            return this;
-        }
-
-        public TrainerApplicationBuilder withInstagramLink(String instagramLink) {
-            this.instagramLink = instagramLink;
-            return this;
-        }
-
-        public TrainerApplicationBuilder withApplicationDate(Date applicationDate) {
-            this.applicationDate = applicationDate;
-            return this;
-        }
-
-        public TrainerApplication build() {
-            TrainerApplication trainerApplication = new TrainerApplication();
-            trainerApplication.setUser(user);
-            trainerApplication.setInstitution(institution);
-            trainerApplication.setGraduationYear(graduationYear);
-            trainerApplication.setInstagramLink(instagramLink);
-            trainerApplication.setApplicationDate(applicationDate);
-            return trainerApplication;
-        }
-    }
 }

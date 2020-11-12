@@ -1,5 +1,7 @@
 package com.kharitonov.gym.model.entity;
 
+import com.kharitonov.gym.builder.AccountBuilder;
+
 public class Trainer extends User {
     private String institution;
     private int graduationYear;
@@ -8,18 +10,8 @@ public class Trainer extends User {
     private double rating;
 
     public Trainer() {
-        account = Account.AccountBuilder.anAccount().build();
+        account = AccountBuilder.anAccount().build();
         account.setRole(UserRole.TRAINER);
-    }
-
-    public Trainer(Account account) {
-        account.setRole(UserRole.TRAINER);
-        this.account = account;
-    }
-
-    public Trainer(Account account, String firstName,
-                   String lastName, String phoneNumber) {
-        super(account, firstName, lastName, phoneNumber);
     }
 
     public String getInstitution() {

@@ -1,5 +1,6 @@
 package com.kharitonov.gym.model.dao.impl;
 
+import com.kharitonov.gym.builder.TrainerApplicationBuilder;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.model.dao.TrainerApplicationDao;
 import com.kharitonov.gym.model.entity.TrainerApplication;
@@ -130,7 +131,7 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
             String instagramLink = resultSet.getString(TableColumnName.TRAINER_APPLICATION_INSTAGRAM_LINK);
             Date applicationDate = resultSet.getDate(TableColumnName.TRAINER_APPLICATION_APPLICATION_DATE);
             User user = UserDaoImpl.create(resultSet);
-            return TrainerApplication.TrainerApplicationBuilder.aTrainerApplication()
+            return TrainerApplicationBuilder.aTrainerApplication()
                     .withUser(user)
                     .withInstitution(institution)
                     .withGraduationYear(graduationYear)
