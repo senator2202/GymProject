@@ -1,4 +1,4 @@
-package com.kharitonov.gym.builder;
+package com.kharitonov.gym.model.builder;
 
 import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.model.entity.User;

@@ -1,7 +1,7 @@
 package com.kharitonov.gym.model.dao.impl;
 
-import com.kharitonov.gym.builder.FeedbackBuilder;
 import com.kharitonov.gym.exception.DaoException;
+import com.kharitonov.gym.model.builder.FeedbackBuilder;
 import com.kharitonov.gym.model.dao.FeedbackDao;
 import com.kharitonov.gym.model.entity.Feedback;
 import com.kharitonov.gym.model.pool.ConnectionPool;

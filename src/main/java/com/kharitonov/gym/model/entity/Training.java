@@ -115,26 +115,56 @@ public class Training {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Training training = (Training) o;
 
-        if (trainingId != training.trainingId) return false;
-        if (trainerId != training.trainerId) return false;
-        if (clientId != training.clientId) return false;
-        if (isDone != training.isDone) return false;
-        if (rating != training.rating) return false;
-        if (trainerFirstName != null ? !trainerFirstName.equals(training.trainerFirstName) : training.trainerFirstName != null)
+        if (trainingId != training.trainingId) {
             return false;
-        if (trainerLastName != null ? !trainerLastName.equals(training.trainerLastName) : training.trainerLastName != null)
+        }
+        if (trainerId != training.trainerId) {
             return false;
-        if (clientFirstName != null ? !clientFirstName.equals(training.clientFirstName) : training.clientFirstName != null)
+        }
+        if (clientId != training.clientId) {
             return false;
-        if (clientLastName != null ? !clientLastName.equals(training.clientLastName) : training.clientLastName != null)
+        }
+        if (isDone != training.isDone) {
             return false;
-        if (date != null ? !date.equals(training.date) : training.date != null) return false;
-        if (time != null ? !time.equals(training.time) : training.time != null) return false;
+        }
+        if (rating != training.rating) {
+            return false;
+        }
+        if (trainerFirstName != null
+                ? !trainerFirstName.equals(training.trainerFirstName)
+                : training.trainerFirstName != null) {
+            return false;
+        }
+        if (trainerLastName != null
+                ? !trainerLastName.equals(training.trainerLastName)
+                : training.trainerLastName != null) {
+            return false;
+        }
+        if (clientFirstName != null
+                ? !clientFirstName.equals(training.clientFirstName)
+                : training.clientFirstName != null) {
+            return false;
+        }
+        if (clientLastName != null
+                ? !clientLastName.equals(training.clientLastName)
+                : training.clientLastName != null) {
+            return false;
+        }
+        if (date != null ? !date.equals(training.date) : training.date != null) {
+            return false;
+        }
+        if (time != null ? !time.equals(training.time) : training.time != null) {
+            return false;
+        }
         return description != null ? description.equals(training.description) : training.description == null;
     }
 
@@ -155,4 +185,22 @@ public class Training {
         return result;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Training{");
+        sb.append("trainingId=").append(trainingId);
+        sb.append(", trainerId=").append(trainerId);
+        sb.append(", trainerFirstName='").append(trainerFirstName).append('\'');
+        sb.append(", trainerLastName='").append(trainerLastName).append('\'');
+        sb.append(", clientId=").append(clientId);
+        sb.append(", clientFirstName='").append(clientFirstName).append('\'');
+        sb.append(", clientLastName='").append(clientLastName).append('\'');
+        sb.append(", date=").append(date);
+        sb.append(", time=").append(time);
+        sb.append(", isDone=").append(isDone);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", rating=").append(rating);
+        sb.append('}');
+        return sb.toString();
+    }
 }

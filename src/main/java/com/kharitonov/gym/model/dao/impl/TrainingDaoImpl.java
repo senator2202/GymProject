@@ -1,9 +1,9 @@
 package com.kharitonov.gym.model.dao.impl;
 
-import com.kharitonov.gym.builder.AccountBuilder;
-import com.kharitonov.gym.builder.ClientBuilder;
-import com.kharitonov.gym.builder.TrainingBuilder;
 import com.kharitonov.gym.exception.DaoException;
+import com.kharitonov.gym.model.builder.AccountBuilder;
+import com.kharitonov.gym.model.builder.ClientBuilder;
+import com.kharitonov.gym.model.builder.TrainingBuilder;
 import com.kharitonov.gym.model.dao.TrainingDao;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.Client;

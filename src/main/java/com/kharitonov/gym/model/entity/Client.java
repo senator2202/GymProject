@@ -1,6 +1,6 @@
 package com.kharitonov.gym.model.entity;
 
-import com.kharitonov.gym.builder.AccountBuilder;
+import com.kharitonov.gym.model.builder.AccountBuilder;
 
 public class Client extends User {
     private double moneyBalance;
@@ -39,5 +39,55 @@ public class Client extends User {
 
     public void setBoughtTrainings(int boughtTrainings) {
         this.boughtTrainings = boughtTrainings;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Client client = (Client) o;
+
+        if (Double.compare(client.moneyBalance, moneyBalance) != 0) {
+            return false;
+        }
+        if (Double.compare(client.personalDiscount, personalDiscount) != 0) {
+            return false;
+        }
+        if (boughtTrainings != client.boughtTrainings) {
+            return false;
+        }
+        return super.equals((User) o);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(moneyBalance);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(personalDiscount);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + boughtTrainings;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Client{");
+        sb.append("moneyBalance=").append(moneyBalance);
+        sb.append(", personalDiscount=").append(personalDiscount);
+        sb.append(", boughtTrainings=").append(boughtTrainings);
+        sb.append(", account=").append(account);
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", phoneNumber='").append(phoneNumber).append('\'');
+        sb.append(", imageName='").append(imageName).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

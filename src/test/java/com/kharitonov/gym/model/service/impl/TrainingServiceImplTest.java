@@ -1,6 +1,6 @@
 package com.kharitonov.gym.model.service.impl;
 
-import com.kharitonov.gym.builder.TrainingBuilder;
+import com.kharitonov.gym.model.builder.TrainingBuilder;
 import com.kharitonov.gym.data_provider.StaticDataProvider;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;

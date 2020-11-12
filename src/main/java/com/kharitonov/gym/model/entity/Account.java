@@ -67,6 +67,66 @@ public class Account {
         this.locale = locale;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Account account = (Account) o;
+
+        if (id != account.id) {
+            return false;
+        }
+        if (isActive != account.isActive) {
+            return false;
+        }
+        if (name != null ? !name.equals(account.name) : account.name != null) {
+            return false;
+        }
+        if (email != null ? !email.equals(account.email) : account.email != null) {
+            return false;
+        }
+        if (role != account.role) {
+            return false;
+        }
+        if (registrationDate != null
+                ? !registrationDate.equals(account.registrationDate)
+                : account.registrationDate != null) {
+            return false;
+        }
+        return locale == account.locale;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
+        result = 31 * result + (isActive ? 1 : 0);
+        result = 31 * result + (locale != null ? locale.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Account{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", role=").append(role);
+        sb.append(", registrationDate=").append(registrationDate);
+        sb.append(", isActive=").append(isActive);
+        sb.append(", locale=").append(locale);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public enum AccountLocale {
         RUSSIAN("ru"), ENGLISH("en");
 
@@ -89,5 +149,4 @@ public class Account {
             return postfix;
         }
     }
-
 }
