@@ -4,6 +4,9 @@ import com.kharitonov.gym.util.RequestParameterName;
 
 import java.util.Map;
 
+/**
+ * The type User validator.
+ */
 public class UserValidator extends CommonValidator {
     private static final String BLANK = "";
     private static final String LOGIN_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{1,19}$";
@@ -21,18 +24,50 @@ public class UserValidator extends CommonValidator {
     private UserValidator() {
     }
 
+    /**
+     * Correct update summary parameters boolean.
+     *
+     * @param id      the id
+     * @param summary the summary
+     * @return the boolean
+     */
     public static boolean correctUpdateSummaryParameters(int id, String summary) {
         return correctId(id) && correctSummary(summary);
     }
 
+    /**
+     * Correct update image parameters boolean.
+     *
+     * @param id        the id
+     * @param imageName the image name
+     * @return the boolean
+     */
     public static boolean correctUpdateImageParameters(int id, String imageName) {
         return correctId(id) && correctImageName(imageName);
     }
 
+    /**
+     * Correct personal data parameters boolean.
+     *
+     * @param userId    the user id
+     * @param firstName the first name
+     * @param lastName  the last name
+     * @param phone     the phone
+     * @return the boolean
+     */
     public static boolean correctPersonalDataParameters(int userId, String firstName, String lastName, String phone) {
         return correctId(userId) && correctName(firstName) && correctName(lastName) && correctPhone(phone);
     }
 
+    /**
+     * Correct account data parameters boolean.
+     *
+     * @param email          the email
+     * @param locale         the locale
+     * @param newPassword    the new password
+     * @param repeatPassword the repeat password
+     * @return the boolean
+     */
     public static boolean correctAccountDataParameters(String email, String locale,
                                                        String newPassword, String repeatPassword) {
         return correctEmail(email) && correctLocale(locale) && correctPasswords(newPassword, repeatPassword);
@@ -45,10 +80,23 @@ public class UserValidator extends CommonValidator {
         return option1 || option2;
     }
 
+    /**
+     * Correct update discount parameters boolean.
+     *
+     * @param id       the id
+     * @param discount the discount
+     * @return the boolean
+     */
     public static boolean correctUpdateDiscountParameters(String id, String discount) {
         return correctId(id) && correctDiscount(discount);
     }
 
+    /**
+     * Correct login parameters boolean.
+     *
+     * @param parameters the parameters
+     * @return the boolean
+     */
     public static boolean correctLoginParameters(Map<String, String> parameters) {
         boolean result = true;
         String login = parameters.get(RequestParameterName.LOGIN);
@@ -66,6 +114,12 @@ public class UserValidator extends CommonValidator {
         return result;
     }
 
+    /**
+     * Correct register parameters boolean.
+     *
+     * @param parameters the parameters
+     * @return the boolean
+     */
     public static boolean correctRegisterParameters(Map<String, String> parameters) {
         boolean result = true;
         String login = parameters.get(RequestParameterName.REGISTRATION_LOGIN);
@@ -96,10 +150,22 @@ public class UserValidator extends CommonValidator {
         return result;
     }
 
+    /**
+     * Correct deposit amount boolean.
+     *
+     * @param amount the amount
+     * @return the boolean
+     */
     public static boolean correctDepositAmount(String amount) {
         return amount != null && amount.matches(DEPOSIT_AMOUNT_REGEX);
     }
 
+    /**
+     * Correct days number boolean.
+     *
+     * @param days the days
+     * @return the boolean
+     */
     public static boolean correctDaysNumber(String days) {
         return days == null || days.matches(DAYS_NUMBER_REGEX);
     }

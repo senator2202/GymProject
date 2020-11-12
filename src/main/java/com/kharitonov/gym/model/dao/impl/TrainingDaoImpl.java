@@ -19,6 +19,9 @@ import java.util.Optional;
 
 import static com.kharitonov.gym.model.dao.impl.TrainingStatementCreator.*;
 
+/**
+ * The type Training dao.
+ */
 public class TrainingDaoImpl implements TrainingDao {
     private static final TrainingDaoImpl INSTANCE = new TrainingDaoImpl();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
@@ -26,6 +29,11 @@ public class TrainingDaoImpl implements TrainingDao {
     private TrainingDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static TrainingDaoImpl getInstance() {
         return INSTANCE;
     }
@@ -141,7 +149,7 @@ public class TrainingDaoImpl implements TrainingDao {
         try {
             connection.setAutoCommit(false);
             setTrainingRating(connection, trainingId, rating);
-            double trainerRating = averageTrainerRating(trainerId);
+            double trainerRating = countAverageTrainerRating(trainerId);
             boolean result = updateTrainerRating(connection, trainerId, trainerRating);
             connection.commit();
             return result;
@@ -173,7 +181,7 @@ public class TrainingDaoImpl implements TrainingDao {
     }
 
     @Override
-    public double averageTrainerRating(int trainerId) throws DaoException {
+    public double countAverageTrainerRating(int trainerId) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = statementAverageRaiting(connection, trainerId);
              ResultSet resultSet = statement.executeQuery()) {

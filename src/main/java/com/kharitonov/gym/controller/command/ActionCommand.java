@@ -10,10 +10,24 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The interface Action command.
+ */
 public interface ActionCommand {
 
+    /**
+     * Main abstract method for all commands
+     *
+     * @param request the http request
+     * @return the page where to forward/redirect
+     */
     String execute(HttpServletRequest request);
 
+    /**
+     * Restore last request attributes from session.
+     *
+     * @param request the request
+     */
     default void restoreRequestAttributes(HttpServletRequest request) {
         RequestAttributesWrapper wrapper =
                 (RequestAttributesWrapper) request.getSession().getAttribute(SessionAttributeName.SAVED_ATTRIBUTES);
@@ -27,10 +41,21 @@ public interface ActionCommand {
         }
     }
 
+    /**
+     * Gets previous page.
+     *
+     * @param request the request
+     * @return the previous page
+     */
     default String getPreviousPage(HttpServletRequest request) {
         return (String) request.getSession().getAttribute(SessionAttributeName.PREVIOUS_PAGE);
     }
 
+    /**
+     * Clear session attributes except user.
+     *
+     * @param request the request
+     */
     default void clearSessionAttributesExceptUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Enumeration<String> attrs = session.getAttributeNames();

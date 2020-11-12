@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * This filter controls user access to any commands
+ */
 @WebFilter(urlPatterns = {"/mainController"})
 public class RoleControlFilter implements Filter {
     private static final CommandRoleMap MAP = CommandRoleMap.getInstance();

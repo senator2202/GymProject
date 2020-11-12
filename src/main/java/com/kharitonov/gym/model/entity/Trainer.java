@@ -2,6 +2,9 @@ package com.kharitonov.gym.model.entity;
 
 import com.kharitonov.gym.model.builder.AccountBuilder;
 
+/**
+ * The type Trainer.
+ */
 public class Trainer extends User {
     private String institution;
     private int graduationYear;
@@ -9,47 +12,100 @@ public class Trainer extends User {
     private String shortSummary;
     private double rating;
 
+    /**
+     * Instantiates a new Trainer.
+     */
     public Trainer() {
         account = AccountBuilder.anAccount().build();
         account.setRole(UserRole.TRAINER);
     }
 
+    /**
+     * Gets institution.
+     *
+     * @return the institution
+     */
     public String getInstitution() {
         return institution;
     }
 
+    /**
+     * Sets institution.
+     *
+     * @param institution the institution
+     */
     public void setInstitution(String institution) {
         this.institution = institution;
     }
 
+    /**
+     * Gets graduation year.
+     *
+     * @return the graduation year
+     */
     public int getGraduationYear() {
         return graduationYear;
     }
 
+    /**
+     * Sets graduation year.
+     *
+     * @param graduationYear the graduation year
+     */
     public void setGraduationYear(int graduationYear) {
         this.graduationYear = graduationYear;
     }
 
+    /**
+     * Gets instagram link.
+     *
+     * @return the instagram link
+     */
     public String getInstagramLink() {
         return instagramLink;
     }
 
+    /**
+     * Sets instagram link.
+     *
+     * @param instagramLink the instagram link
+     */
     public void setInstagramLink(String instagramLink) {
         this.instagramLink = instagramLink;
     }
 
+    /**
+     * Gets rating.
+     *
+     * @return the rating
+     */
     public double getRating() {
         return rating;
     }
 
+    /**
+     * Sets rating.
+     *
+     * @param rating the rating
+     */
     public void setRating(double rating) {
         this.rating = rating;
     }
 
+    /**
+     * Gets short summary.
+     *
+     * @return the short summary
+     */
     public String getShortSummary() {
         return shortSummary;
     }
 
+    /**
+     * Sets short summary.
+     *
+     * @param shortSummary the short summary
+     */
     public void setShortSummary(String shortSummary) {
         this.shortSummary = shortSummary;
     }

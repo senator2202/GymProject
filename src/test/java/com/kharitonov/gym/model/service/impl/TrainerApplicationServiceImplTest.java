@@ -37,7 +37,7 @@ public class TrainerApplicationServiceImplTest {
                                                boolean expected) throws DaoException, ServiceException {
         when(dao.exists(id)).thenReturn(false);
         when(dao.add(anyInt(), anyString(), anyInt(), anyString())).thenReturn(true);
-        boolean actual = service.sendApplication(id, institution, graduationYear, instagramLink);
+        boolean actual = service.addApplication(id, institution, graduationYear, instagramLink);
         assertEquals(actual, expected);
     }
 
@@ -45,7 +45,7 @@ public class TrainerApplicationServiceImplTest {
     public void testSendApplicationExisting(int id, String institution, String graduationYear, String instagramLink,
                                             boolean expected) throws DaoException, ServiceException {
         when(dao.exists(id)).thenReturn(true);
-        boolean actual = service.sendApplication(id, institution, graduationYear, instagramLink);
+        boolean actual = service.addApplication(id, institution, graduationYear, instagramLink);
         assertFalse(actual);
     }
 
@@ -53,7 +53,7 @@ public class TrainerApplicationServiceImplTest {
             dependsOnMethods = {"testSendApplicationExisting", "testSendApplicationNotExisting"})
     public void testSendApplicationException() throws DaoException, ServiceException {
         when(dao.add(anyInt(), anyString(), anyInt(), anyString())).thenThrow(new DaoException());
-        service.sendApplication(2, "BSU", "2015", "https://www.instagram.com/xzibit");
+        service.addApplication(2, "BSU", "2015", "https://www.instagram.com/xzibit");
     }
 
     @Test(dataProviderClass = StaticDataProvider.class, dataProvider = "dataIdValidation")

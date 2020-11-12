@@ -170,7 +170,7 @@ public class UserServiceImplTest {
     public void testRegisterUserNotExisting(Map<String, String> parameters, Optional<User> expected)
             throws DaoException, ServiceException {
         when(dao.loginExists(anyString())).thenReturn(false);
-        when(dao.findByEmail(anyString())).thenReturn(0);
+        when(dao.findIdByEmail(anyString())).thenReturn(0);
         when(dao.add(anyString(), anyString(), anyString())).thenReturn(254);
         when(dao.findUserById(254)).thenReturn(expected);
         Optional<User> actual = service.registerUser(parameters);
@@ -200,7 +200,7 @@ public class UserServiceImplTest {
         validMap.put(RequestParameterName.REPEAT_PASSWORD, "qwerty");
         validMap.put(RequestParameterName.REGISTRATION_EMAIL, "qwerty@gmail.com");
         when(dao.loginExists("tratata")).thenReturn(false);
-        when(dao.findByEmail("qwerty@gmail.com")).thenReturn(254);
+        when(dao.findIdByEmail("qwerty@gmail.com")).thenReturn(254);
         Optional<User> actual = service.registerUser(validMap);
         ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
         boolean result = errorSet.contains(ValidationError.EMAIL_EXISTS) && actual.isEmpty();
@@ -251,7 +251,7 @@ public class UserServiceImplTest {
 
     @Test(groups = "updateAccount")
     public void testUpdateAccountDataEmailExisting() throws DaoException, ServiceException {
-        when(dao.findByEmail(anyString())).thenReturn(99);
+        when(dao.findIdByEmail(anyString())).thenReturn(99);
         boolean actual = service.updateAccountData(new User(AccountBuilder.anAccount().withId(22).build()),
                 "qwerty@mail.ru", "russian", "qwerty", "qwerty");
         ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
@@ -266,7 +266,7 @@ public class UserServiceImplTest {
             throws DaoException, ServiceException {
         Account account = AccountBuilder.anAccount().withId(222).withLocale(Account.AccountLocale.ENGLISH).build();
         User user = new Client(account);
-        when(dao.findByEmail(anyString())).thenReturn(0);
+        when(dao.findIdByEmail(anyString())).thenReturn(0);
         when(dao.updateAccountData(anyInt(), anyString(), any(), any())).thenReturn(true);
         boolean actual = service.updateAccountData(user, email, locale, newPassword, repeatPassword);
         assertEquals(actual, expected);

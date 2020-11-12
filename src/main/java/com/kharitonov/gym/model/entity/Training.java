@@ -3,6 +3,9 @@ package com.kharitonov.gym.model.entity;
 import java.sql.Date;
 import java.sql.Time;
 
+/**
+ * The type Training.
+ */
 public class Training {
     private int trainingId;
     private int trainerId;
@@ -17,98 +20,218 @@ public class Training {
     private String description;
     private int rating;
 
+    /**
+     * Gets training id.
+     *
+     * @return the training id
+     */
     public int getTrainingId() {
         return trainingId;
     }
 
+    /**
+     * Sets training id.
+     *
+     * @param trainingId the training id
+     */
     public void setTrainingId(int trainingId) {
         this.trainingId = trainingId;
     }
 
+    /**
+     * Gets trainer id.
+     *
+     * @return the trainer id
+     */
     public int getTrainerId() {
         return trainerId;
     }
 
+    /**
+     * Sets trainer id.
+     *
+     * @param trainerId the trainer id
+     */
     public void setTrainerId(int trainerId) {
         this.trainerId = trainerId;
     }
 
+    /**
+     * Gets trainer first name.
+     *
+     * @return the trainer first name
+     */
     public String getTrainerFirstName() {
         return trainerFirstName;
     }
 
+    /**
+     * Sets trainer first name.
+     *
+     * @param trainerFirstName the trainer first name
+     */
     public void setTrainerFirstName(String trainerFirstName) {
         this.trainerFirstName = trainerFirstName;
     }
 
+    /**
+     * Gets trainer last name.
+     *
+     * @return the trainer last name
+     */
     public String getTrainerLastName() {
         return trainerLastName;
     }
 
+    /**
+     * Sets trainer last name.
+     *
+     * @param trainerLastName the trainer last name
+     */
     public void setTrainerLastName(String trainerLastName) {
         this.trainerLastName = trainerLastName;
     }
 
+    /**
+     * Gets client id.
+     *
+     * @return the client id
+     */
     public int getClientId() {
         return clientId;
     }
 
+    /**
+     * Sets client id.
+     *
+     * @param clientId the client id
+     */
     public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
+    /**
+     * Gets client first name.
+     *
+     * @return the client first name
+     */
     public String getClientFirstName() {
         return clientFirstName;
     }
 
+    /**
+     * Sets client first name.
+     *
+     * @param clientFirstName the client first name
+     */
     public void setClientFirstName(String clientFirstName) {
         this.clientFirstName = clientFirstName;
     }
 
+    /**
+     * Gets client last name.
+     *
+     * @return the client last name
+     */
     public String getClientLastName() {
         return clientLastName;
     }
 
+    /**
+     * Sets client last name.
+     *
+     * @param clientLastName the client last name
+     */
     public void setClientLastName(String clientLastName) {
         this.clientLastName = clientLastName;
     }
 
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Sets date.
+     *
+     * @param date the date
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Gets time.
+     *
+     * @return the time
+     */
     public Time getTime() {
         return time;
     }
 
+    /**
+     * Sets time.
+     *
+     * @param time the time
+     */
     public void setTime(Time time) {
         this.time = time;
     }
 
+    /**
+     * Gets is done.
+     *
+     * @return the is done
+     */
     public boolean getIsDone() {
         return isDone;
     }
 
+    /**
+     * Sets is done.
+     *
+     * @param isDone the is done
+     */
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets rating.
+     *
+     * @return the rating
+     */
     public int getRating() {
         return rating;
     }
 
+    /**
+     * Sets rating.
+     *
+     * @param rating the rating
+     */
     public void setRating(int rating) {
         this.rating = rating;
     }

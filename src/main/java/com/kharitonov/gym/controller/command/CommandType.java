@@ -2,6 +2,9 @@ package com.kharitonov.gym.controller.command;
 
 import com.kharitonov.gym.controller.command.impl.*;
 
+/**
+ * The enum represents command type.
+ */
 public enum CommandType {
     ADD_FEEDBACK(new AddFeedbackCommand()),
     ADD_TRAINING(new AddTrainingCommand()),
@@ -45,6 +48,11 @@ public enum CommandType {
         this.command = command;
     }
 
+    /**
+     * Gets command.
+     *
+     * @return the command
+     */
     public ActionCommand getCommand() {
         return command;
     }

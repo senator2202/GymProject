@@ -16,6 +16,9 @@ import static com.kharitonov.gym.model.dao.impl.TrainerApplicationStatementCreat
 import static com.kharitonov.gym.model.dao.impl.UserStatementCreator.statementUpdateTrainer;
 import static com.kharitonov.gym.model.dao.impl.UserStatementCreator.statementUpdateTrainerRole;
 
+/**
+ * The type Trainer application dao.
+ */
 public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     private static final TrainerApplicationDaoImpl INSTANCE = new TrainerApplicationDaoImpl();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
@@ -23,6 +26,11 @@ public class TrainerApplicationDaoImpl implements TrainerApplicationDao {
     private TrainerApplicationDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static TrainerApplicationDaoImpl getInstance() {
         return INSTANCE;
     }

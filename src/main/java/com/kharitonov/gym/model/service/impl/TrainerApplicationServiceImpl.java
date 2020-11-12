@@ -13,6 +13,9 @@ import com.kharitonov.gym.model.validator.ValidationErrorSet;
 
 import java.util.List;
 
+/**
+ * The type Trainer application service.
+ */
 public class TrainerApplicationServiceImpl implements TrainerApplicationService {
     private static final TrainerApplicationServiceImpl INSTANCE = new TrainerApplicationServiceImpl();
     private final TrainerApplicationDao dao = TrainerApplicationDaoImpl.getInstance();
@@ -20,13 +23,18 @@ public class TrainerApplicationServiceImpl implements TrainerApplicationService 
     private TrainerApplicationServiceImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static TrainerApplicationServiceImpl getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public boolean sendApplication(int id, String institution,
-                                   String graduationYear, String instagramLink) throws ServiceException {
+    public boolean addApplication(int id, String institution,
+                                  String graduationYear, String instagramLink) throws ServiceException {
         if (!TrainerApplicationValidator.correctSendParameters(id, institution, graduationYear, instagramLink)) {
             return false;
         }

@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This filter updates current user status before any request.
+ * Status could be changed by admin or by executing ConfirmAccountCommand.
+ */
 @WebFilter(urlPatterns = {"/*"})
 public class StatusUpdateFilter implements Filter {
     @Override

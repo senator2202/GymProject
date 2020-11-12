@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+/**
+ * Main controller of the application
+ */
 @WebServlet(urlPatterns = "/mainController")
 public class MainServlet extends HttpServlet {
 

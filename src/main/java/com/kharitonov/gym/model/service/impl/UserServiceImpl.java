@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * The type User service.
+ */
 public class UserServiceImpl implements UserService {
     private static final String BLANK = "";
     private static final UserServiceImpl INSTANCE = new UserServiceImpl();
@@ -28,6 +31,11 @@ public class UserServiceImpl implements UserService {
     private static final double DEFAULT_TRAINING_COST = 20;
     private final UserDao dao = UserDaoImpl.getInstance();
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static UserServiceImpl getInstance() {
         return INSTANCE;
     }
@@ -72,7 +80,7 @@ public class UserServiceImpl implements UserService {
                 errorSet.add(ValidationError.LOGIN_EXISTS);
                 exists = true;
             }
-            if (dao.findByEmail(email) != 0) {
+            if (dao.findIdByEmail(email) != 0) {
                 errorSet.add(ValidationError.EMAIL_EXISTS);
                 exists = true;
             }
@@ -114,7 +122,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         try {
-            int id = dao.findByEmail(email);
+            int id = dao.findIdByEmail(email);
             if (id != 0 && id != user.getAccount().getId()) {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
                 errorSet.add(ValidationError.CHANGE_EMAIL_EXISTS);

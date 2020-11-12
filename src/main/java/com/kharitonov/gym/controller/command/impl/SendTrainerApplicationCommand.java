@@ -34,7 +34,7 @@ public class SendTrainerApplicationCommand implements ActionCommand {
         String instagram = request.getParameter(RequestParameterName.INSTAGRAM_LINK);
         String page;
         try {
-            if (service.sendApplication(id, institution, year, instagram)) {
+            if (service.addApplication(id, institution, year, instagram)) {
                 String prevPage = getPreviousPage(request);
                 PagePath pagePath = Arrays.stream(PagePath.values())
                         .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(PagePath.PERSONAL_ACCOUNT);

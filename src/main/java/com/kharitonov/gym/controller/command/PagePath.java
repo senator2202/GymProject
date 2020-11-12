@@ -1,5 +1,9 @@
 package com.kharitonov.gym.controller.command;
 
+/**
+ * The enum represents Page paths to concrete page. It could be either direct path to page,
+ * or servlet command
+ */
 public enum PagePath {
     ABOUT("/jsp/about.jsp", "/mainController?command=open_about"),
     ADMIN_FEEDBACKS("/jsp/admin_feedbacks.jsp", "/mainController?command=open_admin_feedbacks"),
@@ -23,10 +27,20 @@ public enum PagePath {
         this.servletCommand = servletCommand;
     }
 
+    /**
+     * Gets direct url.
+     *
+     * @return the direct url
+     */
     public String getDirectUrl() {
         return directUrl;
     }
 
+    /**
+     * Gets servlet command.
+     *
+     * @return the servlet command
+     */
     public String getServletCommand() {
         return servletCommand;
     }

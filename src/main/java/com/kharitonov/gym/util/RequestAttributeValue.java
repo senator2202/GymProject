@@ -1,5 +1,8 @@
 package com.kharitonov.gym.util;
 
+/**
+ * The type Request attribute value.
+ */
 public class RequestAttributeValue {
     public static final String REGISTRATIONS_TAB = "registrationsTab";
     public static final String APPLICATIONS_TAB = "applicationsTab";

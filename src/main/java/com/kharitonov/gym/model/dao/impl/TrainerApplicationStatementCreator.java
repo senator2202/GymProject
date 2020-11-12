@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * PreparedStatement creator for TrainerApplicationDaoImpl.
+ */
 class TrainerApplicationStatementCreator {
     private static final String SQL_INSERT_APPLICATION =
             "INSERT INTO trainer_applications (user_id, app_institution, app_graduation, app_instagram) " +
@@ -22,6 +25,17 @@ class TrainerApplicationStatementCreator {
     private TrainerApplicationStatementCreator() {
     }
 
+    /**
+     * Statement insert application prepared statement.
+     *
+     * @param connection     the connection
+     * @param userId         the user id
+     * @param institution    the institution
+     * @param graduationYear the graduation year
+     * @param instagramLink  the instagram link
+     * @return the prepared statement
+     * @throws SQLException the sql exception
+     */
     static PreparedStatement statementInsertApplication(Connection connection,
                                                         int userId,
                                                         String institution,
@@ -36,6 +50,14 @@ class TrainerApplicationStatementCreator {
         return statement;
     }
 
+    /**
+     * Statement find by id prepared statement.
+     *
+     * @param connection the connection
+     * @param userId     the user id
+     * @return the prepared statement
+     * @throws SQLException the sql exception
+     */
     static PreparedStatement statementFindById(Connection connection,
                                                int userId)
             throws SQLException {
@@ -44,11 +66,26 @@ class TrainerApplicationStatementCreator {
         return statement;
     }
 
+    /**
+     * Statement select all applications prepared statement.
+     *
+     * @param connection the connection
+     * @return the prepared statement
+     * @throws SQLException the sql exception
+     */
     static PreparedStatement statementSelectAllApplications(Connection connection)
             throws SQLException {
         return connection.prepareStatement(SQL_SELECT_ALL_APPLICATIONS);
     }
 
+    /**
+     * Statement delete application prepared statement.
+     *
+     * @param connection the connection
+     * @param userId     the user id
+     * @return the prepared statement
+     * @throws SQLException the sql exception
+     */
     static PreparedStatement statementDeleteApplication(Connection connection, int userId)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_DELETE_APPLICATION);

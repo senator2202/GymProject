@@ -8,9 +8,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * The interface Base dao with couple of deafult utility methods.
+ */
 public interface BaseDao {
+    /**
+     * The constant LOGGER.
+     */
     Logger LOGGER = LogManager.getLogger(BaseDao.class);
 
+    /**
+     * Close.
+     *
+     * @param resultSet the result set
+     */
     default void close(ResultSet resultSet) {
         if (resultSet != null) {
             try {
@@ -21,6 +32,11 @@ public interface BaseDao {
         }
     }
 
+    /**
+     * Close.
+     *
+     * @param statement the statement
+     */
     default void close(Statement statement) {
         if (statement != null) {
             try {
@@ -31,6 +47,11 @@ public interface BaseDao {
         }
     }
 
+    /**
+     * Rollback.
+     *
+     * @param connection the connection
+     */
     default void rollback(Connection connection) {
         if (connection != null) {
             try {
@@ -41,6 +62,11 @@ public interface BaseDao {
         }
     }
 
+    /**
+     * Sets auto commit true.
+     *
+     * @param connection the connection
+     */
     default void setAutoCommitTrue(Connection connection) {
         if (connection != null) {
             try {

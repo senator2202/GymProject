@@ -7,7 +7,10 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 
-public class CommandRoleMap {
+/**
+ * The map associates command type and user roles, permitted to execute this command
+ */
+class CommandRoleMap {
     private static final CommandRoleMap INSTANCE = new CommandRoleMap();
     private static final EnumMap<CommandType, List<UserRole>> ROLE_MAP;
 
@@ -59,10 +62,22 @@ public class CommandRoleMap {
 
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     static CommandRoleMap getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * Method checks if the command is available for this role
+     *
+     * @param type the command type
+     * @param role the user role
+     * @return permission
+     */
     public boolean containsRole(CommandType type, UserRole role) {
         return ROLE_MAP.get(type).contains(role);
     }

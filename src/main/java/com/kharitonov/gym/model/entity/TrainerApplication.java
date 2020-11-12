@@ -2,6 +2,9 @@ package com.kharitonov.gym.model.entity;
 
 import java.sql.Date;
 
+/**
+ * The type Trainer application.
+ */
 public class TrainerApplication {
     private User user;
     private String institution;
@@ -9,42 +12,92 @@ public class TrainerApplication {
     private String instagramLink;
     private Date applicationDate;
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user.
+     *
+     * @param user the user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * Gets institution.
+     *
+     * @return the institution
+     */
     public String getInstitution() {
         return institution;
     }
 
+    /**
+     * Sets institution.
+     *
+     * @param institution the institution
+     */
     public void setInstitution(String institution) {
         this.institution = institution;
     }
 
+    /**
+     * Gets graduation year.
+     *
+     * @return the graduation year
+     */
     public int getGraduationYear() {
         return graduationYear;
     }
 
+    /**
+     * Sets graduation year.
+     *
+     * @param graduationYear the graduation year
+     */
     public void setGraduationYear(int graduationYear) {
         this.graduationYear = graduationYear;
     }
 
+    /**
+     * Gets instagram link.
+     *
+     * @return the instagram link
+     */
     public String getInstagramLink() {
         return instagramLink;
     }
 
+    /**
+     * Sets instagram link.
+     *
+     * @param instagramLink the instagram link
+     */
     public void setInstagramLink(String instagramLink) {
         this.instagramLink = instagramLink;
     }
 
+    /**
+     * Gets application date.
+     *
+     * @return the application date
+     */
     public Date getApplicationDate() {
         return applicationDate;
     }
 
+    /**
+     * Sets application date.
+     *
+     * @param applicationDate the application date
+     */
     public void setApplicationDate(Date applicationDate) {
         this.applicationDate = applicationDate;
     }

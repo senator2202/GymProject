@@ -5,6 +5,9 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
+/**
+ * Tag generates code of button, that has cancel training functionality.
+ */
 public class CancelButtonTag extends SimpleTagSupport {
     private int trainingId;
     private String tooltip = "cancel";
@@ -24,18 +27,38 @@ public class CancelButtonTag extends SimpleTagSupport {
         out.write(html);
     }
 
+    /**
+     * Gets training id.
+     *
+     * @return the training id
+     */
     public int getTrainingId() {
         return trainingId;
     }
 
+    /**
+     * Sets training id.
+     *
+     * @param trainingId the training id
+     */
     public void setTrainingId(int trainingId) {
         this.trainingId = trainingId;
     }
 
+    /**
+     * Gets tooltip.
+     *
+     * @return the tooltip
+     */
     public String getTooltip() {
         return tooltip;
     }
 
+    /**
+     * Sets tooltip.
+     *
+     * @param tooltip the tooltip
+     */
     public void setTooltip(String tooltip) {
         this.tooltip = tooltip;
     }

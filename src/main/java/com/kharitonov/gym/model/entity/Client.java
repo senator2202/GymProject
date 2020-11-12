@@ -2,41 +2,82 @@ package com.kharitonov.gym.model.entity;
 
 import com.kharitonov.gym.model.builder.AccountBuilder;
 
+/**
+ * The type Client.
+ */
 public class Client extends User {
     private double moneyBalance;
     private double personalDiscount;
     private int boughtTrainings;
 
+    /**
+     * Instantiates a new Client.
+     */
     public Client() {
         account = AccountBuilder.anAccount().build();
         account.setRole(UserRole.CLIENT);
     }
 
+    /**
+     * Instantiates a new Client.
+     *
+     * @param account the account
+     */
     public Client(Account account) {
         account.setRole(UserRole.CLIENT);
         this.account = account;
     }
 
+    /**
+     * Gets money balance.
+     *
+     * @return the money balance
+     */
     public double getMoneyBalance() {
         return moneyBalance;
     }
 
+    /**
+     * Sets money balance.
+     *
+     * @param moneyBalance the money balance
+     */
     public void setMoneyBalance(double moneyBalance) {
         this.moneyBalance = moneyBalance;
     }
 
+    /**
+     * Gets personal discount.
+     *
+     * @return the personal discount
+     */
     public double getPersonalDiscount() {
         return personalDiscount;
     }
 
+    /**
+     * Sets personal discount.
+     *
+     * @param personalDiscount the personal discount
+     */
     public void setPersonalDiscount(double personalDiscount) {
         this.personalDiscount = personalDiscount;
     }
 
+    /**
+     * Gets bought trainings.
+     *
+     * @return the bought trainings
+     */
     public int getBoughtTrainings() {
         return boughtTrainings;
     }
 
+    /**
+     * Sets bought trainings.
+     *
+     * @param boughtTrainings the bought trainings
+     */
     public void setBoughtTrainings(int boughtTrainings) {
         this.boughtTrainings = boughtTrainings;
     }

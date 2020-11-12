@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet uploads user images.
+ */
 @WebServlet("/uploadController")
 public class UploadServlet extends HttpServlet {
     @Override

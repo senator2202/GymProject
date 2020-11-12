@@ -13,6 +13,9 @@ import java.util.List;
 
 import static com.kharitonov.gym.model.dao.impl.FeedbackStatementCreator.*;
 
+/**
+ * The type Feedback dao.
+ */
 public class FeedbackDaoImpl implements FeedbackDao {
     private static final FeedbackDaoImpl INSTANCE = new FeedbackDaoImpl();
     private final ConnectionPool pool = BasicConnectionPool.getInstance();
@@ -20,6 +23,11 @@ public class FeedbackDaoImpl implements FeedbackDao {
     private FeedbackDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static FeedbackDaoImpl getInstance() {
         return INSTANCE;
     }

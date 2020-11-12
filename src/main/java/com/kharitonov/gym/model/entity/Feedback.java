@@ -2,6 +2,9 @@ package com.kharitonov.gym.model.entity;
 
 import java.sql.Date;
 
+/**
+ * The type Feedback.
+ */
 public class Feedback {
     private int id;
     private String senderName;
@@ -11,61 +14,134 @@ public class Feedback {
     private Date date;
     private String reply;
 
+    /**
+     * Instantiates a new Feedback.
+     */
     public Feedback() {
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets sender name.
+     *
+     * @return the sender name
+     */
     public String getSenderName() {
         return senderName;
     }
 
+    /**
+     * Sets sender name.
+     *
+     * @param senderName the sender name
+     */
     public void setSenderName(String senderName) {
         this.senderName = senderName;
     }
 
+    /**
+     * Gets sender email.
+     *
+     * @return the sender email
+     */
     public String getSenderEmail() {
         return senderEmail;
     }
 
+    /**
+     * Sets sender email.
+     *
+     * @param senderEmail the sender email
+     */
     public void setSenderEmail(String senderEmail) {
         this.senderEmail = senderEmail;
     }
 
+    /**
+     * Gets subject.
+     *
+     * @return the subject
+     */
     public String getSubject() {
         return subject;
     }
 
+    /**
+     * Sets subject.
+     *
+     * @param subject the subject
+     */
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
+    /**
+     * Gets message.
+     *
+     * @return the message
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Sets message.
+     *
+     * @param message the message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Sets date.
+     *
+     * @param date the date
+     */
     public void setDate(Date date) {
         this.date = date;
     }
 
+    /**
+     * Gets reply.
+     *
+     * @return the reply
+     */
     public String getReply() {
         return reply;
     }
 
+    /**
+     * Sets reply.
+     *
+     * @param reply the reply
+     */
     public void setReply(String reply) {
         this.reply = reply;
     }

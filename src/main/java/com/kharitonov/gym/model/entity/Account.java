@@ -2,6 +2,9 @@ package com.kharitonov.gym.model.entity;
 
 import java.sql.Date;
 
+/**
+ * The type Account.
+ */
 public class Account {
     private int id;
     private String name;
@@ -11,58 +14,128 @@ public class Account {
     private boolean isActive;
     private AccountLocale locale;
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param email the email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets role.
+     *
+     * @return the role
+     */
     public UserRole getRole() {
         return role;
     }
 
+    /**
+     * Sets role.
+     *
+     * @param role the role
+     */
     public void setRole(UserRole role) {
         this.role = role;
     }
 
+    /**
+     * Gets registration date.
+     *
+     * @return the registration date
+     */
     public Date getRegistrationDate() {
         return registrationDate;
     }
 
+    /**
+     * Sets registration date.
+     *
+     * @param registrationDate the registration date
+     */
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
 
+    /**
+     * Gets is active.
+     *
+     * @return the is active
+     */
     public boolean getIsActive() {
         return isActive;
     }
 
+    /**
+     * Sets is active.
+     *
+     * @param isActive the is active
+     */
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 
+    /**
+     * Gets locale.
+     *
+     * @return the locale
+     */
     public AccountLocale getLocale() {
         return locale;
     }
 
+    /**
+     * Sets locale.
+     *
+     * @param locale the locale
+     */
     public void setLocale(AccountLocale locale) {
         this.locale = locale;
     }
@@ -127,8 +200,18 @@ public class Account {
         return sb.toString();
     }
 
+    /**
+     * The enum Account locale.
+     */
     public enum AccountLocale {
-        RUSSIAN("ru"), ENGLISH("en");
+        /**
+         * Russian account locale.
+         */
+        RUSSIAN("ru"),
+        /**
+         * English account locale.
+         */
+        ENGLISH("en");
 
         private final String postfix;
 
@@ -136,6 +219,12 @@ public class Account {
             this.postfix = postfix;
         }
 
+        /**
+         * Locale by postfix account locale.
+         *
+         * @param postfix the postfix
+         * @return the account locale
+         */
         public static AccountLocale localeByPostfix(String postfix) {
             for (AccountLocale value : values()) {
                 if (value.postfix.equals(postfix)) {
@@ -145,6 +234,11 @@ public class Account {
             return null;
         }
 
+        /**
+         * Gets postfix.
+         *
+         * @return the postfix
+         */
         public String getPostfix() {
             return postfix;
         }

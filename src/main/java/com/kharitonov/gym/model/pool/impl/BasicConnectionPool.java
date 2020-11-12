@@ -17,6 +17,9 @@ import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * The type Basic connection pool.
+ */
 public class BasicConnectionPool implements ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(BasicConnectionPool.class);
     private static final BasicConnectionPool INSTANCE = new BasicConnectionPool();
@@ -53,6 +56,11 @@ public class BasicConnectionPool implements ConnectionPool {
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static BasicConnectionPool getInstance() {
         return INSTANCE;
     }

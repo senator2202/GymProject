@@ -11,6 +11,10 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.util.EnumSet;
 
+/**
+ * Tag checks context attributes for error or message objects.
+ * Than writes html on page that opens modal window with message for user
+ */
 public class MessageTag extends SimpleTagSupport {
     @Override
     public void doTag() throws JspException, IOException {

@@ -2,12 +2,21 @@ package com.kharitonov.gym.util;
 
 import java.util.Base64;
 
+/**
+ * The type Crypto utility.
+ */
 public class CryptoUtility {
     private static final int OFFSET = 4;
 
     private CryptoUtility() {
     }
 
+    /**
+     * Encrypt message string.
+     *
+     * @param text the text
+     * @return the string
+     */
     public static String encryptMessage(String text) {
         String b64encoded =
                 Base64.getEncoder().encodeToString(text.getBytes());

@@ -17,6 +17,9 @@ import java.util.Optional;
 
 import static com.kharitonov.gym.model.dao.impl.UserStatementCreator.*;
 
+/**
+ * The type User dao.
+ */
 public class UserDaoImpl implements UserDao {
     private static final UserDaoImpl INSTANCE = new UserDaoImpl();
     private static final String BLANK = "";
@@ -25,10 +28,22 @@ public class UserDaoImpl implements UserDao {
     private UserDaoImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static UserDaoImpl getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * Create user.
+     *
+     * @param resultSet the result set
+     * @return the user
+     * @throws SQLException the sql exception
+     */
     static User create(ResultSet resultSet) throws SQLException {
         String role = resultSet.getString(TableColumnName.ACCOUNT_ROLE);
         UserRole userRole = UserRole.valueOf(role);
@@ -159,7 +174,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int findByEmail(String email) throws DaoException {
+    public int findIdByEmail(String email) throws DaoException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statementSelect = statementSelectByEmail(connection, email);
              ResultSet resultSet = statementSelect.executeQuery()) {

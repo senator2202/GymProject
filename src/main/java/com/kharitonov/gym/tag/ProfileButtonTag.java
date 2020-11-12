@@ -11,6 +11,9 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
+/**
+ * Tag generates code of button, that has view profile functionality.
+ */
 public class ProfileButtonTag extends SimpleTagSupport {
     private User user;
     private String tooltip;
@@ -71,18 +74,38 @@ public class ProfileButtonTag extends SimpleTagSupport {
                 "data-rating=\"" + ((Trainer) user).getRating() + "\">\n";
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user.
+     *
+     * @param user the user
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * Gets tooltip.
+     *
+     * @return the tooltip
+     */
     public String getTooltip() {
         return tooltip;
     }
 
+    /**
+     * Sets tooltip.
+     *
+     * @param tooltip the tooltip
+     */
     public void setTooltip(String tooltip) {
         this.tooltip = tooltip;
     }

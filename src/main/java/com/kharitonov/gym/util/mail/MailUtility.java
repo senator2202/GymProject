@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Properties;
 
+/**
+ * The type Mail utility.
+ */
 public class MailUtility {
     private static final Logger LOGGER = LogManager.getLogger(MailUtility.class);
     private static final String MESSAGE_TEXT = "Here is your confirmation link: \n%s";
@@ -17,6 +20,12 @@ public class MailUtility {
     private MailUtility() {
     }
 
+    /**
+     * Send confirm message.
+     *
+     * @param email the email
+     * @param id    the id
+     */
     public static void sendConfirmMessage(String email, int id) {
         PropertiesReader reader = new PropertiesReader();
         String path = PropertiesPath.MAIL_PROPERTIES;
@@ -32,6 +41,14 @@ public class MailUtility {
         }
     }
 
+    /**
+     * Send message boolean.
+     *
+     * @param email   the email
+     * @param subject the subject
+     * @param message the message
+     * @return the boolean
+     */
     public static boolean sendMessage(String email, String subject, String message) {
         PropertiesReader reader = new PropertiesReader();
         String path = PropertiesPath.MAIL_PROPERTIES;

@@ -1,5 +1,8 @@
 package com.kharitonov.gym.util;
 
+/**
+ * The type Request attribute name.
+ */
 public class RequestAttributeName {
     public static final String APPLICATIONS = "applications";
     public static final String RECENT_USERS = "recentUsers";

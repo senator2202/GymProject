@@ -9,6 +9,9 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
+/**
+ * Tag generates code, that adds additional functionality to definite table
+ */
 public class TableUtilityTag extends SimpleTagSupport {
     private String tableId;
     private int order = 0;
@@ -33,26 +36,56 @@ public class TableUtilityTag extends SimpleTagSupport {
         out.write(script);
     }
 
+    /**
+     * Gets direction.
+     *
+     * @return the direction
+     */
     public String getDirection() {
         return direction;
     }
 
+    /**
+     * Sets direction.
+     *
+     * @param direction the direction
+     */
     public void setDirection(String direction) {
         this.direction = direction;
     }
 
+    /**
+     * Gets order.
+     *
+     * @return the order
+     */
     public int getOrder() {
         return order;
     }
 
+    /**
+     * Sets order.
+     *
+     * @param order the order
+     */
     public void setOrder(int order) {
         this.order = order;
     }
 
+    /**
+     * Gets table id.
+     *
+     * @return the table id
+     */
     public String getTableId() {
         return tableId;
     }
 
+    /**
+     * Sets table id.
+     *
+     * @param tableId the table id
+     */
     public void setTableId(String tableId) {
         this.tableId = tableId;
     }

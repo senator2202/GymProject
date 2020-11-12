@@ -1,5 +1,8 @@
 package com.kharitonov.gym.util;
 
+/**
+ * The type Session attribute name.
+ */
 public class SessionAttributeName {
     public static final String USER = "user";
     public static final String PREVIOUS_PAGE = "previousPage";

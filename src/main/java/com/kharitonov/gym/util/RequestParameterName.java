@@ -1,5 +1,8 @@
 package com.kharitonov.gym.util;
 
+/**
+ * The type Request parameter name.
+ */
 public class RequestParameterName {
     public static final String LOGIN = "login";
     public static final String LOGIN_PASSWORD = "loginPassword";

@@ -7,6 +7,9 @@ import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.util.EnumSet;
 
+/**
+ * Tag removes context attribiute.
+ */
 public class AttributeFlusherTag extends SimpleTagSupport {
     private ValidationError error;
 
@@ -18,10 +21,20 @@ public class AttributeFlusherTag extends SimpleTagSupport {
         errorSet.remove(error);
     }
 
+    /**
+     * Gets error.
+     *
+     * @return the error
+     */
     public ValidationError getError() {
         return error;
     }
 
+    /**
+     * Sets error.
+     *
+     * @param error the error
+     */
     public void setError(ValidationError error) {
         this.error = error;
     }

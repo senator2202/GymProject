@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+/**
+ * The type Feedback service.
+ */
 public class FeedbackServiceImpl implements FeedbackService {
     private static final Logger LOGGER = LogManager.getLogger(FeedbackServiceImpl.class);
     private static final FeedbackServiceImpl INSTANCE = new FeedbackServiceImpl();
@@ -20,6 +23,11 @@ public class FeedbackServiceImpl implements FeedbackService {
     private FeedbackServiceImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static FeedbackServiceImpl getInstance() {
         return INSTANCE;
     }

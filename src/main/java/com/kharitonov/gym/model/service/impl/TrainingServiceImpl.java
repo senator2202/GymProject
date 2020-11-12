@@ -15,6 +15,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.*;
 
+/**
+ * The type Training service.
+ */
 public class TrainingServiceImpl implements TrainingService {
     private static final String SECONDS_POSTFIX = ":00";
     private static final int TIME_LENGTH = 8;
@@ -26,6 +29,11 @@ public class TrainingServiceImpl implements TrainingService {
     private TrainingServiceImpl() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static TrainingServiceImpl getInstance() {
         return INSTANCE;
     }
