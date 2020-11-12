@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * This command allows the guest to register new account
+ */
 public class RegisterCommand implements ActionCommand {
     private static final Logger LOGGER =
             LogManager.getLogger(RegisterCommand.class);

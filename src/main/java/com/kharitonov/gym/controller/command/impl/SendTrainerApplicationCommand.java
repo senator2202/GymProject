@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
+/**
+ * This command allows the client to send the application to be a trainer
+ */
 public class SendTrainerApplicationCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(SendTrainerApplicationCommand.class);
     private final TrainerApplicationService service = TrainerApplicationServiceImpl.getInstance();

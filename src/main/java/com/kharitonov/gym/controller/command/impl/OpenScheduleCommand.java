@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * This command allows the user to open page with his trainings schedule
+ */
 public class OpenScheduleCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(OpenScheduleCommand.class);
     private final UserServiceImpl userService = UserServiceImpl.getInstance();

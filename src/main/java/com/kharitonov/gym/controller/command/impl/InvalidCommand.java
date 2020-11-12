@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Any other command that is not defined
+ */
 public class InvalidCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(InvalidCommand.class);
 

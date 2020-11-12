@@ -15,6 +15,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * This command allows the user to confirm his account
+ */
 public class ConfirmAccountCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(ConfirmAccountCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();

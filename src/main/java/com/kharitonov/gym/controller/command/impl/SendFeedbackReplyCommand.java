@@ -13,6 +13,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the admin to send reply for the feedback
+ */
 public class SendFeedbackReplyCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(SendFeedbackReplyCommand.class);
     private final FeedbackService service = FeedbackServiceImpl.getInstance();

@@ -15,6 +15,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * This command allows the user to update his account data
+ */
 public class UpdateAccountDataCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateAccountDataCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();

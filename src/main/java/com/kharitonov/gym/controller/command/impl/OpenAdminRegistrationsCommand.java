@@ -16,6 +16,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * This command allows the admin to open page with all recent registrations
+ */
 public class OpenAdminRegistrationsCommand implements ActionCommand {
     private static final String DEFAULT_DAYS = "30";
     private static final Logger LOGGER = LogManager.getLogger(OpenAdminRegistrationsCommand.class);

@@ -10,6 +10,9 @@ import com.kharitonov.gym.util.SessionAttributeValue;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
+/**
+ * This command allows the admin to change interface language
+ */
 public class ChangeAdminLocaleCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

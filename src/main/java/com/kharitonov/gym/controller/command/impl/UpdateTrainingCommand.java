@@ -11,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the client to update his training
+ */
 public class UpdateTrainingCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateTrainingCommand.class);
     private final TrainingService service = TrainingServiceImpl.getInstance();

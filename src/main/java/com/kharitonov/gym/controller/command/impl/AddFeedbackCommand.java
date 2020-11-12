@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the user to add feedback
+ */
 public class AddFeedbackCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(AddFeedbackCommand.class);
     private final FeedbackService service = FeedbackServiceImpl.getInstance();

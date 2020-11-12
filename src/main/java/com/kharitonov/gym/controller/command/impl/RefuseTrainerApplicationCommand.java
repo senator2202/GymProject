@@ -11,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the admin to refuse in the application for training
+ */
 public class RefuseTrainerApplicationCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(RefuseTrainerApplicationCommand.class);
     private final TrainerApplicationService service = TrainerApplicationServiceImpl.getInstance();

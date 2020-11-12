@@ -11,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the admin to block another user
+ */
 public class BlockUserCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(BlockUserCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();

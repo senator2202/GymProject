@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * This command allows the user to open home page
+ */
 public class OpenHomeCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(OpenHomeCommand.class);
     private final UserServiceImpl userService = UserServiceImpl.getInstance();

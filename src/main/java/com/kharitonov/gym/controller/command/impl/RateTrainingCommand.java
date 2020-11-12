@@ -11,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the client to rate his past training
+ */
 public class RateTrainingCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(RateTrainingCommand.class);
     private final TrainingService trainingService = TrainingServiceImpl.getInstance();

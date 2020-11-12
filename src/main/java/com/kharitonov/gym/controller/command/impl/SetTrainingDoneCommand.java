@@ -11,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the trainer to set past training done
+ */
 public class SetTrainingDoneCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(SetTrainingDoneCommand.class);
     private final TrainingService service = TrainingServiceImpl.getInstance();

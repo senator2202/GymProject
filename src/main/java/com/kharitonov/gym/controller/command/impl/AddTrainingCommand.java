@@ -13,6 +13,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the client to add new training
+ */
 public class AddTrainingCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(AddTrainingCommand.class);
     private static final int INVALID_ID = -1;

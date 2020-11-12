@@ -13,6 +13,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the client to make a deposit
+ */
 public class MakeDepositCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(MakeDepositCommand.class);
     private final UserService service = UserServiceImpl.getInstance();

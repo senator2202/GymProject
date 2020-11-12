@@ -11,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the admin to approve the trainer application
+ */
 public class ApproveTrainerApplicationCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(ApproveTrainerApplicationCommand.class);
     private final TrainerApplicationService appService = TrainerApplicationServiceImpl.getInstance();

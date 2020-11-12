@@ -13,6 +13,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
+/**
+ * This command allows the trainer to update short summary of his profile
+ */
 public class UpdateShortSummaryCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateShortSummaryCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();

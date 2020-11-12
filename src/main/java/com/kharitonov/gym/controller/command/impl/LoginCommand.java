@@ -19,6 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * This command allows the guest to login
+ */
 public class LoginCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();

@@ -14,6 +14,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * This command allows the admin to open his main page (page with all trainer applications)
+ */
 public class OpenAdminMainCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(OpenAdminMainCommand.class);
     private final TrainerApplicationService service = TrainerApplicationServiceImpl.getInstance();

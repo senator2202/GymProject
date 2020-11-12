@@ -14,6 +14,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * This command allows the admin to open page with feedbacks, left by all users
+ */
 public class OpenAdminFeedbacksCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(OpenAdminFeedbacksCommand.class);
     private final FeedbackService service = FeedbackServiceImpl.getInstance();

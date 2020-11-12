@@ -7,6 +7,9 @@ import com.kharitonov.gym.util.RequestAttributeValue;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the user to open page with his personal data
+ */
 public class OpenPersonalDataCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

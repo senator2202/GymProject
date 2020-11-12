@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.UUID;
 
+/**
+ * This command allows the user to upload and save new profile image
+ */
 public class UploadImageCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UploadImageCommand.class);
     private static final String UPLOAD_DIR = "uploads";

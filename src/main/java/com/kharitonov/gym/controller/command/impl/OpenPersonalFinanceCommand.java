@@ -7,6 +7,9 @@ import com.kharitonov.gym.util.RequestAttributeValue;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the client to open his personal finance page
+ */
 public class OpenPersonalFinanceCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

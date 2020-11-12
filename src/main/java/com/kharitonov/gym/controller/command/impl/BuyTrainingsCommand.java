@@ -14,6 +14,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the user to buy trainings
+ */
 public class BuyTrainingsCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(BuyTrainingsCommand.class);
     private final UserServiceImpl userService = UserServiceImpl.getInstance();

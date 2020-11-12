@@ -13,6 +13,9 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * This command allows the user to update his personal data
+ */
 public class UpdatePersonalDataCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdatePersonalDataCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();

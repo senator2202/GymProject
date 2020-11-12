@@ -13,6 +13,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the user to cancel his training
+ */
 public class CancelTrainingCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(CancelTrainingCommand.class);
     private final TrainingService service = TrainingServiceImpl.getInstance();

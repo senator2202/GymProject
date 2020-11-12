@@ -9,6 +9,9 @@ import com.kharitonov.gym.util.SessionAttributeName;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * This command allows the user to logout
+ */
 public class LogoutCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {

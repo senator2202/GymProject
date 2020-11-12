@@ -10,6 +10,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This command allows the admin to update discount for client
+ */
 public class UpdateDiscountCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateDiscountCommand.class);
     private final UserServiceImpl service = UserServiceImpl.getInstance();
