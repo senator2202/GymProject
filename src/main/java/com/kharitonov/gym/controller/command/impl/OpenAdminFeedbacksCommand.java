@@ -7,7 +7,7 @@ import com.kharitonov.gym.model.entity.Feedback;
 import com.kharitonov.gym.model.service.FeedbackService;
 import com.kharitonov.gym.model.service.impl.FeedbackServiceImpl;
 import com.kharitonov.gym.util.RequestAttributeName;
-import com.kharitonov.gym.util.RequestAttributeValue;
+import com.kharitonov.gym.util.SidebarTabName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,7 +26,7 @@ public class OpenAdminFeedbacksCommand implements ActionCommand {
         String page;
         try {
             List<Feedback> feedbacks = service.findAllFeedbacks();
-            request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.FEEDBACKS_TAB);
+            request.setAttribute(RequestAttributeName.ACTIVE_TAB, SidebarTabName.FEEDBACKS_TAB);
             request.setAttribute(RequestAttributeName.FEEDBACKS, feedbacks);
             page = PagePath.ADMIN_FEEDBACKS.getDirectUrl();
         } catch (ServiceException e) {

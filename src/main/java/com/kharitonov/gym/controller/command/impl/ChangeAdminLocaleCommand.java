@@ -5,7 +5,6 @@ import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.model.entity.Account;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.util.SessionAttributeName;
-import com.kharitonov.gym.util.SessionAttributeValue;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -18,9 +17,9 @@ public class ChangeAdminLocaleCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
         String oldLocale = user.getAccount().getLocale().getPostfix();
-        String newLocale = oldLocale.equals(SessionAttributeValue.EN_LOCALE)
-                ? SessionAttributeValue.RU_LOCALE
-                : SessionAttributeValue.EN_LOCALE;
+        String newLocale = oldLocale.equals(Account.AccountLocale.ENGLISH.getPostfix())
+                ? Account.AccountLocale.RUSSIAN.getPostfix()
+                : Account.AccountLocale.ENGLISH.getPostfix();
         restoreRequestAttributes(request);
         user.getAccount().setLocale(Account.AccountLocale.localeByPostfix(newLocale));
         String prevPage = getPreviousPage(request);

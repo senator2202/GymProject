@@ -1,7 +1,7 @@
 package com.kharitonov.gym.util;
 
 /**
- * The type Request parameter name.
+ * The class is used to store the names of request parameters.
  */
 public class RequestParameterName {
     public static final String LOGIN = "login";

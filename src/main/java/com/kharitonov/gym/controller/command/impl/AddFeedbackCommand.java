@@ -7,6 +7,7 @@ import com.kharitonov.gym.model.service.FeedbackService;
 import com.kharitonov.gym.model.service.impl.FeedbackServiceImpl;
 import com.kharitonov.gym.util.RequestAttributeName;
 import com.kharitonov.gym.util.RequestParameterName;
+import com.kharitonov.gym.util.XssProtector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +26,8 @@ public class AddFeedbackCommand implements ActionCommand {
         String email = request.getParameter(RequestParameterName.FEEDBACK_SENDER_EMAIL);
         String subject = request.getParameter(RequestParameterName.FEEDBACK_SUBJECT);
         String message = request.getParameter(RequestParameterName.FEEDBACK_MESSAGE);
+        message = XssProtector.protect(message);
+        subject = XssProtector.protect(subject);
         String page;
         try {
             if (service.addFeedback(name, email, subject, message)) {

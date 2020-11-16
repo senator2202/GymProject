@@ -27,12 +27,11 @@ public class MailUtility {
      * @param id    the id
      */
     public static void sendConfirmMessage(String email, int id) {
-        PropertiesReader reader = new PropertiesReader();
         String path = PropertiesPath.MAIL_PROPERTIES;
         String confirmLink = prepareConfirmLink(id);
         String text = String.format(MESSAGE_TEXT, confirmLink);
         try {
-            Properties properties = reader.readProperties(path);
+            Properties properties = PropertiesReader.readProperties(path);
             MailSender sender = new MailSender(email, MESSAGE_SUBJECT, text, properties);
             sender.send();
             LOGGER.info("Confirmation link was sent to '{}'", email);
@@ -50,11 +49,10 @@ public class MailUtility {
      * @return the boolean
      */
     public static boolean sendMessage(String email, String subject, String message) {
-        PropertiesReader reader = new PropertiesReader();
         String path = PropertiesPath.MAIL_PROPERTIES;
         boolean result;
         try {
-            Properties properties = reader.readProperties(path);
+            Properties properties = PropertiesReader.readProperties(path);
             MailSender sender = new MailSender(email, subject, message, properties);
             sender.send();
             LOGGER.info("Message was successfully sent to '{}'", email);

@@ -1,7 +1,7 @@
 package com.kharitonov.gym.util;
 
 /**
- * The type Properties path.
+ * The class is used to store paths to properties files.
  */
 public class PropertiesPath {
     /**

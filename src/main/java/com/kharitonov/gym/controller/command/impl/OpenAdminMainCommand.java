@@ -7,7 +7,7 @@ import com.kharitonov.gym.model.entity.TrainerApplication;
 import com.kharitonov.gym.model.service.TrainerApplicationService;
 import com.kharitonov.gym.model.service.impl.TrainerApplicationServiceImpl;
 import com.kharitonov.gym.util.RequestAttributeName;
-import com.kharitonov.gym.util.RequestAttributeValue;
+import com.kharitonov.gym.util.SidebarTabName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,7 +26,7 @@ public class OpenAdminMainCommand implements ActionCommand {
         String page;
         try {
             List<TrainerApplication> applications = service.getAllApplications();
-            request.setAttribute(RequestAttributeName.ACTIVE_TAB, RequestAttributeValue.APPLICATIONS_TAB);
+            request.setAttribute(RequestAttributeName.ACTIVE_TAB, SidebarTabName.APPLICATIONS_TAB);
             request.setAttribute(RequestAttributeName.APPLICATIONS, applications);
             page = PagePath.ADMIN_MAIN.getDirectUrl();
         } catch (ServiceException e) {

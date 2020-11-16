@@ -6,6 +6,7 @@ import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.service.TrainingService;
 import com.kharitonov.gym.model.service.impl.TrainingServiceImpl;
 import com.kharitonov.gym.util.RequestParameterName;
+import com.kharitonov.gym.util.XssProtector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +25,7 @@ public class UpdateTrainingCommand implements ActionCommand {
         String date = request.getParameter(RequestParameterName.TRAINING_DATE);
         String time = request.getParameter(RequestParameterName.TRAINING_TIME);
         String description = request.getParameter(RequestParameterName.TRAINING_DESCRIPTION);
+        description = XssProtector.protect(description);
         String page;
         try {
             if (service.updateTraining(id, date, time, description)) {

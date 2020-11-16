@@ -9,11 +9,13 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * The type Properties reader.
+ * The class is used to call reading properties method
  */
 public class PropertiesReader {
-    private static final Logger LOGGER =
-            LogManager.getLogger(PropertiesReader.class);
+    private static final Logger LOGGER = LogManager.getLogger(PropertiesReader.class);
+
+    private PropertiesReader() {
+    }
 
     /**
      * Read properties properties.
@@ -22,7 +24,7 @@ public class PropertiesReader {
      * @return the properties
      * @throws PropertyReaderException the property reader exception
      */
-    public Properties readProperties(String path) throws PropertyReaderException {
+    public static Properties readProperties(String path) throws PropertyReaderException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         try (InputStream inputStream = classLoader.getResourceAsStream(path)) {
             Properties properties = new Properties();

@@ -1,7 +1,7 @@
 package com.kharitonov.gym.util;
 
 /**
- * The type Request attribute name.
+ * The class is used to store the names of request attributes.
  */
 public class RequestAttributeName {
     public static final String APPLICATIONS = "applications";

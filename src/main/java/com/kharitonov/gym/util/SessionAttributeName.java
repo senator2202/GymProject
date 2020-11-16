@@ -1,7 +1,7 @@
 package com.kharitonov.gym.util;
 
 /**
- * The type Session attribute name.
+ * The class is used to store the session attribute names.
  */
 public class SessionAttributeName {
     public static final String USER = "user";

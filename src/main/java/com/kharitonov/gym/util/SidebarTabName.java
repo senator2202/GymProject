@@ -1,9 +1,11 @@
 package com.kharitonov.gym.util;
 
+
 /**
- * The type Request attribute value.
+ * The class is used to store the names of sidebar tabs.
+ * This names are used by jsp to mark the active tabs during navigation.
  */
-public class RequestAttributeValue {
+public class SidebarTabName {
     public static final String REGISTRATIONS_TAB = "registrationsTab";
     public static final String APPLICATIONS_TAB = "applicationsTab";
     public static final String FEEDBACKS_TAB = "feedbacksTab";
@@ -11,6 +13,6 @@ public class RequestAttributeValue {
     public static final String PERSONAL_DATA_TAB = "personalDataTab";
     public static final String PERSONAL_FINANCE_TAB = "personalFinanceTab";
 
-    private RequestAttributeValue() {
+    private SidebarTabName() {
     }
 }

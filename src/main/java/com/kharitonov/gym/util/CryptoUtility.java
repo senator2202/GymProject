@@ -3,7 +3,7 @@ package com.kharitonov.gym.util;
 import java.util.Base64;
 
 /**
- * The type Crypto utility.
+ * The class is used for encryption.
  */
 public class CryptoUtility {
     private static final int OFFSET = 4;

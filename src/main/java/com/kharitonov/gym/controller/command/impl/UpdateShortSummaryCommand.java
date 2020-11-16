@@ -7,6 +7,7 @@ import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.util.RequestParameterName;
 import com.kharitonov.gym.util.SessionAttributeName;
+import com.kharitonov.gym.util.XssProtector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +26,7 @@ public class UpdateShortSummaryCommand implements ActionCommand {
         Trainer trainer = (Trainer) request.getSession().getAttribute(SessionAttributeName.USER);
         int id = trainer.getAccount().getId();
         String summary = request.getParameter(RequestParameterName.SHORT_SUMMARY);
+        summary = XssProtector.protect(summary);
         String page;
         try {
             if (service.updateShortSummary(id, summary)) {

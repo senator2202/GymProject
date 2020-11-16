@@ -28,11 +28,10 @@ public class BasicConnectionPool implements ConnectionPool {
     private final BlockingQueue<ProxyConnection> usedConnections;
 
     private BasicConnectionPool() {
-        PropertiesReader reader = new PropertiesReader();
         String propertiesPath = PropertiesPath.DB_PROPERTIES;
         Properties properties;
         try {
-            properties = reader.readProperties(propertiesPath);
+            properties = PropertiesReader.readProperties(propertiesPath);
         } catch (PropertyReaderException e) {
             throw new RuntimeException("Unable to read DB properties!", e);
         }
