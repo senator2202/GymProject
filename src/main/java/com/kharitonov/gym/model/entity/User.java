@@ -169,11 +169,7 @@ public class User {
         if (phoneNumber != null ? !phoneNumber.equals(user.phoneNumber) : user.phoneNumber != null) {
             return false;
         }
-        if (imageName != null ? !imageName.equals(user.imageName) : user.imageName != null) {
-            return false;
-        }
-
-        return true;
+        return imageName != null ? imageName.equals(user.imageName) : user.imageName == null;
     }
 
     @Override

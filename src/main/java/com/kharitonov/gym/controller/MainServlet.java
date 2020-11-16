@@ -37,7 +37,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         String page = processRequest(request);
         response.sendRedirect(page);
     }
@@ -76,7 +76,7 @@ public class MainServlet extends HttpServlet {
         if (!dest.exists()) {
             dest.mkdir();
         }
-        String files[] = src.list();
+        String[] files = src.list();
         for (String file : files) {
             File srcFile = new File(src, file);
             File destFile = new File(dest, file);

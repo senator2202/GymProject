@@ -133,7 +133,7 @@ public class Trainer extends User {
         if (shortSummary != null ? !shortSummary.equals(trainer.shortSummary) : trainer.shortSummary != null) {
             return false;
         }
-        return super.equals((User) o);
+        return super.equals(o);
     }
 
     @Override

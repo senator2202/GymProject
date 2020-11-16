@@ -102,7 +102,7 @@ public class Client extends User {
         if (boughtTrainings != client.boughtTrainings) {
             return false;
         }
-        return super.equals((User) o);
+        return super.equals(o);
     }
 
     @Override

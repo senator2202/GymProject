@@ -125,10 +125,7 @@ public class TrainerApplication {
         if (instagramLink != null ? !instagramLink.equals(that.instagramLink) : that.instagramLink != null) {
             return false;
         }
-        if (applicationDate != null ? !applicationDate.equals(that.applicationDate) : that.applicationDate != null) {
-            return false;
-        }
-        return true;
+        return applicationDate != null ? applicationDate.equals(that.applicationDate) : that.applicationDate == null;
     }
 
     @Override

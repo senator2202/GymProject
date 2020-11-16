@@ -173,11 +173,7 @@ public class Feedback {
         if (date != null ? !date.equals(feedback.date) : feedback.date != null) {
             return false;
         }
-        if (reply != null ? !reply.equals(feedback.reply) : feedback.reply != null) {
-            return false;
-        }
-
-        return true;
+        return reply != null ? reply.equals(feedback.reply) : feedback.reply == null;
     }
 
     @Override
