@@ -47,7 +47,7 @@ public class MailSender {
         try {
             initMessage();
             Transport.send(message);
-            LOGGER.info("Message to '{}' was successfully send!", mailSubject);
+            LOGGER.info("Message to '{}' was successfully send!", sendToEmail);
         } catch (AddressException e) {
             LOGGER.error("Invalid email address: ", e);
         } catch (MessagingException e) {

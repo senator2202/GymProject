@@ -62,4 +62,14 @@
         </taglib>
     </jsp-config>
 
+    <context-param>
+        <param-name>uploadSrc</param-name>
+        <param-value>C:/uploads/</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>uploadDest</param-name>
+        <param-value>/uploads/</param-value>
+    </context-param>
+
 </web-app>

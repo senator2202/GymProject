@@ -75,8 +75,6 @@
                                                     </textarea>
                                                 </td>
                                                 <td class="td-actions justify-content-between">
-                                                    <fmt:message key="schedule_trainer.tooltipEdite"
-                                                                 var="editTraining"/>
                                                     <button type="submit" rel="tooltip"
                                                             class="btn btn-outline-primary btn-round"
                                                             data-toggle="modal" data-target="#modalDescription"

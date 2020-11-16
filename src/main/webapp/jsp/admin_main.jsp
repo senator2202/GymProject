@@ -104,8 +104,9 @@
                                                         ${application.applicationDate}
                                                 </td>
                                                 <td class="td-actions text-right">
+                                                    <fmt:message key='admin_main.openProfile' var="openTooltip"/>
                                                     <ctg:profile-button user="${application.user}"
-                                                                        tooltip="open profile"/>
+                                                                        tooltip="${openTooltip}"/>
                                                 </td>
                                                 <td class="td-actions text-right">
                                                     <form action="${pageContext.request.contextPath}/mainController"
@@ -120,7 +121,9 @@
                                                                value="${application.graduationYear}"/>
                                                         <input type="hidden" name="appInstagram"
                                                                value="${application.instagramLink}"/>
+                                                        <fmt:message key='admin_main.approve' var="approveTooltip"/>
                                                         <button type="submit" rel="tooltip"
+                                                                title="${approveTooltip}"
                                                                 class="btn btn-success btn-round">
                                                             <i class="material-icons">done</i>
                                                         </button>
@@ -133,7 +136,9 @@
                                                                value="refuse_trainer_application"/>
                                                         <input type="hidden" name="appId"
                                                                value="${application.user.account.id}"/>
+                                                        <fmt:message key='admin_main.refuse' var="refuseTooltip"/>
                                                         <button type="submit" rel="tooltip"
+                                                                title="${refuseTooltip}"
                                                                 class="btn btn-danger btn-round">
                                                             <i class="material-icons">close</i>
                                                         </button>

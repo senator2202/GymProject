@@ -1,5 +1,6 @@
 package com.kharitonov.gym.controller.command.impl;
 
+import com.kharitonov.gym.controller.ContextParameterName;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.model.entity.User;
@@ -11,6 +12,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.UUID;
@@ -20,9 +23,7 @@ import java.util.UUID;
  */
 public class UploadImageCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UploadImageCommand.class);
-    private static final String UPLOAD_DIR = "uploads";
     private static final String SLASH = "/";
-    private static final String BLANK = "";
     private static final String EXTENSION_SEPARATOR = ".";
     private static final int FILE_SIZE_THRESHOLD = 1024 * 1024;
     private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 5 * 5;
@@ -54,23 +55,24 @@ public class UploadImageCommand implements ActionCommand {
     }
 
     private String defineUploadPath(HttpServletRequest request) {
-        String applicationDir = request.getServletContext().getRealPath(BLANK);
-        String uploadPath = applicationDir + UPLOAD_DIR + File.separator;
-        File fileSaveDir = new File(uploadPath);
-        if (!fileSaveDir.exists()) {
-            fileSaveDir.mkdirs();
-        }
+        ServletContext context = request.getServletContext();
+        String uploadPath = context.getInitParameter(ContextParameterName.UPLOAD_SOURCE);
         return uploadPath;
     }
 
     private String saveItem(FileItem fileItem, HttpServletRequest request) throws Exception {
-        String uploadPath = defineUploadPath(request);
-        String uploadName = generateName(fileItem.getName());
-        File uploadedFile = new File(uploadPath + uploadName);
         String itemName = fileItem.getName();
+        String uploadName = generateName(itemName);
+        String uploadPath = defineUploadPath(request);
+        File uploadedFile = new File(uploadPath + uploadName);
+        ServletContext context = request.getServletContext();
+        String uploadAppPath = context.getInitParameter(ContextParameterName.UPLOAD_DESTINATION);
+        File appFile =
+                new File(request.getServletContext().getRealPath(SLASH) + uploadAppPath + SLASH + uploadName);
         fileItem.write(uploadedFile);
+        fileItem.write(appFile);
         LOGGER.info("File {} was successfully uploaded!", itemName);
-        return SLASH + UPLOAD_DIR + SLASH + uploadName;
+        return uploadAppPath + uploadName;
     }
 
     private String generateName(String realName) {

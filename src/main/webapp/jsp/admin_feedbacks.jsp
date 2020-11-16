@@ -95,7 +95,9 @@
                                                 </td>
                                                 <td class="td-actions text-right">
                                                     <c:if test="${empty feedback.reply}">
+                                                        <fmt:message key='admin_feedbacks.reply' var="replyTooltip"/>
                                                         <button type="button" class="btn btn-rose btn-round"
+                                                                title="${replyTooltip}"
                                                                 data-toggle="modal" data-target="#modalFeedbackReply"
                                                                 data-feedbackid="${feedback.id}"
                                                                 data-replyemail="${feedback.senderEmail}"

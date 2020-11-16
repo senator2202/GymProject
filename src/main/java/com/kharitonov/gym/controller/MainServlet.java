@@ -4,6 +4,8 @@ import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.model.pool.impl.BasicConnectionPool;
 import com.kharitonov.gym.util.RequestParameterName;
 import com.kharitonov.gym.util.SessionAttributeName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.util.Enumeration;
 import java.util.Iterator;
 
@@ -20,6 +22,8 @@ import java.util.Iterator;
  */
 @WebServlet(urlPatterns = "/mainController")
 public class MainServlet extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(MainServlet.class);
+    private static final int BUFFER_SIZE = 4096;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -58,7 +62,39 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        BasicConnectionPool.getInstance();
+        loadImages();
+    }
+
+    private void loadImages() {
+        String srcValue = getServletContext().getInitParameter(ContextParameterName.UPLOAD_SOURCE);
+        String destValue = getServletContext().getInitParameter(ContextParameterName.UPLOAD_DESTINATION);
+        File src = new File(srcValue);
+        File dest = new File(this.getServletContext().getRealPath(destValue));
+        if (!src.exists()) {
+            src.mkdir();
+        }
+        if (!dest.exists()) {
+            dest.mkdir();
+        }
+        String files[] = src.list();
+        for (String file : files) {
+            File srcFile = new File(src, file);
+            File destFile = new File(dest, file);
+            copyFile(srcFile, destFile);
+        }
+    }
+
+    private void copyFile(File srcFile, File destFile) {
+        try (InputStream in = new FileInputStream(srcFile);
+             OutputStream out = new FileOutputStream(destFile)) {
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int length;
+            while ((length = in.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            LOGGER.error("File {} was not loaded!", srcFile.getName(), e);
+        }
     }
 
     @Override
