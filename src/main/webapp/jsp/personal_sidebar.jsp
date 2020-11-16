@@ -9,6 +9,7 @@
     <c:when test="${user.account.role=='CLIENT'}">
         <jsp:include page="${pageContext.request.contextPath}/jsp/modal/trainer_application.jsp"/>
         <jsp:include page="${pageContext.request.contextPath}/jsp/modal/application_exists.jsp"/>
+        <jsp:include page="${pageContext.request.contextPath}/jsp/modal/application_sent.jsp"/>
     </c:when>
     <c:when test="${user.account.role=='TRAINER'}">
         <jsp:include page="${pageContext.request.contextPath}/jsp/modal/edit_summary.jsp"/>

@@ -31,11 +31,11 @@ public class AddTrainingCommand implements ActionCommand {
         String page;
         try {
             int trainingId = trainingService.addTraining(trainerId, clientId, date, time);
-            if (trainingId == INVALID_ID) {
-                page = PagePath.ERROR_404.getDirectUrl();
-            } else {
+            if (trainingId != INVALID_ID) {
                 client.setBoughtTrainings(client.getBoughtTrainings() - 1);
                 page = PagePath.SCHEDULE.getServletPath();
+            } else {
+                page = PagePath.ERROR_404.getDirectUrl();
             }
 
         } catch (ServiceException e) {

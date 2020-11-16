@@ -8,6 +8,7 @@ import com.kharitonov.gym.model.service.TrainerApplicationService;
 import com.kharitonov.gym.model.service.impl.TrainerApplicationServiceImpl;
 import com.kharitonov.gym.model.validator.ValidationError;
 import com.kharitonov.gym.model.validator.ValidationErrorSet;
+import com.kharitonov.gym.util.RequestAttributeName;
 import com.kharitonov.gym.util.RequestParameterName;
 import com.kharitonov.gym.util.SessionAttributeName;
 import org.apache.logging.log4j.LogManager;
@@ -38,14 +39,15 @@ public class SendTrainerApplicationCommand implements ActionCommand {
                 String prevPage = getPreviousPage(request);
                 PagePath pagePath = Arrays.stream(PagePath.values())
                         .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(PagePath.PERSONAL_ACCOUNT);
+                request.getSession().setAttribute(RequestAttributeName.APPLICATION_SENT, true);
                 page = pagePath.getServletPath();
             } else {
                 ValidationErrorSet errorSet = ValidationErrorSet.getInstance();
                 if (errorSet.contains(ValidationError.APPLICATION_EXISTS)) {
-                    request.getSession().setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
                     String prevPage = getPreviousPage(request);
                     PagePath pagePath = Arrays.stream(PagePath.values())
                             .filter(p -> p.getDirectUrl().equals(prevPage)).findFirst().orElse(PagePath.PERSONAL_ACCOUNT);
+                    request.getSession().setAttribute(SessionAttributeName.ERROR_SET, errorSet.getAllAndClear());
                     page = pagePath.getServletPath();
                 } else {
                     page = PagePath.ERROR_404.getDirectUrl();

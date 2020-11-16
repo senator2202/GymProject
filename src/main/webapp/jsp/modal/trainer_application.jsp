@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <label for="institution"><fmt:message key="trainer_application.institution"/> *</label>
                                 <input type="text" class="form-control" id="institution" name="institution"
-                                       style="background-color: #fff;" pattern="\p{L}{2,30}" required>
+                                       style="background-color: #fff;" pattern="^[\p{L}\s]{2,30}$" required>
                             </div>
                             <div class="form-group">
                                 <label for="graduationYear"><fmt:message key="trainer_application.year"/> *</label>

@@ -17,6 +17,7 @@ public class RequestAttributeName {
     public static final String FEEDBACK_SENT = "feedbackSent";
     public static final String DAYS = "days";
     public static final String CLIENT_MAP = "clientMap";
+    public static final String APPLICATION_SENT = "applicationSent";
 
     private RequestAttributeName() {
 
