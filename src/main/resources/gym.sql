@@ -47,7 +47,7 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(260, 'client7657470', 'AU~R4Uqgzh7g~JKg', 'email599744@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(261, 'client1358051', 'A]HR}Uqgzh7g~JKg', 'email3783797@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(262, 'client6507838', 'AInR|Uqgzh7g~JKg', 'email8795236@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
-	(263, 'client4917933', 'AMnQ5Uqgzh7g~JKg', 'email1941702@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
+	(263, 'client4917933', 'AMnQ5Uqgzh7g~JKg', 'email1941702@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
 	(264, 'client1614015', 'AMnQ7Uqgzh7g~JKg', 'email9659230@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(265, 'client7472113', 'AkXQ4Uqgzh7g~JKg', 'email9791347@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(266, 'client1156353', 'AkHQ~Uqgzh7g~JKg', 'email6479627@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `trainer_applications` (
   CONSTRAINT `FK_trainer_applications_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы gym.trainer_applications: ~3 rows (приблизительно)
+-- Дамп данных таблицы gym.trainer_applications: ~6 rows (приблизительно)
 /*!40000 ALTER TABLE `trainer_applications` DISABLE KEYS */;
 REPLACE INTO `trainer_applications` (`user_id`, `app_institution`, `app_graduation`, `app_instagram`, `application_date`) VALUES
 	(288, 'MGU', 2015, 'https://www.instagram.com/xzibit', '2020-09-29 11:10:54'),
@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы gym.trainings: ~11 rows (приблизительно)
+-- Дамп данных таблицы gym.trainings: ~36 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`, `description`, `training_rating`) VALUES
 	(9, 301, 284, '2020-10-25', '17:00:00', 1, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.', 5),
@@ -316,25 +316,25 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(302, 'Аркадий', 'Райкин', '80296558891', 4.8, 'BSUIR', 2008, 'https://www.instagram.com/pavelbabich8', 0.0, '/uploads/65252e71-bdb1-4ec6-a199-ad06bb5ad5f2.jpg', 100, 0, 'Персональный тренер\r\nНаправление: Зона боевых искусств\r\nСургутский профессиональный колледж. '),
 	(303, 'Bill', 'Perkins', '80291111111', 0.0, NULL, NULL, NULL, 0.0, '/uploads/197fce3c-e19b-421b-be12-491adc4b881d.jpg', 100, 0, NULL),
 	(304, 'Perr', 'Billkins', '80292222222', 0.0, NULL, NULL, NULL, 0.0, '/uploads/94ce9ef4-1f5d-460e-9597-711be19d41af.jpg', 100, 0, NULL),
-	(308, 'Peter', 'Parker', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/43f83b29-10a2-4f27-b32e-ce18bb62fc92.jpg', 100, 0, NULL),
-	(309, 'Клинт', 'Иствуд', '+372644646464', 0.0, NULL, NULL, NULL, 0.0, '/uploads/19b8df2f-7e0e-4a08-86b3-d177f2662f2d.jpg', 100, 0, NULL),
+	(308, 'Peter', 'Parker', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/43f83b29-10a2-4f27-b32e-ce18bb62fc92.png', 100, 0, NULL),
+	(309, 'Клинт', 'Иствуд', '+372644646464', 0.0, NULL, NULL, NULL, 0.0, '/uploads/19b8df2f-7e0e-4a08-86b3-d177f2662f2d.png', 100, 0, NULL),
 	(312, 'Дон', 'Савеньон', '80172669988', 0.0, NULL, NULL, NULL, 6.5, '/uploads/11fefd33-6935-418a-9d06-385dcdf6c16f.png', 100, 0, NULL),
-	(313, 'Энрике', 'Иглесиас', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/6f12d701-5f55-45a5-806f-5e56e7fe9f40.jpg', 100, 0, NULL),
+	(313, 'Энрике', 'Иглесиас', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/6f12d701-5f55-45a5-806f-5e56e7fe9f40.png', 100, 0, NULL),
 	(314, 'Рэй', 'Чарльз', '80296558877', 0.0, NULL, NULL, NULL, 0.0, '/uploads/2f8d3fef-352f-47a0-97b6-1637a315aeb5.jpg', 100, 0, NULL),
-	(315, 'Doctor', 'Watson', '+37500699887', 0.0, NULL, NULL, NULL, 0.0, '/uploads/1d982118-aa87-419c-b73f-43d07c049da2.jpg', 100, 0, NULL),
-	(316, 'Jim', 'Carry', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/0f07a4e0-8281-4386-8bd8-b4b0123d90c1.jpg', 100, 0, NULL),
+	(315, 'Doctor', 'Watson', '+37500699887', 0.0, NULL, NULL, NULL, 0.0, '/uploads/1d982118-aa87-419c-b73f-43d07c049da2.png', 100, 0, NULL),
+	(316, 'Jim', 'Carry', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/0f07a4e0-8281-4386-8bd8-b4b0123d90c1.png', 100, 0, NULL),
 	(317, 'Евгений', 'Голубь', '+37544987798', 0.0, NULL, NULL, NULL, 0.0, '/uploads/e97467d3-004b-4e2f-a89e-e768f52ece70.jpg', 100, 0, NULL),
-	(318, 'Sergei', 'Snatovich', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/e8dba640-5939-4ccf-a199-af97743189d8.jpg', 100, 0, NULL),
+	(318, 'Sergei', 'Snatovich', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/e8dba640-5939-4ccf-a199-af97743189d8.png', 100, 0, NULL),
 	(319, 'Lera', 'Kutumova', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/dfdbdb87-2139-4682-a789-4a1c3fae0380.jpg', 100, 0, NULL),
 	(333, 'Михаил', 'Дуглас', '+375292223344', 3.9, 'BSUFC', 2017, 'https://www.instagram.com/l_one_mars/', 0.0, '/uploads/2449e660-c11e-4bd0-b2c7-23791e636c11.jpg', 100, 0, 'so-so'),
 	(334, 'Валентин', 'Петуховский', '+375442316598', 0.0, NULL, NULL, NULL, 0.0, '/uploads/d3c00009-f81f-4c85-bad7-c1f4fe6dd9dc.jpg', 100, 0, NULL),
 	(335, 'Elena', 'Vorobei', '+375299876543', 3.8, 'Envila', 2008, 'https://www.instagram.com/buzova86/', 0.0, '/uploads/429aab5d-6925-4131-a4de-11325b01314e.jpg', 100, 0, 'not bad '),
 	(336, 'Самсон', 'Петрович', '+375297884412', 0.0, NULL, NULL, NULL, 0.0, '/uploads/c9574808-91aa-456f-ab11-af7fef3fc966.jpg', 100, 0, NULL),
 	(337, 'Apple', 'Juice', '+375336778919', 0.0, NULL, NULL, NULL, 0.0, '/uploads/c2b2b6da-e2df-4e2b-a19b-d6d0aa397022.jpg', 100, 0, NULL),
-	(338, 'Cherry', 'Tomato', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/64919dc8-fb88-49cc-bf58-0a31d8c66cd8.jpg', 100, 0, NULL),
+	(338, 'Cherry', 'Tomato', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/64919dc8-fb88-49cc-bf58-0a31d8c66cd8.png', 100, 0, NULL),
 	(339, 'Эдгар', 'Запашный', '80293336688', 0.0, NULL, NULL, NULL, 0.0, '/uploads/3600b076-8a45-4564-bbc8-6b6eb52d2a85.jpg', 100, 0, NULL),
 	(340, 'Аскольд', 'Запашный', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/913afcc5-f9ee-418f-a618-56d5c19bb843.jpg', 100, 0, NULL),
-	(341, 'Матвей', 'Занозин', '+375444366988', 0.0, NULL, NULL, NULL, 0.0, '/uploads/777d9f5e-ccb5-4085-9f22-0e370ec09f95.jpg', 100, 0, NULL),
+	(341, 'Матвей', 'Занозин', '+375444366988', 0.0, NULL, NULL, NULL, 0.0, '/uploads/777d9f5e-ccb5-4085-9f22-0e370ec09f95.png', 100, 0, NULL),
 	(342, 'Егор', 'Прокшин', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/690a7d42-2122-4e1f-8baf-b9eba3cb881b.jpg', 100, 0, NULL),
 	(343, 'Абдурахман', 'Петрович', '80172306303', 0.0, NULL, NULL, NULL, 0.0, '/uploads/913afcc5-f9ee-418f-a618-56d5c19bb843.jpg', 173, 9, NULL),
 	(344, 'Вадим', 'Галыгин', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/239bbd6b-3b1d-4bd5-b806-935cb79cad2d.png', 100, 0, NULL),
@@ -346,7 +346,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(350, 'Ярик', 'Фонарик', '+375336447799', 0.0, NULL, NULL, NULL, 0.0, '/uploads/6f12d701-5f55-45a5-806f-5e56e7fe9f40.png', 100, 0, NULL),
 	(351, 'Arnold', 'Kabachok', '80296665522', 0.0, NULL, NULL, NULL, 0.0, '/uploads/2f8d3fef-352f-47a0-97b6-1637a315aeb5.jpg', 100, 0, NULL),
 	(352, 'Alex', 'Mahoney', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/1d982118-aa87-419c-b73f-43d07c049da2.png', 100, 0, NULL),
-	(353, 'Джессика', 'Симпсон', '+355296665544', 0.0, NULL, NULL, NULL, 0.0, '/uploads/0f07a4e0-8281-4386-8bd8-b4b0123d90c1.jpg', 100, 0, NULL);
+	(353, 'Джессика', 'Симпсон', '+355296665544', 0.0, NULL, NULL, NULL, 0.0, '/uploads/0f07a4e0-8281-4386-8bd8-b4b0123d90c1.png', 100, 0, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,10 +67,11 @@ public class MainServlet extends HttpServlet {
     }
 
     private void loadImages() {
-        String srcValue = getServletContext().getInitParameter(ContextParameterName.UPLOAD_SOURCE);
-        String destValue = getServletContext().getInitParameter(ContextParameterName.UPLOAD_DESTINATION);
+        ServletContext context = getServletContext();
+        String srcValue = context.getInitParameter(ContextParameterName.UPLOAD_SOURCE);
+        String destValue = context.getInitParameter(ContextParameterName.UPLOAD_DESTINATION);
         File src = new File(srcValue);
-        File dest = new File(this.getServletContext().getRealPath(destValue));
+        File dest = new File(context.getRealPath(destValue));
         if (!src.exists()) {
             src.mkdir();
         }
