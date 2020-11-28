@@ -4,6 +4,7 @@ import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
+import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.model.validator.ValidationError;
 import com.kharitonov.gym.model.validator.ValidationErrorSet;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BuyTrainingsCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(BuyTrainingsCommand.class);
-    private final UserServiceImpl userService = UserServiceImpl.getInstance();
+    private final UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

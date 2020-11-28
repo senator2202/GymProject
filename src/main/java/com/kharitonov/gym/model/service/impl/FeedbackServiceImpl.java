@@ -7,8 +7,6 @@ import com.kharitonov.gym.model.dao.impl.FeedbackDaoImpl;
 import com.kharitonov.gym.model.entity.Feedback;
 import com.kharitonov.gym.model.service.FeedbackService;
 import com.kharitonov.gym.model.validator.FeedbackValidator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -16,7 +14,6 @@ import java.util.List;
  * The type Feedback service.
  */
 public class FeedbackServiceImpl implements FeedbackService {
-    private static final Logger LOGGER = LogManager.getLogger(FeedbackServiceImpl.class);
     private static final FeedbackServiceImpl INSTANCE = new FeedbackServiceImpl();
     private final FeedbackDao dao = FeedbackDaoImpl.getInstance();
 

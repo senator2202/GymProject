@@ -6,6 +6,7 @@ import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.entity.UserRole;
+import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.model.validator.ValidationErrorSet;
 import com.kharitonov.gym.util.RequestParameterName;
@@ -24,7 +25,7 @@ import java.util.Optional;
  */
 public class LoginCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
-    private final UserServiceImpl service = UserServiceImpl.getInstance();
+    private final UserService service = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

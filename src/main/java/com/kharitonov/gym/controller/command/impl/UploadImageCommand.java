@@ -4,6 +4,7 @@ import com.kharitonov.gym.controller.ContextParameterName;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.util.SessionAttributeName;
 import org.apache.commons.fileupload.FileItem;
@@ -26,7 +27,7 @@ public class UploadImageCommand implements ActionCommand {
     private static final String EXTENSION_SEPARATOR = ".";
     private static final int FILE_SIZE_THRESHOLD = 1024 * 1024;
     private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 5 * 5;
-    private final UserServiceImpl service = UserServiceImpl.getInstance();
+    private final UserService service = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

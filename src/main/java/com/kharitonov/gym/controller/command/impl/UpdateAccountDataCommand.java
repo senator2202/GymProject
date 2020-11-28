@@ -4,6 +4,7 @@ import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.model.validator.ValidationError;
 import com.kharitonov.gym.model.validator.ValidationErrorSet;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UpdateAccountDataCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateAccountDataCommand.class);
-    private final UserServiceImpl service = UserServiceImpl.getInstance();
+    private final UserService service = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

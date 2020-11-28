@@ -4,6 +4,7 @@ import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.*;
+import com.kharitonov.gym.model.service.TrainingService;
 import com.kharitonov.gym.model.service.impl.TrainingServiceImpl;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.util.RequestAttributeName;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class OpenScheduleCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(OpenScheduleCommand.class);
     private final UserServiceImpl userService = UserServiceImpl.getInstance();
-    private final TrainingServiceImpl trainingService = TrainingServiceImpl.getInstance();
+    private final TrainingService trainingService = TrainingServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {

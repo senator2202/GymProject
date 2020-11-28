@@ -4,6 +4,7 @@ import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Trainer;
+import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.util.RequestParameterName;
 import com.kharitonov.gym.util.SessionAttributeName;
@@ -19,7 +20,7 @@ import java.util.Arrays;
  */
 public class UpdateShortSummaryCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(UpdateShortSummaryCommand.class);
-    private final UserServiceImpl service = UserServiceImpl.getInstance();
+    private final UserService service = UserServiceImpl.getInstance();
 
     @Override
     public String execute(HttpServletRequest request) {
