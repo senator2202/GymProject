@@ -68,12 +68,12 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(281, 'client5052467', 'AQXR9Uqgzh7g~JKg', 'email5591607@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(282, 'client4738890', 'AEXQ6Uqgzh7g~JKg', 'email8151779@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 0),
 	(283, 'client289959', 'Ak~R7Uqgzh7g~JKg', 'email794059@gmail.com', 'CLIENT', '2020-09-09 21:29:37', 'RUSSIAN', 1),
-	(284, 'senator2202', '9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'RUSSIAN', 1),
+	(284, 'senator2202', '9Vrgph\\g', 'senator220291@gmail.com', 'CLIENT', '2020-09-10 10:17:40', 'ENGLISH', 1),
 	(285, 'client3826502', 'A]~Q}Uqgzh7g~JKg', 'email2463376@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(286, 'client9528772', 'AIXQ|Uqgzh7g~JKg', 'email1443461@gmail.com', 'CLIENT', '2020-09-17 09:11:08', 'RUSSIAN', 0),
 	(288, 'abra', '9Vrgph\\g', 'abracadabra@gmail.com', 'CLIENT', '2020-09-17 12:06:52', 'RUSSIAN', 1),
 	(289, 'tuchi', '9Vrgph\\g', 'tuchikakludi@mail.ru', 'CLIENT', '2020-09-17 12:09:46', 'RUSSIAN', 0),
-	(301, 'trainer', '9Vrgph\\g', 'romashka@tut.by', 'TRAINER', '2020-09-29 13:35:56', 'RUSSIAN', 1),
+	(301, 'trainer', '9Vrgph\\g', 'romashka@tut.by', 'TRAINER', '2020-09-29 13:35:56', 'ENGLISH', 1),
 	(302, 'kentavr', '9Vrgph\\g', 'kentavr@mail.ru', 'TRAINER', '2020-09-29 13:37:49', 'ENGLISH', 1),
 	(303, 'recent_user', '9Vrgph\\g', 'recent@mail.ru', 'CLIENT', '2020-10-07 16:07:32', 'ENGLISH', 1),
 	(304, 'recent_user2', '9Vrgph\\g', 'recent2@mail.ru', 'CLIENT', '2020-10-07 16:08:09', 'ENGLISH', 1),
@@ -106,7 +106,7 @@ REPLACE INTO `accounts` (`account_id`, `login`, `password`, `email`, `role`, `re
 	(349, 'dedushka', '9Vrgph\\g', 'babushka@mail.ru', 'CLIENT', '2020-11-10 00:19:44', 'RUSSIAN', 0),
 	(350, 'ded322', '9Vrgph\\g', 'ded322@tut.by', 'CLIENT', '2020-11-10 00:22:00', 'RUSSIAN', 1),
 	(351, 'aaaaaaa', '9Vrgph\\g', 'yaw13078@cuoly.com', 'CLIENT', '2020-11-10 01:03:51', 'RUSSIAN', 1),
-	(352, 'bbbbbbb', '9Vrgph\\g', 'dqa87266@bcaoo.com', 'CLIENT', '2020-11-10 01:06:58', 'RUSSIAN', 1),
+	(352, 'bbbbbbb', '9Vrgph\\g', 'dqa87266@bcaoo.com', 'CLIENT', '2020-11-10 01:06:58', 'RUSSIAN', 0),
 	(353, 'asasddsa', '9Vrgph\\g', 'hsw71420@bcaoo.com', 'CLIENT', '2020-11-10 01:11:53', 'RUSSIAN', 1);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
@@ -122,9 +122,9 @@ CREATE TABLE IF NOT EXISTS `feedbacks` (
   `reply_message` mediumtext,
   PRIMARY KEY (`feedback_id`),
   UNIQUE KEY `report_id` (`feedback_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Дамп данных таблицы gym.feedbacks: ~40 rows (приблизительно)
+-- Дамп данных таблицы gym.feedbacks: ~41 rows (приблизительно)
 /*!40000 ALTER TABLE `feedbacks` DISABLE KEYS */;
 REPLACE INTO `feedbacks` (`feedback_id`, `sender_name`, `sender_email`, `feedback_subject`, `feedback_message`, `feedback_datetime`, `reply_message`) VALUES
 	(1, 'Alex', 'alex222@mail.ru', 'service', 'service is good', '2020-10-16 12:56:51', 'thank you for your feedback'),
@@ -164,9 +164,10 @@ REPLACE INTO `feedbacks` (`feedback_id`, `sender_name`, `sender_email`, `feedbac
 	(47, '', 'tartar@mai.ru', '', 'message', '2020-11-09 23:18:50', NULL),
 	(48, '', 'tartar@mai.ru', 'bad', 'message', '2020-11-09 23:18:50', 'asdasasdasd'),
 	(49, 'alex', 'tartar@mai.ru', 'bad', 'message', '2020-11-09 23:18:50', 'asdasdasdasd'),
-	(50, '', 'senator220291@gmail.com', '', 'asasdasd', '2020-11-10 00:57:06', 'asdasasdasd'),
+	(50, '', 'senator220291@gmail.com', '', 'asasdasd', '2020-11-10 00:57:06', NULL),
 	(51, 'dantes', 'azaza@tut.by', 'azaza', 'how much is the fish?', '2020-11-10 15:45:19', '200 br'),
-	(52, '', 'alex222@tut.by', 'allert("h")', 'allert("hello")', '2020-11-16 09:55:08', 'ах ты, взломщик!!!!');
+	(52, '', 'alex222@tut.by', 'allert("h")', 'allert("hello")', '2020-11-16 09:55:08', 'ах ты, взломщик!!!!'),
+	(53, 'Бильбо', 'bilbo@tut.by', 'претензия', 'сколько можно повышать цены?', '2020-11-29 12:19:45', NULL);
 /*!40000 ALTER TABLE `feedbacks` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.trainer_applications
@@ -185,11 +186,11 @@ CREATE TABLE IF NOT EXISTS `trainer_applications` (
 /*!40000 ALTER TABLE `trainer_applications` DISABLE KEYS */;
 REPLACE INTO `trainer_applications` (`user_id`, `app_institution`, `app_graduation`, `app_instagram`, `application_date`) VALUES
 	(288, 'MGU', 2015, 'https://www.instagram.com/xzibit', '2020-09-29 11:10:54'),
-	(284, 'БГУФК', 2013, 'https://www.instagram.com/senator2202', '2020-10-30 22:46:48'),
 	(312, 'БГТУ', 2016, 'https://www.instagram.com/vitaliyklitschko', '2020-11-16 15:14:55'),
 	(289, 'BSEU', 2012, 'https://www.instagram.com/mattdamonteam', '2020-11-16 15:17:58'),
 	(263, 'RSFU', 2019, 'https://www.instagram.com/sarychevkirill', '2020-11-16 15:21:38'),
-	(334, 'Кельнский Университет', 2009, 'https://www.instagram.com/bundeskanzlerin', '2020-11-16 15:22:40');
+	(334, 'Кельнский Университет', 2009, 'https://www.instagram.com/bundeskanzlerin', '2020-11-16 15:22:40'),
+	(284, 'БГУФК', 2011, 'https://www.instagram.com/senator2202', '2020-11-29 13:52:07');
 /*!40000 ALTER TABLE `trainer_applications` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.trainings
@@ -209,47 +210,47 @@ CREATE TABLE IF NOT EXISTS `trainings` (
   KEY `FK_trainings_users_2` (`client_id`),
   CONSTRAINT `FK_trainings_users` FOREIGN KEY (`trainer_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `FK_trainings_users_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
 
 -- Дамп данных таблицы gym.trainings: ~36 rows (приблизительно)
 /*!40000 ALTER TABLE `trainings` DISABLE KEYS */;
 REPLACE INTO `trainings` (`training_id`, `trainer_id`, `client_id`, `training_date`, `training_time`, `done`, `description`, `training_rating`) VALUES
-	(9, 301, 284, '2020-10-25', '17:00:00', 1, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.', 5),
-	(12, 301, 284, '2020-10-23', '12:00:00', 1, 'Пресс, бицепс, трицепс', 4),
-	(13, 301, 284, '2020-11-05', '17:00:00', 1, 'Бег на дорожке 10 мин. Жим лежа 3 подхода на 12 повторений', 4),
+	(9, 301, 284, '2020-10-25', '17:00:00', 1, 'Кардио разминка 10 мин, тяга грифа широким хватом сверху, тяга штанги в наклоне,  французский жим, подъем ног на пресс.', 1),
+	(12, 301, 284, '2020-10-23', '12:00:00', 1, 'Пресс, бицепс, трицепс', 2),
+	(13, 301, 284, '2020-11-05', '17:00:00', 1, 'Бег на дорожке 10 мин. Жим лежа 3 подхода на 12 повторений', 1),
 	(14, 301, 303, '2020-10-25', '12:00:00', 1, 'Пресс, бицепс, трицепс', 3),
 	(17, 301, 288, '2020-10-21', '12:00:00', 1, 'Кардио тренировка: бег на дорожке 20 мин, велотренажер 20 мин, степ тренажер 20 мин', 3),
 	(23, 301, 343, '2020-10-24', '14:30:00', 1, 'Пока 2 кг не скинешь, из зала не выйдешь!!!!', 3),
-	(27, 301, 284, '2020-11-21', '15:05:00', 0, 'Отжимания на брусьях, 5х15, разводка гантелей 4x10, пресс 2х20', 0),
-	(28, 301, 284, '2020-11-02', '04:00:00', 1, 'бег на дорожке 10 мин;\r\nподтягивания с весом + 15 кг 4 подхода на максимум повторений;\r\nтяга штанги в наклоне 5 подходов по 8-10 повторений;\r\nгипер экстензии, 5 подходов по 12 повторений', 5),
-	(38, 301, 284, '2020-11-20', '14:25:00', 0, 'Прыгать, бегать, отжиматься', 0),
-	(40, 333, 284, '2020-11-22', '15:00:00', 0, 'Очень серьезный кач', 0),
-	(42, 274, 284, '2020-11-19', '15:30:00', 0, 'Серьезный кач', 0),
-	(45, 335, 284, '2020-11-22', '13:00:00', 0, NULL, 0),
-	(46, 302, 284, '2020-11-23', '15:30:00', 0, NULL, 0),
-	(47, 274, 284, '2020-11-24', '15:30:00', 0, NULL, 0),
-	(48, 333, 284, '2020-11-25', '15:30:00', 0, NULL, 0),
-	(49, 301, 261, '2020-11-19', '17:30:00', 0, 'Будем бегать и прыгать', 0),
-	(50, 301, 258, '2020-11-20', '18:30:00', 0, NULL, 0),
-	(51, 301, 341, '2020-11-20', '13:30:00', 0, NULL, 0),
-	(52, 301, 313, '2020-11-20', '15:30:00', 0, NULL, 0),
-	(53, 301, 339, '2020-11-21', '20:30:00', 0, NULL, 0),
-	(54, 301, 277, '2020-11-21', '10:30:00', 0, NULL, 0),
-	(55, 301, 282, '2020-11-21', '15:30:00', 0, NULL, 0),
-	(56, 301, 280, '2020-11-22', '15:30:00', 0, NULL, 0),
-	(57, 301, 286, '2020-11-22', '17:30:00', 0, NULL, 0),
-	(58, 301, 353, '2020-11-22', '19:30:00', 0, NULL, 0),
-	(59, 301, 341, '2020-11-23', '19:30:00', 0, NULL, 0),
-	(60, 301, 278, '2020-11-23', '17:30:00', 0, NULL, 0),
-	(61, 301, 276, '2020-11-23', '15:30:00', 0, NULL, 0),
-	(62, 301, 345, '2020-11-24', '15:30:00', 0, NULL, 0),
-	(63, 301, 281, '2020-11-24', '11:30:00', 0, NULL, 0),
-	(64, 301, 269, '2020-11-25', '14:30:00', 0, NULL, 0),
-	(65, 301, 340, '2020-11-25', '11:30:00', 0, NULL, 0),
-	(66, 301, 274, '2020-11-25', '17:30:00', 0, NULL, 0),
-	(67, 302, 284, '2020-11-26', '15:30:00', 0, NULL, 0),
-	(68, 335, 284, '2020-11-26', '19:30:00', 0, NULL, 0),
-	(69, 333, 284, '2020-11-27', '19:30:00', 0, NULL, 0);
+	(27, 301, 284, '2020-12-06', '15:05:00', 0, 'Отжимания на брусьях, 5х15, разводка гантелей 4x10, пресс 2х20', 0),
+	(28, 301, 284, '2020-11-02', '04:00:00', 1, 'бег на дорожке 10 мин;\r\nподтягивания с весом + 15 кг 4 подхода на максимум повторений;\r\nтяга штанги в наклоне 5 подходов по 8-10 повторений;\r\nгипер экстензии, 5 подходов по 12 повторений', 2),
+	(38, 301, 284, '2020-12-08', '14:25:00', 0, 'Прыгать, бегать, отжиматься', 0),
+	(40, 333, 284, '2020-12-08', '15:00:00', 0, 'Очень серьезный кач', 0),
+	(42, 274, 284, '2020-12-09', '15:30:00', 0, 'Серьезный кач', 0),
+	(45, 335, 284, '2020-12-09', '13:00:00', 0, NULL, 0),
+	(46, 302, 284, '2020-12-10', '15:30:00', 0, NULL, 0),
+	(47, 274, 284, '2020-12-11', '15:30:00', 0, NULL, 0),
+	(48, 333, 284, '2020-12-12', '15:30:00', 0, NULL, 0),
+	(49, 301, 261, '2020-12-12', '17:30:00', 0, 'Будем бегать и прыгать', 0),
+	(50, 301, 258, '2020-12-12', '18:30:00', 0, NULL, 0),
+	(51, 301, 341, '2020-12-13', '13:30:00', 0, NULL, 0),
+	(52, 301, 313, '2020-11-29', '15:30:00', 0, 'Бег 10 мин,  ГАК приседания, жим штанги в наклоне, подтягивания с весом', 0),
+	(53, 301, 339, '2020-12-13', '20:30:00', 0, NULL, 0),
+	(54, 301, 277, '2020-12-14', '10:30:00', 0, NULL, 0),
+	(55, 301, 282, '2020-12-14', '15:30:00', 0, NULL, 0),
+	(56, 301, 280, '2020-12-15', '15:30:00', 0, NULL, 0),
+	(57, 301, 286, '2020-12-16', '17:30:00', 0, NULL, 0),
+	(58, 301, 353, '2020-12-16', '19:30:00', 0, NULL, 0),
+	(59, 301, 341, '2020-12-17', '19:30:00', 0, NULL, 0),
+	(60, 301, 278, '2020-12-17', '17:30:00', 0, NULL, 0),
+	(61, 301, 276, '2020-12-17', '15:30:00', 0, NULL, 0),
+	(62, 301, 345, '2020-12-18', '15:30:00', 0, NULL, 0),
+	(63, 301, 281, '2020-12-18', '11:30:00', 0, NULL, 0),
+	(64, 301, 269, '2020-12-22', '14:30:00', 0, NULL, 0),
+	(66, 301, 274, '2020-12-04', '17:30:00', 0, NULL, 0),
+	(67, 302, 284, '2020-12-05', '15:30:00', 0, NULL, 0),
+	(68, 335, 284, '2020-12-06', '19:30:00', 0, 'Может назначишь уже мне тренировку? А?', 0),
+	(69, 333, 284, '2020-12-07', '19:30:00', 0, NULL, 0),
+	(71, 335, 284, '2020-12-13', '15:00:00', 0, NULL, 0);
 /*!40000 ALTER TABLE `trainings` ENABLE KEYS */;
 
 -- Дамп структуры для таблица gym.users
@@ -262,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `rating` double(22,1) DEFAULT '0.0',
   `institution` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `graduation` int DEFAULT NULL,
-  `instagram` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `instagram` varchar(70) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `discount` double(22,1) DEFAULT '0.0',
   `image_name` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `money_balance` int DEFAULT '100',
@@ -307,19 +308,19 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(281, 'Бен', 'Аффлек', '', NULL, NULL, NULL, NULL, 0.0, '/uploads/c9574808-91aa-456f-ab11-af7fef3fc966.jpg', 100, 0, NULL),
 	(282, 'Ярослава', 'Тринадцатко', '80175554466', NULL, NULL, NULL, NULL, 0.0, '/uploads/c2b2b6da-e2df-4e2b-a19b-d6d0aa397022.jpg', 100, 0, NULL),
 	(283, 'Oleg', 'Beton', '', NULL, NULL, NULL, NULL, 0.0, '/uploads/bbf38f89-e040-436c-a798-690b77b6f738.jpg', 100, 0, NULL),
-	(284, 'Александр', 'Шмюгельсон', '+375335678962', NULL, NULL, NULL, NULL, 12.0, '/uploads/3600b076-8a45-4564-bbc8-6b6eb52d2a85.png', 490, 23, NULL),
+	(284, 'Ivan', 'Nalivkin', '80296558899', NULL, NULL, NULL, NULL, 12.0, '/uploads/78070ce5-119b-4714-b8a9-4593d82a05c3.jpg', 414, 32, NULL),
 	(285, 'Екатерина', 'Шитикова', '+375336991236', 0.0, NULL, NULL, NULL, 0.0, '/uploads/913afcc5-f9ee-418f-a618-56d5c19bb843.jpg', 100, 0, NULL),
 	(286, 'Олег', 'Бориков', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/777d9f5e-ccb5-4085-9f22-0e370ec09f95.jpg', 100, 0, NULL),
 	(288, 'Chef', 'Ivlev', '80295554466', 0.0, NULL, NULL, NULL, 0.0, '/uploads/690a7d42-2122-4e1f-8baf-b9eba3cb881b.jpg', 100, 0, NULL),
 	(289, 'Глеб', 'Балашевич', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/239bbd6b-3b1d-4bd5-b806-935cb79cad2d.png', 100, 0, NULL),
-	(301, 'Anastacia', 'Lipinskaya', '+375441234598', 4.2, 'MSLU', 2012, 'https://www.instagram.com/monicabellucciofficiel', 0.0, '/uploads/161221b0-f018-4dae-b149-26a3a06fba34.jpg', 100, 0, 'Сертифицированный персональный тренер\r\n• Силовой тренинг\r\n• Функциональный тренинг\r\n• Снижение веса\r\n• Набор мышечной массы\r\n								'),
+	(301, 'Anastacia', 'Lipinskaya', '+375441234598', 2.7, 'MSLU', 2012, 'https://www.instagram.com/monicabellucciofficiel', 0.0, '/uploads/455a0682-dca4-47f0-a107-37dc8813eb63.jpg', 100, 0, 'Mega professional!'),
 	(302, 'Аркадий', 'Райкин', '80296558891', 4.8, 'BSUIR', 2008, 'https://www.instagram.com/pavelbabich8', 0.0, '/uploads/65252e71-bdb1-4ec6-a199-ad06bb5ad5f2.jpg', 100, 0, 'Персональный тренер\r\nНаправление: Зона боевых искусств\r\nСургутский профессиональный колледж. '),
 	(303, 'Bill', 'Perkins', '80291111111', 0.0, NULL, NULL, NULL, 0.0, '/uploads/197fce3c-e19b-421b-be12-491adc4b881d.jpg', 100, 0, NULL),
 	(304, 'Perr', 'Billkins', '80292222222', 0.0, NULL, NULL, NULL, 0.0, '/uploads/94ce9ef4-1f5d-460e-9597-711be19d41af.jpg', 100, 0, NULL),
 	(308, 'Peter', 'Parker', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/43f83b29-10a2-4f27-b32e-ce18bb62fc92.png', 100, 0, NULL),
 	(309, 'Клинт', 'Иствуд', '+372644646464', 0.0, NULL, NULL, NULL, 0.0, '/uploads/19b8df2f-7e0e-4a08-86b3-d177f2662f2d.png', 100, 0, NULL),
 	(312, 'Дон', 'Савеньон', '80172669988', 0.0, NULL, NULL, NULL, 6.5, '/uploads/11fefd33-6935-418a-9d06-385dcdf6c16f.png', 100, 0, NULL),
-	(313, 'Энрике', 'Иглесиас', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/6f12d701-5f55-45a5-806f-5e56e7fe9f40.png', 100, 0, NULL),
+	(313, 'Энрике', 'Иглесиас', '80296553318', 0.0, NULL, NULL, NULL, 6.0, '/uploads/6f12d701-5f55-45a5-806f-5e56e7fe9f40.png', 100, 0, NULL),
 	(314, 'Рэй', 'Чарльз', '80296558877', 0.0, NULL, NULL, NULL, 0.0, '/uploads/2f8d3fef-352f-47a0-97b6-1637a315aeb5.jpg', 100, 0, NULL),
 	(315, 'Doctor', 'Watson', '+37500699887', 0.0, NULL, NULL, NULL, 0.0, '/uploads/1d982118-aa87-419c-b73f-43d07c049da2.png', 100, 0, NULL),
 	(316, 'Jim', 'Carry', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/0f07a4e0-8281-4386-8bd8-b4b0123d90c1.png', 100, 0, NULL),
@@ -333,7 +334,7 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(337, 'Apple', 'Juice', '+375336778919', 0.0, NULL, NULL, NULL, 0.0, '/uploads/c2b2b6da-e2df-4e2b-a19b-d6d0aa397022.jpg', 100, 0, NULL),
 	(338, 'Cherry', 'Tomato', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/64919dc8-fb88-49cc-bf58-0a31d8c66cd8.png', 100, 0, NULL),
 	(339, 'Эдгар', 'Запашный', '80293336688', 0.0, NULL, NULL, NULL, 0.0, '/uploads/3600b076-8a45-4564-bbc8-6b6eb52d2a85.jpg', 100, 0, NULL),
-	(340, 'Аскольд', 'Запашный', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/913afcc5-f9ee-418f-a618-56d5c19bb843.jpg', 100, 0, NULL),
+	(340, 'Аскольд', 'Запашный', '+375296987456', 0.0, NULL, NULL, NULL, 0.0, '/uploads/913afcc5-f9ee-418f-a618-56d5c19bb843.jpg', 100, 1, NULL),
 	(341, 'Матвей', 'Занозин', '+375444366988', 0.0, NULL, NULL, NULL, 0.0, '/uploads/777d9f5e-ccb5-4085-9f22-0e370ec09f95.png', 100, 0, NULL),
 	(342, 'Егор', 'Прокшин', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/690a7d42-2122-4e1f-8baf-b9eba3cb881b.jpg', 100, 0, NULL),
 	(343, 'Абдурахман', 'Петрович', '80172306303', 0.0, NULL, NULL, NULL, 0.0, '/uploads/913afcc5-f9ee-418f-a618-56d5c19bb843.jpg', 173, 9, NULL),
@@ -345,8 +346,8 @@ REPLACE INTO `users` (`user_id`, `first_name`, `last_name`, `phone`, `rating`, `
 	(349, 'Prapor', 'Schmatko', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/9b510a77-d369-43fc-a0f4-6005efb1e4f2.jpg', 100, 0, NULL),
 	(350, 'Ярик', 'Фонарик', '+375336447799', 0.0, NULL, NULL, NULL, 0.0, '/uploads/6f12d701-5f55-45a5-806f-5e56e7fe9f40.png', 100, 0, NULL),
 	(351, 'Arnold', 'Kabachok', '80296665522', 0.0, NULL, NULL, NULL, 0.0, '/uploads/2f8d3fef-352f-47a0-97b6-1637a315aeb5.jpg', 100, 0, NULL),
-	(352, 'Alex', 'Mahoney', '', 0.0, NULL, NULL, NULL, 0.0, '/uploads/1d982118-aa87-419c-b73f-43d07c049da2.png', 100, 0, NULL),
-	(353, 'Джессика', 'Симпсон', '+355296665544', 0.0, NULL, NULL, NULL, 0.0, '/uploads/0f07a4e0-8281-4386-8bd8-b4b0123d90c1.png', 100, 0, NULL);
+	(352, 'Alex', 'Mahoney', '', 0.0, NULL, NULL, NULL, 8.0, '/uploads/1d982118-aa87-419c-b73f-43d07c049da2.png', 100, 0, NULL),
+	(353, 'Джессика', 'Симпсон', '+355296665544', 0.0, NULL, NULL, NULL, 3.0, '/uploads/0f07a4e0-8281-4386-8bd8-b4b0123d90c1.png', 100, 0, NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

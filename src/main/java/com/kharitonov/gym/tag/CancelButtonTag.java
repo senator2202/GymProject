@@ -10,6 +10,7 @@ import java.io.IOException;
  */
 public class CancelButtonTag extends SimpleTagSupport {
     private int trainingId;
+    private int clientId;
     private String tooltip = "cancel";
 
     @Override
@@ -20,6 +21,7 @@ public class CancelButtonTag extends SimpleTagSupport {
                 "<form action=\"/mainController\" method=\"post\">\n" +
                         "   <input type=\"hidden\" name=\"command\" value=\"cancel_training\"/>\n" +
                         "   <input type=\"hidden\" name=\"trainingId\" value=\"" + trainingId + "\"/>\n" +
+                        "   <input type=\"hidden\" name=\"clientId\" value=\"" + clientId + "\"/>\n" +
                         "   <button type=\"submit\" rel=\"tooltip\" class=\"btn btn-outline-danger btn-round\" data-toggle=\"tooltip\" title=\"" + tooltip + "\">\n" +
                         "       <i class=\"material-icons\">close</i>\n" +
                         "   </button>\n" +
@@ -61,5 +63,23 @@ public class CancelButtonTag extends SimpleTagSupport {
      */
     public void setTooltip(String tooltip) {
         this.tooltip = tooltip;
+    }
+
+    /**
+     * Gets clientId.
+     *
+     * @return the client id
+     */
+    public int getClientId() {
+        return clientId;
+    }
+
+    /**
+     * Sets clientId.
+     *
+     * @param clientId the client id
+     */
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 }

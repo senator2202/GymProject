@@ -6,7 +6,6 @@ package com.kharitonov.gym.model.validator;
 public class TrainerApplicationValidator extends CommonValidator {
     private static final String YEAR_REGEX = "^[12][09]\\d{2}$";
     private static final String INSTITUTION_REGEX = "^[\\p{L}\\s]{2,30}$";
-    private static final String INSTAGRAM_REGEX = "^(https://www.instagram.com/.{0,70})?$";
 
     private TrainerApplicationValidator() {
     }
@@ -41,10 +40,6 @@ public class TrainerApplicationValidator extends CommonValidator {
 
     private static boolean correctYear(String year) {
         return year != null && year.matches(YEAR_REGEX);
-    }
-
-    private static boolean correctInstagram(String instagram) {
-        return instagram != null && instagram.matches(INSTAGRAM_REGEX);
     }
 
     private static boolean correctInstitution(String institution) {

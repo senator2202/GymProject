@@ -127,9 +127,9 @@ public class StaticDataProvider {
     @Test
     public Object[][] dataDeleteTraining() {
         return new Object[][]{
-                {"12", 25, true},
-                {"12", -25, false},
-                {"-12", 25, false}
+                {"12", "25", true},
+                {"12", "-25", false},
+                {"-12", "25", false}
         };
     }
 
@@ -215,17 +215,17 @@ public class StaticDataProvider {
     @Test
     public Object[][] dataUpdatePersonalData() {
         return new Object[][]{
-                {25, "alexey", "kharitonov", "+375296543211", true},
-                {25, "alexey", "kharitonov", "", true},
-                {25, "alexey", "", "", true},
-                {25, "", "", "", true},
-                {25, "alexey", "kharitonov", "+qwe", false},
-                {25, "alexey", "kharitonov", null, false},
-                {25, "alexey", "khariton'ov", "+375296543211", false},
-                {25, "alexey", null, "+375296543211", false},
-                {25, "alex''''ey", "kharitonov", "+375296543211", false},
-                {25, null, "kharitonov", "+375296543211", false},
-                {-25, "alexey", "kharitonov", "+375296543211", false}
+                {25, "alexey", "kharitonov", "+375296543211", "https://www.instagram.com/pavelbabich8", true},
+                {25, "alexey", "kharitonov", "", "https://www.instagram.com/pavelbabich8", true},
+                {25, "alexey", "", "", "https://www.instagram.com/pavelbabich8", true},
+                {25, "", "", "", "https://www.instagram.com/pavelbabich8", true},
+                {25, "alexey", "kharitonov", "+qwe", "https://www.instagram.com/pavelbabich8", false},
+                {25, "alexey", "kharitonov", null, "https://www.instagram.com/pavelbabich8", false},
+                {25, "alexey", "khariton'ov", "+375296543211", "https://www.instagram.com/pavelbabich8", false},
+                {25, "alexey", null, "+375296543211", "https://www.instagram.com/pavelbabich8", false},
+                {25, "alex''''ey", "kharitonov", "+375296543211", "https://www.instagram.com/pavelbabich8", false},
+                {25, null, "kharitonov", "+375296543211", "https://www.instagram.com/pavelbabich8", false},
+                {-25, "alexey", "kharitonov", "+375296543211", "https://www.instagram.com/pavelbabich8", false}
         };
     }
 

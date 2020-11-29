@@ -61,10 +61,12 @@ public interface UserService {
      * @param firstName the first name
      * @param lastName  the last name
      * @param phone     the phone
+     * @param instagram the instagram link
      * @return the boolean
      * @throws ServiceException the service exception
      */
-    boolean updatePersonalData(int userId, String firstName, String lastName, String phone) throws ServiceException;
+    boolean updatePersonalData(int userId, String firstName, String lastName, String phone, String instagram)
+            throws ServiceException;
 
     /**
      * Find recent users list.

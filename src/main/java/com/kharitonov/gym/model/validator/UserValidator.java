@@ -55,8 +55,10 @@ public class UserValidator extends CommonValidator {
      * @param phone     the phone
      * @return the boolean
      */
-    public static boolean correctPersonalDataParameters(int userId, String firstName, String lastName, String phone) {
-        return correctId(userId) && correctName(firstName) && correctName(lastName) && correctPhone(phone);
+    public static boolean correctPersonalDataParameters(int userId, String firstName, String lastName,
+                                                        String phone, String instagram) {
+        return correctId(userId) && correctName(firstName) && correctName(lastName) &&
+                correctPhone(phone) && correctInstagram(instagram);
     }
 
     /**

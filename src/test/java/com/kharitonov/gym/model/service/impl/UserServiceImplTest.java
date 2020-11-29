@@ -1,9 +1,9 @@
 package com.kharitonov.gym.model.service.impl;
 
-import com.kharitonov.gym.model.builder.AccountBuilder;
 import com.kharitonov.gym.data_provider.StaticDataProvider;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
+import com.kharitonov.gym.model.builder.AccountBuilder;
 import com.kharitonov.gym.model.dao.UserDao;
 import com.kharitonov.gym.model.dao.impl.UserDaoImpl;
 import com.kharitonov.gym.model.entity.Account;
@@ -281,17 +281,18 @@ public class UserServiceImplTest {
     }
 
     @Test(dataProviderClass = StaticDataProvider.class, dataProvider = "dataUpdatePersonalData")
-    public void testUpdatePersonalData(int userId, String firstName, String lastName, String phone, boolean expected)
+    public void testUpdatePersonalData(int userId, String firstName, String lastName, String phone,
+                                       String instagram, boolean expected)
             throws DaoException, ServiceException {
-        when(dao.updatePersonalData(anyInt(), anyString(), anyString(), anyString())).thenReturn(true);
-        boolean actual = service.updatePersonalData(userId, firstName, lastName, phone);
+        when(dao.updatePersonalData(anyInt(), anyString(), anyString(), anyString(), anyString())).thenReturn(true);
+        boolean actual = service.updatePersonalData(userId, firstName, lastName, phone, instagram);
         assertEquals(actual, expected);
     }
 
     @Test(dependsOnMethods = "testUpdatePersonalData", expectedExceptions = ServiceException.class)
     public void testUpdatePersonalDataException() throws DaoException, ServiceException {
-        when(dao.updatePersonalData(anyInt(), anyString(), anyString(), anyString())).thenThrow(new DaoException());
-        service.updatePersonalData(25, "alex", "tartar", "");
+        when(dao.updatePersonalData(anyInt(), anyString(), anyString(), anyString(), anyString())).thenThrow(new DaoException());
+        service.updatePersonalData(25, "alex", "tartar", "", "https://www.instagram.com/pavelbabich8");
     }
 
     @DataProvider

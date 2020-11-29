@@ -126,6 +126,7 @@
                                                     </button>
                                                     <fmt:message key="schedule_client.tooltipCancel" var="cancel"/>
                                                     <ctg:cancel-button trainingId="${training.trainingId}"
+                                                                       clientId="${training.clientId}"
                                                                        tooltip="${cancel}"/>
                                                 </td>
                                             </tr>

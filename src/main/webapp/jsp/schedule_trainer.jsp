@@ -95,6 +95,7 @@
                                                     </form>
                                                     <fmt:message key="schedule_trainer.cancel" var="cancel"/>
                                                     <ctg:cancel-button trainingId="${training.trainingId}"
+                                                                       clientId="${training.clientId}"
                                                                        tooltip="${cancel}"/>
                                                 </td>
                                             </tr>

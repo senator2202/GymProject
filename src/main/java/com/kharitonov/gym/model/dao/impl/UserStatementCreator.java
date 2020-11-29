@@ -47,7 +47,7 @@ class UserStatementCreator {
     private static final String SQL_SELECT_ROLE =
             "SELECT role FROM accounts WHERE login=? AND password=?";
     private static final String SQL_UPDATE_USER =
-            "UPDATE users SET first_name=?, last_name=?, phone=? WHERE user_id=?";
+            "UPDATE users SET first_name=?, last_name=?, phone=?, instagram=? WHERE user_id=?";
     private static final String SQL_UPDATE_ACCOUNT =
             "UPDATE accounts SET email=?, locale=?, password=? WHERE account_id=?";
     private static final String SQL_UPDATE_TRAINER_ROLE =
@@ -309,13 +309,15 @@ class UserStatementCreator {
                                                  String firstName,
                                                  String lastName,
                                                  String phone,
+                                                 String instagram,
                                                  int id)
             throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_USER);
         statement.setString(1, firstName);
         statement.setString(2, lastName);
         statement.setString(3, phone);
-        statement.setInt(4, id);
+        statement.setString(4, instagram);
+        statement.setInt(5, id);
         return statement;
     }
 

@@ -4,6 +4,7 @@ import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
 import com.kharitonov.gym.model.entity.Client;
+import com.kharitonov.gym.model.entity.User;
 import com.kharitonov.gym.model.service.TrainingService;
 import com.kharitonov.gym.model.service.impl.TrainingServiceImpl;
 import com.kharitonov.gym.util.RequestParameterName;
@@ -22,13 +23,16 @@ public class CancelTrainingCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        Client client = (Client) request.getSession().getAttribute(SessionAttributeName.USER);
-        int clientId = client.getAccount().getId();
+        User user = (User) request.getSession().getAttribute(SessionAttributeName.USER);
+        String clientId = request.getParameter(RequestParameterName.CLIENT_ID);
         String trainingId = request.getParameter(RequestParameterName.TRAINING_ID);
         String page;
         try {
             if (service.deleteTraining(trainingId, clientId)) {
-                client.setBoughtTrainings(client.getBoughtTrainings() + 1);
+                if (user instanceof Client) {
+                    Client client = (Client) user;
+                    ((Client) user).setBoughtTrainings(client.getBoughtTrainings() + 1);
+                }
                 page = PagePath.SCHEDULE.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();

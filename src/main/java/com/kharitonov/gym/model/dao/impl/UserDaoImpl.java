@@ -216,9 +216,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean updatePersonalData(int userId, String firstName, String lastName, String phone) throws DaoException {
+    public boolean updatePersonalData(int userId, String firstName, String lastName, String phone, String instagram)
+            throws DaoException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = statementUpdateUser(connection, firstName, lastName, phone, userId)) {
+             PreparedStatement statement = statementUpdateUser(connection, firstName, lastName, phone, instagram, userId)) {
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -252,7 +253,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean updateBalanceAndBoughtTrainings(int userId, double decreaseBalance, int increaseTrainings) throws DaoException {
+    public boolean updateBalanceAndBoughtTrainings(int userId, double decreaseBalance, int increaseTrainings)
+            throws DaoException {
         Connection connection = pool.getConnection();
         try (PreparedStatement statementDecrease = statementDecreaseBalance(connection, userId, decreaseBalance);
              PreparedStatement statementIncrease = statementIncreaseTrainings(connection, userId, increaseTrainings)) {

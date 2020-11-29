@@ -150,13 +150,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updatePersonalData(int userId, String firstName, String lastName, String phone)
+    public boolean updatePersonalData(int userId, String firstName, String lastName, String phone, String instagram)
             throws ServiceException {
-        if (!UserValidator.correctPersonalDataParameters(userId, firstName, lastName, phone)) {
+        if (!UserValidator.correctPersonalDataParameters(userId, firstName, lastName, phone, instagram)) {
             return false;
         }
         try {
-            return dao.updatePersonalData(userId, firstName, lastName, phone);
+            return dao.updatePersonalData(userId, firstName, lastName, phone, instagram);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

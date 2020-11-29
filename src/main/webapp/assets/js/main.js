@@ -108,7 +108,7 @@
         var tsfilter = $(this).data('tsfilter');
         $('.schedule-filter li').removeClass('active');
         $(this).addClass('active');
-        
+
         if(tsfilter == 'all') {
             $('.schedule-table').removeClass('filtering');
             $('.ts-item').removeClass('show');

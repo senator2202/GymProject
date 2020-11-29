@@ -87,10 +87,11 @@ public interface UserDao extends BaseDao {
      * @param firstName the first name
      * @param lastName  the last name
      * @param phone     the phone
+     * @param instagram
      * @return the boolean
      * @throws DaoException the dao exception
      */
-    boolean updatePersonalData(int userId, String firstName, String lastName, String phone)
+    boolean updatePersonalData(int userId, String firstName, String lastName, String phone, String instagram)
             throws DaoException;
 
     /**

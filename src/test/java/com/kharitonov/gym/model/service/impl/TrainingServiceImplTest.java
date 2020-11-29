@@ -1,9 +1,9 @@
 package com.kharitonov.gym.model.service.impl;
 
-import com.kharitonov.gym.model.builder.TrainingBuilder;
 import com.kharitonov.gym.data_provider.StaticDataProvider;
 import com.kharitonov.gym.exception.DaoException;
 import com.kharitonov.gym.exception.ServiceException;
+import com.kharitonov.gym.model.builder.TrainingBuilder;
 import com.kharitonov.gym.model.dao.TrainingDao;
 import com.kharitonov.gym.model.dao.impl.TrainingDaoImpl;
 import com.kharitonov.gym.model.entity.Client;
@@ -96,7 +96,7 @@ public class TrainingServiceImplTest {
     }
 
     @Test(dataProviderClass = StaticDataProvider.class, dataProvider = "dataDeleteTraining")
-    public void testDeleteTraining(String trainingId, int userId, boolean expected)
+    public void testDeleteTraining(String trainingId, String userId, boolean expected)
             throws DaoException, ServiceException {
         when(dao.deleteTraining(anyInt(), anyInt())).thenReturn(true);
         boolean actual = service.deleteTraining(trainingId, userId);
@@ -106,7 +106,7 @@ public class TrainingServiceImplTest {
     @Test(expectedExceptions = ServiceException.class, dependsOnMethods = "testDeleteTraining")
     public void testDeleteTrainingException() throws DaoException, ServiceException {
         when(dao.deleteTraining(anyInt(), anyInt())).thenThrow(new DaoException());
-        service.deleteTraining("24", 25);
+        service.deleteTraining("24", "25");
     }
 
     @Test(dataProviderClass = StaticDataProvider.class, dataProvider = "dataUpdateTraining")

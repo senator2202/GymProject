@@ -3,7 +3,9 @@ package com.kharitonov.gym.controller.command.impl;
 import com.kharitonov.gym.controller.command.ActionCommand;
 import com.kharitonov.gym.controller.command.PagePath;
 import com.kharitonov.gym.exception.ServiceException;
+import com.kharitonov.gym.model.entity.Trainer;
 import com.kharitonov.gym.model.entity.User;
+import com.kharitonov.gym.model.entity.UserRole;
 import com.kharitonov.gym.model.service.UserService;
 import com.kharitonov.gym.model.service.impl.UserServiceImpl;
 import com.kharitonov.gym.util.RequestParameterName;
@@ -29,12 +31,16 @@ public class UpdatePersonalDataCommand implements ActionCommand {
         String firstName = request.getParameter(RequestParameterName.FIRST_NAME);
         String lastName = request.getParameter(RequestParameterName.LAST_NAME);
         String phone = request.getParameter(RequestParameterName.PHONE);
+        String instagram = request.getParameter(RequestParameterName.INSTAGRAM_LINK);
         String page;
         try {
-            if (service.updatePersonalData(id, firstName, lastName, phone)) {
+            if (service.updatePersonalData(id, firstName, lastName, phone, instagram)) {
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
                 user.setPhoneNumber(phone);
+                if (user.getAccount().getRole() == UserRole.TRAINER) {
+                    ((Trainer) user).setInstagramLink(instagram);
+                }
                 page = PagePath.PERSONAL_DATA.getServletPath();
             } else {
                 page = PagePath.ERROR_404.getDirectUrl();

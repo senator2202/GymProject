@@ -89,13 +89,14 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public boolean deleteTraining(String trainingId, int userId) throws ServiceException {
+    public boolean deleteTraining(String trainingId, String userId) throws ServiceException {
         if (!CommonValidator.correctId(trainingId) || !CommonValidator.correctId(userId)) {
             return false;
         }
-        int id = Integer.parseInt(trainingId);
+        int trId = Integer.parseInt(trainingId);
+        int clientId = Integer.parseInt(userId);
         try {
-            return dao.deleteTraining(id, userId);
+            return dao.deleteTraining(trId, clientId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

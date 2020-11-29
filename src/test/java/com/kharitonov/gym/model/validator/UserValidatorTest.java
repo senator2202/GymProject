@@ -130,8 +130,8 @@ public class UserValidatorTest {
 
     @Test(dataProviderClass = StaticDataProvider.class, dataProvider = "dataUpdatePersonalData")
     public void testCorrectPersonalDataParameters(int userId, String firstName, String lastName,
-                                                  String phone, boolean expected) {
-        boolean actual = UserValidator.correctPersonalDataParameters(userId, firstName, lastName, phone);
+                                                  String phone, String instagram, boolean expected) {
+        boolean actual = UserValidator.correctPersonalDataParameters(userId, firstName, lastName, phone, instagram);
         assertEquals(actual, expected);
     }
 

@@ -60,7 +60,7 @@ public interface TrainingService {
      * @return the boolean
      * @throws ServiceException the service exception
      */
-    boolean deleteTraining(String trainingId, int userId) throws ServiceException;
+    boolean deleteTraining(String trainingId, String userId) throws ServiceException;
 
     /**
      * Update training boolean.

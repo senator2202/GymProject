@@ -48,17 +48,22 @@
             <type>java.lang.String</type>
         </attribute>
     </tag>
-    
+
     <tag>
         <name>cancel-button</name>
         <tag-class>com.kharitonov.gym.tag.CancelButtonTag</tag-class>
         <body-content>empty</body-content>
-        
+
         <attribute>
             <name>trainingId</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
+        </attribute>
+        <attribute>
+            <name>clientId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
             <name>tooltip</name>
