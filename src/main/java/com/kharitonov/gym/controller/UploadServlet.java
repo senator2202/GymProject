@@ -16,7 +16,6 @@ import java.io.IOException;
  * Servlet uploads user images.
  */
 @WebServlet("/uploadController")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class UploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
