@@ -292,6 +292,7 @@ public class UserDaoImpl implements UserDao {
                         .withImageName(resultSet.getString(TableColumnName.USER_IMAGE))
                         .withInstitution(resultSet.getString(TableColumnName.USER_INSTITUTION))
                         .withInstagramLink(resultSet.getString(TableColumnName.USER_INSTAGRAM))
+                        .withGraduationYear(resultSet.getInt(TableColumnName.USER_GRADUATION))
                         .withRating(resultSet.getDouble(TableColumnName.USER_RATING))
                         .withShortSummary(resultSet.getString(TableColumnName.USER_SHORT_SUMMARY))
                         .build();
